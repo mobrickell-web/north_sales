@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "North Point",
   description:
     "Sales organization consulting that drives stronger teams and better business results.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   cta: {
     label: "Schedule a Consultation",
     labelLines: ["Schedule a", "Consultation"] as const,
