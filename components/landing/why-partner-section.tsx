@@ -1,15 +1,14 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
-  X,
   CalendarDays,
   UserRound,
   Globe,
   ShieldLock,
   Target,
 } from "lucide-react";
-import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +29,27 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export function WhyPartnerSection() {
   const { whyChooseUs } = siteConfig;
+  const [expanded, setExpanded] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  // Allow closing the expanded panel with the Escape key
+  useEffect(() => {
+    if (!expanded) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setExpanded(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [expanded]);
+
+  const toggle = () => {
+    const willExpand = !expanded;
+    setExpanded(willExpand);
+    if (!willExpand) {
+      // Collapse: keep the button in view instead of jumping
+      panelRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   return (
     <section
@@ -89,67 +109,72 @@ export function WhyPartnerSection() {
           ))}
         </ul>
 
-        {/* CTA Button */}
+        {/* CTA Button — toggles the details panel inline (no popup) */}
         <div className="mt-8 flex w-full max-w-[1280px] justify-center sm:justify-end sm:pr-4">
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <button
-                type="button"
-                className="inline-flex h-[43px] w-full sm:w-[213px] cursor-pointer items-center justify-center bg-bronze px-[24px] font-secondary text-[10px] font-bold leading-none tracking-[0.5em] text-white uppercase shadow-md transition-all hover:bg-[#8f5d0e] focus:outline-none focus:ring-2 focus:ring-ring"
-              >
-                MORE
-              </button>
-            </Dialog.Trigger>
+          <button
+            type="button"
+            onClick={toggle}
+            aria-expanded={expanded}
+            aria-controls="why-partner-details"
+            className="inline-flex h-[43px] w-full sm:w-[213px] cursor-pointer items-center justify-center bg-bronze px-[24px] font-secondary text-[10px] font-bold leading-none tracking-[0.5em] text-white uppercase shadow-md transition-all hover:bg-[#8f5d0e] focus:outline-none focus:ring-2 focus:ring-ring"
+          >
+            {expanded ? "LESS" : "MORE"}
+          </button>
+        </div>
 
-            <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
-              <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] sm:w-full max-w-[1100px] max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-12">
-                <div className="flex flex-col gap-2 border-b border-gray-200 pb-4">
-                  {/* Top row: Close */}
-                  <div className="flex justify-end">
-                    <Dialog.Close className="rounded-full p-1 text-gray-500 hover:bg-gray-100 focus:outline-none">
-                      <X className="size-6" />
-                      <span className="sr-only">Close</span>
-                    </Dialog.Close>
-                  </div>
+        {/* Expandable details panel — animates open and pushes the next section down */}
+        <div
+          id="why-partner-details"
+          ref={panelRef}
+          className={cn(
+            "grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+            expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          )}
+        >
+          <div className="overflow-hidden">
+            <div
+              aria-hidden={!expanded}
+              inert={!expanded}
+              className={cn(
+                "relative mt-8 rounded-2xl bg-white p-6 pt-12 shadow-lg transition-opacity duration-300 ease-in-out sm:p-10 sm:pt-12",
+                expanded ? "opacity-100" : "pointer-events-none opacity-0",
+              )}
+            >
+              {/* Panel Title */}
+              <h3 className="w-full text-center font-body text-[11px] font-bold tracking-wide text-primary uppercase sm:text-[16px] lg:text-[22px]">
+                {whyChooseUs.modal.title}
+              </h3>
 
-                  {/* Title row — centered on its own line */}
-                  <Dialog.Title className="w-full text-center font-body text-[11px] font-bold tracking-wide text-primary uppercase sm:text-[16px] lg:text-[22px]">
-                    {whyChooseUs.modal.title}
-                  </Dialog.Title>
-                </div>
-
-                {/* Modal Content */}
-                <ul className="mt-10 grid grid-cols-1 divide-y divide-black/10 md:grid-cols-5 md:divide-x md:divide-y-0">
-                  {whyChooseUs.modal.pillars.map((item) => (
-                    <li
-                      key={item.id}
-                      className="flex flex-col items-center px-4 py-6 text-center first:pt-0 last:pb-0 md:py-0"
-                    >
-                      <div className="flex h-14 items-center justify-center">
-                        {iconMap[item.icon] || (
-                          <Image
-                            src={item.icon}
-                            alt={item.title}
-                            width={48}
-                            height={48}
-                            className="size-12 object-contain"
-                            unoptimized
-                          />
-                        )}
-                      </div>
-                      <h3 className="mt-3 font-body text-[13px] font-bold tracking-[0.04em] text-primary uppercase">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 font-body text-[12px] leading-relaxed text-[#5C5F66]">
-                        {item.description}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog.Root>
+              {/* Panel Content */}
+              <ul className="mt-10 grid grid-cols-1 divide-y divide-black/10 md:grid-cols-5 md:divide-x md:divide-y-0">
+                {whyChooseUs.modal.pillars.map((item) => (
+                  <li
+                    key={item.id}
+                    className="flex flex-col items-center px-4 py-6 text-center first:pt-0 last:pb-0 md:py-0"
+                  >
+                    <div className="flex h-14 items-center justify-center">
+                      {iconMap[item.icon] || (
+                        <Image
+                          src={item.icon}
+                          alt={item.title}
+                          width={48}
+                          height={48}
+                          className="size-12 object-contain"
+                          unoptimized
+                        />
+                      )}
+                    </div>
+                    <h4 className="mt-3 font-body text-[13px] font-bold tracking-[0.04em] text-primary uppercase">
+                      {item.title}
+                    </h4>
+                    <p className="mt-2 font-body text-[12px] leading-relaxed text-[#5C5F66]">
+                      {item.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

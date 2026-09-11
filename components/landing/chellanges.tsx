@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Phone, Check, X, Compass } from "lucide-react";
-import * as Dialog from "@radix-ui/react-dialog";
+import { Phone, Check, Compass } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface ChallengesProps {
   sectionNumber?: number | string;
@@ -12,7 +12,47 @@ interface ChallengesProps {
 
 export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
   const { challenges } = siteConfig;
-  const [isOpen, setIsOpen] = useState(false);
+
+  // Two independent inline panels driven by the two CTAs
+  const [revenueOpen, setRevenueOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+
+  const revenuePanelRef = useRef<HTMLDivElement>(null);
+  const detailsPanelRef = useRef<HTMLDivElement>(null);
+
+  // Escape closes the open panels (deepest/last first)
+  useEffect(() => {
+    if (!revenueOpen && !detailsOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (detailsOpen) setDetailsOpen(false);
+      else if (revenueOpen) setRevenueOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [revenueOpen, detailsOpen]);
+
+  const toggleRevenue = () => {
+    const willExpand = !revenueOpen;
+    setRevenueOpen(willExpand);
+    if (!willExpand) {
+      revenuePanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  const toggleDetails = () => {
+    const willExpand = !detailsOpen;
+    setDetailsOpen(willExpand);
+    if (!willExpand) {
+      detailsPanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
 
   return (
     <section
@@ -86,15 +126,84 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
           </div>
         </div>
 
-        {/* Primary MORE CTA */}
+        {/* Primary MORE CTA — toggles the revenue panel inline (no popup) */}
         <div className="mt-4 flex w-full max-w-[1280px] justify-center sm:justify-end">
           <button
             type="button"
-            onClick={() => setIsOpen(true)}
+            onClick={toggleRevenue}
+            aria-expanded={revenueOpen}
+            aria-controls="challenges-revenue"
             className="inline-flex h-[40px] w-full sm:w-[200px] cursor-pointer items-center justify-center bg-[#b17411] px-6 font-secondary text-[13px] font-bold leading-none tracking-[0.4em] text-white uppercase shadow-sm hover:bg-[#8f5d0e]"
           >
-            MORE
+            {revenueOpen ? "LESS" : "MORE"}
           </button>
+        </div>
+
+        {/* Expandable revenue panel — animates open and pushes the next content down */}
+        <div
+          id="challenges-revenue"
+          ref={revenuePanelRef}
+          className={cn(
+            "grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+            revenueOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          )}
+        >
+          <div className="overflow-hidden">
+            <div
+              aria-hidden={!revenueOpen}
+              inert={!revenueOpen}
+              className={cn(
+                "mt-6 rounded-2xl bg-white p-6 shadow-lg transition-opacity duration-300 ease-in-out sm:p-10",
+                revenueOpen ? "opacity-100" : "pointer-events-none opacity-0",
+              )}
+            >
+              <span className="block w-full text-center font-body text-[11px] font-bold tracking-wider text-[#001528] uppercase sm:text-[13px] lg:text-[15px]">
+                {challenges.modal.title}
+              </span>
+
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                <div className="flex flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-6">
+                  <Image
+                    src="/icons/p15.svg"
+                    alt="Improvement Icon"
+                    width={80}
+                    height={80}
+                    className="size-20 object-contain"
+                    unoptimized
+                  />
+                </div>
+
+                {challenges.modal.revenueTiers.map((tier, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col justify-center rounded-xl border border-gray-200 bg-white p-5 text-center shadow-xs"
+                  >
+                    <span className="font-body text-[20px] font-extrabold text-[#001528]">
+                      {tier.revenue}
+                    </span>
+                    <span className="font-body text-[10px] font-bold text-gray-500 uppercase">
+                      {tier.label}
+                    </span>
+                    <span className="mt-2 font-body text-[10px] text-gray-500">
+                      5-10% improvement =
+                    </span>
+                    <span className="font-body text-[22px] font-extrabold text-[#001528]">
+                      {tier.gain}
+                    </span>
+                    <span className="font-body text-[10px] text-gray-500">
+                      {tier.sub}
+                    </span>
+                  </div>
+                ))}
+
+                <div className="flex items-center rounded-xl border border-gray-200 bg-white p-5 text-left">
+                  <p className="font-body text-[12px] font-bold leading-relaxed text-[#001528]">
+                    {challenges.modal.impactNotice}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Audio / Executive Overview Banner */}
@@ -179,82 +288,38 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
 
             <button
               type="button"
-              onClick={() => setIsOpen(true)}
+              onClick={toggleDetails}
+              aria-expanded={detailsOpen}
+              aria-controls="challenges-details"
               className="mt-2 inline-flex h-[38px] w-full sm:w-fit cursor-pointer items-center justify-center bg-[#b17411] px-5 font-body text-[11px] font-bold tracking-wider text-white uppercase shadow-xs hover:bg-[#8f5d0e]"
             >
-              {challenges.investment.buttonText}
+              {detailsOpen
+                ? "HOW IS OUR FEE DETERMINED? — LESS ›"
+                : challenges.investment.buttonText}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* POPUP MODAL */}
-      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-        <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs animate-in fade-in-0" />
-          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 max-h-[90vh] w-[95vw] sm:w-full max-w-[1150px] translate-x-[-50%] translate-y-[-50%] overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl animate-in fade-in-0 zoom-in-95 sm:p-10">
-            {/* Modal Header — two rows so title never wraps against close button */}
-            <div className="flex flex-col gap-2 border-b border-gray-200 pb-4">
-              {/* Top row: Close */}
-              <div className="flex justify-end">
-                <Dialog.Close className="rounded-full p-1 text-gray-500 hover:bg-gray-100 focus:outline-none">
-                  <X className="size-6" />
-                  <span className="sr-only">Close</span>
-                </Dialog.Close>
-              </div>
-
-              {/* Title row — centered on its own line */}
-              <span className="w-full text-center font-body text-[11px] font-bold tracking-wider text-[#001528] uppercase sm:text-[13px] lg:text-[15px]">
-                {challenges.modal.title}
-              </span>
-            </div>
-
-            <div className="flex flex-col gap-8 mt-6">
-              {/* Revenue Tier Cards Grid */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                <div className="flex flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-6">
-                  <Image
-                    src="/icons/p15.svg"
-                    alt="Improvement Icon"
-                    width={80}
-                    height={80}
-                    className="size-20 object-contain"
-                    unoptimized
-                  />
-                </div>
-
-                {challenges.modal.revenueTiers.map((tier, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col justify-center rounded-xl border border-gray-200 bg-white p-5 text-center shadow-xs"
-                  >
-                    <span className="font-body text-[20px] font-extrabold text-[#001528]">
-                      {tier.revenue}
-                    </span>
-                    <span className="font-body text-[10px] font-bold text-gray-500 uppercase">
-                      {tier.label}
-                    </span>
-                    <span className="mt-2 font-body text-[10px] text-gray-500">
-                      5-10% improvement =
-                    </span>
-                    <span className="font-body text-[22px] font-extrabold text-[#001528]">
-                      {tier.gain}
-                    </span>
-                    <span className="font-body text-[10px] text-gray-500">
-                      {tier.sub}
-                    </span>
-                  </div>
-                ))}
-
-                <div className="flex items-center rounded-xl border border-gray-200 bg-white p-5 text-left">
-                  <p className="font-body text-[12px] font-bold leading-relaxed text-[#001528]">
-                    {challenges.modal.impactNotice}
-                  </p>
-                </div>
-              </div>
-
+        {/* Expandable details panel — animates open and pushes the next section down */}
+        <div
+          id="challenges-details"
+          ref={detailsPanelRef}
+          className={cn(
+            "grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+            detailsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          )}
+        >
+          <div className="overflow-hidden">
+            <div
+              aria-hidden={!detailsOpen}
+              inert={!detailsOpen}
+              className={cn(
+                "mt-8 rounded-2xl bg-white p-6 shadow-lg transition-opacity duration-300 ease-in-out sm:p-10",
+                detailsOpen ? "opacity-100" : "pointer-events-none opacity-0",
+              )}
+            >
               {/* 3 Columns Details Section */}
-              <div className="grid grid-cols-1 gap-8 border-t border-gray-200 pt-6 md:grid-cols-3">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                 {/* Column 1: Who We Work With */}
                 <div className="flex flex-col gap-3">
                   <h4 className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase">
@@ -320,9 +385,9 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
                 </div>
               </div>
             </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

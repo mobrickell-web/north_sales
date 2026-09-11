@@ -11,12 +11,9 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeHash, setActiveHash] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return window.location.hash || "#top";
-    }
-    return "#top";
-  });
+  // Must render identically on server and client to avoid hydration mismatch;
+  // the real hash is applied in the mount effect below.
+  const [activeHash, setActiveHash] = useState<string>("#top");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -24,6 +21,9 @@ export function SiteHeader() {
     const handleHashChange = () => {
       setActiveHash(window.location.hash || "#top");
     };
+
+    // Sync with the actual URL hash after hydration.
+    handleHashChange();
 
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);

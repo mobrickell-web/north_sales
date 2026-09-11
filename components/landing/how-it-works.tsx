@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Check, X, ChevronLeft, Target } from "lucide-react";
-import * as Dialog from "@radix-ui/react-dialog";
+import { Check, ChevronLeft, Target } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface HowItWorksProps {
   sectionNumber?: number | string;
@@ -24,24 +24,62 @@ interface ModalComponent {
 export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
   const { howItWorks } = siteConfig;
 
-  // Track current step (1, 2, or 3) and selected component index
-  const [modalStep, setModalStep] = useState<1 | 2 | 3>(1);
+  // Outer panel (3 pillars) and inner panel (12 components) expand inline
+  const [expanded, setExpanded] = useState(false);
+  const [componentsOpen, setComponentsOpen] = useState(false);
+  // Selected component index swaps the inner panel content to its detail view
   const [selectedCompIndex, setSelectedCompIndex] = useState<number | null>(
     null,
   );
 
+  const outerPanelRef = useRef<HTMLDivElement>(null);
+  const innerPanelRef = useRef<HTMLDivElement>(null);
+
+  // Escape closes the deepest open level first
+  useEffect(() => {
+    if (!expanded) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (selectedCompIndex !== null) setSelectedCompIndex(null);
+      else if (componentsOpen) setComponentsOpen(false);
+      else setExpanded(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [expanded, componentsOpen, selectedCompIndex]);
+
+  const toggleOuter = () => {
+    const willExpand = !expanded;
+    setExpanded(willExpand);
+    if (!willExpand) {
+      // Collapse everything and keep the button in view
+      setComponentsOpen(false);
+      setSelectedCompIndex(null);
+      outerPanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  const toggleInner = () => {
+    const willExpand = !componentsOpen;
+    setComponentsOpen(willExpand);
+    if (!willExpand) {
+      setSelectedCompIndex(null);
+      innerPanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
   const handleOpenComponentDetail = (index: number) => {
     setSelectedCompIndex(index);
-    setModalStep(3);
   };
 
   const handleBack = () => {
-    if (modalStep === 3) {
-      setModalStep(2);
-      setSelectedCompIndex(null);
-    } else if (modalStep === 2) {
-      setModalStep(1);
-    }
+    setSelectedCompIndex(null);
   };
 
   const activeComponent =
@@ -164,204 +202,224 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
           ))}
         </div>
 
-        {/* Bottom CTA & Dialog */}
+        {/* CTA Button — toggles the details panel inline (no popup) */}
         <div className="mt-8 flex w-full max-w-[1280px] justify-center sm:justify-end">
-          <Dialog.Root
-            onOpenChange={() => {
-              setModalStep(1);
-              setSelectedCompIndex(null);
-            }}
+          <button
+            type="button"
+            onClick={toggleOuter}
+            aria-expanded={expanded}
+            aria-controls="how-it-works-details"
+            className="inline-flex h-[43px] w-full sm:w-[213px] cursor-pointer items-center justify-center bg-[#b17411] px-[24px] font-secondary text-[14px] font-bold leading-none tracking-[0.5em] text-white uppercase shadow-md transition-all hover:bg-[#8f5d0e] focus:outline-none focus:ring-2 focus:ring-ring"
           >
-            <Dialog.Trigger asChild>
-              <button
-                type="button"
-                className="inline-flex h-[43px] w-full sm:w-[213px] cursor-pointer items-center justify-center bg-[#b17411] px-[24px] font-secondary text-[14px] font-bold leading-none tracking-[0.5em] text-white uppercase shadow-md transition-all hover:bg-[#8f5d0e] focus:outline-none focus:ring-2 focus:ring-ring"
-              >
-                MORE
-              </button>
-            </Dialog.Trigger>
+            {expanded ? "LESS" : "MORE"}
+          </button>
+        </div>
 
-            <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
-              <Dialog.Content className="fixed left-[50%] top-[50%] z-50 max-h-[90vh] w-[95vw] sm:w-full max-w-[1150px] translate-x-[-50%] translate-y-[-50%] overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-10">
-                {/* Header Controls */}
-                <div className="flex flex-col gap-2 border-b border-gray-200 pb-4">
-                  {/* Top row: Back + Close */}
-                  <div className="flex items-center justify-between">
-                    {modalStep > 1 ? (
-                      <button
-                        type="button"
-                        onClick={handleBack}
-                        className="inline-flex cursor-pointer items-center gap-1 font-body text-[13px] font-bold text-primary hover:text-[#b17411]"
-                      >
-                        <ChevronLeft className="size-4" />
-                        {modalStep === 3 ? "Back to Components" : "Back"}
-                      </button>
-                    ) : (
-                      <div />
-                    )}
-
-                    <Dialog.Close className="rounded-full p-1 text-gray-500 hover:bg-gray-100 focus:outline-none">
-                      <X className="size-6" />
-                      <span className="sr-only">Close</span>
-                    </Dialog.Close>
-                  </div>
-
-                  {/* Title row — on its own line so it never wraps against buttons */}
-                  {modalStep >= 2 && (
-                    <span className="w-full text-center font-body text-[11px] font-bold tracking-wider text-primary uppercase sm:text-[13px] lg:text-[14px]">
-                      THE 12 SALES PERFORMANCE COMPONENTS™
-                    </span>
-                  )}
+        {/* Expandable details panel — animates open and pushes the next section down */}
+        <div
+          id="how-it-works-details"
+          ref={outerPanelRef}
+          className={cn(
+            "grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+            expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          )}
+        >
+          <div className="overflow-hidden">
+            <div
+              aria-hidden={!expanded}
+              inert={!expanded}
+              className={cn(
+                "mt-8 rounded-2xl bg-[#F2F2F3] p-6 shadow-lg transition-opacity duration-300 ease-in-out sm:p-10",
+                expanded ? "opacity-100" : "pointer-events-none opacity-0",
+              )}
+            >
+              {/* 3 Dark Pillars */}
+              <div className="flex flex-col items-center">
+                <div className="mt-6 grid w-full grid-cols-1 gap-6 md:grid-cols-3">
+                  {howItWorks.modalPillars.map((pillar, index) => (
+                    <div
+                      key={pillar.id}
+                      className="flex flex-col items-start rounded-xl bg-[#001528] p-8 text-left text-white shadow-md"
+                    >
+                      <div className="mx-auto mb-6 flex h-16 items-center justify-center">
+                        {renderModalPillarIcon(index)}
+                      </div>
+                      <h3 className="w-full text-center font-body text-[18px] font-bold tracking-wide text-white uppercase">
+                        {pillar.title}
+                      </h3>
+                      <ul className="mt-6 flex flex-col gap-3 font-body text-[14px] text-gray-200">
+                        {pillar.bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start gap-2.5">
+                            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-white" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
 
-                {/* MODAL STEP 1: 3 Dark Pillars */}
-                {modalStep === 1 && (
-                  <div className="mt-6 flex flex-col items-center">
-                    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
-                      {howItWorks.modalPillars.map((pillar, index) => (
-                        <div
-                          key={pillar.id}
-                          className="flex flex-col items-start rounded-xl bg-[#001528] p-8 text-left text-white shadow-md"
-                        >
-                          <div className="mx-auto mb-6 flex h-16 items-center justify-center">
-                            {renderModalPillarIcon(index)}
-                          </div>
-                          <h3 className="w-full text-center font-body text-[18px] font-bold tracking-wide text-white uppercase">
-                            {pillar.title}
-                          </h3>
-                          <ul className="mt-6 flex flex-col gap-3 font-body text-[14px] text-gray-200">
-                            {pillar.bullets.map((bullet, idx) => (
-                              <li
-                                key={idx}
-                                className="flex items-start gap-2.5"
-                              >
-                                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-white" />
-                                <span>{bullet}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
+                <div className="mt-8 flex w-full justify-center sm:justify-end">
+                  <button
+                    type="button"
+                    onClick={toggleInner}
+                    aria-expanded={componentsOpen}
+                    aria-controls="how-it-works-components"
+                    className="inline-flex h-[43px] w-full sm:w-[213px] cursor-pointer items-center justify-center bg-[#b17411] px-[24px] font-secondary text-[14px] font-bold leading-none tracking-[0.5em] text-white uppercase shadow-md transition-all hover:bg-[#8f5d0e] focus:outline-none focus:ring-2"
+                  >
+                    {componentsOpen ? "LESS" : "MORE"}
+                  </button>
+                </div>
+              </div>
 
-                    <div className="mt-8 flex w-full justify-center sm:justify-end">
-                      <button
-                        type="button"
-                        onClick={() => setModalStep(2)}
-                        className="inline-flex h-[43px] w-full sm:w-[213px] cursor-pointer items-center justify-center bg-[#b17411] px-[24px] font-secondary text-[14px] font-bold leading-none tracking-[0.5em] text-white uppercase shadow-md transition-all hover:bg-[#8f5d0e] focus:outline-none focus:ring-2"
-                      >
-                        MORE
-                      </button>
-                    </div>
-                  </div>
+              {/* Inner expandable panel: 12 Sales Components grid */}
+              <div
+                id="how-it-works-components"
+                ref={innerPanelRef}
+                className={cn(
+                  "grid w-full transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+                  componentsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                 )}
-
-                {/* MODAL STEP 2: 12 Sales Components Grid */}
-                {modalStep === 2 && (
-                  <div className="mt-8 flex flex-col gap-8">
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                      {howItWorks.modalComponents.map((comp, idx) => (
-                        <div
-                          key={comp.num}
-                          className="flex flex-col items-start text-left"
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="flex size-7 items-center justify-center rounded-full bg-[#001528] text-[12px] font-bold text-white">
-                              {comp.num}
-                            </span>
-                          </div>
-                          <h4 className="mt-2 font-body text-[11px] font-bold tracking-tight text-primary uppercase sm:mt-3 sm:text-[13px]">
-                            {comp.title}
-                          </h4>
-                          <p className="mt-1.5 font-body text-[10px] leading-relaxed text-[#5C5F66] sm:mt-2 sm:text-[11px]">
-                            {comp.desc}
-                          </p>
+              >
+                <div className="overflow-hidden">
+                  <div
+                    aria-hidden={!componentsOpen}
+                    inert={!componentsOpen}
+                    className={cn(
+                      "flex flex-col gap-8 transition-opacity duration-300 ease-in-out",
+                      componentsOpen
+                        ? "opacity-100"
+                        : "pointer-events-none opacity-0",
+                    )}
+                  >
+                    {/* Title + Back (detail view only) */}
+                    <div className="mt-8 flex flex-col gap-2 border-b border-gray-300/60 pb-4">
+                      <div className="flex items-center justify-between">
+                        {selectedCompIndex !== null ? (
                           <button
                             type="button"
-                            onClick={() => handleOpenComponentDetail(idx)}
-                            className="mt-2 cursor-pointer font-body text-[11px] font-bold text-[#b17411] hover:underline"
+                            onClick={handleBack}
+                            className="inline-flex cursor-pointer items-center gap-1 font-body text-[13px] font-bold text-primary hover:text-[#b17411]"
                           >
-                            More ›
+                            <ChevronLeft className="size-4" />
+                            Back to Components
                           </button>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Bottom Target Banner */}
-                    <div className="mt-4 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
-                      <Target className="size-8 shrink-0 text-[#b17411]" />
-                      <div className="flex flex-col">
-                        <h5 className="font-body text-[13px] font-extrabold text-primary uppercase">
-                          WE DONT ASSUME THE SOLUTION—WE IDENTIFY THE
-                          OPPORTUNITY.
-                        </h5>
-                        <p className="font-body text-[11px] text-[#5C5F66]">
-                          We dont walk in with a preset answer. We examine,
-                          analyze and determine where the greatest performance
-                          opportunities exist.
-                        </p>
+                        ) : (
+                          <div />
+                        )}
                       </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* MODAL STEP 3: Deep-Dive Component Detail View */}
-                {modalStep === 3 && activeComponent && (
-                  <div className="mt-6 flex flex-col gap-6 text-left">
-                    <div className="flex items-center gap-3">
-                      <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#001528] text-[12px] font-bold text-white sm:size-9 sm:text-[14px]">
-                        {activeComponent.num}
+                      <span className="w-full text-center font-body text-[11px] font-bold tracking-wider text-primary uppercase sm:text-[13px] lg:text-[14px]">
+                        THE 12 SALES PERFORMANCE COMPONENTS™
                       </span>
-                      <h3 className="font-body text-[15px] font-extrabold text-primary uppercase sm:text-[20px]">
-                        {activeComponent.title}
-                      </h3>
                     </div>
 
-                    {activeComponent.overview && (
-                      <p className="font-body text-[14px] leading-relaxed text-gray-700">
-                        {activeComponent.overview}
-                      </p>
-                    )}
-
-                    {activeComponent.areas &&
-                      activeComponent.areas.length > 0 && (
-                        <div className="rounded-xl border border-gray-100 bg-gray-50 p-6">
-                          <h4 className="font-body text-[13px] font-bold text-primary uppercase">
-                            Areas We May Examine Include:
-                          </h4>
-                          <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                            {activeComponent.areas.map(
-                              (area: string, i: number) => (
-                                <li
-                                  key={i}
-                                  className="flex items-start gap-2.5 font-body text-[13px] text-gray-600"
-                                >
-                                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#b17411]" />
-                                  <span>{area}</span>
-                                </li>
-                              ),
-                            )}
-                          </ul>
+                    {/* Components grid — swaps to detail view when a component is selected */}
+                    {selectedCompIndex === null ? (
+                      <>
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                          {howItWorks.modalComponents.map((comp, idx) => (
+                            <div
+                              key={comp.num}
+                              className="flex flex-col items-start text-left"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="flex size-7 items-center justify-center rounded-full bg-[#001528] text-[12px] font-bold text-white">
+                                  {comp.num}
+                                </span>
+                              </div>
+                              <h4 className="mt-2 font-body text-[11px] font-bold tracking-tight text-primary uppercase sm:mt-3 sm:text-[13px]">
+                                {comp.title}
+                              </h4>
+                              <p className="mt-1.5 font-body text-[10px] leading-relaxed text-[#5C5F66] sm:mt-2 sm:text-[11px]">
+                                {comp.desc}
+                              </p>
+                              <button
+                                type="button"
+                                onClick={() => handleOpenComponentDetail(idx)}
+                                className="mt-2 cursor-pointer font-body text-[11px] font-bold text-[#b17411] hover:underline"
+                              >
+                                More ›
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                      )}
 
-                    {activeComponent.note && (
-                      <p className="font-body text-[12px] italic text-gray-500">
-                        {activeComponent.note}
-                      </p>
-                    )}
+                        {/* Bottom Target Banner */}
+                        <div className="mt-4 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                          <Target className="size-8 shrink-0 text-[#b17411]" />
+                          <div className="flex flex-col">
+                            <h5 className="font-body text-[13px] font-extrabold text-primary uppercase">
+                              WE DONT ASSUME THE SOLUTION—WE IDENTIFY THE
+                              OPPORTUNITY.
+                            </h5>
+                            <p className="font-body text-[11px] text-[#5C5F66]">
+                              We dont walk in with a preset answer. We examine,
+                              analyze and determine where the greatest
+                              performance opportunities exist.
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      activeComponent && (
+                        <div className="flex flex-col gap-6 text-left">
+                          {/* Component detail view */}
+                          <div className="flex items-center gap-3">
+                            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#001528] text-[12px] font-bold text-white sm:size-9 sm:text-[14px]">
+                              {activeComponent.num}
+                            </span>
+                            <h3 className="font-body text-[15px] font-extrabold text-primary uppercase sm:text-[20px]">
+                              {activeComponent.title}
+                            </h3>
+                          </div>
 
-                    {activeComponent.objective && (
-                      <p className="font-body text-[14px] font-semibold text-primary">
-                        {activeComponent.objective}
-                      </p>
+                          {activeComponent.overview && (
+                            <p className="font-body text-[14px] leading-relaxed text-gray-700">
+                              {activeComponent.overview}
+                            </p>
+                          )}
+
+                          {activeComponent.areas &&
+                            activeComponent.areas.length > 0 && (
+                              <div className="rounded-xl border border-gray-100 bg-gray-50 p-6">
+                                <h4 className="font-body text-[13px] font-bold text-primary uppercase">
+                                  Areas We May Examine Include:
+                                </h4>
+                                <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                                  {activeComponent.areas.map(
+                                    (area: string, i: number) => (
+                                      <li
+                                        key={i}
+                                        className="flex items-start gap-2.5 font-body text-[13px] text-gray-600"
+                                      >
+                                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#b17411]" />
+                                        <span>{area}</span>
+                                      </li>
+                                    ),
+                                  )}
+                                </ul>
+                              </div>
+                            )}
+
+                          {activeComponent.note && (
+                            <p className="font-body text-[12px] italic text-gray-500">
+                              {activeComponent.note}
+                            </p>
+                          )}
+
+                          {activeComponent.objective && (
+                            <p className="font-body text-[14px] font-semibold text-primary">
+                              {activeComponent.objective}
+                            </p>
+                          )}
+                        </div>
+                      )
                     )}
                   </div>
-                )}
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog.Root>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
