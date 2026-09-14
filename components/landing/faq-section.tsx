@@ -53,9 +53,9 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
                     <span>{faqItem.question}</span>
                     <span
                       aria-hidden
-                      className="text-[22px] leading-none transition-transform group-open:rotate-90"
+                      className="text-[22px] leading-none transition-transform group-open:rotate-45"
                     >
-                      ›
+                      +
                     </span>
                   </summary>
                   <div className="flex flex-col gap-2 px-7 pb-4">
