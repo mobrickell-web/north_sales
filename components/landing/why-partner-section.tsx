@@ -53,7 +53,7 @@ export function WhyPartnerSection() {
 
   return (
     <section
-      id="why-partner"
+      id="why-choose-us"
       aria-labelledby="why-partner-heading"
       className="relative w-full overflow-hidden bg-[#F2F2F3] py-10 lg:py-14"
     >

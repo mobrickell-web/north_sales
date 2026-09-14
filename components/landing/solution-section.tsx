@@ -18,7 +18,7 @@ export function SolutionSection({ sectionNumber = 6 }: SolutionSectionProps) {
 
   return (
     <section
-      id="why-north-point"
+      id="solutions"
       aria-labelledby="solution-heading"
       className="relative w-full overflow-hidden border-b border-[#D48C27] bg-white"
     >

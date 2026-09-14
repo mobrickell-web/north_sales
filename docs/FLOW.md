@@ -45,12 +45,12 @@ public/images/               Hero imagery
 | Figma block                 | File                                                                     | Anchor                     |
 | --------------------------- | ------------------------------------------------------------------------ | -------------------------- |
 | Hero                        | `hero-section.tsx`                                                       | `#top`                     |
-| Why Partner                 | `why-partner-section.tsx`                                                | `#why-partner`             |
+| Why Partner                 | `why-partner-section.tsx`                                                | `#why-choose-us`           |
 | Proven Results              | `proven-results-section.tsx`                                             | `#results`                 |
 | Testimonial                 | `testimonial-section.tsx`                                                | `#testimonial`             |
 | Industries We Serve         | `process-section.tsx`                                                    | `#process`                 |
-| Solutions / Why North Point | `solution-section.tsx`                                                   | `#why-north-point`         |
-| Resources & Insights / FAQs | `faq-section.tsx`                                                        | `#resources`               |
+| Solutions / Why North Point | `solution-section.tsx`                                                   | `#solutions`               |
+| Resources & Insights / FAQs | `faq-section.tsx`                                                        | `#faqs`                    |
 | Our Proven Process data     | Stored in `config/site.ts`; not currently rendered as a separate section |
 | Final CTA                   | footer CTA band (`site-footer.tsx`)                                      | `#cta`                     |
 | Header / Footer             | `site-header.tsx`, `site-footer.tsx`                                     | via `(landing)/layout.tsx` |

@@ -94,9 +94,9 @@ export function ProvenResultsSection({
                   {stat.description}
                 </p>
                 <div className="mt-auto flex flex-col items-start gap-1 pt-6">
-                  <p className="font-body text-[16px] leading-none font-semibold tracking-[0.05em] text-[#94A3B8] uppercase">
+                  {/* <p className="font-body text-[16px] leading-none font-semibold tracking-[0.05em] text-[#94A3B8] uppercase">
                     Source:
-                  </p>
+                  </p> */}
                   <p className="font-body text-[15px] leading-[1.4] font-normal text-white">
                     {stat.source}
                   </p>

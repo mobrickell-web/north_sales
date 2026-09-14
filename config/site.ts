@@ -11,14 +11,14 @@ export const siteConfig = {
   },
   nav: [
     { href: "#top", label: "Home" },
-    { href: "#why-partner", label: "Why Choose Us" },
+    { href: "#why-choose-us", label: "Why Choose Us" },
     { href: "#results", label: "Results" },
     { label: "STEPS", href: "#steps" },
     { label: "HOW IT WORKS", href: "#how-it-works" },
     { label: "CHALLENGES", href: "#challenges" },
 
-    { href: "#why-north-point", label: "Solutions" },
-    { href: "#resources", label: "FAQ's" },
+    { href: "#solutions", label: "Solutions" },
+    { href: "#faqs", label: "FAQ's" },
   ],
   hero: {
     titleLine1: "Stronger Sales Organization",
@@ -763,18 +763,134 @@ export const siteConfig = {
     badge: "FAQ's",
     title: "Resources & Insights",
     questions: [
-      "What is your typical engagement and investment?",
-      "How long does a typical engagement last?",
-      "How do you work with our leadership team?",
-      "Is the engagement conducted remotely?",
-      "Who is your ideal client?",
-      "What happens after the 60-day engagement?",
-      "What kind of results can we expect?",
-      "Who do you typically work with?",
-      "What industries do you serve?",
-      "What makes North Point Sales Group different?",
-      "How is the engagement billed?",
-      "How do we get started?",
+      {
+        question: "What is your typical engagement and investment?",
+        answer: [
+          "Every engagement is customized based on your organization's size, objectives, and implementation requirements.",
+          "Our Executive Sales Performance Implementation engagements typically begin at $50,000, with larger organizations and more complex engagements quoted accordingly.",
+          "Our objective is to create measurable business value that significantly exceeds your investment.",
+        ],
+      },
+      {
+        question: "How long does a typical engagement last?",
+        answer: [
+          "Our standard engagement is 60 days.",
+          "This structured engagement allows us to evaluate your sales organization, develop a customized Executive Implementation Plan, and work alongside your leadership team to implement practical improvements that continue producing value long after the engagement has concluded.",
+        ],
+      },
+      {
+        question: "How do you work with our leadership team?",
+        answer: [
+          "We work directly with executive leadership throughout the engagement.",
+          "Our role is not simply to provide recommendations, but to help implement them.",
+          "Our implementation philosophy is best described as:",
+          "Done With You. Done For You.",
+          "We collaborate with your leadership team to strengthen sales leadership, improve accountability, implement better systems, and improve overall sales performance.",
+        ],
+      },
+      {
+        question: "Is the engagement conducted remotely?",
+        answer: [
+          "Yes.",
+          "The vast majority of our engagements are conducted remotely using secure video conferencing and collaborative technologies.",
+          "This allows us to work efficiently with organizations throughout the United States while minimizing disruption to your business.",
+        ],
+      },
+      {
+        question: "Will you travel to our location if necessary?",
+        answer: [
+          "Yes.",
+          "Although most engagements can be successfully completed remotely, there are situations where an on-site visit may provide additional value.",
+          "If both parties agree that travel would benefit the engagement, on-site visits can be arranged.",
+          "Travel expenses and any applicable on-site facilitation fees are discussed and approved in advance.",
+        ],
+      },
+      {
+        question: "What kind of results can we expect?",
+        answer: [
+          "Every organization is different.",
+          "While no consulting firm can ethically guarantee specific financial outcomes, our objective is to identify and implement opportunities that strengthen leadership, improve execution, increase accountability, improve sales performance, and position your organization for sustainable revenue growth.",
+        ],
+      },
+      {
+        question: "Who do you typically work with?",
+        answer: [
+          "We primarily work with:",
+          {
+            bullets: [
+              "Owners",
+              "CEOs",
+              "Presidents",
+              "Executive Leadership Teams",
+              "Chief Revenue Officers",
+              "Vice Presidents of Sales",
+              "Sales Directors",
+            ],
+          },
+          "Organizations typically have an existing sales organization or are committed to building one.",
+        ],
+      },
+      {
+        question: "What industries do you serve?",
+        answer: [
+          "Our methodology applies across many industries where professional sales organizations play a critical role in business growth.",
+          "Rather than specializing in one specific industry, we specialize in improving the performance of sales organizations.",
+        ],
+      },
+      {
+        question: "What makes North Point Sales Group different?",
+        answer: [
+          "Many consulting firms provide recommendations.",
+          "Many training companies provide education.",
+          "North Point Sales Group focuses on implementation.",
+          "We partner with executive leadership to help put practical improvements into action, creating stronger leadership, better systems, improved accountability, and measurable organizational performance.",
+        ],
+      },
+      {
+        question: "Who is your ideal client?",
+        answer: [
+          "North Point Sales Group is best suited for organizations that:",
+          {
+            bullets: [
+              "Typically generate annual revenues beginning around $10 million or more",
+              "Have an established sales organization or are committed to building one",
+              "View sales performance as a strategic business priority",
+              "Are committed to implementing meaningful organizational improvements",
+              "Value executive-level collaboration and long-term business growth",
+            ],
+          },
+        ],
+      },
+      {
+        question: "How is the engagement billed?",
+        answer: [
+          "Our standard investment schedule is straightforward.",
+          {
+            bullets: [
+              "$25,000 is due upon execution of the engagement agreement to begin the Executive Discovery and Assessment phase.",
+              "The remaining $25,000 is due following presentation and executive approval of the customized Executive Implementation Plan, typically during Weeks Three or Four, prior to implementation.",
+            ],
+          },
+          "This structure allows executive leadership to review and approve the strategic implementation plan before Phase Two begins.",
+        ],
+      },
+      {
+        question: "What happens after the 60-day engagement?",
+        answer: [
+          "Many organizations continue implementing the systems, processes, and leadership improvements established during the engagement.",
+          "Others choose to retain North Point Sales Group for ongoing executive advisory services, quarterly business reviews, leadership coaching, or future organizational initiatives.",
+          "Continuing advisory services are always optional and customized to your organization's needs.",
+        ],
+      },
+      {
+        question: "How do we get started?",
+        answer: [
+          "The first step is to request a confidential Executive Consultation.",
+          "During this conversation, we'll learn about your organization, discuss your objectives, answer your questions, and determine whether North Point Sales Group is the right fit for your business.",
+          "If we believe we can create significant value, we'll outline the recommended next steps. If we don't, we'll tell you that as well.",
+          "We believe the right partnerships begin with honesty, transparency, and a shared commitment to achieving meaningful business results.",
+        ],
+      },
     ],
   },
   results: {
@@ -794,18 +910,21 @@ export const siteConfig = {
     stats: [
       {
         value: "79%",
-        description: "of clients improve sales productivity within 12 months",
-        source: "CSO Insights",
+        description:
+          "of exceutives say sales productivity is their #1 chellange",
+        source: "- CSO Insights",
       },
       {
         value: "2.8x",
-        description: "average increase in win rates after engagement",
-        source: "North Point Advisors Client Data",
+        description:
+          "High-performing sales organizations achieve 2.8x more revenue growth.",
+        source: "- McKinsey & Company",
       },
       {
         value: "57%",
-        description: "of clients exceed revenue targets year over year",
-        source: "Gartner",
+        description:
+          "of revenue is lost due to ineffective sales processes and execution",
+        source: "- Gartner",
       },
     ],
   },
@@ -862,14 +981,14 @@ export const siteConfig = {
             title: "Quick Actions",
             links: [
               { label: "Home", href: "#top" },
-              { label: "Why choose us", href: "#why-north-point" },
+              { label: "Why choose us", href: "#why-choose-us" },
               { label: "Results", href: "#results" },
               { label: "Steps", href: "#steps" },
               { label: "How it works", href: "#how-it-works" },
               { label: "Challenges", href: "#challenges" },
 
-              { label: "Solutions", href: "#why-north-point" },
-              { label: "FAQ's", href: "#resources" },
+              { label: "Solutions", href: "#solutions" },
+              { label: "FAQ's", href: "#faqs" },
             ],
           },
         ],
@@ -883,7 +1002,7 @@ export const siteConfig = {
               { label: "About Us", href: "#about" },
               { label: "Our Approach", href: "#approach" },
               { label: "Engagement", href: "#engagement" },
-              { label: "Resources", href: "#resources" },
+              { label: "Resources", href: "#faqs" },
               { label: "Contact", href: "#contact" },
             ],
           },

@@ -12,7 +12,7 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
 
   return (
     <section
-      id="resources"
+      id="faqs"
       aria-labelledby="faq-heading"
       className="relative w-full bg-white overflow-hidden"
     >
@@ -34,19 +34,23 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
           </h2>
         </div>
 
-        <div className="mt-5 flex w-full max-w-[1280px] flex-col gap-6 lg:flex-row">
+        <div className="mt-5 flex w-full max-w-[1280px] flex-col gap-0 lg:flex-row lg:gap-6">
           {columns.map((column, columnIndex) => (
             <div
               key={columnIndex}
-              className="w-full overflow-hidden rounded-[4px] border border-[#D8DCE3] lg:w-[628px]"
+              className={
+                columnIndex === 0
+                  ? "w-full overflow-hidden rounded-t-[4px] border border-[#D8DCE3] lg:w-[628px] lg:rounded-[4px]"
+                  : "-mt-px w-full overflow-hidden rounded-b-[4px] border border-[#D8DCE3] lg:mt-0 lg:w-[628px] lg:rounded-[4px]"
+              }
             >
-              {column.map((question) => (
+              {column.map((faqItem) => (
                 <details
-                  key={question}
+                  key={faqItem.question}
                   className="group border-b border-[#D8DCE3] last:border-b-0"
                 >
                   <summary className="flex min-h-[50px] cursor-pointer list-none items-center justify-between gap-4 px-7 font-body text-[16px] leading-[1.4] font-medium text-[#1B2A4A] marker:hidden">
-                    <span>{question}</span>
+                    <span>{faqItem.question}</span>
                     <span
                       aria-hidden
                       className="text-[22px] leading-none transition-transform group-open:rotate-90"
@@ -54,10 +58,33 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
                       ›
                     </span>
                   </summary>
-                  <p className="px-7 pb-4 font-body text-[14px] leading-[1.4] text-[#5C5F66]">
-                    We tailor each engagement to your organization&apos;s goals,
-                    priorities, and growth stage.
-                  </p>
+                  <div className="flex flex-col gap-2 px-7 pb-4">
+                    {faqItem.answer.map((block, index) =>
+                      typeof block === "string" ? (
+                        <p
+                          key={index}
+                          className="font-body text-[14px] leading-[1.4] text-[#5C5F66]"
+                        >
+                          {block}
+                        </p>
+                      ) : (
+                        <ul key={index} className="flex flex-col gap-1.5 pl-1">
+                          {block.bullets.map((bullet) => (
+                            <li
+                              key={bullet}
+                              className="flex gap-2 font-body text-[14px] leading-[1.4] text-[#5C5F66]"
+                            >
+                              <span
+                                aria-hidden
+                                className="mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full bg-bronze"
+                              />
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ),
+                    )}
+                  </div>
                 </details>
               ))}
             </div>
