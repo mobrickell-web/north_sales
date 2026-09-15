@@ -89,50 +89,24 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
 
   // Render icons for the 3 main process cards
   const renderCardIcon = (index: number) => {
-    switch (index) {
-      case 0:
-        return (
-          <Image
-            src="/icons/p1.svg"
-            alt="Discover & Assess"
-            width={64}
-            height={64}
-            className="size-16 object-contain"
-            unoptimized
-          />
-        );
-      case 1:
-        return (
-          <Image
-            src="/icons/p2.svg"
-            alt="Design & Align"
-            width={64}
-            height={64}
-            className="size-16 object-contain"
-            unoptimized
-          />
-        );
-      case 2:
-        return (
-          <svg
-            width="64"
-            height="64"
-            viewBox="0 0 48 48"
-            fill="none"
-            className="size-16 text-[#b17411]"
-          >
-            <path
-              d="M12 36V28M20 36V22M28 36V18M36 36V12M12 22L20 16L28 20L36 10M36 10H30M36 10V16"
-              stroke="#b17411"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        );
-      default:
-        return null;
-    }
+    const iconPaths = [
+      "/icons/P1.svg",
+      "/icons/P2.svg",
+      "/icons/process-3.svg",
+    ];
+    const iconPath = iconPaths[index];
+    if (!iconPath) return null;
+
+    return (
+      <Image
+        src={iconPath}
+        alt={howItWorks.steps[index]?.title ?? "Process step icon"}
+        width={64}
+        height={64}
+        className="size-16 object-contain"
+        unoptimized
+      />
+    );
   };
 
   // Render icons for Modal Step 1 Pillars using p3.svg, p4.svg, and p5.svg
