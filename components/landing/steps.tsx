@@ -8,7 +8,7 @@ interface StepsProps {
   sectionNumber?: number | string;
 }
 
-export function Steps({ sectionNumber = 3 }: StepsProps) {
+export function Steps({ sectionNumber = 4 }: StepsProps) {
   const { salesEngagement } = siteConfig;
 
   // Custom step renderer to mix Lucide React icons with local SVG assets

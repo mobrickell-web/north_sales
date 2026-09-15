@@ -13,8 +13,9 @@ export const siteConfig = {
     { href: "#top", label: "Home" },
     { href: "#why-choose-us", label: "Why Choose Us" },
     { href: "#results", label: "Results" },
-    { label: "STEPS", href: "#steps" },
+
     { label: "HOW IT WORKS", href: "#how-it-works" },
+    { label: "STEPS", href: "#steps" },
     { label: "CHALLENGES", href: "#challenges" },
 
     { href: "#solutions", label: "Solutions" },
@@ -40,80 +41,81 @@ export const siteConfig = {
   },
   whyChooseUs: {
     badge: "Why Choose Us",
-    title: "Why Partner With North Point Sales Group?",
+    title: "WHY EXECUTIVE TEAMS ENGAGE NORTH POINT SALES GROUP?",
     pillars: [
       {
-        id: "expertise",
-        title: "Expertise That Delivers",
+        id: "strengthen-performance",
+        title: "Strengthen Existing Sales Performance",
         description:
-          "Decades of sales leadership experience across industries and markets.",
+          "We help established, growth-oriented organizations improve the performance of their existing sales operation before adding more people, marketing, or unnecessary spending.",
         icon: "/icons/deliver.svg",
       },
       {
-        id: "data",
-        title: "Data-Driven Approach",
-        description: "We use insights and analytics to drive better decisions.",
+        id: "evaluate-organization",
+        title: "Evaluate the Entire Sales Organization",
+        description:
+          "We look at the sales organization as an interconnected revenue-producing system rather than assuming the salespeople themselves are the problem.",
         icon: "/icons/data.svg",
       },
       {
-        id: "customized",
-        title: "Customized Solutions",
+        id: "focus-on-what-matters",
+        title: "Focus on What Matters Most",
         description:
-          "Every organization is unique. We build solutions tailored to your goals, culture, and market dynamics.",
+          "We concentrate on the specific areas most relevant to the organization's current objectives, challenges, and opportunities.",
         icon: "/icons/solution.svg",
       },
       {
-        id: "impact",
-        title: "Measurable Impact",
+        id: "improve-revenue-profit",
+        title: "Improve Revenue and Contribution Profit",
         description:
-          "We focus on outcomes that improve your top and bottom line.",
+          "Our focus is on improvements that can produce meaningful financial impact, not change simply for the sake of change.",
         icon: "/icons/impact.svg",
       },
       {
-        id: "partnership",
-        title: "Partnership You Can Trust",
+        id: "help-leadership-implement",
+        title: "Help Leadership Implement Improvements",
         description:
-          "We work alongside your team as a true extension of your business.",
+          "We do more than identify opportunities. We help leadership implement the changes needed to capture them and measure whether they are producing results.",
         icon: "/icons/trust.svg",
       },
     ],
     // Modal content for the "MORE" CTA
     modal: {
-      title: "WHY EXECUTIVE TEAMS ENGAGE NORTH POINT SALES GROUP",
+      title: "OUR APPROACH",
       pillars: [
         {
-          id: "exec-partnership",
-          title: "Executive Partnership",
+          id: "diagnose-before-prescribe",
+          title: "Diagnose Before We Prescribe",
           description:
-            "We work side-by-side with leadership to solve meaningful challenges and create lasting improvement.",
+            "We first determine what is working, what may be restricting performance, and where meaningful opportunities for improvement exist.",
           icon: "/icons/user.svg",
         },
         {
-          id: "focused-engagement",
-          title: "Focused 60-Day Engagement",
+          id: "focus-financial-impact",
+          title: "Focus Where Financial Impact Matters Most",
           description:
-            "A structured, intensive process designed to create measurable momentum in a short period of time.",
+            "If an area of the sales organization is performing well, we leave it alone. We focus on areas where improvement is most likely to produce a meaningful business return.",
           icon: "/icons/calendar.svg",
         },
         {
-          id: "remote-nationwide",
-          title: "Remote Nationwide",
+          id: "implementation-not-just-recommendations",
+          title: "Implementation, Not Just Recommendations",
           description:
-            "We partner with growth-oriented companies across the U.S. through a proven virtual model.",
+            "We do more than provide reports and recommendations. We work with leadership to help put agreed-upon improvements into practice and evaluate the results.",
           icon: "/icons/globe.svg",
         },
         {
-          id: "confidential",
-          title: "Confidential By Design",
+          id: "objective-outside-perspective",
+          title: "Objective Outside Perspective",
           description:
-            "Your business, your team, your challenges—always handled with complete discretion.",
+            "Because we are not part of the existing internal structure, we can evaluate sales performance objectively while working collaboratively with leadership and the sales organization.",
           icon: "/icons/shield-lock.svg",
         },
         {
-          id: "customized-business",
-          title: "Customized To Your Business",
+          id: "long-term-resource",
+          title: "A Long-Term Resource When Needed",
           description:
-            "No templates. Every engagement is tailored to your goals, your team, and your market.",
+            "Our objective is not simply to complete an engagement and disappear. When appropriate, we want to remain a trusted sales-performance resource leadership can call upon as future needs and opportunities arise.",
           icon: "/icons/target.svg",
         },
       ],
@@ -620,7 +622,7 @@ export const siteConfig = {
     typicalEngagement: {
       title: "TYPICAL ENGAGEMENT",
       bullets: [
-        "Comprehensive diagnostic of the 12 Sales Performance Components™",
+        "Focused evaluation of the Sales Performance Components™ most relevant to your organization",
         "Executive Implementation Plan with prioritized recommendations",
         "Implementation support: Done With You and Done For You",
         "Active engagement typically 60 days",
@@ -772,6 +774,14 @@ export const siteConfig = {
         ],
       },
       {
+        question:
+          "Can North Point work with just a few of our Sales or Account Representatives?",
+        answer: [
+          "Yes. In some cases, we can begin by working with two or three Sales or Account Representatives to identify opportunities for improved productivity and performance.",
+          "This can provide leadership with a practical way to evaluate our approach and the results before considering a broader engagement with the rest of the sales organization.",
+        ],
+      },
+      {
         question: "How long does a typical engagement last?",
         answer: [
           "Our standard engagement is 60 days.",
@@ -911,20 +921,55 @@ export const siteConfig = {
       {
         value: "79%",
         description:
-          "of exceutives say sales productivity is their #1 chellange",
-        source: "- CSO Insights",
+          "of executives say achieving their company’s goals requires improving the productivity of their existing sales team.",
+        source: "TextExpander",
+        sourceInfo: {
+          title: "TextExpander",
+          description: [
+            "TextExpander is a business productivity software company that provides tools designed to help individuals and organizations improve efficiency, consistency, and communication across their teams.",
+            "Its research and business content frequently addresses workplace productivity, employee efficiency, communication, and how organizations can make better use of their existing workforce.",
+          ],
+        },
+        popout: {
+          title: "Improving Existing Sales Productivity",
+          description:
+            "A large majority of executives recognize that achieving company growth objectives depends on improving the productivity of the sales team already in place. This supports a core North Point principle: before adding more salespeople, more marketing, or more spending, leadership should first determine whether greater performance can be achieved from the existing sales organization.",
+        },
       },
       {
-        value: "2.8x",
+        value: "70%",
         description:
-          "High-performing sales organizations achieve 2.8x more revenue growth.",
-        source: "- McKinsey & Company",
+          "of sales reps’ time is spent on activities other than selling.",
+        source: "Salesforce, State of Sales",
+        sourceInfo: {
+          title: "Salesforce — State of Sales",
+          description: [
+            "Salesforce is one of the world's leading customer relationship management and business software companies, providing sales, marketing, customer service, analytics, and related technologies to organizations around the world.",
+            "Salesforce's State of Sales research examines trends affecting sales organizations, sales representatives, sales operations, technology, productivity, and revenue growth. Its reports are based on surveys and research involving sales professionals, representatives, and leaders across multiple industries and geographic markets.",
+          ],
+        },
+        popout: {
+          title: "Time Spent on Non-Selling Activities",
+          description:
+            "Sales representatives can spend the majority of their workweek on activities other than directly selling, including administrative work, internal communication, research, data entry, and other responsibilities. Improving sales performance is not always about asking people to work harder. Often, it is about helping the sales organization operate more efficiently so sales professionals can devote more time and attention to revenue-producing activity.",
+        },
       },
       {
-        value: "57%",
-        description:
-          "of revenue is lost due to ineffective sales processes and execution",
-        source: "- Gartner",
+        value: "47%",
+        description: "average quota attainment across B2B sales organizations.",
+        source: "Forrester",
+        sourceInfo: {
+          title: "Forrester",
+          description: [
+            "Forrester Research is a global independent research and advisory firm founded in 1983. The company provides research, analysis, consulting, and strategic guidance to business leaders in areas including sales, marketing, technology, customer experience, product development, and revenue growth.",
+            "Forrester has conducted business and technology research for more than 40 years and serves organizations throughout North America, Europe, and the Asia-Pacific region. Its research incorporates proprietary data, quantitative and qualitative analysis, and structured research methodologies. Forrester Research, Inc. is publicly traded on Nasdaq under the ticker FORR.",
+          ],
+        },
+        popout: {
+          title: "Average B2B Quota Attainment",
+          description:
+            "When average quota attainment is below 50%, the issue may extend beyond the individual salesperson. Sales leadership, lead quality, prospecting, messaging, pipeline management, CRM utilization, training, accountability, compensation, and other factors can all influence performance. North Point evaluates the areas most relevant to the organization to determine where targeted improvements may produce stronger results.",
+        },
       },
     ],
   },
@@ -983,8 +1028,9 @@ export const siteConfig = {
               { label: "Home", href: "#top" },
               { label: "Why choose us", href: "#why-choose-us" },
               { label: "Results", href: "#results" },
-              { label: "Steps", href: "#steps" },
+
               { label: "How it works", href: "#how-it-works" },
+              { label: "Steps", href: "#steps" },
               { label: "Challenges", href: "#challenges" },
 
               { label: "Solutions", href: "#solutions" },
@@ -1032,9 +1078,9 @@ export const siteConfig = {
     ],
 
     contact: {
-      phone: "(970) 230-1439",
+      phone: "(970) 250-1439",
       email: "contact@northpointsalesgroup.com",
-      location: "Montrose, CO",
+      location: "CO",
       scope: "Serving Clients Nationwide",
     },
 

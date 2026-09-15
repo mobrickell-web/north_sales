@@ -8,7 +8,7 @@ interface FaqSectionProps {
 
 export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
   const { faq } = siteConfig;
-  const columns = [faq.questions.slice(0, 6), faq.questions.slice(6)];
+  const columns = [faq.questions.slice(0, 7), faq.questions.slice(7)];
 
   return (
     <section
@@ -44,49 +44,61 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
                   : "-mt-px w-full overflow-hidden rounded-b-[4px] border border-[#D8DCE3] lg:mt-0 lg:w-[628px] lg:rounded-[4px]"
               }
             >
-              {column.map((faqItem) => (
-                <details
-                  key={faqItem.question}
-                  className="group border-b border-[#D8DCE3] last:border-b-0"
-                >
-                  <summary className="flex min-h-[50px] cursor-pointer list-none items-center justify-between gap-4 px-7 font-body text-[16px] leading-[1.4] font-medium text-[#1B2A4A] marker:hidden">
-                    <span>{faqItem.question}</span>
-                    <span
-                      aria-hidden
-                      className="text-[22px] leading-none transition-transform group-open:rotate-45"
-                    >
-                      +
-                    </span>
-                  </summary>
-                  <div className="flex flex-col gap-2 px-7 pb-4">
-                    {faqItem.answer.map((block, index) =>
-                      typeof block === "string" ? (
-                        <p
-                          key={index}
-                          className="font-body text-[14px] leading-[1.4] text-[#5C5F66]"
-                        >
-                          {block}
-                        </p>
-                      ) : (
-                        <ul key={index} className="flex flex-col gap-1.5 pl-1">
-                          {block.bullets.map((bullet) => (
-                            <li
-                              key={bullet}
-                              className="flex gap-2 font-body text-[14px] leading-[1.4] text-[#5C5F66]"
-                            >
-                              <span
-                                aria-hidden
-                                className="mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full bg-bronze"
-                              />
-                              <span>{bullet}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      ),
-                    )}
-                  </div>
-                </details>
-              ))}
+              {column.map((faqItem, itemIndex) => {
+                const number =
+                  columnIndex === 0
+                    ? itemIndex + 1
+                    : columns[0].length + itemIndex + 1;
+                return (
+                  <details
+                    key={faqItem.question}
+                    className="group border-b border-[#D8DCE3] last:border-b-0"
+                  >
+                    <summary className="flex min-h-[50px] cursor-pointer list-none items-center justify-between gap-4 px-7 font-body text-[16px] leading-[1.4] font-medium text-[#1B2A4A] marker:hidden">
+                      <span>
+                        <span className="font-semibold">{number}.</span>{" "}
+                        {faqItem.question}
+                      </span>
+                      <span
+                        aria-hidden
+                        className="text-[22px] leading-none transition-transform group-open:rotate-45"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <div className="flex flex-col gap-2 px-7 pb-4">
+                      {faqItem.answer.map((block, index) =>
+                        typeof block === "string" ? (
+                          <p
+                            key={index}
+                            className="font-body text-[14px] leading-[1.4] text-[#5C5F66]"
+                          >
+                            {block}
+                          </p>
+                        ) : (
+                          <ul
+                            key={index}
+                            className="flex flex-col gap-1.5 pl-1"
+                          >
+                            {block.bullets.map((bullet) => (
+                              <li
+                                key={bullet}
+                                className="flex gap-2 font-body text-[14px] leading-[1.4] text-[#5C5F66]"
+                              >
+                                <span
+                                  aria-hidden
+                                  className="mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full bg-bronze"
+                                />
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      )}
+                    </div>
+                  </details>
+                );
+              })}
             </div>
           ))}
         </div>

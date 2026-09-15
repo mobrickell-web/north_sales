@@ -70,7 +70,7 @@ export function WhyPartnerSection() {
           </span>
           <h2
             id="why-partner-heading"
-            className="max-w-[720px] font-body text-[18px] font-bold tracking-[0.04em] text-primary uppercase sm:text-[22px]"
+            className="max-w-[820px] font-body text-[18px] font-bold tracking-[0.04em] text-primary uppercase sm:text-[22px]"
           >
             {whyChooseUs.title}
           </h2>

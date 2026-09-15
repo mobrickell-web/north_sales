@@ -13,8 +13,8 @@ export default function LandingPage() {
       <HeroSection />
       <WhyPartnerSection />
       <ProvenResultsSection />
-      <Steps />
       <HowItWorks />
+      <Steps />
       <Challenges />
       <SolutionSection />
       <FaqSection />

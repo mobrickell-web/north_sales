@@ -1,6 +1,11 @@
+"use client";
+
 // components/ProvenResultsSection.tsx
 
 import Image from "next/image";
+import { useState } from "react";
+import { X } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +17,10 @@ export function ProvenResultsSection({
   sectionNumber = 2,
 }: ProvenResultsSectionProps) {
   const { results } = siteConfig;
+  const [popup, setPopup] = useState<{
+    title: string;
+    paragraphs: readonly string[];
+  } | null>(null);
 
   return (
     <section
@@ -67,45 +76,99 @@ export function ProvenResultsSection({
         </div>
 
         {/* Right — stats panel */}
-        <div className="relative w-full overflow-hidden bg-[#001528] lg:min-h-[325px] lg:min-w-0 lg:flex-1">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%)",
-            }}
-          />
+        <Dialog.Root
+          open={!!popup}
+          onOpenChange={(open) => !open && setPopup(null)}
+        >
+          <div className="relative w-full overflow-hidden bg-[#001528] lg:min-h-[325px] lg:min-w-0 lg:flex-1">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-25"
+              style={{
+                backgroundImage:
+                  "radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%)",
+              }}
+            />
 
-          <div className="relative flex h-full min-h-[253px] w-full flex-col sm:flex-row sm:items-stretch lg:px-2 lg:py-9">
-            {results.stats.map((stat, index) => (
-              <div
-                key={stat.value}
-                className={cn(
-                  "flex w-full flex-col gap-3 px-6 py-8 text-left sm:min-w-0 sm:flex-1 sm:px-6 sm:py-0",
-                  index > 0 &&
-                    "border-t border-[#E89B2D] sm:border-t-0 sm:border-l",
-                )}
-              >
-                <p className="font-heading text-[44px] leading-none font-bold tracking-tight text-[#E89B2D] sm:text-[48px]">
-                  {stat.value}
-                </p>
-                <p className="font-body text-[15px] leading-[1.4] font-normal text-white">
-                  {stat.description}
-                </p>
-                <div className="mt-auto flex flex-col items-start gap-1 pt-6">
-                  {/* <p className="font-body text-[16px] leading-none font-semibold tracking-[0.05em] text-[#94A3B8] uppercase">
-                    Source:
-                  </p> */}
-                  <p className="font-body text-[15px] leading-[1.4] font-normal text-white">
-                    {stat.source}
-                  </p>
+            <div className="relative flex h-full min-h-[253px] w-full flex-col sm:flex-row sm:items-stretch lg:px-2 lg:py-9">
+              {results.stats.map((stat, index) => (
+                <div
+                  key={stat.value}
+                  className={cn(
+                    "flex w-full flex-col gap-2 px-6 py-6 text-left sm:min-w-0 sm:flex-1 sm:px-6 sm:py-0",
+                    index > 0 &&
+                      "border-t border-[#E89B2D] sm:border-t-0 sm:border-l",
+                  )}
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      stat.popout &&
+                      setPopup({
+                        title: stat.popout.title,
+                        paragraphs: [stat.popout.description],
+                      })
+                    }
+                    className="group flex cursor-pointer flex-col items-start gap-3 text-left transition-opacity hover:opacity-90 focus:outline-none"
+                  >
+                    <p className="font-heading text-[44px] leading-none font-bold tracking-tight text-[#E89B2D] sm:text-[48px]">
+                      {stat.value}
+                    </p>
+                    <p className="font-body text-[15px] leading-[1.4] font-normal text-white">
+                      {stat.description}
+                    </p>
+                  </button>
+                  <div className="mt-auto flex flex-col items-start gap-1">
+                    <p className="font-body text-[16px] leading-none font-semibold tracking-[0.05em] text-[#94A3B8] uppercase">
+                      Source:
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setPopup({
+                          title: stat.sourceInfo.title,
+                          paragraphs: stat.sourceInfo.description,
+                        })
+                      }
+                      className="cursor-pointer text-left font-body text-[15px] leading-[1.4] font-normal text-white underline decoration-[#E89B2D]/60 underline-offset-2 transition hover:text-[#E89B2D] focus:outline-none"
+                    >
+                      {stat.source}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+
+          {/* Interactive Pop-out Box / Dialog */}
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+            <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] sm:w-full max-w-[620px] max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+              <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+                <X className="size-5" />
+                <span className="sr-only">Close</span>
+              </Dialog.Close>
+
+              {popup && (
+                <div className="flex flex-col gap-3">
+                  <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                    {popup.title}
+                  </Dialog.Title>
+                  <Dialog.Description asChild>
+                    <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                      {popup.paragraphs.map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </Dialog.Description>
+                </div>
+              )}
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
       </div>
     </section>
   );
 }
+
+export default ProvenResultsSection;

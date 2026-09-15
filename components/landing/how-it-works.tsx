@@ -21,7 +21,7 @@ interface ModalComponent {
   objective?: string;
 }
 
-export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
+export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
   const { howItWorks } = siteConfig;
 
   // Outer panel (3 pillars) and inner panel (12 components) expand inline
