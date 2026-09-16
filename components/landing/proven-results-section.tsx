@@ -155,7 +155,7 @@ export function ProvenResultsSection({
                     {popup.title}
                   </Dialog.Title>
                   <Dialog.Description asChild>
-                    <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                    <div className="flex flex-col gap-3 whitespace-pre-line font-body text-[14px] leading-relaxed text-[#5C5F66]">
                       {popup.paragraphs.map((paragraph, index) => (
                         <p key={index}>{paragraph}</p>
                       ))}

@@ -124,7 +124,7 @@ export const siteConfig = {
   //steps section
   salesEngagement: {
     badge: "Steps",
-    title: "Our 60-Day Sales Performance Engagement",
+    title: "Our 60-Day FOCUS",
     steps: [
       {
         stepNumber: 1,
@@ -178,7 +178,7 @@ export const siteConfig = {
   //how it works section
 
   howItWorks: {
-    badge: "HOW IT WORKS",
+    badge: "HOW WE WORK",
     title: "OUR PROVEN PROCESS",
     steps: [
       {
@@ -635,6 +635,19 @@ export const siteConfig = {
       description:
         "North Point Sales Group engagements begin at $50,000. Final professional fees are determined by the size and complexity of the sales organization, diagnostic scope, implementation requirements, and North Point professional resources required.",
       buttonText: "HOW IS OUR FEE DETERMINED? — MORE ›",
+      feeDetermined: {
+        title: "How is our fee determined?",
+        intro: "Our fee is based on the scope of the engagement, including:",
+        bullets: [
+          "The number of salespeople or account representatives involved",
+          "The Sales Performance Components™ being addressed",
+          "The level of leadership involvement required",
+          "The amount of implementation, coaching, and follow-through needed",
+          "The overall complexity and duration of the engagement",
+        ],
+        footer:
+          "Smaller 30-day engagements may begin at $5,000, while broader 60-day Sales Performance Engagements are priced according to scope and typically begin at $50,000.",
+      },
     },
     modal: {
       title: "WHAT COULD A SMALL IMPROVEMENT BE WORTH?",
@@ -777,8 +790,16 @@ export const siteConfig = {
         question:
           "Can North Point work with just a few of our Sales or Account Representatives?",
         answer: [
-          "Yes. In some cases, we can begin by working with two or three Sales or Account Representatives to identify opportunities for improved productivity and performance.",
-          "This can provide leadership with a practical way to evaluate our approach and the results before considering a broader engagement with the rest of the sales organization.",
+          "Yes. In some cases, we can begin with a smaller 30-day engagement focused on a limited number of Sales or Account Representatives.",
+          "Typical 30-day pricing is:",
+          {
+            bullets: [
+              "1 representative: $5,000",
+              "2–3 representatives: $7,500",
+              "4–5 representatives: $12,500",
+            ],
+          },
+          "Once the scope expands beyond five representatives, we typically move from a limited pilot into a broader 60-day Sales Performance Engagement, with pricing based on the size of the team and the areas being addressed.",
         ],
       },
       {
@@ -862,8 +883,9 @@ export const siteConfig = {
           "North Point Sales Group is best suited for organizations that:",
           {
             bullets: [
-              "Typically generate annual revenues beginning around $10 million or more",
-              "Have an established sales organization or are committed to building one",
+              "Are established, growth-oriented businesses with an active sales operation",
+              "Have an existing sales organization",
+              "Have sufficient scale for sales-performance improvements to create meaningful financial impact",
               "View sales performance as a strategic business priority",
               "Are committed to implementing meaningful organizational improvements",
               "Value executive-level collaboration and long-term business growth",
@@ -949,9 +971,19 @@ export const siteConfig = {
           ],
         },
         popout: {
-          title: "Time Spent on Non-Selling Activities",
-          description:
-            "Sales representatives can spend the majority of their workweek on activities other than directly selling, including administrative work, internal communication, research, data entry, and other responsibilities. Improving sales performance is not always about asking people to work harder. Often, it is about helping the sales organization operate more efficiently so sales professionals can devote more time and attention to revenue-producing activity.",
+          title: "TIME SPENT ON NON-SELLING ACTIVITIES",
+          description: `Sales professionals must still handle essential responsibilities such as CRM updates, follow-up, preparation, and internal communication.
+
+The opportunity is to make those activities more efficient so more time can be directed toward productive selling activity.
+
+North Point may help improve sales productivity by:
+• Simplifying CRM entry and workflows so reps spend less time on administration
+• Reducing duplicate reporting and unnecessary meetings to protect selling time
+• Standardizing follow-up processes so opportunities move forward more consistently
+• Improving lead prioritization so reps focus on the highest-potential opportunities
+• Organizing prospecting and selling time to increase productive sales activity
+• Automating routine administrative tasks where appropriate to free up rep capacity
+• Using appointment setters or support resources when advantageous so salespeople can spend more time selling`,
         },
       },
       {

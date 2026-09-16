@@ -237,151 +237,129 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
           </div>
         </div>
 
-        {/* Typical Engagement & Investment Split Row */}
-        <div className="mt-8 grid w-full max-w-[1280px] grid-cols-1 gap-8 md:grid-cols-2">
-          {/* Left Block: Typical Engagement */}
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <Image
-                src="/icons/p13.svg"
-                alt="Typical Engagement Icon"
-                width={24}
-                height={24}
-                className="size-6 object-contain"
-                unoptimized
-              />
-              <h4 className="font-body text-[16px] font-extrabold tracking-wide text-[#001528] uppercase">
-                {challenges.typicalEngagement.title}
-              </h4>
-            </div>
-            <ul className="flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
-              {challenges.typicalEngagement.bullets.map((bullet, idx) => (
-                <li key={idx} className="flex items-start gap-2.5">
-                  <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-1 font-body text-[12px] font-bold italic text-[#b17411]">
-              {challenges.typicalEngagement.footer}
-            </p>
+        {/* Investment Area incorporating Typical Engagement & Industry Neutral */}
+        <div className="mt-8 w-full max-w-[1280px]">
+          {/* Section Heading: Investment */}
+          <div className="flex items-center gap-2">
+            <Image
+              src="/icons/p13.svg"
+              alt="Investment Icon"
+              width={24}
+              height={24}
+              className="size-6 object-contain"
+              unoptimized
+            />
+            <h4 className="font-body text-[16px] font-extrabold tracking-wide text-[#001528] uppercase">
+              {challenges.investment.title}
+            </h4>
           </div>
 
-          {/* Right Block: Investment */}
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <Image
-                src="/icons/p13.svg"
-                alt="Investment Icon"
-                width={24}
-                height={24}
-                className="size-6 object-contain"
-                unoptimized
-              />
-              <h4 className="font-body text-[16px] font-extrabold tracking-wide text-[#001528] uppercase">
-                {challenges.investment.title}
-              </h4>
+          <p className="mt-2 font-body text-[13px] leading-relaxed text-[#5C5F66] max-w-[1100px]">
+            {challenges.investment.description}
+          </p>
+
+          {/* Cards Row: Typical Engagement & Industry Neutral + CTA Button */}
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-12 items-stretch">
+            {/* Left Card: Typical Engagement */}
+            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-6 shadow-xs md:col-span-7">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Image
+                    src="/icons/p13.svg"
+                    alt="Typical Engagement Icon"
+                    width={22}
+                    height={22}
+                    className="size-5.5 object-contain"
+                    unoptimized
+                  />
+                  <h5 className="font-body text-[15px] font-extrabold tracking-wide text-[#001528] uppercase">
+                    {challenges.typicalEngagement.title}
+                  </h5>
+                </div>
+                <ul className="mt-3.5 flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
+                  {challenges.typicalEngagement.bullets.map((bullet, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="mt-4 border-t border-gray-100 pt-3 font-body text-[12px] font-bold italic text-[#b17411]">
+                {challenges.typicalEngagement.footer}
+              </p>
             </div>
-            <p className="font-body text-[13px] leading-relaxed text-[#5C5F66]">
-              {challenges.investment.description}
-            </p>
 
-            <button
-              type="button"
-              onClick={toggleDetails}
-              aria-expanded={detailsOpen}
-              aria-controls="challenges-details"
-              className="mt-2 inline-flex h-[38px] w-full sm:w-fit cursor-pointer items-center justify-center bg-[#b17411] px-5 font-body text-[11px] font-bold tracking-wider text-white uppercase shadow-xs hover:bg-[#8f5d0e]"
-            >
-              {detailsOpen
-                ? "HOW IS OUR FEE DETERMINED? — LESS ›"
-                : challenges.investment.buttonText}
-            </button>
+            {/* Right Card / Block: Blue Industry Neutral Notice & CTA Button */}
+            <div className="flex flex-col justify-between gap-5 md:col-span-5">
+              {/* Blue Industry Neutral Box */}
+              <div className="flex flex-col justify-center rounded-2xl bg-[#001528] p-6 text-white shadow-sm h-full">
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <Compass className="size-5 shrink-0 text-[#b17411]" />
+                  <span className="font-body text-[12px] font-extrabold tracking-wider text-white uppercase">
+                    Industry Neutral
+                  </span>
+                </div>
+                <p className="font-body text-[13px] leading-relaxed text-gray-300">
+                  {challenges.modal.industryNeutralNotice}
+                </p>
+              </div>
+
+              {/* HOW IS OUR FEE DETERMINED CTA Button */}
+              <button
+                type="button"
+                onClick={toggleDetails}
+                aria-expanded={detailsOpen}
+                aria-controls="challenges-details"
+                className="mt-2 inline-flex h-[38px] w-full sm:w-fit cursor-pointer items-center justify-center bg-[#b17411] px-5 font-body text-[11px] font-bold tracking-wider text-white uppercase shadow-xs hover:bg-[#8f5d0e]"
+              >
+                {detailsOpen
+                  ? "HOW IS OUR FEE DETERMINED? — LESS ›"
+                  : challenges.investment.buttonText}
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Expandable details panel — animates open and pushes the next section down */}
-        <div
-          id="challenges-details"
-          ref={detailsPanelRef}
-          className={cn(
-            "grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
-            detailsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-          )}
-        >
-          <div className="overflow-hidden">
-            <div
-              aria-hidden={!detailsOpen}
-              inert={!detailsOpen}
-              className={cn(
-                "mt-8 rounded-2xl bg-white p-6 shadow-lg transition-opacity duration-300 ease-in-out sm:p-10",
-                detailsOpen ? "opacity-100" : "pointer-events-none opacity-0",
-              )}
-            >
-              {/* 3 Columns Details Section */}
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                {/* Column 1: Who We Work With */}
-                <div className="flex flex-col gap-3">
-                  <h4 className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase">
-                    {challenges.modal.whoWeWorkWithTitle}
-                  </h4>
-                  <ul className="flex flex-col gap-2.5 font-body text-[12px] text-[#5C5F66]">
-                    {challenges.modal.whoWeWorkWith.map((item, idx) => (
+          {/* Expandable Fee Determined Dropdown Panel */}
+          <div
+            id="challenges-details"
+            ref={detailsPanelRef}
+            className={cn(
+              "grid w-full transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+              detailsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+            )}
+          >
+            <div className="overflow-hidden">
+              <div
+                aria-hidden={!detailsOpen}
+                inert={!detailsOpen}
+                className={cn(
+                  "mt-6 rounded-2xl border border-gray-200/80 bg-white p-6 sm:p-8 shadow-md transition-opacity duration-300 ease-in-out",
+                  detailsOpen ? "opacity-100" : "pointer-events-none opacity-0",
+                )}
+              >
+                <h4 className="font-body text-[16px] font-extrabold tracking-wide text-[#001528] uppercase">
+                  {challenges.investment.feeDetermined.title}
+                </h4>
+                <p className="mt-2 font-body text-[14px] font-semibold text-[#001528]">
+                  {challenges.investment.feeDetermined.intro}
+                </p>
+
+                <ul className="mt-3.5 flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
+                  {challenges.investment.feeDetermined.bullets.map(
+                    (bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="mt-1 size-2 shrink-0 rounded-full bg-[#b17411]" />
-                        <span>{item}</span>
+                        <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
+                        <span>{bullet}</span>
                       </li>
-                    ))}
-                  </ul>
+                    ),
+                  )}
+                </ul>
 
-                  <div className="mt-2 flex items-start gap-3 rounded-lg bg-[#001528] p-3 text-white">
-                    <Compass className="size-5 shrink-0 text-white" />
-                    <p className="font-body text-[10px] leading-snug">
-                      {challenges.modal.industryNeutralNotice}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Column 2: Why Us */}
-                <div className="flex flex-col gap-3 border-l-0 border-gray-100 pl-0 md:border-l md:pl-6">
-                  <h4 className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase">
-                    {challenges.modal.whyUsTitle}
-                  </h4>
-                  <ul className="flex flex-col gap-2.5 font-body text-[12px] text-[#5C5F66]">
-                    {challenges.modal.whyUs.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <span className="mt-1 size-2 shrink-0 rounded-full bg-[#b17411]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Column 3: Typical Engagement Details */}
-                <div className="flex flex-col gap-4 border-l-0 border-gray-100 pl-0 md:border-l md:pl-6">
-                  <h4 className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase">
-                    {challenges.modal.typicalDetailsTitle}
-                  </h4>
-                  <div className="flex flex-col gap-4 font-body text-[12px]">
-                    {challenges.modal.typicalDetails.map((detail, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <Image
-                          src={detail.icon}
-                          alt={detail.title}
-                          width={24}
-                          height={24}
-                          className="size-6 object-contain"
-                          unoptimized
-                        />
-                        <div>
-                          <p className="font-bold text-[#001528]">
-                            {detail.title}
-                          </p>
-                          <p className="text-gray-500">{detail.subtitle}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="mt-5 rounded-xl border border-gray-200/70 bg-[#FAF9F5] p-4.5 text-[#001528]">
+                  <p className="font-body text-[13px] font-semibold leading-relaxed">
+                    {challenges.investment.feeDetermined.footer}
+                  </p>
                 </div>
               </div>
             </div>
