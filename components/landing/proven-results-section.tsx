@@ -33,53 +33,61 @@ export function ProvenResultsSection({
         {sectionNumber}
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 pt-20 pb-14 sm:px-10 sm:pt-14 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-[82px] lg:py-12">
-        {/* Left — 484px */}
-        <div className="flex w-full max-w-[484px] shrink-0 flex-col gap-6">
-          <span className="inline-flex w-fit items-center rounded-[20px] border-[0.5px] border-black/15 bg-white px-4 py-1.5 font-body text-[12px] font-semibold tracking-[0.08em] text-bronze uppercase">
-            {results.badge}
-          </span>
+      <Dialog.Root
+        open={!!popup}
+        onOpenChange={(open) => !open && setPopup(null)}
+      >
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 pt-20 pb-14 sm:px-10 sm:pt-14 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:px-[82px] lg:py-12">
+          {/* Left — 484px */}
+          <div className="flex w-full max-w-[484px] shrink-0 flex-col gap-6">
+            <span className="inline-flex w-fit items-center rounded-[20px] border-[0.5px] border-black/15 bg-white px-4 py-1.5 font-body text-[12px] font-semibold tracking-[0.08em] text-bronze uppercase">
+              {results.badge}
+            </span>
 
-          <h2
-            id="results-heading"
-            className="font-body text-[24px] leading-[1.15] font-extrabold tracking-[-0.005em] text-primary uppercase sm:text-[26px]"
-          >
-            {results.title}
-          </h2>
+            <h2
+              id="results-heading"
+              className="font-body text-[24px] leading-[1.15] font-extrabold tracking-[-0.005em] text-primary uppercase sm:text-[26px]"
+            >
+              {results.title}
+            </h2>
 
-          <p className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]">
-            {results.intro}
-          </p>
+            <p className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]">
+              {results.intro}
+            </p>
 
-          <ul className="m-0 grid w-full list-none grid-cols-1 grid-rows-none gap-x-6 gap-y-3 p-0 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3">
-            {results.bullets.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2.5 font-body text-[14px] leading-snug font-semibold text-primary"
-              >
-                <Image
-                  src={results.checkmark}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="mt-0.5 size-4 shrink-0"
-                  unoptimized
-                />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+            <ul className="m-0 grid w-full list-none grid-cols-1 grid-rows-none gap-x-6 gap-y-3 p-0 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3">
+              {results.bullets.map((item) => (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPopup({
+                        title: item.popout.title,
+                        paragraphs: [item.popout.description],
+                      })
+                    }
+                    className="group flex cursor-pointer items-start gap-2.5 text-left font-body text-[14px] leading-snug font-semibold text-primary transition-colors hover:text-[#b17411] focus:outline-none"
+                  >
+                    <Image
+                      src={results.checkmark}
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="mt-0.5 size-4 shrink-0"
+                      unoptimized
+                    />
+                    <span className="group-hover:underline">{item.label}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
 
-          <p className="font-body text-[16px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[20px]">
-            {results.tagline}
-          </p>
-        </div>
+            <p className="font-body text-[16px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[20px]">
+              {results.tagline}
+            </p>
+          </div>
 
-        {/* Right — stats panel */}
-        <Dialog.Root
-          open={!!popup}
-          onOpenChange={(open) => !open && setPopup(null)}
-        >
+          {/* Right — stats panel */}
           <div className="relative w-full overflow-hidden bg-[#001528] lg:min-h-[325px] lg:min-w-0 lg:flex-1">
             <div
               aria-hidden
@@ -139,34 +147,34 @@ export function ProvenResultsSection({
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Interactive Pop-out Box / Dialog */}
-          <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
-            <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] sm:w-full max-w-[620px] max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
-              <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
-                <X className="size-5" />
-                <span className="sr-only">Close</span>
-              </Dialog.Close>
+        {/* Interactive Pop-out Box / Dialog */}
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] sm:w-full max-w-[620px] max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+            <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+              <X className="size-5" />
+              <span className="sr-only">Close</span>
+            </Dialog.Close>
 
-              {popup && (
-                <div className="flex flex-col gap-3">
-                  <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
-                    {popup.title}
-                  </Dialog.Title>
-                  <Dialog.Description asChild>
-                    <div className="flex flex-col gap-3 whitespace-pre-line font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                      {popup.paragraphs.map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
-                      ))}
-                    </div>
-                  </Dialog.Description>
-                </div>
-              )}
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
-      </div>
+            {popup && (
+              <div className="flex flex-col gap-3">
+                <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                  {popup.title}
+                </Dialog.Title>
+                <Dialog.Description asChild>
+                  <div className="flex flex-col gap-3 whitespace-pre-line font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                    {popup.paragraphs.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </Dialog.Description>
+              </div>
+            )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </section>
   );
 }

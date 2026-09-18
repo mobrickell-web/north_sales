@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Phone, Check, Compass } from "lucide-react";
+import { Phone, Check, Compass, X } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -16,21 +17,29 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
   // Two independent inline panels driven by the two CTAs
   const [revenueOpen, setRevenueOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [popup, setPopup] = useState<{
+    title: string;
+    paragraphs: readonly string[];
+  } | null>(null);
 
   const revenuePanelRef = useRef<HTMLDivElement>(null);
   const detailsPanelRef = useRef<HTMLDivElement>(null);
 
   // Escape closes the open panels (deepest/last first)
   useEffect(() => {
-    if (!revenueOpen && !detailsOpen) return;
+    if (!revenueOpen && !detailsOpen && !popup) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
+      if (popup) {
+        setPopup(null);
+        return;
+      }
       if (detailsOpen) setDetailsOpen(false);
       else if (revenueOpen) setRevenueOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [revenueOpen, detailsOpen]);
+  }, [revenueOpen, detailsOpen, popup]);
 
   const toggleRevenue = () => {
     const willExpand = !revenueOpen;
@@ -345,16 +354,60 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
                   {challenges.investment.feeDetermined.intro}
                 </p>
 
-                <ul className="mt-3.5 flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
-                  {challenges.investment.feeDetermined.bullets.map(
-                    (bullet, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
-                        <span>{bullet}</span>
-                      </li>
-                    ),
-                  )}
-                </ul>
+                <Dialog.Root
+                  open={!!popup}
+                  onOpenChange={(open) => !open && setPopup(null)}
+                >
+                  <ul className="mt-3.5 flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
+                    {challenges.investment.feeDetermined.bullets.map(
+                      (bullet) => (
+                        <li
+                          key={bullet.id}
+                          className="flex items-start gap-2.5"
+                        >
+                          <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPopup({
+                                title: bullet.popout.title,
+                                paragraphs: [bullet.popout.description],
+                              })
+                            }
+                            className="cursor-pointer text-left font-body text-[13px] text-[#5C5F66] transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                          >
+                            {bullet.label}
+                          </button>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+
+                  <Dialog.Portal>
+                    <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+                    <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] sm:w-full max-w-[620px] max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+                      <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+                        <X className="size-5" />
+                        <span className="sr-only">Close</span>
+                      </Dialog.Close>
+
+                      {popup && (
+                        <div className="flex flex-col gap-3">
+                          <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                            {popup.title}
+                          </Dialog.Title>
+                          <Dialog.Description asChild>
+                            <div className="flex flex-col gap-3 whitespace-pre-line font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                              {popup.paragraphs.map((paragraph, index) => (
+                                <p key={index}>{paragraph}</p>
+                              ))}
+                            </div>
+                          </Dialog.Description>
+                        </div>
+                      )}
+                    </Dialog.Content>
+                  </Dialog.Portal>
+                </Dialog.Root>
 
                 <div className="mt-5 rounded-xl border border-gray-200/70 bg-[#FAF9F5] p-4.5 text-[#001528]">
                   <p className="font-body text-[13px] font-semibold leading-relaxed">

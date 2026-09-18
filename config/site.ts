@@ -14,8 +14,8 @@ export const siteConfig = {
     { href: "#why-choose-us", label: "Why Choose Us" },
     { href: "#results", label: "Results" },
 
-    { label: "HOW IT WORKS", href: "#how-it-works" },
-    { label: "STEPS", href: "#steps" },
+    { label: "HOW WE WORK", href: "#how-we-work" },
+    { label: "OUR 60 DAY FOCUS", href: "#our-60-day-focus" },
     { label: "CHALLENGES", href: "#challenges" },
 
     { href: "#solutions", label: "Solutions" },
@@ -123,8 +123,10 @@ export const siteConfig = {
   },
   //steps section
   salesEngagement: {
-    badge: "Steps",
+    badge: "Our 60 Day Focus",
     title: "Our 60-Day FOCUS",
+    subtitle:
+      "A focused, results-oriented 6-step, 60-day engagement process designed to identify the areas most likely to improve sales performance and help leadership implement the changes needed to produce measurable results.",
     steps: [
       {
         stepNumber: 1,
@@ -132,6 +134,11 @@ export const siteConfig = {
         description:
           "We gain a deep understanding of your business, goals, challenges, and current sales performance.",
         icon: "search", // Lucide Search icon
+        popout: {
+          title: "Sales Strategy and Planning",
+          description:
+            "We help leadership clarify sales priorities, identify the strongest opportunities for growth, and create a practical plan for improving performance. This may include market focus, sales objectives, resource allocation, prospecting priorities, and the activities most likely to produce measurable results.",
+        },
       },
       {
         stepNumber: 2,
@@ -139,6 +146,11 @@ export const siteConfig = {
         description:
           "We assess people, processes, pipeline, tools, and metrics to identify gaps and the biggest opportunities.",
         icon: "clipboard-list", // Lucide ClipboardList icon
+        popout: {
+          title: "Sales Organization Design",
+          description:
+            "We evaluate whether the current sales structure supports the company's goals. This can include roles and responsibilities, management structure, territories, account assignments, appointment-setting support, communication, and how effectively the team works together.",
+        },
       },
       {
         stepNumber: 3,
@@ -146,6 +158,11 @@ export const siteConfig = {
         description:
           "We develop a customised strategy, systems, and action plan aligned with your objectives.",
         icon: "workflow", // Lucide LayoutGrid or Workflow icon
+        popout: {
+          title: "Go-to-Market Optimization",
+          description:
+            "We examine how the organization identifies, reaches, and converts prospective customers. This may include target markets, lead generation, prospecting methods, sales messaging, value propositions, presentations, follow-up, and the overall path from initial contact to completed sale.",
+        },
       },
       {
         stepNumber: 4,
@@ -153,6 +170,11 @@ export const siteConfig = {
         description:
           "We work alongside your team to implement priorities and build momentum quickly.",
         icon: "settings", // Lucide Settings icon
+        popout: {
+          title: "Sales Talent Assessment and Development",
+          description:
+            "We help identify individual strengths, performance gaps, and opportunities for improvement across the sales team. Development may include coaching, training, prospecting, presentations, objection handling, follow-up, closing, time management, and other skills directly connected to sales productivity.",
+        },
       },
       {
         stepNumber: 5,
@@ -160,6 +182,11 @@ export const siteConfig = {
         description:
           "We refine processes, reinforce accountability, and improve performance using data and feedback.",
         icon: "bar-chart-3", // Lucide BarChart3 icon
+        popout: {
+          title: "Sales Performance Management",
+          description:
+            "We help leadership establish clear expectations, meaningful performance measures, and consistent accountability. This may include sales activity, pipeline movement, conversion rates, CRM utilization, follow-up, forecasting, individual performance, and the results being produced.",
+        },
       },
       {
         stepNumber: 6,
@@ -167,6 +194,11 @@ export const siteConfig = {
         description:
           "We establish systems and habits that ensure lasting improvement and long-term results.",
         icon: "check", // Lucide Check icon
+        popout: {
+          title: "Leadership Coaching and Enablement",
+          description:
+            "Strong sales performance requires effective leadership. We work with sales leaders to strengthen communication, accountability, coaching, decision-making, performance management, and their ability to help salespeople consistently perform at a higher level.",
+        },
       },
     ],
     banner: {
@@ -639,11 +671,55 @@ export const siteConfig = {
         title: "How is our fee determined?",
         intro: "Our fee is based on the scope of the engagement, including:",
         bullets: [
-          "The number of salespeople or account representatives involved",
-          "The Sales Performance Components™ being addressed",
-          "The level of leadership involvement required",
-          "The amount of implementation, coaching, and follow-through needed",
-          "The overall complexity and duration of the engagement",
+          {
+            id: "number-of-salespeople",
+            label:
+              "The number of salespeople or account representatives involved",
+            popout: {
+              title:
+                "The Number of Salespeople or Account Representatives Involved",
+              description:
+                "The number of people included directly affects the amount of evaluation, coaching, communication, performance tracking, and follow-through required throughout the engagement.",
+            },
+          },
+          {
+            id: "sales-performance-components",
+            label: "The Sales Performance Components™ being addressed",
+            popout: {
+              title: "The Sales Performance Components™ Being Addressed",
+              description:
+                "Some engagements may focus on one specific area, while others require attention across several Sales Performance Components™. The broader the scope, the more resources and implementation support may be required.",
+            },
+          },
+          {
+            id: "leadership-involvement",
+            label: "The level of leadership involvement required",
+            popout: {
+              title: "The Level of Leadership Involvement Required",
+              description:
+                "Some engagements require limited management participation, while others involve ongoing collaboration with senior leadership, sales management, or other key decision-makers.",
+            },
+          },
+          {
+            id: "implementation-coaching",
+            label:
+              "The amount of implementation, coaching, and follow-through needed",
+            popout: {
+              title:
+                "The Amount of Implementation, Coaching, and Follow-Through Needed",
+              description:
+                "Fees reflect not only what needs to be evaluated, but also the level of hands-on implementation, coaching, accountability, and follow-through required to help produce measurable improvement.",
+            },
+          },
+          {
+            id: "complexity-duration",
+            label: "The overall complexity and duration of the engagement",
+            popout: {
+              title: "The Overall Complexity and Duration of the Engagement",
+              description:
+                "Engagements vary in complexity depending on the organization, sales structure, objectives, challenges, and length of the assignment. These factors are considered when determining the final scope and fee.",
+            },
+          },
         ],
         footer:
           "Smaller 30-day engagements may begin at $5,000, while broader 60-day Sales Performance Engagements are priced according to scope and typically begin at $50,000.",
@@ -931,12 +1007,60 @@ export const siteConfig = {
     intro: "Our clients achieve sustainable revenue growth through:",
     checkmark: "/icons/checkmark.svg",
     bullets: [
-      "Sales strategy and planning",
-      "Sales organization design",
-      "Go-to-market optimization",
-      "Sales talent assessment and development",
-      "Sales performance management",
-      "Leadership coaching and enablement",
+      {
+        id: "sales-strategy-planning",
+        label: "Sales strategy and planning",
+        popout: {
+          title: "Sales Strategy and Planning",
+          description:
+            "We help leadership clarify sales priorities, identify the strongest opportunities for growth, and create a practical plan for improving performance. This may include market focus, sales objectives, resource allocation, prospecting priorities, and the activities most likely to produce measurable results.",
+        },
+      },
+      {
+        id: "sales-organization-design",
+        label: "Sales organization design",
+        popout: {
+          title: "Sales Organization Design",
+          description:
+            "We evaluate whether the current sales structure supports the company's goals. This can include roles and responsibilities, management structure, territories, account assignments, appointment-setting support, communication, and how effectively the team works together.",
+        },
+      },
+      {
+        id: "go-to-market-optimization",
+        label: "Go-to-market optimization",
+        popout: {
+          title: "Go-to-Market Optimization",
+          description:
+            "We examine how the organization identifies, reaches, and converts prospective customers. This may include target markets, lead generation, prospecting methods, sales messaging, value propositions, presentations, follow-up, and the overall path from initial contact to completed sale.",
+        },
+      },
+      {
+        id: "sales-talent-assessment",
+        label: "Sales talent assessment and development",
+        popout: {
+          title: "Sales Talent Assessment and Development",
+          description:
+            "We help identify individual strengths, performance gaps, and opportunities for improvement across the sales team. Development may include coaching, training, prospecting, presentations, objection handling, follow-up, closing, time management, and other skills directly connected to sales productivity.",
+        },
+      },
+      {
+        id: "sales-performance-management",
+        label: "Sales performance management",
+        popout: {
+          title: "Sales Performance Management",
+          description:
+            "We help leadership establish clear expectations, meaningful performance measures, and consistent accountability. This may include sales activity, pipeline movement, conversion rates, CRM utilization, follow-up, forecasting, individual performance, and the results being produced.",
+        },
+      },
+      {
+        id: "leadership-coaching",
+        label: "Leadership coaching and enablement",
+        popout: {
+          title: "Leadership Coaching and Enablement",
+          description:
+            "Strong sales performance requires effective leadership. We work with sales leaders to strengthen communication, accountability, coaching, decision-making, performance management, and their ability to help salespeople consistently perform at a higher level.",
+        },
+      },
     ],
     tagline: "Building High-Performing Sales Organizations That Win",
     stats: [
@@ -1061,8 +1185,8 @@ North Point may help improve sales productivity by:
               { label: "Why choose us", href: "#why-choose-us" },
               { label: "Results", href: "#results" },
 
-              { label: "How it works", href: "#how-it-works" },
-              { label: "Steps", href: "#steps" },
+              { label: "How we work", href: "#how-we-work" },
+              { label: "Our 60 Day Focus", href: "#our-60-day-focus" },
               { label: "Challenges", href: "#challenges" },
 
               { label: "Solutions", href: "#solutions" },

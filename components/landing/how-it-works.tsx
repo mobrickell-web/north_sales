@@ -128,8 +128,8 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
 
   return (
     <section
-      id="how-it-works"
-      aria-labelledby="how-it-works-heading"
+      id="how-we-work"
+      aria-labelledby="how-we-work-heading"
       className="relative w-full overflow-hidden bg-white pt-20 pb-12 sm:pt-12 lg:py-16"
     >
       {/* Section Indicator Number */}
@@ -144,7 +144,7 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
             {howItWorks.badge}
           </span>
           <h2
-            id="how-it-works-heading"
+            id="how-we-work-heading"
             className="max-w-[720px] font-body text-[20px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[24px]"
           >
             {howItWorks.title}
