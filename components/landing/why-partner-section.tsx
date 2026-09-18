@@ -8,7 +8,9 @@ import {
   Globe,
   ShieldLock,
   Target,
+  X,
 } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -30,17 +32,26 @@ const iconMap: Record<string, React.ReactNode> = {
 export function WhyPartnerSection() {
   const { whyChooseUs } = siteConfig;
   const [expanded, setExpanded] = useState(false);
+  const [popup, setPopup] = useState<{
+    title: string;
+    paragraphs: readonly string[];
+  } | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Allow closing the expanded panel with the Escape key
+  // Escape closes the popup first, then the expanded panel
   useEffect(() => {
-    if (!expanded) return;
+    if (!expanded && !popup) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setExpanded(false);
+      if (e.key !== "Escape") return;
+      if (popup) {
+        setPopup(null);
+        return;
+      }
+      setExpanded(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [expanded]);
+  }, [expanded, popup]);
 
   const toggle = () => {
     const willExpand = !expanded;
@@ -77,37 +88,78 @@ export function WhyPartnerSection() {
         </div>
 
         {/* Main 5 Pillars Row */}
-        <ul className="mt-8 grid w-full max-w-[1280px] grid-cols-1 list-none p-0 md:grid-cols-3 lg:mt-10 lg:grid-cols-5">
-          {whyChooseUs.pillars.map((pillar, index) => (
-            <li
-              key={pillar.id}
-              className={cn(
-                "flex flex-col items-center px-4 py-6 text-center lg:py-0",
-                index > 0 &&
-                  "border-t border-black/10 md:border-t-0 md:border-l",
-              )}
-            >
-              <div className="flex h-14 items-center justify-center">
-                {iconMap[pillar.icon] || (
-                  <Image
-                    src={pillar.icon}
-                    alt={pillar.title}
-                    width={48}
-                    height={48}
-                    className="size-12 object-contain"
-                    unoptimized
-                  />
+        <Dialog.Root
+          open={!!popup}
+          onOpenChange={(open) => !open && setPopup(null)}
+        >
+          <ul className="mt-8 grid w-full max-w-[1280px] grid-cols-1 list-none p-0 md:grid-cols-3 lg:mt-10 lg:grid-cols-5">
+            {whyChooseUs.pillars.map((pillar, index) => (
+              <li
+                key={pillar.id}
+                className={cn(
+                  "flex flex-col items-center px-4 py-6 text-center lg:py-0",
+                  index > 0 &&
+                    "border-t border-black/10 md:border-t-0 md:border-l",
                 )}
-              </div>
-              <h3 className="mt-2 font-body text-[13px] font-bold tracking-[0.04em] text-primary uppercase">
-                {pillar.title}
-              </h3>
-              <p className="mt-2 font-body text-[13px] leading-relaxed text-[#5C5F66]">
-                {pillar.description}
-              </p>
-            </li>
-          ))}
-        </ul>
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    setPopup({
+                      title: pillar.title,
+                      paragraphs: pillar.popout.paragraphs,
+                    })
+                  }
+                  className="group flex cursor-pointer flex-col items-center text-center transition-opacity hover:opacity-90 focus:outline-none"
+                >
+                  <div className="flex h-14 items-center justify-center">
+                    {iconMap[pillar.icon] || (
+                      <Image
+                        src={pillar.icon}
+                        alt=""
+                        width={48}
+                        height={48}
+                        className="size-12 object-contain"
+                        unoptimized
+                      />
+                    )}
+                  </div>
+                  <h3 className="mt-2 font-body text-[13px] font-bold tracking-[0.04em] text-primary uppercase group-hover:text-[#b17411] group-hover:underline">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-2 font-body text-[13px] leading-relaxed text-[#5C5F66]">
+                    {pillar.description}
+                  </p>
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+            <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] sm:w-full max-w-[620px] max-h-[90vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+              <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+                <X className="size-5" />
+                <span className="sr-only">Close</span>
+              </Dialog.Close>
+
+              {popup && (
+                <div className="flex flex-col gap-3">
+                  <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                    {popup.title}
+                  </Dialog.Title>
+                  <Dialog.Description asChild>
+                    <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                      {popup.paragraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </Dialog.Description>
+                </div>
+              )}
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
 
         {/* CTA Button — toggles the details panel inline (no popup) */}
         <div className="mt-8 flex w-full max-w-[1280px] justify-center sm:justify-end sm:pr-4">

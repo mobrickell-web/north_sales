@@ -49,6 +49,18 @@ export const siteConfig = {
         description:
           "We help established, growth-oriented organizations improve the performance of their existing sales operation before adding more people, marketing, or unnecessary spending.",
         icon: "/icons/deliver.svg",
+        popout: {
+          paragraphs: [
+            "Before recommending more salespeople, more leads, or more marketing spend, we first ask a more fundamental question:",
+            "Is the organization getting everything it reasonably can from the sales resources it already has?",
+            "Many established companies have significant revenue potential already sitting inside their existing sales operation — in conversion rates, prospecting effectiveness, sales messaging, follow-up, pipeline management, leadership, accountability, and individual salesperson performance.",
+            "If those areas can be strengthened, even modestly, the financial impact can be substantial.",
+            "For example, improving the productivity of an existing sales team by even a few percentage points may generate meaningful additional revenue without immediately adding payroll, increasing advertising expense, or expanding headcount.",
+            "That is why we believe the first place to look for growth is often inside the existing sales organization.",
+            "The business question is:",
+            "How much additional revenue and contribution profit could your existing sales operation produce if it performed more effectively?",
+          ],
+        },
       },
       {
         id: "evaluate-organization",
@@ -56,6 +68,17 @@ export const siteConfig = {
         description:
           "We look at the sales organization as an interconnected revenue-producing system rather than assuming the salespeople themselves are the problem.",
         icon: "/icons/data.svg",
+        popout: {
+          paragraphs: [
+            "Sales performance is rarely the result of one isolated issue.",
+            "A salesperson may appear to be underperforming when the actual problem is lead quality, weak messaging, poor onboarding, inconsistent follow-up, ineffective pipeline management, limited accountability, compensation structure, or lack of sales leadership.",
+            "That is why we evaluate the sales organization as a complete revenue-producing system rather than automatically assuming the salespeople themselves are the problem.",
+            "We look at how the different components work together and where breakdowns, inefficiencies, or missed opportunities may exist.",
+            "This gives leadership a much clearer picture of what is actually affecting performance before money and resources are committed to fixing the wrong problem.",
+            "The business question is:",
+            "What is actually limiting sales performance, and where is the greatest opportunity for improvement?",
+          ],
+        },
       },
       {
         id: "focus-on-what-matters",
@@ -63,6 +86,18 @@ export const siteConfig = {
         description:
           "We concentrate on the specific areas most relevant to the organization's current objectives, challenges, and opportunities.",
         icon: "/icons/solution.svg",
+        popout: {
+          paragraphs: [
+            "Most companies do not need to overhaul their entire sales organization.",
+            "The real value comes from identifying the few areas that are having the greatest impact on results and concentrating attention there.",
+            "For one company, that may be improving conversion rates. For another, it may be prospecting, lead quality, sales messaging, follow-up, pipeline management, leadership, or the performance of a small number of salespeople.",
+            "By narrowing the focus, the company avoids unnecessary disruption and directs its time, money, and management attention toward the areas most likely to produce measurable improvement.",
+            "Our goal is not to change everything.",
+            "Our goal is to identify what matters most right now and address it effectively.",
+            "The business question is:",
+            "Which improvements are most likely to produce the greatest measurable return for the organization?",
+          ],
+        },
       },
       {
         id: "improve-revenue-profit",
@@ -70,6 +105,17 @@ export const siteConfig = {
         description:
           "Our focus is on improvements that can produce meaningful financial impact, not change simply for the sake of change.",
         icon: "/icons/impact.svg",
+        popout: {
+          paragraphs: [
+            "More revenue is valuable only if the additional business also makes financial sense.",
+            "That is why we look beyond sales activity and top-line growth and focus on whether improvements are producing meaningful contribution profit — the amount remaining after the direct costs associated with generating and delivering the additional business.",
+            "For example, if an improvement produces $500,000 in additional annual revenue, leadership also needs to understand what portion of that revenue contributes meaningfully to profit after direct costs.",
+            "This allows the company to evaluate sales improvements as a business investment rather than simply celebrating higher activity, more appointments, or additional revenue.",
+            "The objective is to create improvements that are financially meaningful and sustainable.",
+            "The business question is:",
+            "Are the changes producing enough additional revenue and contribution profit to justify the investment?",
+          ],
+        },
       },
       {
         id: "help-leadership-implement",
@@ -77,6 +123,18 @@ export const siteConfig = {
         description:
           "We do more than identify opportunities. We help leadership implement the changes needed to capture them and measure whether they are producing results.",
         icon: "/icons/trust.svg",
+        popout: {
+          paragraphs: [
+            "Identifying what needs to change is only valuable if those changes are actually implemented.",
+            "North Point is not designed to simply deliver a report, make recommendations, and leave leadership to figure out the rest.",
+            "We can work alongside the company as a fractional sales executive to help put the agreed-upon improvements into practice.",
+            "That may include working directly with selected salespeople, improving presentations and messaging, strengthening prospecting and follow-up, addressing pipeline issues, improving accountability, coordinating outside vendors when needed, and helping leadership track results.",
+            "The engagement can be narrowly focused on two or three salespeople or expanded to support the broader sales organization.",
+            "The level of involvement depends on what the company actually needs.",
+            "The business question is:",
+            "Once we know what needs to improve, how do we make sure those improvements are actually implemented and producing results?",
+          ],
+        },
       },
     ],
     // Modal content for the "MORE" CTA
@@ -1168,7 +1226,7 @@ North Point may help improve sales productivity by:
     ctaTitle: "Ready to Align Your Sales Organization and Accelerate Growth?",
     ctaSubtitle: "Let's start the conversation.",
     contactLinkLabel: "or Contact Us Directly",
-    contactHref: "#contact",
+    contactHref: "/#contact",
 
     taglinePrimary: "EXECUTIVE SALES PERFORMANCE IMPLEMENTATION",
     taglineSecondary: "A DONE WITH YOU. DONE FOR YOU. SYSTEM.",
@@ -1181,52 +1239,16 @@ North Point may help improve sales productivity by:
           {
             title: "Quick Actions",
             links: [
-              { label: "Home", href: "#top" },
-              { label: "Why choose us", href: "#why-choose-us" },
-              { label: "Results", href: "#results" },
+              { label: "Home", href: "/#top" },
+              { label: "Why choose us", href: "/#why-choose-us" },
+              { label: "Results", href: "/#results" },
 
-              { label: "How we work", href: "#how-we-work" },
-              { label: "Our 60 Day Focus", href: "#our-60-day-focus" },
-              { label: "Challenges", href: "#challenges" },
+              { label: "How we work", href: "/#how-we-work" },
+              { label: "Our 60 Day Focus", href: "/#our-60-day-focus" },
+              { label: "Challenges", href: "/#challenges" },
 
-              { label: "Solutions", href: "#solutions" },
-              { label: "FAQ's", href: "#faqs" },
-            ],
-          },
-        ],
-      },
-      {
-        id: "company",
-        groups: [
-          {
-            title: "COMPANY",
-            links: [
-              { label: "About Us", href: "#about" },
-              { label: "Our Approach", href: "#approach" },
-              { label: "Engagement", href: "#engagement" },
-              { label: "Resources", href: "#faqs" },
-              { label: "Contact", href: "#contact" },
-            ],
-          },
-        ],
-      },
-      {
-        id: "solutions-engagement",
-        groups: [
-          {
-            title: "SOLUTIONS",
-            links: [
-              { label: "Sales Leadership", href: "#" },
-              { label: "Sales Systems", href: "#" },
-              { label: "Sales Performance", href: "#" },
-            ],
-          },
-          {
-            title: "ENGAGEMENT",
-            links: [
-              { label: "60-Day Engagement", href: "#" },
-              { label: "What to Expect", href: "#" },
-              { label: "Who We Work With", href: "#" },
+              { label: "Solutions", href: "/#solutions" },
+              { label: "FAQ's", href: "/#faqs" },
             ],
           },
         ],
@@ -1236,13 +1258,693 @@ North Point may help improve sales productivity by:
     contact: {
       phone: "(970) 250-1439",
       email: "contact@northpointsalesgroup.com",
-      location: "CO",
       scope: "Serving Clients Nationwide",
     },
 
     legal: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Use", href: "#" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Use", href: "/terms-of-use" },
+    ],
+  },
+
+  privacyPolicy: {
+    title: "Privacy Policy",
+    badge: "Legal",
+    hero: {
+      image: {
+        src: "/images/hero-image.svg",
+        alt: "North Point Sales Group — Privacy Policy",
+      },
+      subtitle:
+        "How we collect, use, disclose, and protect information when you interact with our website and services.",
+    },
+    intro: [
+      'North Point Sales Group ("North Point," "we," "us," or "our") respects your privacy and is committed to handling personal information responsibly.',
+      "This Privacy Policy explains how we may collect, use, disclose, and protect information when you visit NorthPointSalesGroup.com, contact us, request information, schedule a consultation, or otherwise interact with our website.",
+    ],
+    sections: [
+      {
+        id: "information-we-may-collect",
+        number: "1",
+        title: "Information We May Collect",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We may collect information that you voluntarily provide to us, including:",
+          },
+          {
+            type: "list",
+            items: [
+              "Your name",
+              "Company or organization name",
+              "Job title",
+              "Email address",
+              "Telephone number",
+              "Information you provide through contact forms, consultation requests, questionnaires, assessments, or other communications",
+              "Information concerning your organization, sales operation, or business needs that you voluntarily provide",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "We may also automatically receive certain technical information when you use our website, such as:",
+          },
+          {
+            type: "list",
+            items: [
+              "Internet Protocol (IP) address",
+              "Browser type",
+              "Device type",
+              "Operating system",
+              "Pages visited",
+              "Referring website",
+              "Date and time of visits",
+              "General website usage and interaction information",
+            ],
+          },
+        ],
+      },
+      {
+        id: "how-we-use-information",
+        number: "2",
+        title: "How We Use Information",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We may use information we collect to:",
+          },
+          {
+            type: "list",
+            items: [
+              "Respond to inquiries and consultation requests",
+              "Communicate with prospective and existing clients",
+              "Evaluate whether North Point Sales Group's services may be appropriate for an organization",
+              "Provide requested information about our services",
+              "Schedule and conduct consultations",
+              "Provide and improve our website and services",
+              "Analyze website usage and performance",
+              "Maintain the security and integrity of our website",
+              "Maintain appropriate business records",
+              "Comply with legal and regulatory requirements",
+              "Protect our legal rights and the rights of others",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "We may also use contact information to communicate with you about North Point Sales Group services that we reasonably believe may be relevant to your business. You may ask us to discontinue marketing communications at any time.",
+          },
+        ],
+      },
+      {
+        id: "cookies-and-similar-technologies",
+        number: "3",
+        title: "Cookies and Similar Technologies",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Our website may use cookies, analytics technologies, or similar tools to help the website function properly, understand how visitors use the site, improve performance, and evaluate the effectiveness of our communications and marketing.",
+          },
+          {
+            type: "paragraph",
+            text: "You may be able to control cookies through your browser settings. Disabling certain cookies may affect the functionality of some portions of the website.",
+          },
+        ],
+      },
+      {
+        id: "how-we-may-share-information",
+        number: "4",
+        title: "How We May Share Information",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We do not sell personal information in the ordinary meaning of the term.",
+          },
+          {
+            type: "paragraph",
+            text: "We may share information with service providers or contractors that assist us with business functions such as:",
+          },
+          {
+            type: "list",
+            items: [
+              "Website hosting and maintenance",
+              "Email and communications",
+              "Scheduling",
+              "Customer relationship management",
+              "Website analytics",
+              "Information technology and security",
+              "Professional, accounting, or legal services",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "These providers may receive information only as reasonably necessary to perform services on our behalf.",
+          },
+          {
+            type: "paragraph",
+            text: "We may also disclose information when we reasonably believe disclosure is necessary to:",
+          },
+          {
+            type: "list",
+            items: [
+              "Comply with applicable law, regulation, subpoena, court order, or other legal process",
+              "Protect the rights, property, or safety of North Point Sales Group, our clients, website users, or others",
+              "Investigate suspected fraud, security incidents, or unlawful activity",
+              "Facilitate a merger, acquisition, financing, restructuring, sale of assets, or similar business transaction",
+            ],
+          },
+        ],
+      },
+      {
+        id: "information-concerning-client-organizations",
+        number: "5",
+        title: "Information Concerning Client Organizations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "During consultations or engagements, prospective or existing clients may provide confidential or proprietary business information.",
+          },
+          {
+            type: "paragraph",
+            text: "Information provided as part of an actual consulting engagement may also be governed by the applicable engagement agreement, confidentiality agreement, nondisclosure agreement, or other written agreement between North Point Sales Group and the client.",
+          },
+          {
+            type: "paragraph",
+            text: "This Privacy Policy is not intended to replace the confidentiality provisions contained in those agreements.",
+          },
+        ],
+      },
+      {
+        id: "data-security",
+        number: "6",
+        title: "Data Security",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We use reasonable administrative, technical, and organizational measures designed to protect information against unauthorized access, disclosure, alteration, misuse, or destruction.",
+          },
+          {
+            type: "paragraph",
+            text: "However, no website, electronic communication, or information-storage system can be guaranteed to be completely secure. Therefore, we cannot guarantee the absolute security of information transmitted through or stored in connection with the website.",
+          },
+        ],
+      },
+      {
+        id: "data-retention",
+        number: "7",
+        title: "Data Retention",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We may retain personal information for as long as reasonably necessary for the purposes for which it was collected, including maintaining business records, responding to inquiries, providing services, resolving disputes, enforcing agreements, and complying with legal obligations.",
+          },
+        ],
+      },
+      {
+        id: "your-privacy-rights",
+        number: "8",
+        title: "Your Privacy Rights",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Depending upon where you reside and applicable law, you may have certain rights concerning your personal information, which may include the right to:",
+          },
+          {
+            type: "list",
+            items: [
+              "Request access to personal information we maintain about you",
+              "Request correction of inaccurate information",
+              "Request deletion of certain personal information",
+              "Request a copy of certain personal information",
+              "Opt out of certain uses or disclosures of personal information where required by law",
+              "Withdraw consent where processing is based upon consent",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "These rights are subject to applicable legal requirements, limitations, and exceptions.",
+          },
+          {
+            type: "paragraph",
+            text: "To submit a privacy-related request, contact us at:",
+          },
+          {
+            type: "email",
+            text: "contact@northpointsalesgroup.com",
+          },
+          {
+            type: "paragraph",
+            text: "We may need to verify your identity before processing certain requests.",
+          },
+        ],
+      },
+      {
+        id: "third-party-websites-and-services",
+        number: "9",
+        title: "Third-Party Websites and Services",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Our website may contain links to third-party websites, platforms, resources, or services.",
+          },
+          {
+            type: "paragraph",
+            text: "North Point Sales Group does not control and is not responsible for the privacy practices, security, content, or policies of third parties. We encourage you to review the privacy policies of any third-party website or service you choose to use.",
+          },
+        ],
+      },
+      {
+        id: "childrens-privacy",
+        number: "10",
+        title: "Children's Privacy",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "North Point Sales Group's website and services are intended for businesses and business professionals and are not directed toward children under the age of 13.",
+          },
+          {
+            type: "paragraph",
+            text: "We do not knowingly seek to collect personal information from children under 13 through this website. If we become aware that such information has been provided to us, we may take reasonable steps to delete it.",
+          },
+        ],
+      },
+      {
+        id: "changes-to-this-privacy-policy",
+        number: "11",
+        title: "Changes to This Privacy Policy",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We may update this Privacy Policy periodically to reflect changes in our practices, technology, legal requirements, or business operations.",
+          },
+          {
+            type: "paragraph",
+            text: "When changes are made, the revised policy will be posted on this page with an updated effective date.",
+          },
+          {
+            type: "paragraph",
+            text: "Your continued use of the website after a revised Privacy Policy is posted constitutes acknowledgment of the updated policy.",
+          },
+        ],
+      },
+      {
+        id: "contact-us",
+        number: "12",
+        title: "Contact Us",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Questions concerning this Privacy Policy or our privacy practices may be directed to:",
+          },
+          {
+            type: "contact",
+            company: "North Point Sales Group",
+            email: "contact@northpointsalesgroup.com",
+            phone: "(970) 250-1439",
+          },
+        ],
+      },
+    ],
+  },
+
+  termsOfUse: {
+    title: "Terms of Use",
+    badge: "Legal",
+    hero: {
+      image: {
+        src: "/images/hero-image.svg",
+        alt: "North Point Sales Group — Terms of Use",
+      },
+      subtitle:
+        "Terms governing your access to and use of the North Point Sales Group website and related materials.",
+    },
+    intro: [
+      "Welcome to NorthPointSalesGroup.com.",
+      'These Terms of Use ("Terms") govern your access to and use of the North Point Sales Group website and the information, materials, resources, and other content made available through the website.',
+      "By accessing or using this website, you agree to these Terms. If you do not agree with these Terms, please do not use the website.",
+    ],
+    sections: [
+      {
+        id: "website-purpose",
+        number: "1",
+        title: "Website Purpose",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "North Point Sales Group provides sales-performance consulting, advisory, implementation, coaching, and related business services to organizations.",
+          },
+          {
+            type: "paragraph",
+            text: "The information presented on this website is intended to provide general information about North Point Sales Group, our approach, our services, and sales-performance concepts.",
+          },
+          {
+            type: "paragraph",
+            text: "Website content does not constitute a consulting engagement or create a client-consultant, fiduciary, employment, partnership, joint venture, or other professional relationship.",
+          },
+        ],
+      },
+      {
+        id: "consulting-engagements",
+        number: "2",
+        title: "Consulting Engagements",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Any consulting or advisory services provided by North Point Sales Group are subject to a separate written engagement agreement or other written agreement between North Point Sales Group and the client.",
+          },
+          {
+            type: "paragraph",
+            text: "If there is any conflict between these Terms of Use and a written client engagement agreement, the provisions of the applicable engagement agreement will control with respect to that engagement.",
+          },
+          {
+            type: "paragraph",
+            text: "Website descriptions of services, processes, timeframes, pricing, deliverables, or potential results are general in nature and may vary depending upon the scope and circumstances of a particular engagement.",
+          },
+        ],
+      },
+      {
+        id: "no-guarantee-of-results",
+        number: "3",
+        title: "No Guarantee of Results",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "North Point Sales Group works with organizations to identify opportunities to strengthen sales leadership, systems, processes, execution, accountability, and overall sales performance.",
+          },
+          {
+            type: "paragraph",
+            text: "Business and sales results depend upon numerous factors, many of which are outside the control of North Point Sales Group.",
+          },
+          {
+            type: "paragraph",
+            text: "Accordingly, North Point Sales Group does not guarantee any particular increase in revenue, profit, sales, conversion rates, productivity, market share, business valuation, or other financial or operational result.",
+          },
+          {
+            type: "paragraph",
+            text: "Any examples, illustrations, projections, calculations, percentages, or discussions of potential improvements appearing on the website are provided for informational and illustrative purposes only. They should not be interpreted as a representation, promise, warranty, or guarantee that any particular organization will achieve similar results.",
+          },
+        ],
+      },
+      {
+        id: "no-financial-legal-tax-or-investment-advice",
+        number: "4",
+        title: "No Financial, Legal, Tax, or Investment Advice",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Information provided on this website is related primarily to business and sales performance.",
+          },
+          {
+            type: "paragraph",
+            text: "Nothing on this website should be interpreted as legal, accounting, tax, investment, securities, or other regulated professional advice.",
+          },
+          {
+            type: "paragraph",
+            text: "Organizations should consult qualified professionals regarding matters requiring specialized professional advice.",
+          },
+        ],
+      },
+      {
+        id: "accuracy-of-website-information",
+        number: "5",
+        title: "Accuracy of Website Information",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We seek to provide useful and accurate information. However, business conditions, research, statistics, third-party information, services, pricing, and other information may change.",
+          },
+          {
+            type: "paragraph",
+            text: "North Point Sales Group does not warrant that all website information will always be complete, current, error-free, or applicable to every organization.",
+          },
+          {
+            type: "paragraph",
+            text: "We reserve the right to modify, update, correct, add, or remove website content at any time without prior notice.",
+          },
+        ],
+      },
+      {
+        id: "intellectual-property",
+        number: "6",
+        title: "Intellectual Property",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Unless otherwise indicated, the website and its original content, including text, graphics, presentations, methodologies, concepts, design elements, videos, audio recordings, documents, logos, branding, and other materials, are owned by or licensed to North Point Sales Group and are protected by applicable intellectual-property laws.",
+          },
+          {
+            type: "paragraph",
+            text: "This includes proprietary North Point Sales Group terminology, methodologies, frameworks, and materials, including where applicable the Sales Performance Components™ and related materials.",
+          },
+          {
+            type: "paragraph",
+            text: "You may view and use publicly available website content for your own legitimate internal business evaluation and informational purposes.",
+          },
+          {
+            type: "paragraph",
+            text: "You may not, without prior written permission:",
+          },
+          {
+            type: "list",
+            items: [
+              "Reproduce substantial portions of the website",
+              "Republish or commercially distribute website materials",
+              "Sell or sublicense website content",
+              "Modify materials and present them as your own",
+              "Copy proprietary methodologies, assessments, frameworks, training materials, presentations, or consulting materials",
+              "Use North Point Sales Group branding in a manner suggesting authorization, sponsorship, endorsement, or affiliation without permission",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Nothing contained on this website grants any license or ownership interest in North Point Sales Group intellectual property except as expressly stated.",
+          },
+        ],
+      },
+      {
+        id: "acceptable-use",
+        number: "7",
+        title: "Acceptable Use",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "You agree not to use the website:",
+          },
+          {
+            type: "list",
+            items: [
+              "For any unlawful or fraudulent purpose",
+              "To attempt unauthorized access to the website, servers, databases, systems, or accounts",
+              "To introduce viruses, malware, malicious code, or other harmful technology",
+              "To interfere with the operation or security of the website",
+              "To collect information from the website through unauthorized automated means",
+              "To impersonate another person or organization",
+              "To submit false, misleading, abusive, defamatory, or unlawful information",
+              "In any manner that violates applicable law or the rights of North Point Sales Group or another party",
+            ],
+          },
+        ],
+      },
+      {
+        id: "third-party-information-and-links",
+        number: "8",
+        title: "Third-Party Information and Links",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The website may refer to third-party research, statistics, publications, companies, websites, tools, technologies, or other resources.",
+          },
+          {
+            type: "paragraph",
+            text: "Such references are provided for informational purposes and do not necessarily constitute an endorsement, sponsorship, partnership, or affiliation.",
+          },
+          {
+            type: "paragraph",
+            text: "North Point Sales Group is not responsible for the availability, accuracy, security, content, products, services, or practices of third-party websites or services.",
+          },
+          {
+            type: "paragraph",
+            text: "Your use of third-party websites and services is subject to the terms and policies established by those third parties.",
+          },
+        ],
+      },
+      {
+        id: "testimonials-examples-and-case-information",
+        number: "9",
+        title: "Testimonials, Examples, and Case Information",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "If testimonials, client experiences, examples, case studies, or performance information are presented on the website, they represent the experiences or circumstances described and should not be considered a guarantee that another organization will obtain the same or similar results.",
+          },
+          {
+            type: "paragraph",
+            text: "Individual business outcomes vary according to factors including organizational circumstances, market conditions, leadership decisions, execution, personnel, available resources, competitive conditions, and other factors.",
+          },
+        ],
+      },
+      {
+        id: "website-availability",
+        number: "10",
+        title: "Website Availability",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "We may modify, suspend, restrict, or discontinue any portion of the website at any time.",
+          },
+          {
+            type: "paragraph",
+            text: "We do not guarantee that the website will always be available, uninterrupted, secure, or free from technical errors.",
+          },
+        ],
+      },
+      {
+        id: "disclaimer-of-warranties",
+        number: "11",
+        title: "Disclaimer of Warranties",
+        blocks: [
+          {
+            type: "paragraph",
+            text: 'To the fullest extent permitted by applicable law, this website and its content are provided on an "as is" and "as available" basis.',
+          },
+          {
+            type: "paragraph",
+            text: "North Point Sales Group disclaims warranties of any kind, whether express or implied, regarding the website or its content, including implied warranties of merchantability, fitness for a particular purpose, accuracy, non-infringement, or uninterrupted availability.",
+          },
+          {
+            type: "paragraph",
+            text: "Nothing in this provision limits any rights that cannot lawfully be waived or excluded.",
+          },
+        ],
+      },
+      {
+        id: "limitation-of-liability",
+        number: "12",
+        title: "Limitation of Liability",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "To the fullest extent permitted by applicable law, North Point Sales Group and its owners, officers, employees, contractors, representatives, affiliates, and agents will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages arising from or relating to your access to, use of, or inability to use this website or your reliance upon information presented on the website.",
+          },
+          {
+            type: "paragraph",
+            text: "This limitation applies regardless of the legal theory asserted and even if the possibility of such damages has been communicated.",
+          },
+          {
+            type: "paragraph",
+            text: "Nothing in these Terms excludes or limits liability that cannot legally be excluded or limited.",
+          },
+        ],
+      },
+      {
+        id: "indemnification",
+        number: "13",
+        title: "Indemnification",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "To the extent permitted by applicable law, you agree to indemnify and hold harmless North Point Sales Group and its owners, officers, employees, contractors, representatives, affiliates, and agents from claims, damages, liabilities, costs, and expenses arising from your unlawful use of the website, your violation of these Terms, or your infringement of the rights of another party.",
+          },
+        ],
+      },
+      {
+        id: "privacy",
+        number: "14",
+        title: "Privacy",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Your use of the website is also subject to our Privacy Policy.",
+          },
+          {
+            type: "internalLink",
+            before: "Please review the ",
+            label: "Privacy Policy",
+            href: "/privacy-policy",
+            after:
+              " for information concerning how we may collect, use, disclose, and protect information.",
+          },
+        ],
+      },
+      {
+        id: "governing-law",
+        number: "15",
+        title: "Governing Law",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "These Terms and your use of this website will be governed by the laws of the State of Colorado, without regard to conflict-of-law principles, except where applicable law requires otherwise.",
+          },
+          {
+            type: "paragraph",
+            text: "Any dispute relating specifically to use of this website will be subject to the jurisdiction of the appropriate courts located in Colorado, unless otherwise required by applicable law or agreed to in writing.",
+          },
+          {
+            type: "paragraph",
+            text: "Consulting engagements may be subject to separate governing-law and dispute-resolution provisions contained in the applicable client agreement.",
+          },
+        ],
+      },
+      {
+        id: "changes-to-these-terms",
+        number: "16",
+        title: "Changes to These Terms",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "North Point Sales Group may revise these Terms periodically.",
+          },
+          {
+            type: "paragraph",
+            text: "Changes become effective when the revised Terms are posted on the website with an updated effective date.",
+          },
+          {
+            type: "paragraph",
+            text: "Your continued use of the website following the posting of revised Terms constitutes acceptance of the revised Terms.",
+          },
+        ],
+      },
+      {
+        id: "severability",
+        number: "17",
+        title: "Severability",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "If any provision of these Terms is determined to be invalid, unlawful, or unenforceable, the remaining provisions will continue in full force and effect to the extent permitted by law.",
+          },
+        ],
+      },
+      {
+        id: "entire-agreement-regarding-website-use",
+        number: "18",
+        title: "Entire Agreement Regarding Website Use",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "These Terms, together with the Privacy Policy, constitute the agreement between you and North Point Sales Group concerning your use of this website.",
+          },
+          {
+            type: "paragraph",
+            text: "They do not replace or modify a separate written engagement agreement entered into between North Point Sales Group and a client.",
+          },
+        ],
+      },
+      {
+        id: "contact-us",
+        number: "19",
+        title: "Contact Us",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Questions concerning these Terms may be directed to:",
+          },
+          {
+            type: "contact",
+            company: "North Point Sales Group",
+            email: "contact@northpointsalesgroup.com",
+            phone: "(970) 250-1439",
+          },
+        ],
+      },
     ],
   },
 } as const;
