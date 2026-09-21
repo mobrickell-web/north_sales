@@ -15,7 +15,30 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
   const [popup, setPopup] = useState<{
     title: string;
     paragraphs: readonly string[];
+    list?: readonly string[];
+    nextStep?: string;
   } | null>(null);
+
+  const stepListIntroPhrases = [
+    "This may include understanding:",
+    "Depending on the engagement, this can include:",
+    "Depending on what the assessment reveals, the plan may address:",
+    "Implementation may involve:",
+    "We can review:",
+    "That can include:",
+  ] as const;
+
+  const openStepPopout = (
+    popout: (typeof salesEngagement.steps)[number]["popout"],
+  ) => {
+    if (!popout) return;
+    setPopup({
+      title: popout.title,
+      paragraphs: popout.paragraphs,
+      list: "list" in popout ? popout.list : undefined,
+      nextStep: "nextStep" in popout ? popout.nextStep : undefined,
+    });
+  };
 
   // Custom step renderer to mix Lucide React icons with local SVG assets
   const renderStepIcon = (index: number) => {
@@ -111,13 +134,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
                   {/* Circle Icon Container */}
                   <button
                     type="button"
-                    onClick={() =>
-                      step.popout &&
-                      setPopup({
-                        title: step.popout.title,
-                        paragraphs: [step.popout.description],
-                      })
-                    }
+                    onClick={() => openStepPopout(step.popout)}
                     className="group flex cursor-pointer flex-col items-center text-center transition-opacity hover:opacity-90 focus:outline-none"
                   >
                     <div className="relative flex size-[110px] items-center justify-center rounded-full border border-[#001528] bg-[#F8F9FA] shadow-xs transition-shadow group-hover:shadow-md">
@@ -153,13 +170,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
                   {/* Step Title */}
                   <button
                     type="button"
-                    onClick={() =>
-                      step.popout &&
-                      setPopup({
-                        title: step.popout.title,
-                        paragraphs: [step.popout.description],
-                      })
-                    }
+                    onClick={() => openStepPopout(step.popout)}
                     className="mt-3 cursor-pointer font-body text-[14px] font-extrabold tracking-[0.05em] text-primary uppercase transition-colors hover:text-[#b17411] focus:outline-none"
                   >
                     {step.title}
@@ -214,10 +225,35 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
                   {popup.title}
                 </Dialog.Title>
                 <Dialog.Description asChild>
-                  <div className="flex flex-col gap-3 whitespace-pre-line font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                    {popup.paragraphs.map((paragraph, index) => (
-                      <p key={index}>{paragraph}</p>
-                    ))}
+                  <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                    {popup.paragraphs.map((paragraph, index) => {
+                      const showListAfter =
+                        popup.list &&
+                        popup.list.length > 0 &&
+                        stepListIntroPhrases.includes(
+                          paragraph as (typeof stepListIntroPhrases)[number],
+                        );
+                      return (
+                        <div key={`${paragraph}-${index}`}>
+                          <p>{paragraph}</p>
+                          {showListAfter && popup.list && (
+                            <ul className="mt-2 list-disc space-y-1.5 pl-5">
+                              {popup.list.map((item) => (
+                                <li key={item}>{item}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      );
+                    })}
+                    {popup.nextStep && (
+                      <div className="mt-2 border-t border-gray-100 pt-4">
+                        <p className="font-body text-[13px] font-extrabold tracking-wide text-[#001528] uppercase">
+                          A Clear Next Step
+                        </p>
+                        <p className="mt-2">{popup.nextStep}</p>
+                      </div>
+                    )}
                   </div>
                 </Dialog.Description>
               </div>

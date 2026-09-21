@@ -147,6 +147,31 @@ export const siteConfig = {
           description:
             "We first determine what is working, what may be restricting performance, and where meaningful opportunities for improvement exist.",
           icon: "/icons/user.svg",
+          popout: {
+            title: "Determine What Is Working Before Recommending Change",
+            paragraphs: [
+              "We do not begin with a predetermined solution.",
+              "Every sales organization is different, and performance can be influenced by leadership, people, process, messaging, lead generation, training, accountability, technology, market conditions, or a combination of factors.",
+              "Our first responsibility is to understand what is already working well, what may be restricting performance, and where meaningful opportunities for improvement may exist.",
+              "That can include reviewing areas such as:",
+              "The objective is to avoid unnecessary change and concentrate attention on the areas that actually warrant it.",
+            ],
+            list: [
+              "Sales leadership",
+              "Sales team performance",
+              "Prospecting and lead generation",
+              "Sales process",
+              "Messaging and presentations",
+              "Pipeline management",
+              "Training and coaching",
+              "Accountability",
+              "Recruiting and onboarding",
+              "Conversion performance",
+              "Customer retention and expansion",
+            ],
+            nextStep:
+              "We begin by evaluating the areas most relevant to your objectives so that any recommendations are based on what we find rather than assumptions made in advance.",
+          },
         },
         {
           id: "focus-financial-impact",
@@ -154,6 +179,30 @@ export const siteConfig = {
           description:
             "If an area of the sales organization is performing well, we leave it alone. We focus on areas where improvement is most likely to produce a meaningful business return.",
           icon: "/icons/calendar.svg",
+          popout: {
+            title: "Improve What Can Produce a Meaningful Business Return",
+            paragraphs: [
+              "Not every weakness deserves the same level of attention.",
+              "If an area of the sales organization is already performing well, there may be little reason to change it simply for the sake of change.",
+              "Instead, we focus on the areas where improvement is most likely to affect revenue, productivity, profitability, conversion, or long-term sales performance.",
+              "That may mean prioritizing:",
+              "The objective is to direct time, management attention, and resources toward improvements that have a legitimate business case behind them.",
+            ],
+            list: [
+              "A weak stage of the sales process",
+              "Low conversion performance",
+              "Poor pipeline discipline",
+              "Ineffective lead follow-up",
+              "Underdeveloped salespeople",
+              "Leadership bottlenecks",
+              "Missed opportunities within existing accounts",
+              "Recruiting or retention problems",
+              "Inefficient sales activity",
+              "Gaps in accountability or execution",
+            ],
+            nextStep:
+              "We help leadership prioritize opportunities based on potential impact so resources are directed toward the areas most likely to produce measurable value.",
+          },
         },
         {
           id: "implementation-not-just-recommendations",
@@ -161,6 +210,32 @@ export const siteConfig = {
           description:
             "We do more than provide reports and recommendations. We work with leadership to help put agreed-upon improvements into practice and evaluate the results.",
           icon: "/icons/globe.svg",
+          popout: {
+            title: "Help Put the Improvements Into Practice",
+            paragraphs: [
+              "Identifying a problem is only the beginning.",
+              "Many consulting engagements end with a report, presentation, or list of recommendations that leadership is then expected to implement internally.",
+              "Our approach is different.",
+              "Once priorities are agreed upon, we can work directly with leadership and the sales organization to help implement the changes.",
+              "Depending on the engagement, that may include:",
+              "We also evaluate progress so leadership can see whether the changes being implemented are producing the intended results.",
+            ],
+            list: [
+              "Coaching salespeople",
+              "Refining sales presentations",
+              "Improving prospecting approaches",
+              "Strengthening follow-up",
+              "Developing accountability systems",
+              "Improving pipeline management",
+              "Supporting sales leadership",
+              "Modifying processes",
+              "Improving onboarding or training",
+              "Establishing performance standards",
+              "Coordinating specialized outside resources when appropriate",
+            ],
+            nextStep:
+              "Once the priorities are established, we help translate them into specific actions, responsibilities, and implementation steps rather than leaving leadership with recommendations alone.",
+          },
         },
         {
           id: "objective-outside-perspective",
@@ -168,6 +243,28 @@ export const siteConfig = {
           description:
             "Because we are not part of the existing internal structure, we can evaluate sales performance objectively while working collaboratively with leadership and the sales organization.",
           icon: "/icons/shield-lock.svg",
+          popout: {
+            title: "Evaluate Performance Without Internal Bias or Politics",
+            paragraphs: [
+              "People inside an organization naturally view the sales operation through the lens of their own responsibilities, experiences, relationships, and priorities.",
+              "That can sometimes make it difficult to determine objectively where performance opportunities or limitations actually exist.",
+              "An outside perspective can help leadership examine the organization without being tied to existing assumptions, historical decisions, or internal structures.",
+              "We can evaluate areas such as:",
+              "Our role is not to assign blame or undermine existing leadership.",
+              "It is to provide an objective perspective while working collaboratively with the people responsible for producing results.",
+            ],
+            list: [
+              "Whether expectations are realistic and clearly communicated",
+              "Whether salespeople have the tools and support they need",
+              "Whether management practices are helping or limiting performance",
+              "Whether existing processes are producing the desired results",
+              "Whether resources are being used effectively",
+              "Whether opportunities are being overlooked",
+              "Whether leadership and the sales team are aligned",
+            ],
+            nextStep:
+              "We provide leadership with an independent view of the sales organization and help separate assumptions from the issues and opportunities that can be supported by actual performance information.",
+          },
         },
         {
           id: "long-term-resource",
@@ -175,6 +272,32 @@ export const siteConfig = {
           description:
             "Our objective is not simply to complete an engagement and disappear. When appropriate, we want to remain a trusted sales-performance resource leadership can call upon as future needs and opportunities arise.",
           icon: "/icons/target.svg",
+          popout: {
+            title: "Sales Performance Support Beyond the Initial Engagement",
+            paragraphs: [
+              "Sales organizations continue to evolve.",
+              "New salespeople are hired. Markets change. Leadership changes. New competitors appear. Growth creates new operational demands. Strategies that worked previously may eventually need to be adjusted.",
+              "For that reason, our relationship does not necessarily have to end when the initial engagement is completed.",
+              "North Point Sales Group can remain available as a sales-performance resource when future needs arise.",
+              "That may include:",
+              "Some organizations may need us again quickly. Others may not need additional assistance for months or longer.",
+              "The objective is simply to give leadership access to an experienced outside resource when sales-related needs or opportunities arise.",
+            ],
+            list: [
+              "Leadership guidance",
+              "Sales team development",
+              "Fractional VP of Sales support",
+              "Recruiting and onboarding assistance",
+              "Sales process reviews",
+              "Performance troubleshooting",
+              "Expansion planning",
+              "Coaching or training",
+              "New market or territory support",
+              "Evaluation of emerging sales challenges",
+            ],
+            nextStep:
+              "After the initial engagement, North Point can remain available as an ongoing resource so leadership has someone familiar with the organization to call when new sales challenges, opportunities, or growth initiatives develop.",
+          },
         },
       ],
     },
@@ -193,9 +316,26 @@ export const siteConfig = {
           "We gain a deep understanding of your business, goals, challenges, and current sales performance.",
         icon: "search", // Lucide Search icon
         popout: {
-          title: "Sales Strategy and Planning",
-          description:
-            "We help leadership clarify sales priorities, identify the strongest opportunities for growth, and create a practical plan for improving performance. This may include market focus, sales objectives, resource allocation, prospecting priorities, and the activities most likely to produce measurable results.",
+          title: "Understand the Business Before Making Recommendations",
+          paragraphs: [
+            "Every engagement begins with understanding the organization as it operates today.",
+            "We learn about your business model, sales objectives, leadership priorities, customers, sales structure, current challenges, and the results you are trying to achieve.",
+            "This may include understanding:",
+            "This discovery process gives us the context necessary to evaluate the sales organization intelligently rather than beginning with assumptions.",
+          ],
+          list: [
+            "How revenue is currently generated",
+            "How prospects enter the sales pipeline",
+            "How the sales team is structured",
+            "How salespeople are managed and supported",
+            "Current sales goals and performance expectations",
+            "Where leadership believes opportunities may exist",
+            "What has already been tried",
+            "What appears to be working well",
+            "Where performance may be inconsistent or difficult to manage",
+          ],
+          nextStep:
+            "Once we understand the business and leadership's objectives, we can determine which areas of the sales organization warrant closer examination.",
         },
       },
       {
@@ -205,9 +345,31 @@ export const siteConfig = {
           "We assess people, processes, pipeline, tools, and metrics to identify gaps and the biggest opportunities.",
         icon: "clipboard-list", // Lucide ClipboardList icon
         popout: {
-          title: "Sales Organization Design",
-          description:
-            "We evaluate whether the current sales structure supports the company's goals. This can include roles and responsibilities, management structure, territories, account assignments, appointment-setting support, communication, and how effectively the team works together.",
+          title: "Identify the Areas Most Likely to Affect Performance",
+          paragraphs: [
+            "We assess the parts of the sales organization most relevant to the company's objectives and current performance.",
+            "Depending on the engagement, this can include:",
+            "The purpose is not to find problems everywhere.",
+            "If something is working well, we leave it alone. Our focus is identifying the gaps, bottlenecks, and opportunities where improvement could produce meaningful business value.",
+          ],
+          list: [
+            "Salespeople and individual performance",
+            "Sales leadership",
+            "Prospecting and lead generation",
+            "Lead qualification",
+            "Sales process",
+            "Messaging and presentations",
+            "Pipeline management",
+            "Follow-up",
+            "Closing effectiveness",
+            "Recruiting and onboarding",
+            "Training and coaching",
+            "Accountability systems",
+            "Technology and sales tools",
+            "Performance metrics and reporting",
+          ],
+          nextStep:
+            "We prioritize the findings so leadership knows which opportunities deserve attention first and which areas require little or no change.",
         },
       },
       {
@@ -217,9 +379,30 @@ export const siteConfig = {
           "We develop a customised strategy, systems, and action plan aligned with your objectives.",
         icon: "workflow", // Lucide LayoutGrid or Workflow icon
         popout: {
-          title: "Go-to-Market Optimization",
-          description:
-            "We examine how the organization identifies, reaches, and converts prospective customers. This may include target markets, lead generation, prospecting methods, sales messaging, value propositions, presentations, follow-up, and the overall path from initial contact to completed sale.",
+          title: "Develop a Practical Plan Based on What We Find",
+          paragraphs: [
+            "Once priorities have been identified, we design an approach specifically around the needs of the organization.",
+            "There is no standard solution that every client is expected to adopt.",
+            "Depending on what the assessment reveals, the plan may address:",
+            "The objective is to create a focused implementation plan that addresses the highest-value opportunities without introducing unnecessary complexity.",
+          ],
+          list: [
+            "Sales strategy",
+            "Sales structure and responsibilities",
+            "Prospecting",
+            "Lead management",
+            "Sales presentations and messaging",
+            "Follow-up systems",
+            "Pipeline management",
+            "Coaching and development",
+            "Recruiting or onboarding",
+            "Performance expectations",
+            "Accountability",
+            "Leadership practices",
+            "Reporting and measurement",
+          ],
+          nextStep:
+            "Leadership receives a defined set of priorities, actions, responsibilities, and performance objectives that can move directly into implementation.",
         },
       },
       {
@@ -229,9 +412,27 @@ export const siteConfig = {
           "We work alongside your team to implement priorities and build momentum quickly.",
         icon: "settings", // Lucide Settings icon
         popout: {
-          title: "Sales Talent Assessment and Development",
-          description:
-            "We help identify individual strengths, performance gaps, and opportunities for improvement across the sales team. Development may include coaching, training, prospecting, presentations, objection handling, follow-up, closing, time management, and other skills directly connected to sales productivity.",
+          title: "Turn the Plan Into Action",
+          paragraphs: [
+            "Recommendations only matter when they are put into practice.",
+            "North Point works alongside leadership and the sales organization to help implement the agreed-upon priorities rather than simply delivering a report and leaving the company to execute on its own.",
+            "Implementation may involve:",
+            "Responsibilities are clearly defined so leadership can see what is being done, who is responsible, and what progress is being made.",
+          ],
+          list: [
+            "Working directly with sales leadership",
+            "Coaching individual salespeople",
+            "Improving sales conversations and presentations",
+            "Strengthening prospecting and follow-up",
+            "Establishing or refining sales processes",
+            "Improving pipeline management",
+            "Introducing accountability systems",
+            "Helping implement performance expectations",
+            "Supporting recruiting or onboarding improvements",
+            "Coordinating appropriate outside specialists when needed",
+          ],
+          nextStep:
+            "We move from recommendations to execution, concentrating first on the changes most likely to produce measurable improvement.",
         },
       },
       {
@@ -241,9 +442,28 @@ export const siteConfig = {
           "We refine processes, reinforce accountability, and improve performance using data and feedback.",
         icon: "bar-chart-3", // Lucide BarChart3 icon
         popout: {
-          title: "Sales Performance Management",
-          description:
-            "We help leadership establish clear expectations, meaningful performance measures, and consistent accountability. This may include sales activity, pipeline movement, conversion rates, CRM utilization, follow-up, forecasting, individual performance, and the results being produced.",
+          title: "Measure What Is Working and Improve What Is Not",
+          paragraphs: [
+            "Implementation is rarely a one-time event.",
+            "Once changes are underway, we evaluate how they are performing in the real sales environment.",
+            "We can review:",
+            "Where something is working, we reinforce it.",
+            "Where results indicate an adjustment is needed, we refine the approach based on actual performance rather than theory.",
+          ],
+          list: [
+            "Sales activity",
+            "Pipeline movement",
+            "Conversion performance",
+            "Individual salesperson performance",
+            "Lead response and follow-up",
+            "Coaching effectiveness",
+            "Accountability",
+            "Adoption of new processes",
+            "Management effectiveness",
+            "Progress toward agreed-upon objectives",
+          ],
+          nextStep:
+            "We use performance information and feedback to strengthen successful changes, correct what is not working, and continue improving execution.",
         },
       },
       {
@@ -253,9 +473,28 @@ export const siteConfig = {
           "We establish systems and habits that ensure lasting improvement and long-term results.",
         icon: "check", // Lucide Check icon
         popout: {
-          title: "Leadership Coaching and Enablement",
-          description:
-            "Strong sales performance requires effective leadership. We work with sales leaders to strengthen communication, accountability, coaching, decision-making, performance management, and their ability to help salespeople consistently perform at a higher level.",
+          title: "Make Improvement Part of the Sales Organization",
+          paragraphs: [
+            "The objective is not to create permanent dependence on North Point.",
+            "Where possible, we help leadership establish the systems, expectations, management practices, and habits necessary for improvements to continue after the initial engagement.",
+            "That can include:",
+            "The goal is to leave the organization stronger and better equipped to maintain the improvements that have been implemented.",
+            "North Point can also remain available as a long-term resource when new challenges, opportunities, or growth initiatives arise.",
+          ],
+          list: [
+            "Clear sales processes",
+            "Defined performance expectations",
+            "Management routines",
+            "Coaching practices",
+            "Pipeline disciplines",
+            "Accountability systems",
+            "Reporting and measurement",
+            "Training resources",
+            "Leadership responsibilities",
+            "Ongoing performance reviews",
+          ],
+          nextStep:
+            "We help transition successful improvements into normal operating practices so the organization can sustain performance while retaining access to North Point when additional support is needed.",
         },
       },
     ],
@@ -277,8 +516,40 @@ export const siteConfig = {
         title: "DISCOVER & ASSESS",
         icon: "search-nodes",
         bullets: [
-          "Understand your business, goals, and challenges",
-          "Assess current state and identify opportunities",
+          {
+            label: "Understand your business, goals, and challenges",
+            popout: {
+              title: "Understand Your Business, Goals, and Challenges",
+              paragraphs: [
+                "Before recommending changes, we first develop a clear understanding of how your business operates, what leadership is trying to accomplish, and where sales performance may be falling short of its potential.",
+                "This can include reviewing your current sales structure, leadership approach, sales team, lead sources, sales process, messaging, pipeline activity, accountability systems, conversion performance, and other factors that influence revenue production.",
+                "The objective is not to assume a problem exists in any particular area. It is to understand the organization as it operates today and determine where closer examination may be warranted.",
+              ],
+            },
+          },
+          {
+            label: "Assess current state and identify opportunities",
+            popout: {
+              title: "Assess Current State and Identify Opportunities",
+              paragraphs: [
+                "Once we understand the organization, we evaluate the areas most relevant to improving sales performance.",
+                "We look for opportunities such as:",
+                "The result is a clearer picture of what is working, what may need improvement, and which opportunities are most worthy of leadership's attention.",
+              ],
+              list: [
+                "Underperforming stages of the sales process",
+                "Inconsistent sales execution",
+                "Gaps in leadership or accountability",
+                "Weak or unclear sales messaging",
+                "Lead-generation or follow-up inefficiencies",
+                "Training and development needs",
+                "Pipeline management issues",
+                "Structural or role-related problems",
+                "Opportunities to improve conversion or productivity",
+                "Additional revenue potential within the existing organization",
+              ],
+            },
+          },
         ],
       },
       {
@@ -287,8 +558,42 @@ export const siteConfig = {
         title: "DESIGN & ALIGN",
         icon: "target",
         bullets: [
-          "Define winning strategy and operating model",
-          "Align structure, roles, and processes for success",
+          {
+            label: "Define winning strategy and operating model",
+            popout: {
+              title: "Define the Strategy and Operating Model",
+              paragraphs: [
+                "Once the most important opportunities have been identified, we help leadership determine what should change and how those changes should be implemented.",
+                "Rather than introducing unnecessary complexity, the objective is to develop a practical approach focused on the areas most likely to improve sales performance.",
+                "Depending on the engagement, this may include changes to:",
+                "The strategy is designed around the realities of your organization rather than forcing your company into a predetermined sales model.",
+              ],
+              list: [
+                "Sales strategy",
+                "Sales process",
+                "Lead generation and qualification",
+                "Sales presentations and messaging",
+                "Pipeline management",
+                "Recruiting and onboarding",
+                "Training and coaching",
+                "Performance expectations",
+                "Management systems",
+                "Accountability and reporting",
+              ],
+            },
+          },
+          {
+            label: "Align structure, roles, and processes for success",
+            popout: {
+              title: "Align Structure, Roles, and Processes for Success",
+              paragraphs: [
+                "Strong sales performance requires more than good individual salespeople. Leadership, structure, roles, systems, expectations, and processes must work together.",
+                "We help determine whether the people responsible for generating, managing, and supporting revenue are properly aligned with the company's objectives.",
+                "That may involve clarifying responsibilities, strengthening management processes, improving communication, establishing performance expectations, modifying workflows, or helping leadership determine where additional resources or expertise may be needed.",
+                "The goal is to create an operating structure that makes successful execution easier, clearer, and more consistent.",
+              ],
+            },
+          },
         ],
       },
       {
@@ -297,8 +602,41 @@ export const siteConfig = {
         title: "IMPLEMENT & GROW",
         icon: "trending-up",
         bullets: [
-          "Execute with focus and accountability",
-          "Enable your team and drive continuous improvement",
+          {
+            label: "Execute with focus and accountability",
+            popout: {
+              title: "Execute With Focus and Accountability",
+              paragraphs: [
+                "Recommendations have limited value unless they are actually implemented.",
+                "North Point Sales Group is designed to move beyond analysis and help leadership put agreed-upon improvements into operation.",
+                "Depending on the engagement, implementation may include:",
+                "Progress is reviewed throughout the engagement so leadership can see what is being implemented, who is responsible, and whether the changes are producing the intended results.",
+              ],
+              list: [
+                "Working directly with sales leadership",
+                "Coaching or developing salespeople",
+                "Refining sales presentations and messaging",
+                "Improving prospecting and follow-up",
+                "Strengthening pipeline management",
+                "Establishing accountability systems",
+                "Improving sales meetings and management practices",
+                "Implementing new processes or performance standards",
+                "Coordinating with appropriate outside specialists when needed",
+              ],
+            },
+          },
+          {
+            label: "Enable your team and drive continuous improvement",
+            popout: {
+              title: "Enable Your Team and Drive Continuous Improvement",
+              paragraphs: [
+                "The objective is not to create permanent dependence on an outside consulting firm.",
+                "Where possible, we help strengthen the capabilities of your existing leadership and sales organization so improvements can continue after the initial engagement.",
+                "As results emerge, additional opportunities may also become visible. North Point can remain available as a long-term sales performance resource when leadership needs additional guidance, implementation support, specialized expertise, or fractional sales leadership.",
+                "The ultimate objective is a stronger, more capable sales organization that can continue improving performance as the business grows.",
+              ],
+            },
+          },
         ],
       },
     ],
@@ -670,36 +1008,174 @@ export const siteConfig = {
         title: "INCONSISTENT REVENUE",
         desc: "Unpredictable results and lack of a steady sales pipeline.",
         icon: "/icons/p6.svg",
+        popout: {
+          title: "Unpredictable Results and Lack of a Steady Sales Pipeline",
+          paragraphs: [
+            "When revenue fluctuates significantly from month to month, leadership can struggle to forecast accurately, plan confidently, and make sound growth decisions.",
+            "Inconsistent revenue can result from several different issues, including:",
+            "The goal is to determine what is creating the inconsistency and strengthen the areas that can produce a more dependable sales pipeline and more predictable revenue performance.",
+          ],
+          list: [
+            "Uneven lead flow",
+            "Weak prospecting activity",
+            "Inconsistent follow-up",
+            "Poor pipeline management",
+            "Low conversion rates",
+            "Overdependence on a small number of customers",
+            "Salespeople operating without clear activity expectations",
+            "Lack of visibility into where future revenue will come from",
+          ],
+          nextStep:
+            "We help you identify where revenue inconsistency begins, prioritize the issues having the greatest impact, and develop a practical plan to create stronger pipeline visibility and more predictable sales performance.",
+        },
       },
       {
         id: "underperforming-teams",
         title: "UNDERPERFORMING SALES TEAMS",
         desc: "Teams lack the skills, coaching, and accountability to win.",
         icon: "/icons/p7.svg",
+        popout: {
+          title: "Teams Lack the Skills, Coaching, and Accountability to Win",
+          paragraphs: [
+            "An underperforming sales team does not necessarily mean the wrong people are in place.",
+            "Performance problems can come from weak training, unclear expectations, ineffective management, poor sales messaging, inconsistent coaching, lack of accountability, or a sales process that makes success unnecessarily difficult.",
+            "We evaluate areas such as:",
+            "The objective is to identify what is limiting performance and help salespeople become more confident, consistent, proficient, and productive.",
+          ],
+          list: [
+            "Prospecting effectiveness",
+            "Sales conversations and presentations",
+            "Objection handling",
+            "Follow-up",
+            "Closing effectiveness",
+            "Product and market knowledge",
+            "Activity levels",
+            "Pipeline discipline",
+            "Coaching and development",
+            "Individual accountability",
+          ],
+          nextStep:
+            "We assess what is holding the team back, determine whether the primary need is skill development, coaching, management, accountability, or process improvement, and build a focused plan to improve performance.",
+        },
       },
       {
         id: "lack-of-process",
         title: "LACK OF PROCESS & ACCOUNTABILITY",
         desc: "No repeatable sales process or system to drive performance.",
         icon: "/icons/p8.svg",
+        popout: {
+          title: "No Repeatable Sales Process or System to Drive Performance",
+          paragraphs: [
+            "When every salesperson approaches the job differently, results often become difficult to manage, measure, and improve.",
+            "A strong sales organization needs a practical process that creates consistency without preventing experienced salespeople from using good judgment.",
+            "That can include clearly defined expectations around:",
+            "We help determine where structure is missing, where existing processes may be ineffective, and what systems can be strengthened to make performance more measurable and repeatable.",
+          ],
+          list: [
+            "Prospecting",
+            "Lead qualification",
+            "Initial sales conversations",
+            "Needs discovery",
+            "Presentations",
+            "Proposals",
+            "Follow-up",
+            "Pipeline management",
+            "Closing",
+            "Customer handoff",
+            "Reporting and accountability",
+          ],
+          nextStep:
+            "We help establish a practical, repeatable sales process with clear expectations, measurable activity, and accountability—giving leadership greater visibility and the team a clearer path to execution.",
+        },
       },
       {
         id: "recruiting-talent",
         title: "DIFFICULTY RECRUITING & RETAINING TOP TALENT",
         desc: "Struggling to attract, develop, and keep the right people.",
         icon: "/icons/p9.svg",
+        popout: {
+          title: "Struggling to Attract, Develop, and Keep the Right People",
+          paragraphs: [
+            "Recruiting salespeople is only part of the challenge. Organizations also need to determine who is most likely to succeed, bring new hires up to speed quickly, develop their capabilities, and retain strong performers.",
+            "Problems can occur when there is:",
+            "We can help leadership evaluate the complete talent cycle—from recruiting and selection through onboarding, development, performance management, and retention.",
+            "The objective is to build a stronger sales organization by improving both who enters the organization and how those individuals are developed once they arrive.",
+          ],
+          list: [
+            "No clearly defined candidate profile",
+            "Inconsistent interviewing or selection",
+            "Weak onboarding",
+            "Insufficient early-stage training",
+            "Unclear performance expectations",
+            "Limited coaching or development",
+            "Compensation misalignment",
+            "Poor management communication",
+            "Lack of advancement opportunities",
+            "Excessive turnover among productive salespeople",
+          ],
+          nextStep:
+            "We help you identify where the talent process is breaking down and strengthen the systems used to attract, select, onboard, develop, and retain salespeople who fit the needs of your organization.",
+        },
       },
       {
         id: "leaders-overwhelmed",
         title: "SALES LEADERS OVERWHELMED",
         desc: "Leaders are stretched thin and lack the tools for scale.",
         icon: "/icons/p10.svg",
+        popout: {
+          title: "Leaders Are Stretched Thin and Lack the Tools for Scale",
+          paragraphs: [
+            "Sales leaders are often responsible for far more than managing sales performance.",
+            "They may be recruiting, interviewing, training, coaching, forecasting, solving customer problems, attending executive meetings, reviewing pipelines, supporting major accounts, and handling day-to-day operational issues.",
+            "As responsibilities accumulate, important sales-management activities can become inconsistent or reactive.",
+            "Common symptoms include:",
+            "North Point can help identify where leadership is overloaded, where management systems can be strengthened, and where additional support—including fractional sales leadership—may improve execution.",
+            "The objective is to give leadership greater control over the sales organization without simply adding more complexity.",
+          ],
+          list: [
+            "Limited time for coaching",
+            "Inconsistent accountability",
+            "Poor pipeline visibility",
+            "Delayed hiring",
+            "Weak follow-through",
+            "Too much time spent solving individual salesperson problems",
+            "Insufficient performance analysis",
+            "Strategic priorities being displaced by daily emergencies",
+          ],
+          nextStep:
+            "We help determine where leadership capacity is being consumed, what responsibilities or systems need to change, and whether additional sales leadership support can create greater focus, accountability, and scalability.",
+        },
       },
       {
         id: "slow-growth",
         title: "SLOW GROWTH & MISSED TARGETS",
         desc: "Growth stalls and opportunities are left on the table.",
         icon: "/icons/Group 147.svg",
+        popout: {
+          title: "Growth Stalls and Opportunities Are Left on the Table",
+          paragraphs: [
+            "When an organization repeatedly misses sales targets or growth begins to slow, the cause may not be obvious.",
+            "The issue could be market-related, but it may also involve sales execution, lead generation, management, staffing, messaging, conversion, customer concentration, pipeline development, or a combination of several factors.",
+            "We look beyond the revenue number itself to understand what is influencing it.",
+            "That can include evaluating:",
+            "The objective is to determine where additional performance potential may exist and help leadership implement the improvements necessary to capture it.",
+          ],
+          list: [
+            "Sales activity",
+            "Lead volume and quality",
+            "Conversion performance",
+            "Pipeline movement",
+            "Average transaction value",
+            "Customer retention and expansion",
+            "Sales team productivity",
+            "Territory or account coverage",
+            "Sales leadership",
+            "Competitive positioning",
+            "Opportunities within existing accounts",
+          ],
+          nextStep:
+            "We help isolate the factors limiting growth, identify the opportunities with the greatest potential impact, and establish clear priorities for improving sales performance and moving the business toward its growth objectives.",
+        },
       },
     ],
     audioBanner: {
