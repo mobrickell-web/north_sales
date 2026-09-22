@@ -37,6 +37,8 @@ export function WhyPartnerSection() {
     paragraphs: readonly string[];
     list?: readonly string[];
     nextStep?: string;
+    /** Card heading from OUR APPROACH panel (shown above popout title) */
+    cardHeading?: string;
   } | null>(null);
 
   const approachListIntroPhrases = [
@@ -51,11 +53,23 @@ export function WhyPartnerSection() {
     if (!popup) return null;
     return (
       <div className="flex flex-col gap-3">
-        <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+        {popup.cardHeading && (
+          <p className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+            {popup.cardHeading}
+          </p>
+        )}
+        <Dialog.Title
+          className={cn(
+            "font-body font-extrabold tracking-wide text-[#061525] uppercase",
+            popup.cardHeading
+              ? "text-[16px] sm:text-[18px]"
+              : "text-[18px] sm:text-[20px]",
+          )}
+        >
           {popup.title}
         </Dialog.Title>
         <Dialog.Description asChild>
-          <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+          <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
             {popup.paragraphs.map((paragraph, index) => {
               const showListAfter =
                 popup.list &&
@@ -78,7 +92,7 @@ export function WhyPartnerSection() {
             })}
             {popup.nextStep && (
               <div className="mt-2 border-t border-gray-100 pt-4">
-                <p className="font-body text-[13px] font-extrabold tracking-wide text-[#001528] uppercase">
+                <p className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[15px]">
                   A Clear Next Step
                 </p>
                 <p className="mt-2">{popup.nextStep}</p>
@@ -235,6 +249,7 @@ export function WhyPartnerSection() {
                         type="button"
                         onClick={() =>
                           setPopup({
+                            cardHeading: item.title,
                             title: item.popout.title,
                             paragraphs: item.popout.paragraphs,
                             list: item.popout.list,

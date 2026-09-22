@@ -55,7 +55,6 @@ export function PrivacyPolicyPage() {
   const { privacyPolicy } = siteConfig;
 
   return (
-    // Privacy policy content is sourced from siteConfig.privacyPolicy.
     <article className="legal-page" aria-labelledby="privacy-policy-heading">
       <header className="legal-page__hero">
         <Image

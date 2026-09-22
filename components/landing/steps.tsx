@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Search, Settings, Check, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface StepsProps {
   sectionNumber?: number | string;
@@ -17,6 +18,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
     paragraphs: readonly string[];
     list?: readonly string[];
     nextStep?: string;
+    cardHeading?: string;
   } | null>(null);
 
   const stepListIntroPhrases = [
@@ -28,11 +30,11 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
     "That can include:",
   ] as const;
 
-  const openStepPopout = (
-    popout: (typeof salesEngagement.steps)[number]["popout"],
-  ) => {
+  const openStepPopout = (step: (typeof salesEngagement.steps)[number]) => {
+    const { popout } = step;
     if (!popout) return;
     setPopup({
+      cardHeading: step.title,
       title: popout.title,
       paragraphs: popout.paragraphs,
       list: "list" in popout ? popout.list : undefined,
@@ -134,7 +136,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
                   {/* Circle Icon Container */}
                   <button
                     type="button"
-                    onClick={() => openStepPopout(step.popout)}
+                    onClick={() => openStepPopout(step)}
                     className="group flex cursor-pointer flex-col items-center text-center transition-opacity hover:opacity-90 focus:outline-none"
                   >
                     <div className="relative flex size-[110px] items-center justify-center rounded-full border border-[#001528] bg-[#F8F9FA] shadow-xs transition-shadow group-hover:shadow-md">
@@ -170,7 +172,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
                   {/* Step Title */}
                   <button
                     type="button"
-                    onClick={() => openStepPopout(step.popout)}
+                    onClick={() => openStepPopout(step)}
                     className="mt-3 cursor-pointer font-body text-[14px] font-extrabold tracking-[0.05em] text-primary uppercase transition-colors hover:text-[#b17411] focus:outline-none"
                   >
                     {step.title}
@@ -221,11 +223,23 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
 
             {popup && (
               <div className="flex flex-col gap-3">
-                <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                {popup.cardHeading && (
+                  <p className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                    {popup.cardHeading}
+                  </p>
+                )}
+                <Dialog.Title
+                  className={cn(
+                    "font-body font-extrabold tracking-wide text-[#061525] uppercase",
+                    popup.cardHeading
+                      ? "text-[16px] sm:text-[18px]"
+                      : "text-[18px] sm:text-[20px]",
+                  )}
+                >
                   {popup.title}
                 </Dialog.Title>
                 <Dialog.Description asChild>
-                  <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                  <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
                     {popup.paragraphs.map((paragraph, index) => {
                       const showListAfter =
                         popup.list &&
@@ -248,7 +262,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
                     })}
                     {popup.nextStep && (
                       <div className="mt-2 border-t border-gray-100 pt-4">
-                        <p className="font-body text-[13px] font-extrabold tracking-wide text-[#001528] uppercase">
+                        <p className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[15px]">
                           A Clear Next Step
                         </p>
                         <p className="mt-2">{popup.nextStep}</p>
