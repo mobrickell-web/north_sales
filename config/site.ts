@@ -52,13 +52,21 @@ export const siteConfig = {
         popout: {
           paragraphs: [
             "Before recommending more salespeople, more leads, or more marketing spend, we first ask a more fundamental question:",
-            "Is the organization getting everything it reasonably can from the sales resources it already has?",
+            {
+              text: "Is the organization getting everything it reasonably can from the sales resources it already has?",
+              bold: true,
+            },
             "Many established companies have significant revenue potential already sitting inside their existing sales operation — in conversion rates, prospecting effectiveness, sales messaging, follow-up, pipeline management, leadership, accountability, and individual salesperson performance.",
             "If those areas can be strengthened, even modestly, the financial impact can be substantial.",
             "For example, improving the productivity of an existing sales team by even a few percentage points may generate meaningful additional revenue without immediately adding payroll, increasing advertising expense, or expanding headcount.",
-            "That is why we believe the first place to look for growth is often inside the existing sales organization.",
-            "The business question is:",
-            "How much additional revenue and contribution profit could your existing sales operation produce if it performed more effectively?",
+            {
+              text: "That is why we start by looking for growth within the existing sales organization.",
+              bold: true,
+            },
+            {
+              text: "The objective is to identify and strengthen the areas of the existing sales operation with the greatest potential to produce additional revenue and contribution profit.",
+              bold: true,
+            },
           ],
         },
       },
@@ -75,8 +83,10 @@ export const siteConfig = {
             "That is why we evaluate the sales organization as a complete revenue-producing system rather than automatically assuming the salespeople themselves are the problem.",
             "We look at how the different components work together and where breakdowns, inefficiencies, or missed opportunities may exist.",
             "This gives leadership a much clearer picture of what is actually affecting performance before money and resources are committed to fixing the wrong problem.",
-            "The business question is:",
-            "What is actually limiting sales performance, and where is the greatest opportunity for improvement?",
+            {
+              text: "The objective is to identify what is actually limiting sales performance and where the greatest opportunities for improvement exist.",
+              bold: true,
+            },
           ],
         },
       },
@@ -90,12 +100,16 @@ export const siteConfig = {
           paragraphs: [
             "Most companies do not need to overhaul their entire sales organization.",
             "The real value comes from identifying the few areas that are having the greatest impact on results and concentrating attention there.",
-            "For one company, that may be improving conversion rates. For another, it may be prospecting, lead quality, sales messaging, follow-up, pipeline management, leadership, or the performance of a small number of salespeople.",
+            {
+              text: "For one company, that may be improving conversion rates. For another, it may be prospecting, lead quality, sales messaging, follow-up, pipeline management, leadership, or the performance of a small number of salespeople.",
+              bold: true,
+            },
             "By narrowing the focus, the company avoids unnecessary disruption and directs its time, money, and management attention toward the areas most likely to produce measurable improvement.",
             "Our goal is not to change everything.",
-            "Our goal is to identify what matters most right now and address it effectively.",
-            "The business question is:",
-            "Which improvements are most likely to produce the greatest measurable return for the organization?",
+            {
+              text: "Our goal is to identify what matters most right now and address it effectively.",
+              bold: true,
+            },
           ],
         },
       },
@@ -112,8 +126,10 @@ export const siteConfig = {
             "For example, if an improvement produces $500,000 in additional annual revenue, leadership also needs to understand what portion of that revenue contributes meaningfully to profit after direct costs.",
             "This allows the company to evaluate sales improvements as a business investment rather than simply celebrating higher activity, more appointments, or additional revenue.",
             "The objective is to create improvements that are financially meaningful and sustainable.",
-            "The business question is:",
-            "Are the changes producing enough additional revenue and contribution profit to justify the investment?",
+            {
+              text: "Every improvement should ultimately be evaluated by the additional revenue and contribution profit it can produce relative to the investment required.",
+              bold: true,
+            },
           ],
         },
       },
@@ -126,13 +142,18 @@ export const siteConfig = {
         popout: {
           paragraphs: [
             "Identifying what needs to change is only valuable if those changes are actually implemented.",
-            "North Point is not designed to simply deliver a report, make recommendations, and leave leadership to figure out the rest.",
+            {
+              text: "NORTH POINT SALES GROUP is not designed to simply deliver a report, make recommendations, and leave leadership to figure out the rest.",
+              bold: true,
+            },
             "We can work alongside the company as a fractional sales executive to help put the agreed-upon improvements into practice.",
             "That may include working directly with selected salespeople, improving presentations and messaging, strengthening prospecting and follow-up, addressing pipeline issues, improving accountability, coordinating outside vendors when needed, and helping leadership track results.",
             "The engagement can be narrowly focused on two or three salespeople or expanded to support the broader sales organization.",
             "The level of involvement depends on what the company actually needs.",
-            "The business question is:",
-            "Once we know what needs to improve, how do we make sure those improvements are actually implemented and producing results?",
+            {
+              text: "The objective is to turn identified improvements into practical changes that are implemented, measured, and sustained.",
+              bold: true,
+            },
           ],
         },
       },

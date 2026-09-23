@@ -7,13 +7,24 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
+type PopupParagraph =
+  string | { readonly text: string; readonly bold?: boolean };
+
+function popupParagraphText(paragraph: PopupParagraph) {
+  return typeof paragraph === "string" ? paragraph : paragraph.text;
+}
+
+function popupParagraphBold(paragraph: PopupParagraph) {
+  return typeof paragraph === "object" && Boolean(paragraph.bold);
+}
+
 export function WhyPartnerSection() {
   const { whyChooseUs } = siteConfig;
   const [expanded, setExpanded] = useState(false);
   const [popup, setPopup] = useState<{
     subheading: string;
     subheadingSecondary?: string;
-    paragraphs: readonly string[];
+    paragraphs: readonly PopupParagraph[];
     list?: readonly string[];
     nextStep?: string;
     /** Section H2 — only for the five pillars above the MORE CTA */
@@ -56,15 +67,23 @@ export function WhyPartnerSection() {
         <Dialog.Description asChild>
           <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
             {popup.paragraphs.map((paragraph, index) => {
+              const text = popupParagraphText(paragraph);
               const showListAfter =
                 popup.list &&
                 popup.list.length > 0 &&
                 approachListIntroPhrases.includes(
-                  paragraph as (typeof approachListIntroPhrases)[number],
+                  text as (typeof approachListIntroPhrases)[number],
                 );
               return (
-                <div key={`${paragraph}-${index}`}>
-                  <p>{paragraph}</p>
+                <div key={`${text}-${index}`}>
+                  <p
+                    className={cn(
+                      popupParagraphBold(paragraph) &&
+                        "font-bold text-[#001528]",
+                    )}
+                  >
+                    {text}
+                  </p>
                   {showListAfter && popup.list && (
                     <ul className="mt-2 list-disc space-y-1.5 pl-5">
                       {popup.list.map((item) => (
