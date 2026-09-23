@@ -2,43 +2,24 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  CalendarDays,
-  UserRound,
-  Globe,
-  ShieldLock,
-  Target,
-  X,
-} from "lucide-react";
+import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-
-// Lucide Icons Map
-const iconMap: Record<string, React.ReactNode> = {
-  "/icons/user.svg": (
-    <UserRound className="size-12 stroke-[1.8] text-primary" />
-  ),
-  "/icons/calendar.svg": (
-    <CalendarDays className="size-12 stroke-[1.8] text-primary" />
-  ),
-  "/icons/globe.svg": <Globe className="size-12 stroke-[1.8] text-primary" />,
-  "/icons/shield-lock.svg": (
-    <ShieldLock className="size-12 stroke-[1.8] text-primary" />
-  ),
-  "/icons/target.svg": <Target className="size-12 stroke-[1.8] text-primary" />,
-};
 
 export function WhyPartnerSection() {
   const { whyChooseUs } = siteConfig;
   const [expanded, setExpanded] = useState(false);
   const [popup, setPopup] = useState<{
-    title: string;
+    subheading: string;
+    subheadingSecondary?: string;
     paragraphs: readonly string[];
     list?: readonly string[];
     nextStep?: string;
-    /** Card heading from OUR APPROACH panel (shown above popout title) */
-    cardHeading?: string;
+    /** Section H2 — only for the five pillars above the MORE CTA */
+    showSectionTitle?: boolean;
+    /** OUR APPROACH panel title — only for the five cards below MORE */
+    showApproachTitle?: boolean;
   } | null>(null);
 
   const approachListIntroPhrases = [
@@ -53,21 +34,25 @@ export function WhyPartnerSection() {
     if (!popup) return null;
     return (
       <div className="flex flex-col gap-3">
-        {popup.cardHeading && (
-          <p className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
-            {popup.cardHeading}
-          </p>
-        )}
-        <Dialog.Title
-          className={cn(
-            "font-body font-extrabold tracking-wide text-[#061525] uppercase",
-            popup.cardHeading
-              ? "text-[16px] sm:text-[18px]"
-              : "text-[18px] sm:text-[20px]",
-          )}
-        >
-          {popup.title}
-        </Dialog.Title>
+        {popup.showSectionTitle ? (
+          <>
+            <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+              {whyChooseUs.title}
+            </Dialog.Title>
+            <p className="font-body text-[12px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[13px]">
+              {popup.subheading}
+            </p>
+          </>
+        ) : popup.showApproachTitle ? (
+          <>
+            <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+              {popup.subheading}
+            </Dialog.Title>
+            <p className="font-body text-[12px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[13px]">
+              {whyChooseUs.modal.title}
+            </p>
+          </>
+        ) : null}
         <Dialog.Description asChild>
           <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
             {popup.paragraphs.map((paragraph, index) => {
@@ -173,23 +158,22 @@ export function WhyPartnerSection() {
                   type="button"
                   onClick={() =>
                     setPopup({
-                      title: pillar.title,
+                      showSectionTitle: true,
+                      subheading: pillar.title,
                       paragraphs: pillar.popout.paragraphs,
                     })
                   }
                   className="group flex cursor-pointer flex-col items-center text-center transition-opacity hover:opacity-90 focus:outline-none"
                 >
                   <div className="flex h-14 items-center justify-center">
-                    {iconMap[pillar.icon] || (
-                      <Image
-                        src={pillar.icon}
-                        alt=""
-                        width={48}
-                        height={48}
-                        className="size-12 object-contain"
-                        unoptimized
-                      />
-                    )}
+                    <Image
+                      src={pillar.icon}
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="size-12 object-contain"
+                      unoptimized
+                    />
                   </div>
                   <h3 className="mt-2 font-body text-[13px] font-bold tracking-[0.04em] text-primary uppercase group-hover:text-[#b17411] group-hover:underline">
                     {pillar.title}
@@ -249,8 +233,8 @@ export function WhyPartnerSection() {
                         type="button"
                         onClick={() =>
                           setPopup({
-                            cardHeading: item.title,
-                            title: item.popout.title,
+                            showApproachTitle: true,
+                            subheading: item.title,
                             paragraphs: item.popout.paragraphs,
                             list: item.popout.list,
                             nextStep: item.popout.nextStep,
@@ -259,16 +243,14 @@ export function WhyPartnerSection() {
                         className="group flex cursor-pointer flex-col items-center text-center focus:outline-none"
                       >
                         <div className="flex h-14 items-center justify-center">
-                          {iconMap[item.icon] || (
-                            <Image
-                              src={item.icon}
-                              alt={item.title}
-                              width={48}
-                              height={48}
-                              className="size-12 object-contain"
-                              unoptimized
-                            />
-                          )}
+                          <Image
+                            src={item.icon}
+                            alt={item.title}
+                            width={48}
+                            height={48}
+                            className="size-12 object-contain"
+                            unoptimized
+                          />
                         </div>
                         <h4 className="mt-3 font-body text-[13px] font-bold tracking-[0.04em] text-primary uppercase group-hover:text-[#b17411] group-hover:underline">
                           {item.title}

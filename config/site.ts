@@ -25,7 +25,7 @@ export const siteConfig = {
     titleLine1: "Stronger Sales Organization",
     titleLine2: "Better Bottom-Line Results.",
     eyebrow: "Driving Revenue Growth Through Sales Organization Excellence",
-    body: "We help established companies uncover the revenue and profit potential already existing within their sales organization—and then help leadership capture it.",
+    body: "We transform underperforming B2B sales organizations into high-performing revenue engines—turning untapped sales capacity into millions of dollars in additional revenue.",
     primaryCta: {
       label: "Schedule a Consultation",
       href: "#cta",
@@ -146,7 +146,7 @@ export const siteConfig = {
           title: "Diagnose Before We Prescribe",
           description:
             "We first determine what is working, what may be restricting performance, and where meaningful opportunities for improvement exist.",
-          icon: "/icons/user.svg",
+          icon: "/icons/data.svg",
           popout: {
             title: "Determine What Is Working Before Recommending Change",
             paragraphs: [
@@ -178,7 +178,7 @@ export const siteConfig = {
           title: "Focus Where Financial Impact Matters Most",
           description:
             "If an area of the sales organization is performing well, we leave it alone. We focus on areas where improvement is most likely to produce a meaningful business return.",
-          icon: "/icons/calendar.svg",
+          icon: "/icons/impact.svg",
           popout: {
             title: "Improve What Can Produce a Meaningful Business Return",
             paragraphs: [
@@ -209,7 +209,7 @@ export const siteConfig = {
           title: "Implementation, Not Just Recommendations",
           description:
             "We do more than provide reports and recommendations. We work with leadership to help put agreed-upon improvements into practice and evaluate the results.",
-          icon: "/icons/globe.svg",
+          icon: "/icons/deliver.svg",
           popout: {
             title: "Help Put the Improvements Into Practice",
             paragraphs: [
@@ -242,7 +242,7 @@ export const siteConfig = {
           title: "Objective Outside Perspective",
           description:
             "Because we are not part of the existing internal structure, we can evaluate sales performance objectively while working collaboratively with leadership and the sales organization.",
-          icon: "/icons/shield-lock.svg",
+          icon: "/icons/insights.svg",
           popout: {
             title: "Evaluate Performance Without Internal Bias or Politics",
             paragraphs: [
@@ -271,7 +271,7 @@ export const siteConfig = {
           title: "A Long-Term Resource When Needed",
           description:
             "Our objective is not simply to complete an engagement and disappear. When appropriate, we want to remain a trusted sales-performance resource leadership can call upon as future needs and opportunities arise.",
-          icon: "/icons/target.svg",
+          icon: "/icons/sustainable.svg",
           popout: {
             title: "Sales Performance Support Beyond the Initial Engagement",
             paragraphs: [

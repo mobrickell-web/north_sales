@@ -14,6 +14,7 @@ interface StepsProps {
 export function Steps({ sectionNumber = 4 }: StepsProps) {
   const { salesEngagement } = siteConfig;
   const [popup, setPopup] = useState<{
+    stepLabel?: string;
     title: string;
     paragraphs: readonly string[];
     list?: readonly string[];
@@ -34,6 +35,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
     const { popout } = step;
     if (!popout) return;
     setPopup({
+      stepLabel: `Step ${step.stepNumber}`,
       cardHeading: step.title,
       title: popout.title,
       paragraphs: popout.paragraphs,
@@ -223,21 +225,23 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
 
             {popup && (
               <div className="flex flex-col gap-3">
-                {popup.cardHeading && (
-                  <p className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
-                    {popup.cardHeading}
-                  </p>
+                {(popup.stepLabel || popup.cardHeading) && (
+                  <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                    {[popup.stepLabel, popup.cardHeading]
+                      .filter(Boolean)
+                      .join(" — ")}
+                  </Dialog.Title>
                 )}
-                <Dialog.Title
+                <p
                   className={cn(
                     "font-body font-extrabold tracking-wide text-[#061525] uppercase",
-                    popup.cardHeading
-                      ? "text-[16px] sm:text-[18px]"
+                    popup.stepLabel
+                      ? "text-[14px] sm:text-[16px]"
                       : "text-[18px] sm:text-[20px]",
                   )}
                 >
                   {popup.title}
-                </Dialog.Title>
+                </p>
                 <Dialog.Description asChild>
                   <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
                     {popup.paragraphs.map((paragraph, index) => {

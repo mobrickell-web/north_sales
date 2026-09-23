@@ -33,6 +33,7 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
     null,
   );
   const [popup, setPopup] = useState<{
+    bulletHeading?: string;
     title: string;
     paragraphs: readonly string[];
     list?: readonly string[];
@@ -179,27 +180,33 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
                   {step.stepNumber} {step.title}
                 </h3>
                 <ul className="mt-6 flex flex-col gap-4 text-left font-body text-[14px] font-normal leading-relaxed text-gray-200">
-                  {step.bullets.map((bullet) => (
-                    <li key={bullet.label} className="flex items-start gap-3">
-                      <Check className="mt-0.5 size-4 shrink-0 text-white" />
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPopup({
-                            title: bullet.popout.title,
-                            paragraphs: bullet.popout.paragraphs,
-                            list:
-                              "list" in bullet.popout
-                                ? bullet.popout.list
-                                : undefined,
-                          })
-                        }
-                        className="cursor-pointer text-left font-body text-[14px] font-normal leading-relaxed text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
-                      >
-                        {bullet.label}
-                      </button>
-                    </li>
-                  ))}
+                  {step.bullets.map((bullet, bulletIndex) => {
+                    const bulletHeading = step.title
+                      .split(" & ")
+                      [bulletIndex]?.trim();
+                    return (
+                      <li key={bullet.label} className="flex items-start gap-3">
+                        <Check className="mt-0.5 size-4 shrink-0 text-white" />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setPopup({
+                              bulletHeading,
+                              title: bullet.popout.title,
+                              paragraphs: bullet.popout.paragraphs,
+                              list:
+                                "list" in bullet.popout
+                                  ? bullet.popout.list
+                                  : undefined,
+                            })
+                          }
+                          className="cursor-pointer text-left font-body text-[14px] font-normal leading-relaxed text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                        >
+                          {bullet.label}
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
@@ -436,9 +443,21 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
 
             {popup && (
               <div className="flex flex-col gap-3">
-                <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                {popup.bulletHeading && (
+                  <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                    {popup.bulletHeading}
+                  </Dialog.Title>
+                )}
+                <p
+                  className={cn(
+                    "font-body font-extrabold tracking-wide text-[#061525] uppercase",
+                    popup.bulletHeading
+                      ? "text-[14px] sm:text-[16px]"
+                      : "text-[16px] sm:text-[18px]",
+                  )}
+                >
                   {popup.title}
-                </Dialog.Title>
+                </p>
                 <Dialog.Description asChild>
                   <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
                     {popup.paragraphs.map((paragraph, index) => {
