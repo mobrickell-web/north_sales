@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
 
 const HEADER_OFFSET = 110;
 
@@ -46,6 +47,7 @@ export function SiteHeader() {
   const [activeHash, setActiveHash] = useState<string>("#top");
   const pathname = usePathname();
   const router = useRouter();
+  const { openSchedule } = useScheduleAppointment();
 
   useEffect(() => {
     const syncHash = () => setActiveHash(window.location.hash || "#top");
@@ -154,9 +156,12 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <Link
-          href="/#cta"
-          onClick={(e) => handleNavClick(e, "/#cta")}
+        <button
+          type="button"
+          onClick={() => {
+            setIsMenuOpen(false);
+            openSchedule();
+          }}
           className="relative z-10 hidden h-[58px] w-[225px] shrink-0 flex-col items-center justify-center gap-[2px] bg-gold p-[10px_24px] text-center font-secondary text-[16px] font-bold uppercase leading-[1.2] tracking-[0.011em] text-[#001528] transition-all hover:bg-gold/90 hover:shadow-lg lg:flex"
         >
           <span className="w-full text-center leading-none">
@@ -165,7 +170,7 @@ export function SiteHeader() {
           <span className="w-full text-center leading-none">
             {siteConfig.cta.labelLines[1]}
           </span>
-        </Link>
+        </button>
 
         <button
           type="button"
@@ -201,13 +206,16 @@ export function SiteHeader() {
                 </Link>
               );
             })}
-            <Link
-              href="/#cta"
-              className="mt-5 flex min-h-[52px] items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"
-              onClick={(e) => handleNavClick(e, "/#cta")}
+            <button
+              type="button"
+              className="mt-5 flex min-h-[52px] w-full items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"
+              onClick={() => {
+                setIsMenuOpen(false);
+                openSchedule();
+              }}
             >
               Schedule a Consultation
-            </Link>
+            </button>
           </nav>
         </div>
       )}

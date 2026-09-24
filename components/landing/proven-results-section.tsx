@@ -20,6 +20,8 @@ export function ProvenResultsSection({
   const [popup, setPopup] = useState<{
     title: string;
     paragraphs: readonly string[];
+    statValue?: string;
+    statDescription?: string;
   } | null>(null);
 
   return (
@@ -113,6 +115,8 @@ export function ProvenResultsSection({
                     onClick={() =>
                       stat.popout &&
                       setPopup({
+                        statValue: stat.value,
+                        statDescription: stat.description,
                         title: stat.popout.title,
                         paragraphs: [stat.popout.description],
                       })
@@ -160,7 +164,24 @@ export function ProvenResultsSection({
 
             {popup && (
               <div className="flex flex-col gap-3">
-                <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                {popup.statValue && (
+                  <p className="font-heading text-[40px] leading-none font-bold tracking-tight text-[#b17411] sm:text-[44px]">
+                    {popup.statValue}
+                  </p>
+                )}
+                {popup.statDescription && (
+                  <p className="font-body text-[15px] leading-relaxed font-semibold text-[#001528] sm:text-[16px]">
+                    {popup.statDescription}
+                  </p>
+                )}
+                <Dialog.Title
+                  className={cn(
+                    "font-body font-extrabold tracking-wide text-[#061525] uppercase",
+                    popup.statValue
+                      ? "mt-1 text-[15px] sm:text-[17px]"
+                      : "text-[16px] sm:text-[18px]",
+                  )}
+                >
                   {popup.title}
                 </Dialog.Title>
                 <Dialog.Description asChild>

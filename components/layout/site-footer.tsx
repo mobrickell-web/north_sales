@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
+import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
 
 const HEADER_OFFSET = 110;
 
@@ -43,6 +44,7 @@ export function SiteFooter() {
   const quickLinks = footer.columns[0]?.groups[0]?.links ?? [];
   const pathname = usePathname();
   const router = useRouter();
+  const { openSchedule } = useScheduleAppointment();
 
   const handleSectionClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -95,13 +97,13 @@ export function SiteFooter() {
           </div>
 
           <div className="flex w-full flex-col items-center gap-1.5 sm:w-auto sm:items-end sm:gap-2">
-            <Link
-              href="/#cta"
-              onClick={(e) => handleSectionClick(e, "/#cta")}
+            <button
+              type="button"
+              onClick={openSchedule}
               className="flex h-[40px] w-full items-center justify-center bg-[#d48c27] font-body text-[11px] font-bold tracking-[0.08em] text-white uppercase shadow-sm transition-colors hover:bg-[#b8781e] sm:h-[46px] sm:w-[260px] sm:text-[13px]"
             >
               {cta.label}
-            </Link>
+            </button>
             <Link
               href={footer.contactHref}
               onClick={(e) => handleSectionClick(e, footer.contactHref)}

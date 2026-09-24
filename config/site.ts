@@ -9,6 +9,38 @@ export const siteConfig = {
     labelLines: ["Schedule a", "Consultation"] as const,
     href: "#cta",
   },
+  appointmentForm: {
+    title: "Schedule Appointment",
+    subtitle:
+      "Share a few details and we will confirm a time that works for your team.",
+    submitLabel: "Schedule Appointment",
+    successTitle: "Appointment Request Received",
+    successMessage:
+      "Thank you. We have received your appointment request and will confirm shortly.",
+    appointmentTypes: [
+      "Initial Consultation",
+      "Discovery Call",
+      "Sales Performance Review",
+      "Follow-up Meeting",
+    ],
+    durations: ["30 minutes", "45 minutes", "60 minutes"],
+    timeSlots: [
+      "9:00 AM",
+      "9:30 AM",
+      "10:00 AM",
+      "10:30 AM",
+      "11:00 AM",
+      "11:30 AM",
+      "1:00 PM",
+      "1:30 PM",
+      "2:00 PM",
+      "2:30 PM",
+      "3:00 PM",
+      "3:30 PM",
+      "4:00 PM",
+      "4:30 PM",
+    ],
+  },
   nav: [
     { href: "#top", label: "Home" },
     { href: "#why-choose-us", label: "Why Choose Us" },
@@ -1206,79 +1238,254 @@ export const siteConfig = {
       phoneNumber: "Call 888-555-POINT (7646) and press 1",
       actionText: "to hear a brief overview of how we can help.",
     },
-    typicalEngagement: {
-      title: "TYPICAL ENGAGEMENT",
-      bullets: [
-        "Focused evaluation of the Sales Performance Components™ most relevant to your organization",
-        "Executive Implementation Plan with prioritized recommendations",
-        "Implementation support: Done With You and Done For You",
-        "Active engagement typically 60 days",
-        "Ongoing support as needed",
-      ],
-      footer: "Our objective is to improve sales performance — not disrupt it.",
-    },
     investment: {
       title: "INVESTMENT",
-      description:
-        "North Point Sales Group engagements begin at $50,000. Final professional fees are determined by the size and complexity of the sales organization, diagnostic scope, implementation requirements, and North Point professional resources required.",
-      buttonText: "HOW IS OUR FEE DETERMINED? — MORE ›",
-      feeDetermined: {
-        title: "How is our fee determined?",
-        intro: "Our fee is based on the scope of the engagement, including:",
-        bullets: [
-          {
-            id: "number-of-salespeople",
-            label:
-              "The number of salespeople or account representatives involved",
-            popout: {
-              title:
-                "The Number of Salespeople or Account Representatives Involved",
-              description:
-                "The number of people included directly affects the amount of evaluation, coaching, communication, performance tracking, and follow-through required throughout the engagement.",
-            },
+      tiers: [
+        {
+          title: "Sales Team Performance Engagement — Beginning at $7,500",
+          description:
+            "Focused specifically on improving the performance of the existing sales team.",
+          popout: {
+            title: "SALES TEAM PERFORMANCE ENGAGEMENT",
+            fee: "Beginning at $7,500",
+            intro:
+              "This engagement is designed for companies that believe the primary opportunity is within the performance of their existing sales team. NORTH POINT SALES GROUP works directly with sales leadership and sales personnel to identify performance gaps, improve execution, and strengthen the sales process.",
+            includedHeading: "WHAT IS INCLUDED",
+            groups: [
+              {
+                title: "Sales Team Assessment",
+                items: [
+                  "Review the current sales team structure and individual responsibilities.",
+                  "Examine how salespeople prospect, qualify, present, follow up, manage opportunities, and close.",
+                  "Review available sales performance data and relevant individual metrics.",
+                  "Identify performance strengths, weaknesses, and areas requiring improvement.",
+                ],
+              },
+              {
+                title: "Sales Process Review",
+                items: [
+                  "Examine the current process from lead receipt through closed sale.",
+                  "Identify breakdowns, inefficiencies, and missed opportunities.",
+                  "Review how salespeople are expected to move prospects through the sales process.",
+                  "Recommend changes where the existing process is limiting performance.",
+                ],
+              },
+              {
+                title: "Direct Sales Team Work",
+                items: [
+                  "Work directly with salespeople to address identified performance issues.",
+                  "Improve sales conversations, presentations, prospecting, follow-up, and closing practices as applicable.",
+                  "Establish clearer expectations for sales activity and performance.",
+                  "Reinforce the sales process through practical application.",
+                ],
+              },
+              {
+                title: "Sales Leadership Support",
+                items: [
+                  "Work with sales leadership on managing and measuring sales performance.",
+                  "Establish appropriate performance expectations and accountability.",
+                  "Identify where management practices may be affecting sales results.",
+                ],
+              },
+              {
+                title: "Performance Improvement Plan",
+                items: [
+                  "Establish the highest-priority improvements.",
+                  "Define recommended actions and responsibilities.",
+                  "Establish appropriate performance measurements.",
+                  "Provide leadership with a practical framework for ongoing improvement.",
+                ],
+              },
+            ],
+            outcomeHeading: "ENGAGEMENT OUTCOME",
+            outcomeParagraphs: [
+              "The objective is to improve the effectiveness of the existing sales team without assuming that adding more salespeople is the answer.",
+              "The exact scope and duration are determined by the size of the sales team and the level of work required.",
+            ],
           },
-          {
-            id: "sales-performance-components",
-            label: "The Sales Performance Components™ being addressed",
-            popout: {
-              title: "The Sales Performance Components™ Being Addressed",
-              description:
-                "Some engagements may focus on one specific area, while others require attention across several Sales Performance Components™. The broader the scope, the more resources and implementation support may be required.",
-            },
+        },
+        {
+          title: "30-Day Focused Sales Performance Engagement — $9,500",
+          description:
+            "Broader assessment of the sales operation, executive findings, priorities, and implementation roadmap.",
+          popout: {
+            title: "30-DAY FOCUSED SALES PERFORMANCE ENGAGEMENT",
+            fee: "Professional Fee: $9,500",
+            intro:
+              "This engagement is designed for companies that want NORTH POINT SALES GROUP to examine their existing sales operation, identify the most significant opportunities, and establish a clear plan before committing to a larger implementation engagement.",
+            includedHeading: "WHAT IS INCLUDED",
+            groups: [
+              {
+                title: "1. Executive Discovery",
+                items: [
+                  "Discussions with company leadership regarding current sales objectives, challenges, and expectations.",
+                  "Review of the company's existing sales organization and operating environment.",
+                  "Identification of management concerns and areas where leadership believes sales performance may be falling short.",
+                ],
+              },
+              {
+                title: "2. Sales Operation Review",
+                intro:
+                  "NORTH POINT SALES GROUP examines the relevant components of the existing sales operation, which may include:",
+                items: [
+                  "Sales leadership",
+                  "Systems and processes",
+                  "Team performance",
+                  "Prospecting and lead development",
+                  "Sales presentations",
+                  "Pipeline management",
+                  "CRM utilization",
+                  "Performance measurement",
+                  "Compensation and incentives",
+                  "Recruiting and onboarding",
+                  "Customer retention and development",
+                  "Sales training",
+                ],
+                outro:
+                  "The review is focused on identifying where meaningful sales-performance opportunities exist rather than simply checking boxes.",
+              },
+              {
+                title: "3. Lead Generation and Conversion Review",
+                intro:
+                  "Where applicable, the engagement may examine how opportunities are generated through:",
+                items: [
+                  "Website activity",
+                  "Paid advertising",
+                  "Social media",
+                  "Referrals",
+                  "Outbound prospecting",
+                  "Live sales calls",
+                  "Other lead sources",
+                ],
+                outro:
+                  "The objective is to determine whether the lead-generation process and the sales process are working together effectively.",
+              },
+              {
+                title: "4. Findings and Priorities",
+                intro: "NORTH POINT SALES GROUP identifies:",
+                items: [
+                  "What is working.",
+                  "Where opportunities are being lost.",
+                  "What problems appear to have the greatest impact on sales performance.",
+                  "What should be addressed first.",
+                  "What should not be prioritized at this stage.",
+                ],
+              },
+              {
+                title: "5. Executive Recommendations",
+                intro:
+                  "Leadership receives a clear presentation of the findings and recommended priorities, including the resources and capabilities that may be required to address them.",
+              },
+              {
+                title: "6. Implementation Roadmap",
+                intro:
+                  "NORTH POINT SALES GROUP develops a practical roadmap showing:",
+                items: [
+                  "Recommended actions",
+                  "Priority and sequence",
+                  "Who should be responsible",
+                  "Areas requiring internal resources",
+                  "Areas that may require outside specialists",
+                  "Recommended measurements for determining whether changes are producing results",
+                ],
+              },
+            ],
+            outcomeHeading: "ENGAGEMENT OUTCOME",
+            outcomeParagraphs: [
+              "At the end of the 30 days, the client has a clear understanding of where its sales-performance opportunities exist, what should be done about them, and what a larger implementation would involve.",
+              "The $9,500 engagement does not include full implementation of the recommended changes or significant third-party costs such as website development, advertising spend, media, technology, or specialized production.",
+            ],
           },
-          {
-            id: "leadership-involvement",
-            label: "The level of leadership involvement required",
-            popout: {
-              title: "The Level of Leadership Involvement Required",
-              description:
-                "Some engagements require limited management participation, while others involve ongoing collaboration with senior leadership, sales management, or other key decision-makers.",
-            },
+        },
+        {
+          title: "Full Sales Performance Implementation — Beginning at $50,000",
+          description:
+            "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.",
+          popout: {
+            title: "FULL SALES PERFORMANCE IMPLEMENTATION",
+            fee: "Beginning at $50,000",
+            intro:
+              "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside force working with leadership and the existing sales organization to diagnose, prioritize, and implement improvements across the sales operation.",
+            includedHeading: "WHAT IS INCLUDED",
+            groups: [
+              {
+                title: "Comprehensive Sales Performance Diagnosis",
+                intro:
+                  "NORTH POINT SALES GROUP examines the areas of the sales operation that may be affecting revenue performance, including:",
+                items: [
+                  "Sales leadership",
+                  "Systems and processes",
+                  "Team performance",
+                  "Prospecting and lead development",
+                  "Sales presentations",
+                  "Pipeline management",
+                  "CRM utilization",
+                  "Performance measurement",
+                  "Compensation and incentives",
+                  "Recruiting and onboarding",
+                  "Customer retention and development",
+                  "Sales training",
+                ],
+                outro:
+                  "The depth of attention given to each area depends upon what the diagnostic process reveals.",
+              },
+              {
+                title: "Implementation",
+                intro:
+                  "Unlike an assessment-only engagement, NORTH POINT SALES GROUP remains involved in putting the recommended changes into operation. This may include:",
+                items: [
+                  "Working directly with sales leadership.",
+                  "Working directly with sales personnel.",
+                  "Improving sales processes and procedures.",
+                  "Improving prospecting and lead development.",
+                  "Improving sales presentations and sales conversations.",
+                  "Strengthening pipeline management and follow-up.",
+                  "Improving CRM utilization and sales reporting.",
+                  "Establishing appropriate performance measurements.",
+                  "Addressing sales-team performance issues.",
+                  "Helping leadership establish accountability.",
+                  "Coordinating implementation across affected areas.",
+                ],
+              },
+              {
+                title: "Lead Generation and Sales Conversion",
+                intro:
+                  "Where lead generation is identified as a significant factor, NORTH POINT SALES GROUP may also address the relationship between marketing-generated opportunities and the sales organization. This can include examining:",
+                items: [
+                  "Website-generated leads",
+                  "Paid advertising",
+                  "Social media",
+                  "Other marketing channels",
+                  "Lead qualification",
+                  "Lead response",
+                  "Conversion from inquiry to sales opportunity",
+                  "Conversion from opportunity to customer",
+                ],
+                outro:
+                  "Where specialized technical work is required—such as website development, advertising production, specialized social-media work, technology development, or other outside services—NORTH POINT SALES GROUP may coordinate or recommend appropriate resources. Significant third-party costs are separate from the NORTH POINT SALES GROUP professional fee and require client approval.",
+              },
+              {
+                title: "Ongoing Performance Measurement",
+                intro:
+                  "The engagement is designed around measurable sales performance rather than simply completing a list of activities. Progress is evaluated through questions such as:",
+                items: [
+                  "Where are we?",
+                  "What have we found?",
+                  "What are we doing about it?",
+                  "Who is responsible for what?",
+                  "What results are we getting?",
+                ],
+              },
+            ],
+            outcomeHeading: "ENGAGEMENT OUTCOME",
+            outcomeParagraphs: [
+              "The objective is not simply to provide the client with recommendations.",
+              "NORTH POINT SALES GROUP becomes an outside sales-performance resource working with company leadership and the existing sales organization to identify opportunities, implement improvements, and measure the resulting performance.",
+              "Final professional fees are determined by the size and complexity of the sales organization, diagnostic scope, implementation requirements, and NORTH POINT SALES GROUP professional resources required.",
+            ],
           },
-          {
-            id: "implementation-coaching",
-            label:
-              "The amount of implementation, coaching, and follow-through needed",
-            popout: {
-              title:
-                "The Amount of Implementation, Coaching, and Follow-Through Needed",
-              description:
-                "Fees reflect not only what needs to be evaluated, but also the level of hands-on implementation, coaching, accountability, and follow-through required to help produce measurable improvement.",
-            },
-          },
-          {
-            id: "complexity-duration",
-            label: "The overall complexity and duration of the engagement",
-            popout: {
-              title: "The Overall Complexity and Duration of the Engagement",
-              description:
-                "Engagements vary in complexity depending on the organization, sales structure, objectives, challenges, and length of the assignment. These factors are considered when determining the final scope and fee.",
-            },
-          },
-        ],
-        footer:
-          "Smaller 30-day engagements may begin at $5,000, while broader 60-day Sales Performance Engagements are priced according to scope and typically begin at $50,000.",
-      },
+        },
+      ],
     },
     modal: {
       title: "WHAT COULD A SMALL IMPROVEMENT BE WORTH?",

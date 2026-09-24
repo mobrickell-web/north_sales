@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Phone, Check, Compass, X } from "lucide-react";
+import { Phone, Compass, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -11,19 +11,38 @@ interface ChallengesProps {
   sectionNumber?: number | string;
 }
 
+type ChallengePopup = {
+  kind: "challenge";
+  title: string;
+  paragraphs: readonly string[];
+  list?: readonly string[];
+  nextStep?: string;
+  cardHeading?: string;
+};
+
+type InvestmentPopup = {
+  kind: "investment";
+  title: string;
+  fee: string;
+  intro: string;
+  includedHeading: string;
+  groups: readonly {
+    title: string;
+    intro?: string;
+    items?: readonly string[];
+    outro?: string;
+  }[];
+  outcomeHeading: string;
+  outcomeParagraphs: readonly string[];
+};
+
+type PopupState = ChallengePopup | InvestmentPopup;
+
 export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
   const { challenges } = siteConfig;
 
-  // Two independent inline panels driven by the two CTAs
   const [revenueOpen, setRevenueOpen] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const [popup, setPopup] = useState<{
-    title: string;
-    paragraphs: readonly string[];
-    list?: readonly string[];
-    nextStep?: string;
-    cardHeading?: string;
-  } | null>(null);
+  const [popup, setPopup] = useState<PopupState | null>(null);
 
   const challengeListIntroPhrases = [
     "Inconsistent revenue can result from several different issues, including:",
@@ -34,96 +53,130 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
     "That can include evaluating:",
   ] as const;
 
-  const renderChallengePopupBody = () => {
-    if (!popup) return null;
-    return (
-      <div className="flex flex-col gap-3">
-        {popup.cardHeading && (
-          <p className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
-            {popup.cardHeading}
-          </p>
+  const renderChallengePopupBody = (active: ChallengePopup) => (
+    <div className="flex flex-col gap-3">
+      {active.cardHeading && (
+        <p className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+          {active.cardHeading}
+        </p>
+      )}
+      <Dialog.Title
+        className={cn(
+          "font-body font-extrabold tracking-wide text-[#061525] uppercase",
+          active.cardHeading
+            ? "text-[16px] sm:text-[18px]"
+            : "text-[18px] sm:text-[20px]",
         )}
-        <Dialog.Title
-          className={cn(
-            "font-body font-extrabold tracking-wide text-[#061525] uppercase",
-            popup.cardHeading
-              ? "text-[16px] sm:text-[18px]"
-              : "text-[18px] sm:text-[20px]",
-          )}
-        >
-          {popup.title}
-        </Dialog.Title>
-        <Dialog.Description asChild>
-          <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
-            {popup.paragraphs.map((paragraph, index) => {
-              const showListAfter =
-                popup.list &&
-                popup.list.length > 0 &&
-                challengeListIntroPhrases.includes(
-                  paragraph as (typeof challengeListIntroPhrases)[number],
-                );
-              return (
-                <div key={`${paragraph}-${index}`}>
-                  <p>{paragraph}</p>
-                  {showListAfter && popup.list && (
-                    <ul className="mt-2 list-disc space-y-1.5 pl-5">
-                      {popup.list.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+      >
+        {active.title}
+      </Dialog.Title>
+      <Dialog.Description asChild>
+        <div className="flex flex-col gap-3 font-body text-[15px] leading-relaxed text-[#5C5F66] sm:text-[16px]">
+          {active.paragraphs.map((paragraph, index) => {
+            const showListAfter =
+              active.list &&
+              active.list.length > 0 &&
+              challengeListIntroPhrases.includes(
+                paragraph as (typeof challengeListIntroPhrases)[number],
               );
-            })}
-            {popup.nextStep && (
-              <div className="mt-2 border-t border-gray-100 pt-4">
-                <p className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[15px]">
-                  A Clear Next Step
-                </p>
-                <p className="mt-2">{popup.nextStep}</p>
+            return (
+              <div key={`${paragraph}-${index}`}>
+                <p>{paragraph}</p>
+                {showListAfter && active.list && (
+                  <ul className="mt-2 list-disc space-y-1.5 pl-5">
+                    {active.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            )}
-          </div>
-        </Dialog.Description>
+            );
+          })}
+          {active.nextStep && (
+            <div className="mt-2 border-t border-gray-100 pt-4">
+              <p className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[15px]">
+                A Clear Next Step
+              </p>
+              <p className="mt-2">{active.nextStep}</p>
+            </div>
+          )}
+        </div>
+      </Dialog.Description>
+    </div>
+  );
+
+  const renderInvestmentPopupBody = (active: InvestmentPopup) => (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1.5 pr-8">
+        <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+          {active.title}
+        </Dialog.Title>
+        <p className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] sm:text-[18px]">
+          {active.fee}
+        </p>
       </div>
-    );
-  };
+      <Dialog.Description asChild>
+        <div className="flex flex-col gap-5 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
+          <p>{active.intro}</p>
+
+          <div className="flex flex-col gap-4">
+            <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
+              {active.includedHeading}
+            </h4>
+            {active.groups.map((group) => (
+              <div key={group.title} className="flex flex-col gap-2">
+                <h5 className="font-body text-[14px] font-extrabold text-[#001528] sm:text-[15px]">
+                  {group.title}
+                </h5>
+                {group.intro && <p>{group.intro}</p>}
+                {group.items && group.items.length > 0 && (
+                  <ul className="list-disc space-y-1.5 pl-5">
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+                {group.outro && <p>{group.outro}</p>}
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-gray-100 pt-4">
+            <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
+              {active.outcomeHeading}
+            </h4>
+            <div className="mt-3 flex flex-col gap-3">
+              {active.outcomeParagraphs.map((paragraph, index) => (
+                <p key={`${paragraph}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Dialog.Description>
+    </div>
+  );
 
   const revenuePanelRef = useRef<HTMLDivElement>(null);
-  const detailsPanelRef = useRef<HTMLDivElement>(null);
 
-  // Escape closes the open panels (deepest/last first)
   useEffect(() => {
-    if (!revenueOpen && !detailsOpen && !popup) return;
+    if (!revenueOpen && !popup) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (popup) {
         setPopup(null);
         return;
       }
-      if (detailsOpen) setDetailsOpen(false);
-      else if (revenueOpen) setRevenueOpen(false);
+      if (revenueOpen) setRevenueOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [revenueOpen, detailsOpen, popup]);
+  }, [revenueOpen, popup]);
 
   const toggleRevenue = () => {
     const willExpand = !revenueOpen;
     setRevenueOpen(willExpand);
     if (!willExpand) {
       revenuePanelRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  };
-
-  const toggleDetails = () => {
-    const willExpand = !detailsOpen;
-    setDetailsOpen(willExpand);
-    if (!willExpand) {
-      detailsPanelRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
@@ -186,6 +239,7 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
                   type="button"
                   onClick={() =>
                     setPopup({
+                      kind: "challenge",
                       cardHeading: item.title,
                       title: item.popout.title,
                       paragraphs: item.popout.paragraphs,
@@ -327,9 +381,8 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
             </div>
           </div>
 
-          {/* Investment Area incorporating Typical Engagement & Industry Neutral */}
+          {/* Investment + Industry Neutral */}
           <div className="mt-8 w-full max-w-[1280px]">
-            {/* Section Heading: Investment */}
             <div className="flex items-center gap-2">
               <Image
                 src="/icons/p13.svg"
@@ -344,131 +397,51 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
               </h4>
             </div>
 
-            <p className="mt-2 font-body text-[13px] leading-relaxed text-[#5C5F66] max-w-[1100px]">
-              {challenges.investment.description}
-            </p>
-
-            {/* Cards Row: Typical Engagement & Industry Neutral + CTA Button */}
-            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-12 items-stretch">
-              {/* Left Card: Typical Engagement */}
-              <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-6 shadow-xs md:col-span-7">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/icons/p13.svg"
-                      alt="Typical Engagement Icon"
-                      width={22}
-                      height={22}
-                      className="size-5.5 object-contain"
-                      unoptimized
-                    />
-                    <h5 className="font-body text-[15px] font-extrabold tracking-wide text-[#001528] uppercase">
-                      {challenges.typicalEngagement.title}
-                    </h5>
-                  </div>
-                  <ul className="mt-3.5 flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
-                    {challenges.typicalEngagement.bullets.map((bullet, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="mt-4 border-t border-gray-100 pt-3 font-body text-[12px] font-bold italic text-[#b17411]">
-                  {challenges.typicalEngagement.footer}
-                </p>
-              </div>
-
-              {/* Right Card / Block: Blue Industry Neutral Notice & CTA Button */}
-              <div className="flex flex-col justify-between gap-5 md:col-span-5">
-                {/* Blue Industry Neutral Box */}
-                <div className="flex flex-col justify-center rounded-2xl bg-[#001528] p-6 text-white shadow-sm h-full">
-                  <div className="flex items-center gap-2.5 mb-2.5">
-                    <Compass className="size-5 shrink-0 text-[#b17411]" />
-                    <span className="font-body text-[12px] font-extrabold tracking-wider text-white uppercase">
-                      Industry Neutral
+            <ol className="mt-4 flex max-w-[1100px] list-none flex-col gap-4 p-0">
+              {challenges.investment.tiers.map((tier, index) => (
+                <li key={tier.title}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPopup({
+                        kind: "investment",
+                        title: tier.popout.title,
+                        fee: tier.popout.fee,
+                        intro: tier.popout.intro,
+                        includedHeading: tier.popout.includedHeading,
+                        groups: tier.popout.groups,
+                        outcomeHeading: tier.popout.outcomeHeading,
+                        outcomeParagraphs: tier.popout.outcomeParagraphs,
+                      })
+                    }
+                    className="group flex w-full items-start gap-3 rounded-xl border border-transparent p-2 text-left transition-colors hover:border-[#b17411]/25 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#b17411]/40"
+                  >
+                    <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#001528] font-body text-[12px] font-bold text-white transition-colors group-hover:bg-[#b17411]">
+                      {index + 1}
                     </span>
-                  </div>
-                  <p className="font-body text-[13px] leading-relaxed text-gray-300">
-                    {challenges.modal.industryNeutralNotice}
-                  </p>
-                </div>
+                    <div className="flex flex-col gap-1">
+                      <p className="font-body text-[14px] font-extrabold leading-snug text-[#001528] sm:text-[15px]">
+                        {tier.title}
+                      </p>
+                      <p className="font-body text-[13px] leading-relaxed text-[#5C5F66]">
+                        {tier.description}
+                      </p>
+                    </div>
+                  </button>
+                </li>
+              ))}
+            </ol>
 
-                {/* HOW IS OUR FEE DETERMINED CTA Button */}
-                <button
-                  type="button"
-                  onClick={toggleDetails}
-                  aria-expanded={detailsOpen}
-                  aria-controls="challenges-details"
-                  className="mt-2 inline-flex h-[38px] w-full sm:w-fit cursor-pointer items-center justify-center bg-[#b17411] px-5 font-body text-[11px] font-bold tracking-wider text-white uppercase shadow-xs hover:bg-[#8f5d0e]"
-                >
-                  {detailsOpen
-                    ? "HOW IS OUR FEE DETERMINED? — LESS ›"
-                    : challenges.investment.buttonText}
-                </button>
+            <div className="mt-6 flex flex-col justify-center rounded-2xl bg-[#001528] p-6 text-white shadow-sm">
+              <div className="mb-2.5 flex items-center gap-2.5">
+                <Compass className="size-5 shrink-0 text-[#b17411]" />
+                <span className="font-body text-[12px] font-extrabold tracking-wider text-white uppercase">
+                  Industry Neutral
+                </span>
               </div>
-            </div>
-
-            {/* Expandable Fee Determined Dropdown Panel */}
-            <div
-              id="challenges-details"
-              ref={detailsPanelRef}
-              className={cn(
-                "grid w-full transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
-                detailsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-              )}
-            >
-              <div className="overflow-hidden">
-                <div
-                  aria-hidden={!detailsOpen}
-                  inert={!detailsOpen}
-                  className={cn(
-                    "mt-6 rounded-2xl border border-gray-200/80 bg-white p-6 sm:p-8 shadow-md transition-opacity duration-300 ease-in-out",
-                    detailsOpen
-                      ? "opacity-100"
-                      : "pointer-events-none opacity-0",
-                  )}
-                >
-                  <h4 className="font-body text-[16px] font-extrabold tracking-wide text-[#001528] uppercase">
-                    {challenges.investment.feeDetermined.title}
-                  </h4>
-                  <p className="mt-2 font-body text-[14px] font-semibold text-[#001528]">
-                    {challenges.investment.feeDetermined.intro}
-                  </p>
-
-                  <ul className="mt-3.5 flex flex-col gap-2.5 font-body text-[13px] text-[#5C5F66]">
-                    {challenges.investment.feeDetermined.bullets.map(
-                      (bullet) => (
-                        <li
-                          key={bullet.id}
-                          className="flex items-start gap-2.5"
-                        >
-                          <Check className="mt-0.5 size-4 shrink-0 text-[#b17411]" />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setPopup({
-                                title: bullet.popout.title,
-                                paragraphs: [bullet.popout.description],
-                              })
-                            }
-                            className="cursor-pointer text-left font-body text-[13px] text-[#5C5F66] transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
-                          >
-                            {bullet.label}
-                          </button>
-                        </li>
-                      ),
-                    )}
-                  </ul>
-
-                  <div className="mt-5 rounded-xl border border-gray-200/70 bg-[#FAF9F5] p-4.5 text-[#001528]">
-                    <p className="font-body text-[13px] font-semibold leading-relaxed">
-                      {challenges.investment.feeDetermined.footer}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <p className="font-body text-[13px] leading-relaxed text-gray-300">
+                {challenges.modal.industryNeutralNotice}
+              </p>
             </div>
           </div>
         </div>
@@ -480,7 +453,8 @@ export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
               <X className="size-5" />
               <span className="sr-only">Close</span>
             </Dialog.Close>
-            {renderChallengePopupBody()}
+            {popup?.kind === "challenge" && renderChallengePopupBody(popup)}
+            {popup?.kind === "investment" && renderInvestmentPopupBody(popup)}
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
