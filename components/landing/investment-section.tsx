@@ -29,8 +29,9 @@ type InvestmentPopup = {
   sequenceHeading?: string;
   sequenceIntro?: string;
   sequenceGroups?: readonly InvestmentGroup[];
-  outcomeHeading: string;
-  outcomeParagraphs: readonly string[];
+  sequenceInNestedPopup?: boolean;
+  outcomeHeading?: string;
+  outcomeParagraphs?: readonly string[];
 };
 
 function renderGroups(groups: readonly InvestmentGroup[]) {
@@ -78,6 +79,29 @@ export function InvestmentSection({
   const { challenges } = siteConfig;
   const { investment } = challenges;
   const [popup, setPopup] = useState<InvestmentPopup | null>(null);
+  const [sequencePopupOpen, setSequencePopupOpen] = useState(false);
+
+  const closePopup = () => {
+    setSequencePopupOpen(false);
+    setPopup(null);
+  };
+
+  const openPopup = (next: InvestmentPopup) => {
+    setSequencePopupOpen(false);
+    setPopup(next);
+  };
+
+  const showSequenceInline =
+    popup?.sequenceHeading &&
+    popup.sequenceGroups &&
+    popup.sequenceGroups.length > 0 &&
+    !popup.sequenceInNestedPopup;
+
+  const showSequenceLink =
+    popup?.sequenceInNestedPopup &&
+    popup.sequenceHeading &&
+    popup.sequenceGroups &&
+    popup.sequenceGroups.length > 0;
 
   return (
     <section
@@ -91,7 +115,9 @@ export function InvestmentSection({
 
       <Dialog.Root
         open={!!popup}
-        onOpenChange={(open) => !open && setPopup(null)}
+        onOpenChange={(open) => {
+          if (!open) closePopup();
+        }}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-5 sm:px-10 lg:px-16">
           <div className="flex w-full max-w-[1280px] flex-col items-center gap-2 text-center">
@@ -109,7 +135,7 @@ export function InvestmentSection({
               <li key={tier.title}>
                 <button
                   type="button"
-                  onClick={() => setPopup({ ...tier.popout })}
+                  onClick={() => openPopup({ ...tier.popout })}
                   className="group flex w-full items-start gap-3 rounded-xl border border-transparent p-2 text-left transition-colors hover:border-[#b17411]/25 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#b17411]/40"
                 >
                   <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#001528] font-body text-[12px] font-bold text-white transition-colors group-hover:bg-[#b17411]">
@@ -182,29 +208,88 @@ export function InvestmentSection({
                         popup.parametersParagraphs,
                       )}
 
-                    {popup.sequenceHeading &&
+                    {showSequenceInline &&
                       renderSectionBlock(
-                        popup.sequenceHeading,
+                        popup.sequenceHeading!,
                         popup.sequenceIntro ? [popup.sequenceIntro] : undefined,
                         popup.sequenceGroups,
                       )}
 
-                    <div className="border-t border-gray-100 pt-4">
-                      <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
-                        {popup.outcomeHeading}
-                      </h4>
-                      <div className="mt-3 flex flex-col gap-3">
-                        {popup.outcomeParagraphs.map((paragraph, index) => (
-                          <p key={`${paragraph}-${index}`}>{paragraph}</p>
-                        ))}
+                    {showSequenceLink && (
+                      <div className="flex flex-col gap-2 border-t border-gray-100 pt-4">
+                        <button
+                          type="button"
+                          onClick={() => setSequencePopupOpen(true)}
+                          className="w-fit cursor-pointer border-0 bg-transparent p-0 text-left font-body text-[13px] font-extrabold tracking-[0.06em] text-[#b17411] uppercase underline decoration-[#b17411]/50 underline-offset-4 transition-colors hover:text-[#8f5d0e] hover:decoration-[#8f5d0e] sm:text-[14px]"
+                        >
+                          {popup.sequenceHeading}
+                        </button>
+                        <p className="font-body text-[13px] text-[#5C5F66]">
+                          Click to view the full day-by-day work sequence.
+                        </p>
                       </div>
-                    </div>
+                    )}
+
+                    {popup.outcomeHeading &&
+                      popup.outcomeParagraphs &&
+                      popup.outcomeParagraphs.length > 0 && (
+                        <div className="border-t border-gray-100 pt-4">
+                          <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
+                            {popup.outcomeHeading}
+                          </h4>
+                          <div className="mt-3 flex flex-col gap-3">
+                            {popup.outcomeParagraphs.map((paragraph, index) => (
+                              <p key={`${paragraph}-${index}`}>{paragraph}</p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                   </div>
                 </Dialog.Description>
               </div>
             )}
           </Dialog.Content>
         </Dialog.Portal>
+
+        <Dialog.Root
+          open={sequencePopupOpen}
+          onOpenChange={setSequencePopupOpen}
+        >
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 z-[60] bg-black/65 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+            <Dialog.Content className="fixed left-[50%] top-[50%] z-[60] max-h-[90vh] w-[95vw] max-w-[620px] translate-x-[-50%] translate-y-[-50%] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+              <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+                <X className="size-5" />
+                <span className="sr-only">Close</span>
+              </Dialog.Close>
+
+              {popup?.sequenceInNestedPopup && (
+                <div className="flex flex-col gap-4 pr-6">
+                  <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                    {popup.sequenceHeading}
+                  </Dialog.Title>
+                  <Dialog.Description asChild>
+                    <div className="flex flex-col gap-5 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
+                      {popup.sequenceIntro && <p>{popup.sequenceIntro}</p>}
+                      {popup.sequenceGroups && (
+                        <div className="flex flex-col gap-4">
+                          {renderGroups(popup.sequenceGroups)}
+                        </div>
+                      )}
+                    </div>
+                  </Dialog.Description>
+                  <button
+                    type="button"
+                    onClick={() => setSequencePopupOpen(false)}
+                    className="mt-2 inline-flex h-[40px] w-full cursor-pointer items-center justify-center border border-[#001528]/15 bg-[#FAF9F5] px-4 font-secondary text-[12px] font-bold tracking-[0.1em] text-[#001528] uppercase transition-colors hover:bg-white"
+                  >
+                    Back to engagement details
+                  </button>
+                </div>
+              )}
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
       </Dialog.Root>
     </section>
   );

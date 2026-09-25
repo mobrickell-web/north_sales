@@ -1430,10 +1430,11 @@ export const siteConfig = {
             ],
             parametersHeading: "ENGAGEMENT PARAMETERS",
             parametersParagraphs: [
-              "The $9,500 professional fee covers the 30-day focused assessment, analysis, executive recommendations, and implementation roadmap. The general 30-day work sequence is outlined below.",
+              "The $9,500 professional fee covers the 30-day focused assessment, analysis, executive recommendations, and implementation roadmap. Select 30-DAY WORK SEQUENCE to view the general day-by-day work sequence.",
               "The engagement does not include full implementation of recommended changes or significant third-party costs such as website development, advertising spend, media, technology, or specialized production.",
               "If the scope of the sales operation or level of analysis required is substantially greater, the engagement may be expanded accordingly.",
             ],
+            sequenceInNestedPopup: true,
             sequenceHeading: "30-DAY WORK SEQUENCE",
             sequenceIntro:
               "The 30-day engagement follows a structured process designed to move from discovery to analysis, then to prioritized recommendations and an implementation roadmap. The sequence is not a rigid checklist. NORTH POINT SALES GROUP examines the relevant areas of the sales operation and allocates its attention based on what the evidence reveals. Areas with greater potential impact receive greater attention, while areas that do not appear to be significant performance constraints are not unnecessarily pursued.",
@@ -1539,10 +1540,6 @@ export const siteConfig = {
                   "How future performance should be measured.",
                 ],
               },
-            ],
-            outcomeHeading: "ENGAGEMENT OUTCOME",
-            outcomeParagraphs: [
-              "At the end of the 30 days, leadership has a clear understanding of where sales-performance opportunities exist, what should be addressed first, and what a larger implementation would involve.",
             ],
           },
         },
