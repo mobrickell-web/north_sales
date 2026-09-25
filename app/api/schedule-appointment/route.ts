@@ -84,7 +84,7 @@ export async function POST(request: Request) {
 
     await Promise.all([
       transporter.sendMail({
-        from: `"North Point Sales Group" <${from}>`,
+        from: `"NORTH POINT SALES GROUP" <${from}>`,
         to,
         replyTo: email,
         subject: emails.internalSubject,
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
         attachments: [getEmailLogoAttachment()],
       }),
       transporter.sendMail({
-        from: `"North Point Sales Group" <${from}>`,
+        from: `"NORTH POINT SALES GROUP" <${from}>`,
         to: email,
         replyTo: from,
         subject: emails.confirmationSubject,

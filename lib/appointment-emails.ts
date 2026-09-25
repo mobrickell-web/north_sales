@@ -96,7 +96,7 @@ function emailShell({
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background:${BRAND.white};border-radius:16px;overflow:hidden;border:1px solid ${BRAND.border};box-shadow:0 8px 28px rgba(0,21,40,0.08);">
           <tr>
             <td style="background:${BRAND.navy};padding:28px 32px 24px;text-align:center;">
-              <img src="cid:${LOGO_CID}" alt="North Point Sales Group" width="220" style="display:block;margin:0 auto 18px;width:220px;max-width:70%;height:auto;border:0;" />
+              <img src="cid:${LOGO_CID}" alt="NORTH POINT SALES GROUP" width="220" style="display:block;margin:0 auto 18px;width:220px;max-width:70%;height:auto;border:0;" />
               <div style="display:inline-block;padding:6px 14px;border:1px solid rgba(193,155,49,0.55);border-radius:999px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:${BRAND.bronzeSoft};">
                 ${escapeHtml(badge)}
               </div>
@@ -136,7 +136,7 @@ function emailShell({
                 <tr>
                   <td style="padding:20px 22px;text-align:center;">
                     <p style="margin:0 0 6px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;color:${BRAND.white};">
-                      North Point Sales Group
+                      NORTH POINT SALES GROUP
                     </p>
                     <p style="margin:0 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#C9D1D9;">
                       <a href="mailto:contact@northpointsalesgroup.com" style="color:${BRAND.bronzeSoft};text-decoration:none;">contact@northpointsalesgroup.com</a>
@@ -187,7 +187,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
 
   const internalSubject = `New Appointment Request — ${details.companyName}`;
   const internalText = [
-    "New appointment request from the North Point website:",
+    "New appointment request from the NORTH POINT SALES GROUP website:",
     "",
     detailsText,
   ].join("\n");
@@ -196,7 +196,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     badge: "New Lead · Website Form",
     heading: "New Appointment Request",
     introHtml: `
-      <p style="margin:0 0 10px;">A prospect just submitted the schedule form on the North Point website.</p>
+      <p style="margin:0 0 10px;">A prospect just submitted the schedule form on the NORTH POINT SALES GROUP website.</p>
       <p style="margin:0;">Review the details below and follow up promptly.</p>
     `,
     detailsHeading: "Request Details",
@@ -216,11 +216,11 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
   });
 
   const confirmationSubject =
-    "We received your appointment request — North Point Sales Group";
+    "We received your appointment request — NORTH POINT SALES GROUP";
   const confirmationText = [
     `Hi ${details.companyName},`,
     "",
-    "Thank you for scheduling an appointment with North Point Sales Group.",
+    "Thank you for scheduling an appointment with NORTH POINT SALES GROUP.",
     "We have received your request and will follow up shortly.",
     "",
     "Your request details:",
@@ -228,7 +228,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     "",
     "If you need to make changes, reply to this email or contact us at contact@northpointsalesgroup.com.",
     "",
-    "— North Point Sales Group",
+    "— NORTH POINT SALES GROUP",
   ].join("\n");
 
   const confirmationHtml = emailShell({
@@ -236,7 +236,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     heading: "We've received your request",
     introHtml: `
       <p style="margin:0 0 10px;">Hi <strong style="color:${BRAND.navy};">${escapeHtml(details.companyName)}</strong>,</p>
-      <p style="margin:0 0 10px;">Thank you for scheduling an appointment with <strong style="color:${BRAND.navy};">North Point Sales Group</strong>.</p>
+      <p style="margin:0 0 10px;">Thank you for scheduling an appointment with <strong style="color:${BRAND.navy};">NORTH POINT SALES GROUP</strong>.</p>
       <p style="margin:0;">Your request is confirmed on our side. A member of our team will follow up shortly to finalize the conversation.</p>
     `,
     detailsHeading: "Your Appointment Details",

@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "North Point Sales Group",
-  shortName: "North Point",
+  name: "NORTH POINT SALES GROUP",
+  shortName: "NORTH POINT SALES GROUP",
   description:
     "Sales organization consulting that drives stronger teams and better business results.",
   url: process.env.SITE_URL || "http://localhost:3000",
@@ -49,8 +49,9 @@ export const siteConfig = {
     { label: "HOW WE WORK", href: "#how-we-work" },
     { label: "OUR 60 DAY FOCUS", href: "#our-60-day-focus" },
     { label: "CHALLENGES", href: "#challenges" },
+    { label: "INVESTMENT", href: "#investment" },
 
-    { href: "#solutions", label: "Solutions" },
+    // { href: "#solutions", label: "Solutions" },
     { href: "#faqs", label: "FAQ's" },
   ],
   hero: {
@@ -73,7 +74,7 @@ export const siteConfig = {
   },
   whyChooseUs: {
     badge: "Why Choose Us",
-    title: "WHY EXECUTIVE TEAMS ENGAGE NORTH POINT SALES GROUP?",
+    title: "WHY EXECUTIVE TEAMS ENGAGE NORTH POINT SALES GROUP",
     pillars: [
       {
         id: "strengthen-performance",
@@ -85,7 +86,7 @@ export const siteConfig = {
           paragraphs: [
             "Before recommending more salespeople, more leads, or more marketing spend, we first ask a more fundamental question:",
             {
-              text: "Is the organization getting everything it reasonably can from the sales resources it already has?",
+              text: "Is the organization getting everything it reasonably can from the sales resources it already has.",
               bold: true,
             },
             "Many established companies have significant revenue potential already sitting inside their existing sales operation — in conversion rates, prospecting effectiveness, sales messaging, follow-up, pipeline management, leadership, accountability, and individual salesperson performance.",
@@ -331,7 +332,7 @@ export const siteConfig = {
               "Sales organizations continue to evolve.",
               "New salespeople are hired. Markets change. Leadership changes. New competitors appear. Growth creates new operational demands. Strategies that worked previously may eventually need to be adjusted.",
               "For that reason, our relationship does not necessarily have to end when the initial engagement is completed.",
-              "North Point Sales Group can remain available as a sales-performance resource when future needs arise.",
+              "NORTH POINT SALES GROUP can remain available as a sales-performance resource when future needs arise.",
               "That may include:",
               "Some organizations may need us again quickly. Others may not need additional assistance for months or longer.",
               "The objective is simply to give leadership access to an experienced outside resource when sales-related needs or opportunities arise.",
@@ -349,7 +350,7 @@ export const siteConfig = {
               "Evaluation of emerging sales challenges",
             ],
             nextStep:
-              "After the initial engagement, North Point can remain available as an ongoing resource so leadership has someone familiar with the organization to call when new sales challenges, opportunities, or growth initiatives develop.",
+              "After the initial engagement, NORTH POINT SALES GROUP can remain available as an ongoing resource so leadership has someone familiar with the organization to call when new sales challenges, opportunities, or growth initiatives develop.",
           },
         },
       ],
@@ -468,7 +469,7 @@ export const siteConfig = {
           title: "Turn the Plan Into Action",
           paragraphs: [
             "Recommendations only matter when they are put into practice.",
-            "North Point works alongside leadership and the sales organization to help implement the agreed-upon priorities rather than simply delivering a report and leaving the company to execute on its own.",
+            "NORTH POINT SALES GROUP works alongside leadership and the sales organization to help implement the agreed-upon priorities rather than simply delivering a report and leaving the company to execute on its own.",
             "Implementation may involve:",
             "Responsibilities are clearly defined so leadership can see what is being done, who is responsible, and what progress is being made.",
           ],
@@ -528,11 +529,11 @@ export const siteConfig = {
         popout: {
           title: "Make Improvement Part of the Sales Organization",
           paragraphs: [
-            "The objective is not to create permanent dependence on North Point.",
+            "The objective is not to create permanent dependence on NORTH POINT SALES GROUP.",
             "Where possible, we help leadership establish the systems, expectations, management practices, and habits necessary for improvements to continue after the initial engagement.",
             "That can include:",
             "The goal is to leave the organization stronger and better equipped to maintain the improvements that have been implemented.",
-            "North Point can also remain available as a long-term resource when new challenges, opportunities, or growth initiatives arise.",
+            "NORTH POINT SALES GROUP can also remain available as a long-term resource when new challenges, opportunities, or growth initiatives arise.",
           ],
           list: [
             "Clear sales processes",
@@ -547,7 +548,7 @@ export const siteConfig = {
             "Ongoing performance reviews",
           ],
           nextStep:
-            "We help transition successful improvements into normal operating practices so the organization can sustain performance while retaining access to North Point when additional support is needed.",
+            "We help transition successful improvements into normal operating practices so the organization can sustain performance while retaining access to NORTH POINT SALES GROUP when additional support is needed.",
         },
       },
     ],
@@ -661,7 +662,7 @@ export const siteConfig = {
               title: "Execute With Focus and Accountability",
               paragraphs: [
                 "Recommendations have limited value unless they are actually implemented.",
-                "North Point Sales Group is designed to move beyond analysis and help leadership put agreed-upon improvements into operation.",
+                "NORTH POINT SALES GROUP is designed to move beyond analysis and help leadership put agreed-upon improvements into operation.",
                 "Depending on the engagement, implementation may include:",
                 "Progress is reviewed throughout the engagement so leadership can see what is being implemented, who is responsible, and whether the changes are producing the intended results.",
               ],
@@ -685,7 +686,7 @@ export const siteConfig = {
               paragraphs: [
                 "The objective is not to create permanent dependence on an outside consulting firm.",
                 "Where possible, we help strengthen the capabilities of your existing leadership and sales organization so improvements can continue after the initial engagement.",
-                "As results emerge, additional opportunities may also become visible. North Point can remain available as a long-term sales performance resource when leadership needs additional guidance, implementation support, specialized expertise, or fractional sales leadership.",
+                "As results emerge, additional opportunities may also become visible. NORTH POINT SALES GROUP can remain available as a long-term sales performance resource when leadership needs additional guidance, implementation support, specialized expertise, or fractional sales leadership.",
                 "The ultimate objective is a stronger, more capable sales organization that can continue improving performance as the business grows.",
               ],
             },
@@ -1053,7 +1054,7 @@ export const siteConfig = {
     title: "Performing at Its Full Potential?",
     intro:
       "Many businesses hit a plateau in sales growth. The problem is rarely the product or the market—it's usually the systems, processes, leadership, and accountability behind the sales team.",
-    highlightText: "That's where North Point Sales Group can help.",
+    highlightText: "That's where NORTH POINT SALES GROUP can help.",
     sectionTitle: "COMMON CHALLENGES WE HELP SOLVE",
     items: [
       {
@@ -1182,7 +1183,7 @@ export const siteConfig = {
             "They may be recruiting, interviewing, training, coaching, forecasting, solving customer problems, attending executive meetings, reviewing pipelines, supporting major accounts, and handling day-to-day operational issues.",
             "As responsibilities accumulate, important sales-management activities can become inconsistent or reactive.",
             "Common symptoms include:",
-            "North Point can help identify where leadership is overloaded, where management systems can be strengthened, and where additional support—including fractional sales leadership—may improve execution.",
+            "NORTH POINT SALES GROUP can help identify where leadership is overloaded, where management systems can be strengthened, and where additional support—including fractional sales leadership—may improve execution.",
             "The objective is to give leadership greater control over the sales organization without simply adding more complexity.",
           ],
           list: [
@@ -1240,6 +1241,7 @@ export const siteConfig = {
     },
     investment: {
       title: "INVESTMENT",
+      subtitle: "WHAT THE ENGAGEMENT INCLUDES",
       tiers: [
         {
           title: "Sales Team Performance Engagement — Beginning at $7,500",
@@ -1556,7 +1558,7 @@ export const siteConfig = {
   // siteConfig snippet
   solution: {
     badge: "Solutions",
-    title: "Why North Point Sales Group?",
+    title: "Why NORTH POINT SALES GROUP?",
     bullets: [
       {
         id: "revenue-potential",
@@ -1586,7 +1588,7 @@ export const siteConfig = {
         label: "Implementation support that turns recommendations into action",
         title: "Implementation Support That Turns Recommendations Into Action",
         content:
-          "A recommendation has little value if it never becomes part of the way the business operates. North Point does not simply identify opportunities and hand over a report. We help leadership put the agreed-upon improvements into practice, monitor how they are working, and make adjustments where necessary.",
+          "A recommendation has little value if it never becomes part of the way the business operates. NORTH POINT SALES GROUP does not simply identify opportunities and hand over a report. We help leadership put the agreed-upon improvements into practice, monitor how they are working, and make adjustments where necessary.",
       },
     ],
     pillars: [
@@ -1626,7 +1628,7 @@ export const siteConfig = {
       },
       {
         question:
-          "Can North Point work with just a few of our Sales or Account Representatives?",
+          "Can NORTH POINT SALES GROUP work with just a few of our Sales or Account Representatives?",
         answer: [
           "Yes. In some cases, we can begin with a smaller 30-day engagement focused on a limited number of Sales or Account Representatives.",
           "Typical 30-day pricing is:",
@@ -1707,18 +1709,18 @@ export const siteConfig = {
         ],
       },
       {
-        question: "What makes North Point Sales Group different?",
+        question: "What makes NORTH POINT SALES GROUP different?",
         answer: [
           "Many consulting firms provide recommendations.",
           "Many training companies provide education.",
-          "North Point Sales Group focuses on implementation.",
+          "NORTH POINT SALES GROUP focuses on implementation.",
           "We partner with executive leadership to help put practical improvements into action, creating stronger leadership, better systems, improved accountability, and measurable organizational performance.",
         ],
       },
       {
         question: "Who is your ideal client?",
         answer: [
-          "North Point Sales Group is best suited for organizations that:",
+          "NORTH POINT SALES GROUP is best suited for organizations that:",
           {
             bullets: [
               "Are established, growth-oriented businesses with an active sales operation",
@@ -1748,7 +1750,7 @@ export const siteConfig = {
         question: "What happens after the 60-day engagement?",
         answer: [
           "Many organizations continue implementing the systems, processes, and leadership improvements established during the engagement.",
-          "Others choose to retain North Point Sales Group for ongoing executive advisory services, quarterly business reviews, leadership coaching, or future organizational initiatives.",
+          "Others choose to retain NORTH POINT SALES GROUP for ongoing executive advisory services, quarterly business reviews, leadership coaching, or future organizational initiatives.",
           "Continuing advisory services are always optional and customized to your organization's needs.",
         ],
       },
@@ -1756,7 +1758,7 @@ export const siteConfig = {
         question: "How do we get started?",
         answer: [
           "The first step is to request a confidential Executive Consultation.",
-          "During this conversation, we'll learn about your organization, discuss your objectives, answer your questions, and determine whether North Point Sales Group is the right fit for your business.",
+          "During this conversation, we'll learn about your organization, discuss your objectives, answer your questions, and determine whether NORTH POINT SALES GROUP is the right fit for your business.",
           "If we believe we can create significant value, we'll outline the recommended next steps. If we don't, we'll tell you that as well.",
           "We believe the right partnerships begin with honesty, transparency, and a shared commitment to achieving meaningful business results.",
         ],
@@ -1841,7 +1843,7 @@ export const siteConfig = {
         popout: {
           title: "Improving Existing Sales Productivity",
           description:
-            "A large majority of executives recognize that achieving company growth objectives depends on improving the productivity of the sales team already in place. This supports a core North Point principle: before adding more salespeople, more marketing, or more spending, leadership should first determine whether greater performance can be achieved from the existing sales organization.",
+            "A large majority of executives recognize that achieving company growth objectives depends on improving the productivity of the sales team already in place. This supports a core NORTH POINT SALES GROUP principle: before adding more salespeople, more marketing, or more spending, leadership should first determine whether greater performance can be achieved from the existing sales organization.",
         },
       },
       {
@@ -1862,7 +1864,7 @@ export const siteConfig = {
 
 The opportunity is to make those activities more efficient so more time can be directed toward productive selling activity.
 
-North Point may help improve sales productivity by:
+NORTH POINT SALES GROUP may help improve sales productivity by:
 • Simplifying CRM entry and workflows so reps spend less time on administration
 • Reducing duplicate reporting and unnecessary meetings to protect selling time
 • Standardizing follow-up processes so opportunities move forward more consistently
@@ -1886,7 +1888,7 @@ North Point may help improve sales productivity by:
         popout: {
           title: "Average B2B Quota Attainment",
           description:
-            "When average quota attainment is below 50%, the issue may extend beyond the individual salesperson. Sales leadership, lead quality, prospecting, messaging, pipeline management, CRM utilization, training, accountability, compensation, and other factors can all influence performance. North Point evaluates the areas most relevant to the organization to determine where targeted improvements may produce stronger results.",
+            "When average quota attainment is below 50%, the issue may extend beyond the individual salesperson. Sales leadership, lead quality, prospecting, messaging, pipeline management, CRM utilization, training, accountability, compensation, and other factors can all influence performance. NORTH POINT SALES GROUP evaluates the areas most relevant to the organization to determine where targeted improvements may produce stronger results.",
         },
       },
     ],
@@ -1950,8 +1952,9 @@ North Point may help improve sales productivity by:
               { label: "How we work", href: "/#how-we-work" },
               { label: "Our 60 Day Focus", href: "/#our-60-day-focus" },
               { label: "Challenges", href: "/#challenges" },
+              { label: "Investment", href: "/#investment" },
 
-              { label: "Solutions", href: "/#solutions" },
+              // { label: "Solutions", href: "/#solutions" },
               { label: "FAQ's", href: "/#faqs" },
             ],
           },
@@ -1977,13 +1980,13 @@ North Point may help improve sales productivity by:
     hero: {
       image: {
         src: "/images/hero-image.svg",
-        alt: "North Point Sales Group — Privacy Policy",
+        alt: "NORTH POINT SALES GROUP — Privacy Policy",
       },
       subtitle:
         "How we collect, use, disclose, and protect information when you interact with our website and services.",
     },
     intro: [
-      'North Point Sales Group ("North Point," "we," "us," or "our") respects your privacy and is committed to handling personal information responsibly.',
+      'NORTH POINT SALES GROUP ("we," "us," or "our") respects your privacy and is committed to handling personal information responsibly.',
       "This Privacy Policy explains how we may collect, use, disclose, and protect information when you visit NorthPointSalesGroup.com, contact us, request information, schedule a consultation, or otherwise interact with our website.",
     ],
     sections: [
@@ -2041,7 +2044,7 @@ North Point may help improve sales productivity by:
             items: [
               "Respond to inquiries and consultation requests",
               "Communicate with prospective and existing clients",
-              "Evaluate whether North Point Sales Group's services may be appropriate for an organization",
+              "Evaluate whether NORTH POINT SALES GROUP's services may be appropriate for an organization",
               "Provide requested information about our services",
               "Schedule and conduct consultations",
               "Provide and improve our website and services",
@@ -2054,7 +2057,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "paragraph",
-            text: "We may also use contact information to communicate with you about North Point Sales Group services that we reasonably believe may be relevant to your business. You may ask us to discontinue marketing communications at any time.",
+            text: "We may also use contact information to communicate with you about NORTH POINT SALES GROUP services that we reasonably believe may be relevant to your business. You may ask us to discontinue marketing communications at any time.",
           },
         ],
       },
@@ -2110,7 +2113,7 @@ North Point may help improve sales productivity by:
             type: "list",
             items: [
               "Comply with applicable law, regulation, subpoena, court order, or other legal process",
-              "Protect the rights, property, or safety of North Point Sales Group, our clients, website users, or others",
+              "Protect the rights, property, or safety of NORTH POINT SALES GROUP, our clients, website users, or others",
               "Investigate suspected fraud, security incidents, or unlawful activity",
               "Facilitate a merger, acquisition, financing, restructuring, sale of assets, or similar business transaction",
             ],
@@ -2128,7 +2131,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "paragraph",
-            text: "Information provided as part of an actual consulting engagement may also be governed by the applicable engagement agreement, confidentiality agreement, nondisclosure agreement, or other written agreement between North Point Sales Group and the client.",
+            text: "Information provided as part of an actual consulting engagement may also be governed by the applicable engagement agreement, confidentiality agreement, nondisclosure agreement, or other written agreement between NORTH POINT SALES GROUP and the client.",
           },
           {
             type: "paragraph",
@@ -2211,7 +2214,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "paragraph",
-            text: "North Point Sales Group does not control and is not responsible for the privacy practices, security, content, or policies of third parties. We encourage you to review the privacy policies of any third-party website or service you choose to use.",
+            text: "NORTH POINT SALES GROUP does not control and is not responsible for the privacy practices, security, content, or policies of third parties. We encourage you to review the privacy policies of any third-party website or service you choose to use.",
           },
         ],
       },
@@ -2222,7 +2225,7 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "North Point Sales Group's website and services are intended for businesses and business professionals and are not directed toward children under the age of 13.",
+            text: "NORTH POINT SALES GROUP's website and services are intended for businesses and business professionals and are not directed toward children under the age of 13.",
           },
           {
             type: "paragraph",
@@ -2260,7 +2263,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "contact",
-            company: "North Point Sales Group",
+            company: "NORTH POINT SALES GROUP",
             email: "contact@northpointsalesgroup.com",
             phone: "(970) 250-1439",
           },
@@ -2275,14 +2278,14 @@ North Point may help improve sales productivity by:
     hero: {
       image: {
         src: "/images/hero-image.svg",
-        alt: "North Point Sales Group — Terms of Use",
+        alt: "NORTH POINT SALES GROUP — Terms of Use",
       },
       subtitle:
-        "Terms governing your access to and use of the North Point Sales Group website and related materials.",
+        "Terms governing your access to and use of the NORTH POINT SALES GROUP website and related materials.",
     },
     intro: [
       "Welcome to NorthPointSalesGroup.com.",
-      'These Terms of Use ("Terms") govern your access to and use of the North Point Sales Group website and the information, materials, resources, and other content made available through the website.',
+      'These Terms of Use ("Terms") govern your access to and use of the NORTH POINT SALES GROUP website and the information, materials, resources, and other content made available through the website.',
       "By accessing or using this website, you agree to these Terms. If you do not agree with these Terms, please do not use the website.",
     ],
     sections: [
@@ -2293,11 +2296,11 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "North Point Sales Group provides sales-performance consulting, advisory, implementation, coaching, and related business services to organizations.",
+            text: "NORTH POINT SALES GROUP provides sales-performance consulting, advisory, implementation, coaching, and related business services to organizations.",
           },
           {
             type: "paragraph",
-            text: "The information presented on this website is intended to provide general information about North Point Sales Group, our approach, our services, and sales-performance concepts.",
+            text: "The information presented on this website is intended to provide general information about NORTH POINT SALES GROUP, our approach, our services, and sales-performance concepts.",
           },
           {
             type: "paragraph",
@@ -2312,7 +2315,7 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "Any consulting or advisory services provided by North Point Sales Group are subject to a separate written engagement agreement or other written agreement between North Point Sales Group and the client.",
+            text: "Any consulting or advisory services provided by NORTH POINT SALES GROUP are subject to a separate written engagement agreement or other written agreement between NORTH POINT SALES GROUP and the client.",
           },
           {
             type: "paragraph",
@@ -2331,15 +2334,15 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "North Point Sales Group works with organizations to identify opportunities to strengthen sales leadership, systems, processes, execution, accountability, and overall sales performance.",
+            text: "NORTH POINT SALES GROUP works with organizations to identify opportunities to strengthen sales leadership, systems, processes, execution, accountability, and overall sales performance.",
           },
           {
             type: "paragraph",
-            text: "Business and sales results depend upon numerous factors, many of which are outside the control of North Point Sales Group.",
+            text: "Business and sales results depend upon numerous factors, many of which are outside the control of NORTH POINT SALES GROUP.",
           },
           {
             type: "paragraph",
-            text: "Accordingly, North Point Sales Group does not guarantee any particular increase in revenue, profit, sales, conversion rates, productivity, market share, business valuation, or other financial or operational result.",
+            text: "Accordingly, NORTH POINT SALES GROUP does not guarantee any particular increase in revenue, profit, sales, conversion rates, productivity, market share, business valuation, or other financial or operational result.",
           },
           {
             type: "paragraph",
@@ -2377,7 +2380,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "paragraph",
-            text: "North Point Sales Group does not warrant that all website information will always be complete, current, error-free, or applicable to every organization.",
+            text: "NORTH POINT SALES GROUP does not warrant that all website information will always be complete, current, error-free, or applicable to every organization.",
           },
           {
             type: "paragraph",
@@ -2392,11 +2395,11 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "Unless otherwise indicated, the website and its original content, including text, graphics, presentations, methodologies, concepts, design elements, videos, audio recordings, documents, logos, branding, and other materials, are owned by or licensed to North Point Sales Group and are protected by applicable intellectual-property laws.",
+            text: "Unless otherwise indicated, the website and its original content, including text, graphics, presentations, methodologies, concepts, design elements, videos, audio recordings, documents, logos, branding, and other materials, are owned by or licensed to NORTH POINT SALES GROUP and are protected by applicable intellectual-property laws.",
           },
           {
             type: "paragraph",
-            text: "This includes proprietary North Point Sales Group terminology, methodologies, frameworks, and materials, including where applicable the Sales Performance Components™ and related materials.",
+            text: "This includes proprietary NORTH POINT SALES GROUP terminology, methodologies, frameworks, and materials, including where applicable the Sales Performance Components™ and related materials.",
           },
           {
             type: "paragraph",
@@ -2414,12 +2417,12 @@ North Point may help improve sales productivity by:
               "Sell or sublicense website content",
               "Modify materials and present them as your own",
               "Copy proprietary methodologies, assessments, frameworks, training materials, presentations, or consulting materials",
-              "Use North Point Sales Group branding in a manner suggesting authorization, sponsorship, endorsement, or affiliation without permission",
+              "Use NORTH POINT SALES GROUP branding in a manner suggesting authorization, sponsorship, endorsement, or affiliation without permission",
             ],
           },
           {
             type: "paragraph",
-            text: "Nothing contained on this website grants any license or ownership interest in North Point Sales Group intellectual property except as expressly stated.",
+            text: "Nothing contained on this website grants any license or ownership interest in NORTH POINT SALES GROUP intellectual property except as expressly stated.",
           },
         ],
       },
@@ -2442,7 +2445,7 @@ North Point may help improve sales productivity by:
               "To collect information from the website through unauthorized automated means",
               "To impersonate another person or organization",
               "To submit false, misleading, abusive, defamatory, or unlawful information",
-              "In any manner that violates applicable law or the rights of North Point Sales Group or another party",
+              "In any manner that violates applicable law or the rights of NORTH POINT SALES GROUP or another party",
             ],
           },
         ],
@@ -2462,7 +2465,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "paragraph",
-            text: "North Point Sales Group is not responsible for the availability, accuracy, security, content, products, services, or practices of third-party websites or services.",
+            text: "NORTH POINT SALES GROUP is not responsible for the availability, accuracy, security, content, products, services, or practices of third-party websites or services.",
           },
           {
             type: "paragraph",
@@ -2511,7 +2514,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "paragraph",
-            text: "North Point Sales Group disclaims warranties of any kind, whether express or implied, regarding the website or its content, including implied warranties of merchantability, fitness for a particular purpose, accuracy, non-infringement, or uninterrupted availability.",
+            text: "NORTH POINT SALES GROUP disclaims warranties of any kind, whether express or implied, regarding the website or its content, including implied warranties of merchantability, fitness for a particular purpose, accuracy, non-infringement, or uninterrupted availability.",
           },
           {
             type: "paragraph",
@@ -2526,7 +2529,7 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "To the fullest extent permitted by applicable law, North Point Sales Group and its owners, officers, employees, contractors, representatives, affiliates, and agents will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages arising from or relating to your access to, use of, or inability to use this website or your reliance upon information presented on the website.",
+            text: "To the fullest extent permitted by applicable law, NORTH POINT SALES GROUP and its owners, officers, employees, contractors, representatives, affiliates, and agents will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages arising from or relating to your access to, use of, or inability to use this website or your reliance upon information presented on the website.",
           },
           {
             type: "paragraph",
@@ -2545,7 +2548,7 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "To the extent permitted by applicable law, you agree to indemnify and hold harmless North Point Sales Group and its owners, officers, employees, contractors, representatives, affiliates, and agents from claims, damages, liabilities, costs, and expenses arising from your unlawful use of the website, your violation of these Terms, or your infringement of the rights of another party.",
+            text: "To the extent permitted by applicable law, you agree to indemnify and hold harmless NORTH POINT SALES GROUP and its owners, officers, employees, contractors, representatives, affiliates, and agents from claims, damages, liabilities, costs, and expenses arising from your unlawful use of the website, your violation of these Terms, or your infringement of the rights of another party.",
           },
         ],
       },
@@ -2594,7 +2597,7 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "North Point Sales Group may revise these Terms periodically.",
+            text: "NORTH POINT SALES GROUP may revise these Terms periodically.",
           },
           {
             type: "paragraph",
@@ -2624,11 +2627,11 @@ North Point may help improve sales productivity by:
         blocks: [
           {
             type: "paragraph",
-            text: "These Terms, together with the Privacy Policy, constitute the agreement between you and North Point Sales Group concerning your use of this website.",
+            text: "These Terms, together with the Privacy Policy, constitute the agreement between you and NORTH POINT SALES GROUP concerning your use of this website.",
           },
           {
             type: "paragraph",
-            text: "They do not replace or modify a separate written engagement agreement entered into between North Point Sales Group and a client.",
+            text: "They do not replace or modify a separate written engagement agreement entered into between NORTH POINT SALES GROUP and a client.",
           },
         ],
       },
@@ -2643,7 +2646,7 @@ North Point may help improve sales productivity by:
           },
           {
             type: "contact",
-            company: "North Point Sales Group",
+            company: "NORTH POINT SALES GROUP",
             email: "contact@northpointsalesgroup.com",
             phone: "(970) 250-1439",
           },

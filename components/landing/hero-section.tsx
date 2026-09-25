@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { CirclePlay } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
 
 export function HeroSection() {
   const { hero } = siteConfig;
+  const { openSchedule } = useScheduleAppointment();
 
   return (
     <section
@@ -31,12 +35,13 @@ export function HeroSection() {
           </p>
 
           <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-2.5">
-            <Link
-              href={hero.primaryCta.href}
-              className="inline-flex min-h-[43px] w-full items-center justify-center bg-bronze px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-white uppercase sm:w-auto sm:whitespace-nowrap"
+            <button
+              type="button"
+              onClick={openSchedule}
+              className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center bg-bronze px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-white uppercase sm:w-auto sm:whitespace-nowrap"
             >
               {hero.primaryCta.label}
-            </Link>
+            </button>
             <Link
               href={hero.secondaryCta.href}
               className="inline-flex min-h-[43px] w-full items-center justify-center gap-2 border-2 border-bronze px-5 text-center font-secondary text-[11px] font-bold tracking-[0.04em] whitespace-normal text-bronze uppercase sm:w-auto sm:whitespace-nowrap"

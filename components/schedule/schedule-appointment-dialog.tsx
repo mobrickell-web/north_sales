@@ -30,6 +30,11 @@ const emptyForm: FormState = {
   duration: "",
 };
 
+type FieldErrors = {
+  email?: string;
+  time?: string;
+};
+
 export function ScheduleAppointmentDialog({
   open,
   onOpenChange,
@@ -39,6 +44,7 @@ export function ScheduleAppointmentDialog({
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   useEffect(() => {
     if (!open) {
@@ -47,6 +53,7 @@ export function ScheduleAppointmentDialog({
         setSubmitted(false);
         setSubmitting(false);
         setError(null);
+        setFieldErrors({});
       }, 200);
       return () => window.clearTimeout(timer);
     }
@@ -60,32 +67,53 @@ export function ScheduleAppointmentDialog({
     return `${year}-${month}-${day}`;
   })();
 
+  const isValidEmail = (value: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
   const updateField = <K extends keyof FormState>(
     key: K,
     value: FormState[K],
   ) => {
     setForm((prev) => ({ ...prev, [key]: value }));
     setError(null);
+    if (key === "email" || key === "time") {
+      setFieldErrors((prev) => ({ ...prev, [key]: undefined }));
+    }
+  };
+
+  const validateRequiredFields = () => {
+    const nextErrors: FieldErrors = {};
+    const emailValue = form.email.trim();
+
+    if (!emailValue) {
+      nextErrors.email = "Email is required.";
+    } else if (!isValidEmail(emailValue)) {
+      nextErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!form.time) {
+      nextErrors.time = "Please select an available time.";
+    }
+
+    setFieldErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (
-      !form.companyName.trim() ||
-      !form.email.trim() ||
-      !form.appointmentType ||
-      !form.date ||
-      !form.time ||
-      !form.duration
-    ) {
-      setError("Please complete all fields before scheduling.");
+    if (!validateRequiredFields()) {
+      setError("Please fill in the required email and time fields.");
       return;
     }
 
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
-    if (!emailOk) {
-      setError("Please enter a valid email address.");
+    if (
+      !form.companyName.trim() ||
+      !form.appointmentType ||
+      !form.date ||
+      !form.duration
+    ) {
+      setError("Please complete all fields before scheduling.");
       return;
     }
 
@@ -190,7 +218,10 @@ export function ScheduleAppointmentDialog({
 
                 <div>
                   <label htmlFor="email" className={labelClass}>
-                    Prospect Email
+                    Prospect Email{" "}
+                    <span className="text-red-600" aria-hidden>
+                      *
+                    </span>
                   </label>
                   <input
                     id="email"
@@ -199,10 +230,27 @@ export function ScheduleAppointmentDialog({
                     autoComplete="email"
                     value={form.email}
                     onChange={(e) => updateField("email", e.target.value)}
-                    className={fieldClass}
+                    className={cn(
+                      fieldClass,
+                      fieldErrors.email &&
+                        "border-red-500 focus:border-red-500 focus:ring-red-500/20",
+                    )}
                     placeholder="name@company.com"
                     required
+                    aria-required="true"
+                    aria-invalid={!!fieldErrors.email}
+                    aria-describedby={
+                      fieldErrors.email ? "email-error" : undefined
+                    }
                   />
+                  {fieldErrors.email && (
+                    <p
+                      id="email-error"
+                      className="mt-1.5 font-body text-[12px] font-semibold text-red-600"
+                    >
+                      {fieldErrors.email}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -249,15 +297,28 @@ export function ScheduleAppointmentDialog({
 
                   <div>
                     <label htmlFor="time" className={labelClass}>
-                      Available Time
+                      Available Time{" "}
+                      <span className="text-red-600" aria-hidden>
+                        *
+                      </span>
                     </label>
                     <select
                       id="time"
                       name="time"
                       value={form.time}
                       onChange={(e) => updateField("time", e.target.value)}
-                      className={cn(fieldClass, "cursor-pointer")}
+                      className={cn(
+                        fieldClass,
+                        "cursor-pointer",
+                        fieldErrors.time &&
+                          "border-red-500 focus:border-red-500 focus:ring-red-500/20",
+                      )}
                       required
+                      aria-required="true"
+                      aria-invalid={!!fieldErrors.time}
+                      aria-describedby={
+                        fieldErrors.time ? "time-error" : undefined
+                      }
                     >
                       <option value="" disabled>
                         Select time
@@ -268,6 +329,14 @@ export function ScheduleAppointmentDialog({
                         </option>
                       ))}
                     </select>
+                    {fieldErrors.time && (
+                      <p
+                        id="time-error"
+                        className="mt-1.5 font-body text-[12px] font-semibold text-red-600"
+                      >
+                        {fieldErrors.time}
+                      </p>
+                    )}
                   </div>
                 </div>
 
