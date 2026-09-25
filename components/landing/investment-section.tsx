@@ -9,20 +9,68 @@ interface InvestmentSectionProps {
   sectionNumber?: number | string;
 }
 
+type InvestmentGroup = {
+  title: string;
+  intro?: string;
+  items?: readonly string[];
+  outro?: string;
+};
+
 type InvestmentPopup = {
   title: string;
   fee: string;
   intro: string;
   includedHeading: string;
-  groups: readonly {
-    title: string;
-    intro?: string;
-    items?: readonly string[];
-    outro?: string;
-  }[];
+  groups: readonly InvestmentGroup[];
+  deliverableHeading?: string;
+  deliverableParagraphs?: readonly string[];
+  parametersHeading?: string;
+  parametersParagraphs?: readonly string[];
+  sequenceHeading?: string;
+  sequenceIntro?: string;
+  sequenceGroups?: readonly InvestmentGroup[];
   outcomeHeading: string;
   outcomeParagraphs: readonly string[];
 };
+
+function renderGroups(groups: readonly InvestmentGroup[]) {
+  return groups.map((group) => (
+    <div key={group.title} className="flex flex-col gap-2">
+      <h5 className="font-body text-[14px] font-extrabold text-[#001528] sm:text-[15px]">
+        {group.title}
+      </h5>
+      {group.intro && <p>{group.intro}</p>}
+      {group.items && group.items.length > 0 && (
+        <ul className="list-disc space-y-1.5 pl-5">
+          {group.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+      {group.outro && <p>{group.outro}</p>}
+    </div>
+  ));
+}
+
+function renderSectionBlock(
+  heading: string,
+  paragraphs?: readonly string[],
+  groups?: readonly InvestmentGroup[],
+) {
+  return (
+    <div className="flex flex-col gap-3 border-t border-gray-100 pt-4">
+      <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
+        {heading}
+      </h4>
+      {paragraphs?.map((paragraph, index) => (
+        <p key={`${heading}-${index}`}>{paragraph}</p>
+      ))}
+      {groups && groups.length > 0 && (
+        <div className="flex flex-col gap-4">{renderGroups(groups)}</div>
+      )}
+    </div>
+  );
+}
 
 export function InvestmentSection({
   sectionNumber = 6,
@@ -61,17 +109,7 @@ export function InvestmentSection({
               <li key={tier.title}>
                 <button
                   type="button"
-                  onClick={() =>
-                    setPopup({
-                      title: tier.popout.title,
-                      fee: tier.popout.fee,
-                      intro: tier.popout.intro,
-                      includedHeading: tier.popout.includedHeading,
-                      groups: tier.popout.groups,
-                      outcomeHeading: tier.popout.outcomeHeading,
-                      outcomeParagraphs: tier.popout.outcomeParagraphs,
-                    })
-                  }
+                  onClick={() => setPopup({ ...tier.popout })}
                   className="group flex w-full items-start gap-3 rounded-xl border border-transparent p-2 text-left transition-colors hover:border-[#b17411]/25 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#b17411]/40"
                 >
                   <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#001528] font-body text-[12px] font-bold text-white transition-colors group-hover:bg-[#b17411]">
@@ -129,23 +167,27 @@ export function InvestmentSection({
                       <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
                         {popup.includedHeading}
                       </h4>
-                      {popup.groups.map((group) => (
-                        <div key={group.title} className="flex flex-col gap-2">
-                          <h5 className="font-body text-[14px] font-extrabold text-[#001528] sm:text-[15px]">
-                            {group.title}
-                          </h5>
-                          {group.intro && <p>{group.intro}</p>}
-                          {group.items && group.items.length > 0 && (
-                            <ul className="list-disc space-y-1.5 pl-5">
-                              {group.items.map((item) => (
-                                <li key={item}>{item}</li>
-                              ))}
-                            </ul>
-                          )}
-                          {group.outro && <p>{group.outro}</p>}
-                        </div>
-                      ))}
+                      {renderGroups(popup.groups)}
                     </div>
+
+                    {popup.deliverableHeading &&
+                      renderSectionBlock(
+                        popup.deliverableHeading,
+                        popup.deliverableParagraphs,
+                      )}
+
+                    {popup.parametersHeading &&
+                      renderSectionBlock(
+                        popup.parametersHeading,
+                        popup.parametersParagraphs,
+                      )}
+
+                    {popup.sequenceHeading &&
+                      renderSectionBlock(
+                        popup.sequenceHeading,
+                        popup.sequenceIntro ? [popup.sequenceIntro] : undefined,
+                        popup.sequenceGroups,
+                      )}
 
                     <div className="border-t border-gray-100 pt-4">
                       <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">

@@ -12,6 +12,7 @@ type AppointmentPayload = {
   appointmentType?: string;
   date?: string;
   time?: string;
+  timezone?: string;
   duration?: string;
 };
 
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
     const appointmentType = body.appointmentType?.trim() ?? "";
     const date = body.date?.trim() ?? "";
     const time = body.time?.trim() ?? "";
+    const timezone = body.timezone?.trim() ?? "";
     const duration = body.duration?.trim() ?? "";
 
     if (
@@ -36,6 +38,7 @@ export async function POST(request: Request) {
       !appointmentType ||
       !date ||
       !time ||
+      !timezone ||
       !duration
     ) {
       return NextResponse.json(
@@ -79,6 +82,7 @@ export async function POST(request: Request) {
       appointmentType,
       date,
       time,
+      timezone,
       duration,
     });
 

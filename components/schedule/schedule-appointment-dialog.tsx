@@ -18,6 +18,7 @@ type FormState = {
   appointmentType: string;
   date: string;
   time: string;
+  timezone: string;
   duration: string;
 };
 
@@ -27,6 +28,7 @@ const emptyForm: FormState = {
   appointmentType: "",
   date: "",
   time: "",
+  timezone: "",
   duration: "",
 };
 
@@ -111,6 +113,7 @@ export function ScheduleAppointmentDialog({
       !form.companyName.trim() ||
       !form.appointmentType ||
       !form.date ||
+      !form.timezone ||
       !form.duration
     ) {
       setError("Please complete all fields before scheduling.");
@@ -130,6 +133,7 @@ export function ScheduleAppointmentDialog({
           appointmentType: form.appointmentType,
           date: form.date,
           time: form.time,
+          timezone: form.timezone,
           duration: form.duration,
         }),
       });
@@ -338,6 +342,29 @@ export function ScheduleAppointmentDialog({
                       </p>
                     )}
                   </div>
+                </div>
+
+                <div>
+                  <label htmlFor="timezone" className={labelClass}>
+                    Time Zone
+                  </label>
+                  <select
+                    id="timezone"
+                    name="timezone"
+                    value={form.timezone}
+                    onChange={(e) => updateField("timezone", e.target.value)}
+                    className={cn(fieldClass, "cursor-pointer")}
+                    required
+                  >
+                    <option value="" disabled>
+                      Select your time zone
+                    </option>
+                    {appointmentForm.timezones.map((zone) => (
+                      <option key={zone} value={zone}>
+                        {zone}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>

@@ -7,6 +7,7 @@ export type AppointmentDetails = {
   appointmentType: string;
   date: string;
   time: string;
+  timezone: string;
   duration: string;
 };
 
@@ -173,6 +174,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     { label: "Appointment Type", value: details.appointmentType },
     { label: "Date", value: details.date },
     { label: "Available Time", value: details.time },
+    { label: "Time Zone", value: details.timezone },
     { label: "Duration", value: details.duration },
   ];
 
@@ -182,6 +184,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     `Appointment Type: ${details.appointmentType}`,
     `Date: ${details.date}`,
     `Available Time: ${details.time}`,
+    `Time Zone: ${details.timezone}`,
     `Meeting Duration: ${details.duration}`,
   ].join("\n");
 
