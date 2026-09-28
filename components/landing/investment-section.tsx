@@ -40,7 +40,15 @@ function renderGroups(groups: readonly InvestmentGroup[]) {
       <h5 className="font-body text-[14px] font-extrabold text-[#001528] sm:text-[15px]">
         {group.title}
       </h5>
-      {group.intro && <p>{group.intro}</p>}
+      {group.intro && (
+        <div className="flex flex-col gap-3">
+          {group.intro.split("\n\n").map((p, i) => (
+            <p key={i} className="whitespace-pre-wrap">
+              {p}
+            </p>
+          ))}
+        </div>
+      )}
       {group.items && group.items.length > 0 && (
         <ul className="list-disc space-y-1.5 pl-5">
           {group.items.map((item) => (
@@ -48,7 +56,15 @@ function renderGroups(groups: readonly InvestmentGroup[]) {
           ))}
         </ul>
       )}
-      {group.outro && <p>{group.outro}</p>}
+      {group.outro && (
+        <div className="flex flex-col gap-3 mt-1">
+          {group.outro.split("\n\n").map((p, i) => (
+            <p key={i} className="whitespace-pre-wrap">
+              {p}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   ));
 }
@@ -64,7 +80,9 @@ function renderSectionBlock(
         {heading}
       </h4>
       {paragraphs?.map((paragraph, index) => (
-        <p key={`${heading}-${index}`}>{paragraph}</p>
+        <p key={`${heading}-${index}`} className="whitespace-pre-wrap">
+          {paragraph}
+        </p>
       ))}
       {groups && groups.length > 0 && (
         <div className="flex flex-col gap-4">{renderGroups(groups)}</div>
@@ -181,7 +199,7 @@ export function InvestmentSection({
                   <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
                     {popup.title}
                   </Dialog.Title>
-                  <p className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] sm:text-[18px]">
+                  <p className="font-body text-[16px] font-extrabold tracking-wide whitespace-pre-wrap text-[#061525] sm:text-[18px]">
                     {popup.fee}
                   </p>
                 </div>
@@ -215,6 +233,26 @@ export function InvestmentSection({
                         popup.sequenceGroups,
                       )}
 
+                    {popup.outcomeHeading &&
+                      popup.outcomeParagraphs &&
+                      popup.outcomeParagraphs.length > 0 && (
+                        <div className="border-t border-gray-100 pt-4">
+                          <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
+                            {popup.outcomeHeading}
+                          </h4>
+                          <div className="mt-3 flex flex-col gap-3">
+                            {popup.outcomeParagraphs.map((paragraph, index) => (
+                              <p
+                                key={`${paragraph}-${index}`}
+                                className="whitespace-pre-wrap"
+                              >
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                     {showSequenceLink && (
                       <div className="flex flex-col gap-2 border-t border-gray-100 pt-4">
                         <button
@@ -229,21 +267,6 @@ export function InvestmentSection({
                         </p>
                       </div>
                     )}
-
-                    {popup.outcomeHeading &&
-                      popup.outcomeParagraphs &&
-                      popup.outcomeParagraphs.length > 0 && (
-                        <div className="border-t border-gray-100 pt-4">
-                          <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
-                            {popup.outcomeHeading}
-                          </h4>
-                          <div className="mt-3 flex flex-col gap-3">
-                            {popup.outcomeParagraphs.map((paragraph, index) => (
-                              <p key={`${paragraph}-${index}`}>{paragraph}</p>
-                            ))}
-                          </div>
-                        </div>
-                      )}
                   </div>
                 </Dialog.Description>
               </div>

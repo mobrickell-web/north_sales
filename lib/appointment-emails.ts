@@ -2,6 +2,7 @@ import { readFileSync } from "fs";
 import path from "path";
 
 export type AppointmentDetails = {
+  contactName: string;
   companyName: string;
   email: string;
   appointmentType: string;
@@ -165,9 +166,10 @@ function emailShell({
 
 export function buildAppointmentEmails(details: AppointmentDetails) {
   const rows = [
-    { label: "Company", value: details.companyName },
+    { label: "Contact Name", value: details.contactName },
+    { label: "Company Name", value: details.companyName },
     {
-      label: "Email",
+      label: "Business Email",
       value: details.email,
       href: `mailto:${details.email}`,
     },
@@ -179,8 +181,9 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
   ];
 
   const detailsText = [
-    `Prospect / Company Name: ${details.companyName}`,
-    `Prospect Email: ${details.email}`,
+    `Contact Name: ${details.contactName}`,
+    `Company Name: ${details.companyName}`,
+    `Business Email: ${details.email}`,
     `Appointment Type: ${details.appointmentType}`,
     `Date: ${details.date}`,
     `Available Time: ${details.time}`,
@@ -221,7 +224,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
   const confirmationSubject =
     "We received your appointment request — NORTH POINT SALES GROUP";
   const confirmationText = [
-    `Hi ${details.companyName},`,
+    `Hi ${details.contactName},`,
     "",
     "Thank you for scheduling an appointment with NORTH POINT SALES GROUP.",
     "We have received your request and will follow up shortly.",
@@ -238,7 +241,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     badge: "Confirmation",
     heading: "We've received your request",
     introHtml: `
-      <p style="margin:0 0 10px;">Hi <strong style="color:${BRAND.navy};">${escapeHtml(details.companyName)}</strong>,</p>
+      <p style="margin:0 0 10px;">Hi <strong style="color:${BRAND.navy};">${escapeHtml(details.contactName)}</strong>,</p>
       <p style="margin:0 0 10px;">Thank you for scheduling an appointment with <strong style="color:${BRAND.navy};">NORTH POINT SALES GROUP</strong>.</p>
       <p style="margin:0;">Your request is confirmed on our side. A member of our team will follow up shortly to finalize the conversation.</p>
     `,

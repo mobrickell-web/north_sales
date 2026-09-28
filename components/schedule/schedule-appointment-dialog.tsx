@@ -13,6 +13,7 @@ type ScheduleAppointmentDialogProps = {
 };
 
 type FormState = {
+  contactName: string;
   companyName: string;
   email: string;
   appointmentType: string;
@@ -23,6 +24,7 @@ type FormState = {
 };
 
 const emptyForm: FormState = {
+  contactName: "",
   companyName: "",
   email: "",
   appointmentType: "",
@@ -110,6 +112,7 @@ export function ScheduleAppointmentDialog({
     }
 
     if (
+      !form.contactName.trim() ||
       !form.companyName.trim() ||
       !form.appointmentType ||
       !form.date ||
@@ -128,6 +131,7 @@ export function ScheduleAppointmentDialog({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          contactName: form.contactName.trim(),
           companyName: form.companyName.trim(),
           email: form.email.trim(),
           appointmentType: form.appointmentType,
@@ -204,8 +208,25 @@ export function ScheduleAppointmentDialog({
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div>
+                  <label htmlFor="contactName" className={labelClass}>
+                    Contact Name
+                  </label>
+                  <input
+                    id="contactName"
+                    name="contactName"
+                    type="text"
+                    autoComplete="name"
+                    value={form.contactName}
+                    onChange={(e) => updateField("contactName", e.target.value)}
+                    className={fieldClass}
+                    placeholder="Contact name"
+                    required
+                  />
+                </div>
+
+                <div>
                   <label htmlFor="companyName" className={labelClass}>
-                    Prospect / Company Name
+                    Company Name
                   </label>
                   <input
                     id="companyName"
@@ -215,14 +236,14 @@ export function ScheduleAppointmentDialog({
                     value={form.companyName}
                     onChange={(e) => updateField("companyName", e.target.value)}
                     className={fieldClass}
-                    placeholder="Company or prospect name"
+                    placeholder="Company name"
                     required
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className={labelClass}>
-                    Prospect Email{" "}
+                    Business Email{" "}
                     <span className="text-red-600" aria-hidden>
                       *
                     </span>

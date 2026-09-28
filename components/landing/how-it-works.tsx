@@ -258,12 +258,38 @@ export function HowItWorks({ sectionNumber = 3 }: HowItWorksProps) {
                           {pillar.title}
                         </h3>
                         <ul className="mt-6 flex flex-col gap-3 font-body text-[14px] text-gray-200">
-                          {pillar.bullets.map((bullet, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5">
-                              <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-white" />
-                              <span>{bullet}</span>
-                            </li>
-                          ))}
+                          {pillar.bullets.map(
+                            (
+                              bullet: {
+                                label: string;
+                                popout: {
+                                  title: string;
+                                  paragraphs: readonly string[];
+                                };
+                              },
+                              idx: number,
+                            ) => (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-2.5"
+                              >
+                                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setPopup({
+                                      bulletHeading: pillar.title,
+                                      title: bullet.popout.title,
+                                      paragraphs: bullet.popout.paragraphs,
+                                    })
+                                  }
+                                  className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                                >
+                                  {bullet.label}
+                                </button>
+                              </li>
+                            ),
+                          )}
                         </ul>
                       </div>
                     ))}

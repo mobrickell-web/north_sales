@@ -1,5 +1,6 @@
 // components/FaqSection.tsx
 
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
 interface FaqSectionProps {
@@ -37,6 +38,7 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
           {faq.questions.map((faqItem, index) => (
             <details
               key={faqItem.question}
+              name="faq-accordion"
               className="group overflow-hidden rounded-[8px] bg-[#EBEBEB]"
             >
               <summary className="flex min-h-[68px] cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 font-body text-[16px] leading-[1.4] font-bold text-[#111111] marker:hidden sm:px-7">
@@ -52,15 +54,38 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
                 </span>
               </summary>
               <div className="flex flex-col gap-2 px-6 pb-5 sm:px-7">
-                {faqItem.answer.map((block, blockIndex) =>
-                  typeof block === "string" ? (
-                    <p
-                      key={blockIndex}
-                      className="font-body text-[14px] leading-[1.5] text-[#3A3A3A]"
-                    >
-                      {block}
-                    </p>
-                  ) : (
+                {faqItem.answer.map((block, blockIndex) => {
+                  if (typeof block === "string") {
+                    return (
+                      <p
+                        key={blockIndex}
+                        className="font-body text-[14px] leading-[1.5] text-[#3A3A3A]"
+                      >
+                        {block}
+                      </p>
+                    );
+                  }
+
+                  if ("linkLine" in block) {
+                    const { before, href, label, after } = block.linkLine;
+                    return (
+                      <p
+                        key={blockIndex}
+                        className="font-body text-[14px] leading-[1.5] text-[#3A3A3A]"
+                      >
+                        {before}
+                        <Link
+                          href={href}
+                          className="font-semibold text-[#b17411] underline decoration-[#b17411]/40 underline-offset-2 hover:text-[#8f5d0e]"
+                        >
+                          {label}
+                        </Link>
+                        {after}
+                      </p>
+                    );
+                  }
+
+                  return (
                     <ul key={blockIndex} className="flex flex-col gap-1.5 pl-1">
                       {block.bullets.map((bullet) => (
                         <li
@@ -75,8 +100,8 @@ export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
                         </li>
                       ))}
                     </ul>
-                  ),
-                )}
+                  );
+                })}
               </div>
             </details>
           ))}

@@ -7,6 +7,7 @@ import {
 } from "@/lib/appointment-emails";
 
 type AppointmentPayload = {
+  contactName?: string;
   companyName?: string;
   email?: string;
   appointmentType?: string;
@@ -24,6 +25,7 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as AppointmentPayload;
 
+    const contactName = body.contactName?.trim() ?? "";
     const companyName = body.companyName?.trim() ?? "";
     const email = body.email?.trim() ?? "";
     const appointmentType = body.appointmentType?.trim() ?? "";
@@ -33,6 +35,7 @@ export async function POST(request: Request) {
     const duration = body.duration?.trim() ?? "";
 
     if (
+      !contactName ||
       !companyName ||
       !email ||
       !appointmentType ||
@@ -77,6 +80,7 @@ export async function POST(request: Request) {
     });
 
     const emails = buildAppointmentEmails({
+      contactName,
       companyName,
       email,
       appointmentType,
