@@ -95,7 +95,7 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
 
   return (
     <section
-      id="our-60-day-focus"
+      id="30-60-focus"
       aria-labelledby="sales-engagement-heading"
       className="relative w-full overflow-hidden bg-white py-12 lg:py-16"
     >
@@ -121,9 +121,16 @@ export function Steps({ sectionNumber = 4 }: StepsProps) {
               {salesEngagement.title}
             </h2>
             {salesEngagement.subtitle && (
-              <p className="mt-2 max-w-[900px] font-body text-[14px] leading-relaxed text-gray-600 sm:text-[16px]">
-                {salesEngagement.subtitle}
-              </p>
+              <div className="mt-2 max-w-[900px] space-y-1">
+                {salesEngagement.subtitle.map((line, index) => (
+                  <p
+                    key={index}
+                    className="font-body text-[14px] leading-relaxed text-gray-600 sm:text-[16px]"
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
             )}
           </div>
 

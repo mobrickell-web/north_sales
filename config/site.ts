@@ -60,7 +60,7 @@ export const siteConfig = {
     { href: "#results", label: "Results" },
 
     { label: "HOW WE WORK", href: "#how-we-work" },
-    { label: "OUR 60 DAY FOCUS", href: "#our-60-day-focus" },
+    { label: "30-60 Focus", href: "#30-60-focus" },
     { label: "CHALLENGES", href: "#challenges" },
     { label: "INVESTMENT", href: "#investment" },
 
@@ -371,10 +371,12 @@ export const siteConfig = {
   },
   //steps section
   salesEngagement: {
-    badge: "Our 60 Day Focus",
-    title: "Our 60-Day FOCUS",
-    subtitle:
-      "A focused, results-oriented 6-step, 60-day engagement process designed to identify the areas most likely to improve sales performance and help leadership implement the changes needed to produce measurable results.",
+    badge: "OUR 30-60 DAY FOCUS",
+    title: "OUR 30-60 DAY IMPLEMENTATION PROCESS",
+    subtitle: [
+      "30 days for focused implementation when the work can be completed efficiently within a shorter Timeframe.",
+      "60 days when the engagement requires broader implementation, coaching, measurement, or follow-through.",
+    ],
     steps: [
       {
         stepNumber: 1,
@@ -1794,7 +1796,7 @@ export const siteConfig = {
             title: "FULL SALES PERFORMANCE IMPLEMENTATION",
             fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–60 Days",
             intro:
-              "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside sales-performance resource to examine, improve, and implement changes across the sales operation.\n\nOption 3 includes the applicable assessment and diagnostic services described in Options 1 and 2, plus the hands-on implementation, performance management, measurement, and ongoing support required to put recommended changes into operation.\n\nThe scope, professional fee, and implementation period are determined by the number, complexity, and depth of the changes required—not simply the size of the company.",
+              "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside sales-performance resource to examine, improve, and implement changes across the sales operation. Option 3 includes the applicable assessment and diagnostic services described in Options 1 and 2, plus the hands-on implementation, performance management, measurement, and ongoing support required to put recommended changes into operation.The scope, professional fee, and implementation period are determined by the number, complexity, and depth of the changes required—not simply the size of the company. Professional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work. A higher-fee engagement does not necessarily require a longer implementation period; for example, a $100,000 engagement may sometimes be completed within 30 days when the required work can be effectively implemented within that timeframe.",
             includedHeading: "INCLUDED SERVICES",
             groups: [
               {
@@ -2252,8 +2254,8 @@ export const siteConfig = {
       {
         question: "How long does a typical engagement last?",
         answer: [
-          "Our standard engagement is 60 days.",
-          "This structured engagement allows us to evaluate your sales organization, develop a customized Executive Implementation Plan, and work alongside your leadership team to implement practical improvements that continue producing value long after the engagement has concluded.",
+          "Our 30–60 day implementation process",
+          "Most NORTH POINT SALES GROUP implementation engagements are completed within 30–60 days.The appropriate duration depends on the size of the sales organization, the areas being addressed, and the depth of implementation required. Duration and professional fees are determined independently—a larger engagement does not necessarily require a longer engagement period.For example, a substantial $100,000 implementation may sometimes be effectively completed within 30 days, while another engagement may require 45–60 days because of the implementation and follow-through involved.",
         ],
       },
       {
@@ -2343,14 +2345,14 @@ export const siteConfig = {
       {
         question: "How is the engagement billed?",
         answer: [
-          "Our standard investment schedule is straightforward.",
+          // "Our standard investment schedule is straightforward.",
           {
             bullets: [
-              "$25,000 is due upon execution of the engagement agreement to begin the Executive Discovery and Assessment phase.",
-              "The remaining $25,000 is due following presentation and executive approval of the customized Executive Implementation Plan, typically during Weeks Three or Four, prior to implementation.",
+              "For a 30-day engagement, 50% is due when the engagement begins and the remaining 50% is due approximately halfway through the 30-day period.",
+              "For a 60-day engagement, one-third is due at the beginning, one-third at approximately Day 30, and the final one-third is due near the end of the engagement.",
             ],
           },
-          "This structure allows executive leadership to review and approve the strategic implementation plan before Phase Two begins.",
+          // "These are quick but vital. Please see if they can change them now. I appreciate it.",
         ],
       },
       {
@@ -2557,7 +2559,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
               { label: "Results", href: "/#results" },
 
               { label: "How we work", href: "/#how-we-work" },
-              { label: "Our 60 Day Focus", href: "/#our-60-day-focus" },
+              { label: "30-60 Focus", href: "/#30-60-focus" },
               { label: "Challenges", href: "/#challenges" },
               { label: "Investment", href: "/#investment" },
 
