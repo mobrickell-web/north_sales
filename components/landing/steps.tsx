@@ -11,7 +11,7 @@ interface StepsProps {
   sectionNumber?: number | string;
 }
 
-export function Steps({ sectionNumber = 4 }: StepsProps) {
+export function Steps({ sectionNumber = 5 }: StepsProps) {
   const { salesEngagement } = siteConfig;
   const [popup, setPopup] = useState<{
     stepLabel?: string;

@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
+import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
 
 const HEADER_OFFSET = 110;
 
@@ -15,6 +16,9 @@ function toHash(href: string) {
 }
 
 function toRoute(href: string) {
+  // Real routes (e.g. /careers, /blogs) pass through untouched
+  if (!href.includes("#")) return href;
+
   const hash = toHash(href);
   if (!hash || hash === "#top") return "/";
   return `/${hash}`;
@@ -117,8 +121,8 @@ export function SiteFooter() {
 
       <section className="bg-[#020B1E] py-12 lg:py-14" id="contact">
         <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 lg:px-12">
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr] lg:items-start lg:gap-16">
-            <div className="flex max-w-[420px] flex-col gap-4">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1fr_1.4fr_1fr] lg:items-start lg:gap-16">
+            <div className="flex max-w-[420px] flex-col gap-6">
               <Link href="/" className="inline-flex w-fit items-center">
                 <Image
                   src="/logo/north-logo.svg"
@@ -128,13 +132,15 @@ export function SiteFooter() {
                   className="h-auto w-[280px] sm:w-[320px]"
                 />
               </Link>
+
+              <TestimonialsDialog />
             </div>
 
             <div className="flex flex-col gap-4">
               <h3 className="font-body text-[13px] font-extrabold tracking-[0.14em] text-white uppercase">
                 Quick Actions
               </h3>
-              <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 font-body text-[13px] text-white/70">
+              <ul className="grid grid-cols-3 gap-x-6 gap-y-2.5 font-body text-[13px] text-white/70">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
                     <Link

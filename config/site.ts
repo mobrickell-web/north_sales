@@ -56,11 +56,12 @@ export const siteConfig = {
   },
   nav: [
     { href: "#top", label: "Home" },
-    { href: "#why-choose-us", label: "Why Choose Us" },
+    { href: "#why-choose-us", label: "Why Us" },
+    { href: "#about-us", label: "About Us" },
     { href: "#results", label: "Results" },
 
     { label: "HOW WE WORK", href: "#how-we-work" },
-    { label: "30-60 Focus", href: "#30-60-focus" },
+    { label: "30-60 DAY FOCUS", href: "#30-60-focus" },
     { label: "CHALLENGES", href: "#challenges" },
     { label: "INVESTMENT", href: "#investment" },
 
@@ -85,6 +86,16 @@ export const siteConfig = {
       alt: "Sales leaders collaborating in a boardroom overlooking the city",
     },
   },
+  aboutUs: {
+    title: "ABOUT US",
+    heading: "EXPERIENCE BEHIND NORTH POINT SALES GROUP",
+    paragraphs: [
+      "The founder and team of NORTH POINT SALES GROUP bring decades of experience working with sales teams across small and mid-sized businesses, including organizations generating more than $250 million in annual retail sales.",
+      "That experience forms the foundation of NORTH POINT SALES GROUP and gives us a practical understanding of what drives sales performance across an organization.",
+      "Our work is focused on identifying opportunities that may help established sales organizations increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
+    ] as const,
+  },
+
   whyChooseUs: {
     badge: "Why Choose Us",
     title: "WHY EXECUTIVE TEAMS ENGAGE NORTH POINT SALES GROUP",
@@ -371,7 +382,7 @@ export const siteConfig = {
   },
   //steps section
   salesEngagement: {
-    badge: "OUR 30-60 DAY FOCUS",
+    badge: "30-60 DAY FOCUS",
     title: "OUR 30-60 DAY IMPLEMENTATION PROCESS",
     subtitle: [
       "30 days for focused implementation when the work can be completed efficiently within a shorter Timeframe.",
@@ -2376,7 +2387,7 @@ export const siteConfig = {
   },
   results: {
     badge: "Results",
-    title: "Proven Results Across Organizations of All Sizes",
+    title: "SALES PERFORMANCE IMPROVEMENT ACROSS THE ORGANIZATION",
     intro: "Our clients achieve sustainable revenue growth through:",
     checkmark: "/icons/checkmark.svg",
     bullets: [
@@ -2555,16 +2566,20 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
             title: "Quick Actions",
             links: [
               { label: "Home", href: "/#top" },
-              { label: "Why choose us", href: "/#why-choose-us" },
+              { label: "Why us", href: "/#why-choose-us" },
+              { label: "About us", href: "/#about-us" },
               { label: "Results", href: "/#results" },
 
               { label: "How we work", href: "/#how-we-work" },
-              { label: "30-60 Focus", href: "/#30-60-focus" },
+              { label: "30-60 DAY Focus", href: "/#30-60-focus" },
               { label: "Challenges", href: "/#challenges" },
               { label: "Investment", href: "/#investment" },
 
               // { label: "Solutions", href: "/#solutions" },
               { label: "FAQ's", href: "/#faqs" },
+
+              { label: "Careers", href: "/careers" },
+              { label: "Blog", href: "/blogs" },
             ],
           },
         ],
@@ -2577,10 +2592,324 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
       scope: "Serving Clients Nationwide",
     },
 
+    testimonialsNote: {
+      title: "Do You Have Testimonials?",
+      paragraphs: [
+        "We actually don't ask our clients for testimonials. The companies we work with are established organizations, and we consider the work we do with them to be confidential.",
+        "If a company brings in NORTH POINT SALES GROUP to further strengthen its sales performance, increase productivity, improve its systems, or pursue additional growth, that's a strategic business decision. There is no particular advantage in announcing those initiatives to competitors.",
+        "For the same reason, we don't believe our clients should be expected to publicly identify themselves or discuss the work we're doing together simply to help us market our company.",
+        "We respect that privacy. What we do for a client is their business, and we keep it that way.",
+      ],
+    },
+
     legal: [
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms of Use", href: "/terms-of-use" },
     ],
+  },
+
+  careers: {
+    title: "Careers",
+    badge: "Careers",
+    hero: {
+      image: {
+        src: "/images/hero-image.svg",
+        alt: "NORTH POINT SALES GROUP — Careers",
+      },
+      subtitle: "Build Your Career With NORTH POINT SALES GROUP",
+    },
+    notice: {
+      title: "NOTE: All positions are remote. No travel is required.",
+      text: "That applies to all four positions, including the Sales Performance Implementation Specialist and Fractional VP of Sales.",
+    },
+    intro: [
+      "NORTH POINT SALES GROUP is a professional sales-performance organization focused on helping established B2B companies capture untapped sales capacity and improve sales results.",
+      "We are looking for experienced professionals who can operate at a high level, take responsibility for results, and work directly with business owners and senior executives.",
+      "Our compensation structure is performance-based, with significant earning potential for people who produce results.",
+    ],
+    roles: [
+      {
+        id: "executive-account-development-specialist",
+        number: "1",
+        title: "Executive Account Development Specialist",
+        income: "Potential Annual Income: $50,000–$80,000",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "NORTH POINT SALES GROUP is seeking experienced Executive Account Development Specialists to initiate conversations with business owners, CEOs, presidents, and senior sales executives.",
+          },
+          {
+            type: "paragraph",
+            text: "This is not a high-volume telemarketing position and it is not traditional appointment setting. Your responsibility is to identify qualified organizations, initiate professional executive-level conversations, establish relevance, and secure qualified appointments.",
+          },
+          {
+            type: "heading",
+            text: "What You Will Do",
+          },
+          {
+            type: "list",
+            items: [
+              "Identify and contact qualified B2B organizations.",
+              "Conduct professional outbound conversations with senior decision makers.",
+              "Introduce NORTH POINT SALES GROUP and explain the business reason for the conversation.",
+              "Determine whether there is sufficient potential to justify an executive discussion.",
+              "Schedule qualified appointments.",
+              "Conduct appropriate follow-up with prospects.",
+              "Maintain accurate prospect and appointment information in the CRM.",
+              "Represent NORTH POINT SALES GROUP professionally in every interaction.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "What We Are Looking For",
+          },
+          {
+            type: "list",
+            items: [
+              "Proven B2B sales, business-development, or executive appointment-setting experience.",
+              "Strong verbal communication skills.",
+              "Comfortable speaking with senior decision makers.",
+              "Ability to communicate business value naturally rather than simply reading a script.",
+              "Good judgment in determining whether a prospect is qualified.",
+              "Persistent without being pushy.",
+              "Self-directed, organized, and accountable.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "Lead Generation",
+          },
+          {
+            type: "paragraph",
+            text: "This position is the exception to our warm-lead structure. Executive Account Development Specialists are responsible for developing their own outbound opportunities through targeted prospecting.",
+          },
+          {
+            type: "heading",
+            text: "Compensation",
+          },
+          {
+            type: "paragraph",
+            text: "Performance-based compensation with potential annual income of approximately $50,000–$80,000, based on qualified appointments, closed business, and production.",
+          },
+        ],
+      },
+      {
+        id: "sales-performance-implementation-specialist",
+        number: "2",
+        title: "Sales Performance Implementation Specialist",
+        income: "Potential Annual Income: $100,000–$250,000",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "NORTH POINT SALES GROUP is seeking experienced Sales Performance Implementation Specialists to work directly with clients during sales-performance implementation engagements.",
+          },
+          {
+            type: "paragraph",
+            text: "This is not traditional sales training. The role involves helping established B2B sales organizations identify performance opportunities, implement improvements, and increase sales effectiveness.",
+          },
+          {
+            type: "heading",
+            text: "What You Will Do",
+          },
+          {
+            type: "list",
+            items: [
+              "Participate in initial assessments of client sales organizations.",
+              "Evaluate existing processes, systems, pipeline management, CRM usage, forecasting, accountability, and team performance.",
+              "Identify areas where sales performance can be improved.",
+              "Develop practical recommendations based on each organization’s situation.",
+              "Assist in implementing those recommendations with client leadership.",
+              "Work closely with managers and salespeople to support execution.",
+              "Monitor progress and results during the engagement.",
+              "Help establish performance standards and accountability.",
+              "Communicate findings and recommendations to client leadership.",
+              "Maintain professional relationships with client teams throughout the engagement.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "What We Are Looking For",
+          },
+          {
+            type: "list",
+            items: [
+              "Significant experience in sales, management, consulting, operations, or business development.",
+              "A clear understanding of how successful B2B sales organizations operate.",
+              "Ability to identify performance opportunities without assuming salespeople are at fault.",
+              "Strong analytical and problem-solving ability.",
+              "Excellent communication and professional presentation skills.",
+              "Comfortable working with executives, owners, and sales leaders.",
+              "Practical judgment based on real business experience.",
+              "Ability to work independently while following the company’s methodology.",
+              "Strong follow-up discipline and attention to detail.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "Lead Generation",
+          },
+          {
+            type: "paragraph",
+            text: "Qualified warm leads are provided. The Implementation Specialist is not expected to build a prospecting operation. The primary responsibility is client assessment, implementation, relationship management, and results.",
+          },
+          {
+            type: "heading",
+            text: "Compensation",
+          },
+          {
+            type: "paragraph",
+            text: "Performance-based compensation with potential annual income of approximately $100,000–$250,000, depending on the volume and scope of client engagements.",
+          },
+        ],
+      },
+      {
+        id: "fractional-vp-of-sales",
+        number: "3",
+        title: "Fractional VP of Sales",
+        income: "Potential Annual Income: $100,000–$300,000+",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "NORTH POINT SALES GROUP is seeking experienced senior sales executives who can serve as Fractional VPs of Sales for selected client organizations.",
+          },
+          {
+            type: "paragraph",
+            text: "This is a senior-level position for an accomplished sales executive who can work directly with ownership and executive leadership and help drive meaningful sales-performance improvements.",
+          },
+          {
+            type: "heading",
+            text: "What You Will Do",
+          },
+          {
+            type: "list",
+            items: [
+              "Work directly with CEOs, presidents, owners, and executive leadership teams.",
+              "Provide fractional senior sales leadership for selected client organizations.",
+              "Assess leadership, processes, pipeline management, forecasting, accountability, and team performance.",
+              "Establish clear priorities and performance expectations.",
+              "Guide implementation of sales-performance improvements.",
+              "Strengthen sales management and accountability.",
+              "Establish measurable standards for pipeline, activity, forecasting, and results.",
+              "Guide managers and sales teams toward consistent execution.",
+              "Monitor results and adjust priorities as needed.",
+              "Represent NORTH POINT SALES GROUP professionally with every client.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "What We Are Looking For",
+          },
+          {
+            type: "list",
+            items: [
+              "Significant senior-level B2B sales leadership experience.",
+              "Experience leading sales organizations or sales teams.",
+              "Strong understanding of sales strategy, execution, forecasting, pipeline management, and performance management.",
+              "Professional communication with executives and business owners.",
+              "Ability to work directly with ownership and executive leadership.",
+              "A practical, results-oriented approach to sales improvement.",
+              "Ability to quickly understand an unfamiliar organization and its sales environment.",
+              "Strong judgment, discretion, and credibility with senior clients.",
+              "Ability to operate independently within a defined methodology.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "Lead Generation",
+          },
+          {
+            type: "paragraph",
+            text: "Qualified warm leads are provided. The Fractional VP is primarily responsible for senior-level client leadership and implementation rather than cold prospecting.",
+          },
+          {
+            type: "heading",
+            text: "Compensation",
+          },
+          {
+            type: "paragraph",
+            text: "Performance-based compensation with potential annual income of approximately $100,000–$300,000+, depending on the number, scope, and value of client engagements.",
+          },
+        ],
+      },
+      {
+        id: "regional-sales-manager",
+        number: "4",
+        title: "Regional Sales Manager",
+        income: "Potential Annual Income: $100,000–$175,000+",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "NORTH POINT SALES GROUP is seeking experienced Regional Sales Managers to develop and manage sales activity within an assigned geographic territory.",
+          },
+          {
+            type: "paragraph",
+            text: "This is a revenue-producing management position responsible for building a regional business-development operation, managing Executive Account Development Specialists, monitoring performance, and helping ensure the region produces qualified opportunities and revenue.",
+          },
+          {
+            type: "heading",
+            text: "What You Will Do",
+          },
+          {
+            type: "list",
+            items: [
+              "Develop and manage sales activity within an assigned geographic territory.",
+              "Recruit, develop, and manage Executive Account Development Specialists.",
+              "Establish territory priorities and performance expectations.",
+              "Monitor appointments, opportunities, activity levels, and revenue results.",
+              "Coach and hold team members accountable for activity and results.",
+              "Maintain accurate performance reporting for the region.",
+              "Review CRM data and sales metrics on a regular basis.",
+              "Identify areas for improvement and take corrective action.",
+              "Coordinate with senior leadership regarding regional performance.",
+              "Build professional relationships with business owners and executives within the territory.",
+              "Expand the region’s sales activity and overall performance.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "What We Are Looking For",
+          },
+          {
+            type: "list",
+            items: [
+              "Proven B2B sales and management experience.",
+              "Experience recruiting, managing, coaching, and holding a sales team accountable.",
+              "Strong business-development and pipeline-generation skills.",
+              "Ability to communicate professionally with owners and executives.",
+              "A track record of measurable results.",
+              "Strong organizational and leadership skills.",
+              "Ability to work independently and manage a territory effectively.",
+              "Experience managing sales performance within a geographic region is preferred.",
+            ],
+          },
+          {
+            type: "heading",
+            text: "Lead Generation",
+          },
+          {
+            type: "paragraph",
+            text: "Qualified warm leads are provided to support the regional sales operation. The Regional Sales Manager is responsible for developing those opportunities, building the regional team, and producing results throughout the assigned territory.",
+          },
+          {
+            type: "heading",
+            text: "Compensation",
+          },
+          {
+            type: "paragraph",
+            text: "Performance-based compensation with potential annual income of approximately $100,000–$175,000+, based on regional production and results.",
+          },
+        ],
+      },
+    ],
+    closing: {
+      id: "a-different-kind-of-sales-career",
+      title: "A Different Kind of Sales Career",
+      paragraphs: [
+        "NORTH POINT SALES GROUP is not looking for people who simply want a job.",
+        "We are looking for experienced sales professionals and sales leaders who understand performance, accept accountability, and want their income to reflect the value they produce.",
+        "Experienced professionals. Performance-based compensation. Significant earning potential.",
+      ],
+    },
   },
 
   privacyPolicy: {

@@ -14,7 +14,7 @@ interface ProvenResultsSectionProps {
 }
 
 export function ProvenResultsSection({
-  sectionNumber = 2,
+  sectionNumber = 3,
 }: ProvenResultsSectionProps) {
   const { results } = siteConfig;
   const [popup, setPopup] = useState<{
@@ -48,7 +48,7 @@ export function ProvenResultsSection({
 
             <h2
               id="results-heading"
-              className="font-body text-[24px] leading-[1.15] font-extrabold tracking-[-0.005em] text-primary uppercase sm:text-[26px]"
+              className="font-body text-[22px] leading-[1.15] font-bold tracking-[-0.005em] text-primary uppercase sm:text-[22px]"
             >
               {results.title}
             </h2>

@@ -7,7 +7,7 @@ interface FaqSectionProps {
   sectionNumber?: number | string;
 }
 
-export function FaqSection({ sectionNumber = 7 }: FaqSectionProps) {
+export function FaqSection({ sectionNumber = 8 }: FaqSectionProps) {
   const { faq } = siteConfig;
 
   return (

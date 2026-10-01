@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/landing/hero-section";
+import { AboutUsSection } from "@/components/landing/about-us-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { ProvenResultsSection } from "@/components/landing/proven-results-section";
 // import { SolutionSection } from "@/components/landing/solution-section";
@@ -13,6 +14,7 @@ export default function LandingPage() {
     <>
       <HeroSection />
       <WhyPartnerSection />
+      <AboutUsSection />
       <ProvenResultsSection />
       <HowItWorks />
       <Steps />

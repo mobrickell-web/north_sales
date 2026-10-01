@@ -19,7 +19,7 @@ type ChallengePopup = {
   cardHeading?: string;
 };
 
-export function Challenges({ sectionNumber = 5 }: ChallengesProps) {
+export function Challenges({ sectionNumber = 6 }: ChallengesProps) {
   const { challenges } = siteConfig;
 
   const [revenueOpen, setRevenueOpen] = useState(false);

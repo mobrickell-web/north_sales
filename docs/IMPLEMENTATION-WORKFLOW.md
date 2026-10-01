@@ -18,8 +18,8 @@
 - [x] Scaffold standalone NestJS app (Nest 12, TS 6, manual scaffold) in
       `../backend` (own git repo, own `node_modules`, own `package-lock.json`),
       install `@nestjs/jwt @nestjs/passport @nestjs/schedule prisma
-    @prisma/client bcrypt class-validator class-transformer date-fns-tz
-    nodemailer`.
+@prisma/client bcrypt class-validator class-transformer date-fns-tz
+nodemailer`.
 - [x] Define `backend/.env` / `backend/.env.example`:
       `DATABASE_URL`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `MAIL_*`, `APP_URL`,
       `INITIAL_ADMIN_EMAIL`, `INITIAL_ADMIN_PASSWORD` (required — no fallback).
