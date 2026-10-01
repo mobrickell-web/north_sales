@@ -24,12 +24,17 @@ const BRAND = {
   rowAlt: "#F7F5F0",
 };
 
-const LOGO_CID = "north-logo";
+const LOGO_CID = "north-logo-01";
 
 export function getEmailLogoAttachment() {
-  const logoPath = path.join(process.cwd(), "public", "logo", "north-logo.svg");
+  const logoPath = path.join(
+    process.cwd(),
+    "public",
+    "logo",
+    "north-logo-01.svg",
+  );
   return {
-    filename: "north-logo.svg",
+    filename: "north-logo-01.svg",
     content: readFileSync(logoPath),
     cid: LOGO_CID,
     contentType: "image/svg+xml" as const,

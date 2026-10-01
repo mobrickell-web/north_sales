@@ -124,6 +124,13 @@ export const blogPosts = [
         text: "These questions provide a much more complete picture.",
       },
       {
+        type: "image",
+        src: "/images/blog/sales-system.svg",
+        alt: "Diagram showing a salesperson at the centre of a system shaped by leadership, sales process, lead generation, opportunity quality, technology, compensation, accountability, and training.",
+        caption:
+          "The salesperson is one variable inside a larger operating system.",
+      },
+      {
         type: "heading",
         text: "Don't Assume the Salespeople Are the Problem",
       },
@@ -331,6 +338,13 @@ export const blogPosts = [
       {
         type: "paragraph",
         text: "But that conclusion is much more useful when it is supported by evidence.",
+      },
+      {
+        type: "image",
+        src: "/images/blog/more-reps.svg",
+        alt: "Diagram of a funnel where additional salespeople enter at the top but are blocked by a single narrow constraint, leaving output unchanged.",
+        caption:
+          "Adding capacity above a narrow constraint does not change the output below it.",
       },
       {
         type: "heading",
@@ -569,6 +583,13 @@ export const blogPosts = [
       {
         type: "paragraph",
         text: "The more important question is whether the organization has the underlying conditions that make improvement possible.",
+      },
+      {
+        type: "image",
+        src: "/images/blog/revenue-gap.svg",
+        alt: "Bar chart comparing current revenue with potential revenue, where the difference is marked as a gap lost to a fixable constraint.",
+        caption:
+          "Unconstrained revenue often already exists inside the current operation.",
       },
       {
         type: "heading",
@@ -896,6 +917,13 @@ export const blogPosts = [
       {
         type: "paragraph",
         text: "The problem occurs when training is used as the default response to every sales-performance problem.",
+      },
+      {
+        type: "image",
+        src: "/images/blog/training-vs-performance.svg",
+        alt: "Side-by-side comparison of sales training, which affects one person, and sales performance improvement, which changes process, lead flow, and goals across the whole team.",
+        caption:
+          "Training raises the ceiling for one person. Performance improvement raises it for the whole operation.",
       },
       {
         type: "heading",
@@ -1312,6 +1340,13 @@ export const blogPosts = [
       {
         type: "paragraph",
         text: "It also means recognizing when a particular recommendation is outside the consultant's role or requires another specialist.",
+      },
+      {
+        type: "image",
+        src: "/images/blog/engagement-path.svg",
+        alt: "Four-step timeline: diagnose the real constraint, design the fix, implement it with the team, then measure it against real numbers.",
+        caption:
+          "A credible engagement moves from diagnosis to measurement, and leaves capability in-house.",
       },
       {
         type: "heading",

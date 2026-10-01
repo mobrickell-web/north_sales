@@ -6,20 +6,37 @@ import * as Dialog from "@radix-ui/react-dialog";
 
 import { siteConfig } from "@/config/site";
 
-export function TestimonialsDialog() {
+interface TestimonialsDialogProps {
+  /** "button" = gold CTA under the logo, "link" = matches Quick Actions link style. */
+  variant?: "button" | "link";
+}
+
+export function TestimonialsDialog({
+  variant = "button",
+}: TestimonialsDialogProps) {
   const [open, setOpen] = useState(false);
   const { title, paragraphs } = siteConfig.footer.testimonialsNote;
   const [first, ...rest] = paragraphs;
 
+  const triggerClassName =
+    variant === "link"
+      ? "inline-flex cursor-pointer items-center gap-2 text-left font-body text-[13px] text-white/70 transition-colors hover:text-[#d48c27]"
+      : "inline-flex w-fit cursor-pointer items-center gap-2 bg-[#d48c27] px-5 py-3 font-body text-[11px] font-bold tracking-[0.08em] text-white uppercase shadow-sm transition-colors hover:bg-[#b8781e] sm:text-[13px]";
+
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button
-          type="button"
-          className="inline-flex w-fit cursor-pointer items-center gap-2 bg-[#d48c27] px-5 py-3 font-body text-[11px] font-bold tracking-[0.08em] text-white uppercase shadow-sm transition-colors hover:bg-[#b8781e] sm:text-[13px]"
-        >
+        <button type="button" className={triggerClassName}>
+          {variant === "link" && (
+            <span
+              aria-hidden
+              className="size-1 shrink-0 rounded-full bg-[#d48c27]/70"
+            />
+          )}
           {title}
-          <ChevronRight className="size-4" aria-hidden />
+          {variant === "button" && (
+            <ChevronRight className="size-4" aria-hidden />
+          )}
         </button>
       </Dialog.Trigger>
 

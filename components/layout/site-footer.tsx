@@ -125,15 +125,13 @@ export function SiteFooter() {
             <div className="flex max-w-[420px] flex-col gap-6">
               <Link href="/" className="inline-flex w-fit items-center">
                 <Image
-                  src="/logo/north-logo.svg"
+                  src="/logo/north-logo-01.svg"
                   alt={name}
                   width={500}
                   height={160}
                   className="h-auto w-[280px] sm:w-[320px]"
                 />
               </Link>
-
-              <TestimonialsDialog />
             </div>
 
             <div className="flex flex-col gap-4">
@@ -156,6 +154,9 @@ export function SiteFooter() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <TestimonialsDialog variant="link" />
+                </li>
               </ul>
             </div>
 

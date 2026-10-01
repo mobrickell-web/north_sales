@@ -56,8 +56,8 @@ export const siteConfig = {
   },
   nav: [
     { href: "#top", label: "Home" },
-    { href: "#why-choose-us", label: "Why Us" },
     { href: "#about-us", label: "About Us" },
+    { href: "#why-choose-us", label: "Why Us" },
     { href: "#results", label: "Results" },
 
     { label: "HOW WE WORK", href: "#how-we-work" },
@@ -1807,7 +1807,7 @@ export const siteConfig = {
             title: "FULL SALES PERFORMANCE IMPLEMENTATION",
             fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–60 Days",
             intro:
-              "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside sales-performance resource to examine, improve, and implement changes across the sales operation. Option 3 includes the applicable assessment and diagnostic services described in Options 1 and 2, plus the hands-on implementation, performance management, measurement, and ongoing support required to put recommended changes into operation.The scope, professional fee, and implementation period are determined by the number, complexity, and depth of the changes required—not simply the size of the company. Professional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work. A higher-fee engagement does not necessarily require a longer implementation period; for example, a $100,000 engagement may sometimes be completed within 30 days when the required work can be effectively implemented within that timeframe.",
+              "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside sales-performance resource to examine, improve, and implement changes across the sales operation.\n\nOption 3 includes the applicable assessment and diagnostic services described in Options 1 and 2, plus the hands-on implementation, performance management, measurement, and ongoing support required to put recommended changes into operation.\n\nThe scope, professional fee, and implementation period are determined by the number, complexity, and depth of the changes required—not simply the size of the company.\n\nProfessional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work.\n\nA higher-fee engagement does not necessarily require a longer implementation period; for example, a $100,000 engagement may sometimes be completed within 30 days when the required work can be effectively implemented within that timeframe.",
             includedHeading: "INCLUDED SERVICES",
             groups: [
               {
@@ -2266,7 +2266,10 @@ export const siteConfig = {
         question: "How long does a typical engagement last?",
         answer: [
           "Our 30–60 day implementation process",
-          "Most NORTH POINT SALES GROUP implementation engagements are completed within 30–60 days.The appropriate duration depends on the size of the sales organization, the areas being addressed, and the depth of implementation required. Duration and professional fees are determined independently—a larger engagement does not necessarily require a longer engagement period.For example, a substantial $100,000 implementation may sometimes be effectively completed within 30 days, while another engagement may require 45–60 days because of the implementation and follow-through involved.",
+          "Most NORTH POINT SALES GROUP implementation engagements are completed within 30–60 days.",
+          "The appropriate duration depends on the size of the sales organization, the areas being addressed, and the depth of implementation required.",
+          "Duration and professional fees are determined independently—a larger engagement does not necessarily require a longer engagement period.",
+          "For example, a substantial $100,000 implementation may sometimes be effectively completed within 30 days, while another engagement may require 45–60 days because of the implementation and follow-through involved.",
         ],
       },
       {
@@ -2566,8 +2569,8 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
             title: "Quick Actions",
             links: [
               { label: "Home", href: "/#top" },
-              { label: "Why us", href: "/#why-choose-us" },
               { label: "About us", href: "/#about-us" },
+              { label: "Why us", href: "/#why-choose-us" },
               { label: "Results", href: "/#results" },
 
               { label: "How we work", href: "/#how-we-work" },
@@ -2593,7 +2596,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
     },
 
     testimonialsNote: {
-      title: "Do You Have Testimonials?",
+      title: "Testimonials",
       paragraphs: [
         "We actually don't ask our clients for testimonials. The companies we work with are established organizations, and we consider the work we do with them to be confidential.",
         "If a company brings in NORTH POINT SALES GROUP to further strengthen its sales performance, increase productivity, improve its systems, or pursue additional growth, that's a strategic business decision. There is no particular advantage in announcing those initiatives to competitors.",

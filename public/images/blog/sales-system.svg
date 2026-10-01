@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+
+  <g fill="none" stroke="#b17411" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="5 7">
+    <ellipse cx="600" cy="355" rx="390" ry="215" />
+  </g>
+
+  <g>
+    <circle cx="600" cy="355" r="104" fill="#b17411" fill-opacity="0.14" stroke="#efb862" stroke-width="2" />
+    <circle cx="600" cy="330" r="20" fill="#efb862" />
+    <path d="M565 396c0-19.9 15.7-36 35-36s35 16.1 35 36" fill="none" stroke="#efb862" stroke-width="4" stroke-linecap="round" />
+    <text x="600" y="424" text-anchor="middle" fill="#ffffff" fill-opacity="0.9" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="0.14em">SALESPERSON</text>
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="0.08em" fill="#ffffff" fill-opacity="0.92" text-anchor="middle">
+    <g>
+      <rect x="890" y="329" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="990" y="361">LEAD GENERATION</text>
+    </g>
+    <g>
+      <rect x="776" y="481" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="876" y="513">TECHNOLOGY</text>
+    </g>
+    <g>
+      <rect x="500" y="544" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="600" y="576">COMPENSATION</text>
+    </g>
+    <g>
+      <rect x="224" y="481" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="324" y="513">ACCOUNTABILITY</text>
+    </g>
+    <g>
+      <rect x="110" y="329" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="210" y="361">TRAINING</text>
+    </g>
+    <g>
+      <rect x="224" y="177" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="324" y="209">LEADERSHIP</text>
+    </g>
+    <g>
+      <rect x="500" y="114" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="600" y="146">OPPORTUNITY QUALITY</text>
+    </g>
+    <g>
+      <rect x="776" y="177" width="200" height="52" rx="26" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" />
+      <text x="876" y="209">SALES PROCESS</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="70" y="646" width="1060" height="2" fill="#ffffff" fill-opacity="0.12" />
+    <circle cx="98" cy="690" r="5" fill="#b17411" />
+    <text x="118" y="695" fill="#ffffff" fill-opacity="0.72" font-family="Inter, Arial, sans-serif" font-size="15">One variable inside a larger operating system.</text>
+  </g>
+</svg>

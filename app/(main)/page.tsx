@@ -13,8 +13,8 @@ export default function LandingPage() {
   return (
     <>
       <HeroSection />
-      <WhyPartnerSection />
       <AboutUsSection />
+      <WhyPartnerSection />
       <ProvenResultsSection />
       <HowItWorks />
       <Steps />

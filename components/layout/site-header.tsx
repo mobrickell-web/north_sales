@@ -121,7 +121,7 @@ export function SiteHeader() {
           onClick={(e) => handleNavClick(e, "/#top")}
         >
           <Image
-            src="/logo/north-logo.svg"
+            src="/logo/north-logo-01.svg"
             alt={siteConfig.name}
             width={328}
             height={104}

@@ -205,7 +205,13 @@ export function InvestmentSection({
                 </div>
                 <Dialog.Description asChild>
                   <div className="flex flex-col gap-5 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
-                    <p>{popup.intro}</p>
+                    <div className="flex flex-col gap-3">
+                      {popup.intro.split("\n\n").map((p, i) => (
+                        <p key={i} className="whitespace-pre-wrap">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
 
                     <div className="flex flex-col gap-4">
                       <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">

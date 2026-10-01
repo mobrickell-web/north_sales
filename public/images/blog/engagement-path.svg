@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <g fill="none" stroke="#b17411" stroke-width="2.5" stroke-opacity="0.6" stroke-linecap="round">
+      <path d="M150 355h900" />
+    </g>
+
+    <g>
+      <circle cx="150" cy="355" r="40" fill="#b17411" />
+      <text x="150" y="366" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">1</text>
+      <g text-anchor="middle">
+        <text x="150" y="270" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.10em">DIAGNOSE</text>
+        <text x="150" y="438" fill="#ffffff" fill-opacity="0.66" font-size="14">Find the real</text>
+        <text x="150" y="459" fill="#ffffff" fill-opacity="0.66" font-size="14">constraint</text>
+      </g>
+    </g>
+
+    <g>
+      <circle cx="450" cy="355" r="40" fill="#b17411" />
+      <text x="450" y="366" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">2</text>
+      <g text-anchor="middle">
+        <text x="450" y="270" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.10em">DESIGN</text>
+        <text x="450" y="438" fill="#ffffff" fill-opacity="0.66" font-size="14">Build the fix,</text>
+        <text x="450" y="459" fill="#ffffff" fill-opacity="0.66" font-size="14">not a report</text>
+      </g>
+    </g>
+
+    <g>
+      <circle cx="750" cy="355" r="40" fill="#b17411" />
+      <text x="750" y="366" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">3</text>
+      <g text-anchor="middle">
+        <text x="750" y="270" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.10em">IMPLEMENT</text>
+        <text x="750" y="438" fill="#ffffff" fill-opacity="0.66" font-size="14">Work with your</text>
+        <text x="750" y="459" fill="#ffffff" fill-opacity="0.66" font-size="14">team, in place</text>
+      </g>
+    </g>
+
+    <g>
+      <circle cx="1050" cy="355" r="40" fill="#efb862" />
+      <text x="1050" y="366" text-anchor="middle" fill="#001528" font-size="24" font-weight="700">4</text>
+      <g text-anchor="middle">
+        <text x="1050" y="270" fill="#efb862" font-size="15" font-weight="700" letter-spacing="0.10em">MEASURE</text>
+        <text x="1050" y="438" fill="#ffffff" fill-opacity="0.66" font-size="14">Hold it to</text>
+        <text x="1050" y="459" fill="#ffffff" fill-opacity="0.66" font-size="14">real numbers</text>
+      </g>
+    </g>
+
+    <g>
+      <rect x="70" y="556" width="1060" height="2" fill="#ffffff" fill-opacity="0.12" />
+      <g transform="translate(70,600)">
+        <rect width="520" height="84" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10" />
+        <g transform="translate(26,22)">
+          <circle cx="14" cy="14" r="14" fill="none" stroke="#b17411" stroke-width="2" />
+          <path d="M9 14l4 4 7-8" fill="none" stroke="#b17411" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <text x="42" y="19" fill="#ffffff" fill-opacity="0.80" font-size="14" font-weight="600" letter-spacing="0.08em">NO LONG-TERM DEPENDENCY</text>
+        </g>
+      </g>
+      <g transform="translate(610,600)">
+        <rect width="520" height="84" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.10" />
+        <g transform="translate(26,22)">
+          <circle cx="14" cy="14" r="14" fill="none" stroke="#b17411" stroke-width="2" />
+          <path d="M9 14l4 4 7-8" fill="none" stroke="#b17411" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <text x="42" y="19" fill="#ffffff" fill-opacity="0.80" font-size="14" font-weight="600" letter-spacing="0.08em">CAPABILITY STAYS IN-HOUSE</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

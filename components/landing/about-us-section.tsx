@@ -4,7 +4,7 @@ interface AboutUsSectionProps {
   sectionNumber?: number | string;
 }
 
-export function AboutUsSection({ sectionNumber = 2 }: AboutUsSectionProps) {
+export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
   const { aboutUs } = siteConfig;
 
   return (

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b17411" stop-opacity="0.30" />
+      <stop offset="1" stop-color="#b17411" stop-opacity="0.06" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+
+  <g fill="#efb862" fill-opacity="0.75">
+    <circle cx="100" cy="150" r="4" /><circle cx="148" cy="150" r="4" /><circle cx="196" cy="150" r="4" />
+    <circle cx="244" cy="150" r="4" /><circle cx="292" cy="150" r="4" /><circle cx="340" cy="150" r="4" />
+    <circle cx="388" cy="150" r="4" /><circle cx="436" cy="150" r="4" /><circle cx="484" cy="150" r="4" />
+    <circle cx="532" cy="150" r="4" /><circle cx="580" cy="150" r="4" /><circle cx="628" cy="150" r="4" />
+    <circle cx="676" cy="150" r="4" /><circle cx="724" cy="150" r="4" /><circle cx="772" cy="150" r="4" />
+    <circle cx="820" cy="150" r="4" /><circle cx="868" cy="150" r="4" /><circle cx="916" cy="150" r="4" />
+    <circle cx="964" cy="150" r="4" /><circle cx="1012" cy="150" r="4" /><circle cx="1060" cy="150" r="4" />
+    <circle cx="1108" cy="150" r="4" />
+  </g>
+
+  <path d="M100 214h1000L656 468h-112z" fill="url(#fill)" stroke="#efb862" stroke-width="2" stroke-opacity="0.7" />
+
+  <g font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="0.12em" text-anchor="middle">
+    <text x="600" y="330" fill="#ffffff" fill-opacity="0.85">MORE SALESPEOPLE ADDED</text>
+  </g>
+
+  <g>
+    <rect x="486" y="496" width="228" height="56" rx="10" fill="#b17411" />
+    <text x="600" y="531" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="0.12em">CONSTRAINT</text>
+  </g>
+
+  <g fill="none" stroke="#b17411" stroke-width="2" stroke-opacity="0.55">
+    <path d="M600 552v34" />
+    <path d="M588 578l12 12 12-12" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <g fill="#efb862">
+    <circle cx="524" cy="626" r="7" /><circle cx="556" cy="626" r="7" /><circle cx="588" cy="626" r="7" />
+    <circle cx="620" cy="626" r="7" /><circle cx="652" cy="626" r="7" /><circle cx="684" cy="626" r="7" />
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="0.12em" fill="#ffffff" fill-opacity="0.72" text-anchor="middle">
+    <text x="600" y="666">SAME OUTPUT</text>
+  </g>
+
+  <g>
+    <rect x="70" y="700" width="1060" height="2" fill="#ffffff" fill-opacity="0.12" />
+  </g>
+</svg>

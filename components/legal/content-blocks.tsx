@@ -1,9 +1,17 @@
 export type ContentBlock =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
-  | { type: "list"; items: readonly string[] };
+  | { type: "list"; items: readonly string[] }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      caption?: string;
+    };
 
 type HeadingTag = "h2" | "h3";
+
+import Image from "next/image";
 
 export function ContentBlockContent({
   block,
@@ -28,6 +36,24 @@ export function ContentBlockContent({
             <li key={item}>{item}</li>
           ))}
         </ul>
+      );
+    case "image":
+      return (
+        <figure className="legal-page__figure">
+          <Image
+            src={block.src}
+            alt={block.alt}
+            width={1200}
+            height={750}
+            unoptimized
+            className="legal-page__figure-image"
+          />
+          {block.caption && (
+            <figcaption className="legal-page__figure-caption">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
       );
     default:
       return null;
