@@ -1,6 +1,6 @@
 "use client";
 
-import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
+import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { siteConfig } from "@/config/site";
 
 export function BlogPostCta({ text }: { text: string }) {
