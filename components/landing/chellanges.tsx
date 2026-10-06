@@ -298,12 +298,7 @@ export function Challenges({ sectionNumber = 6 }: ChallengesProps) {
 
               <div className="flex flex-col gap-1 text-center md:text-left">
                 <p className="font-body text-[14px] font-bold text-white">
-                  {challenges.audioBanner.preferText}
-                </p>
-                <p className="font-body text-[14px] font-bold text-white">
-                  {challenges.audioBanner.phoneNumber}
-                </p>
-                <p className="font-body text-[14px] font-bold text-white">
+                  {challenges.audioBanner.preferText}{" "}
                   {challenges.audioBanner.actionText}
                 </p>
               </div>

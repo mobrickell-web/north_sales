@@ -68,6 +68,13 @@ export const siteConfig = {
     // { href: "#solutions", label: "Solutions" },
     { href: "#faqs", label: "FAQ's" },
   ],
+  navMore: {
+    label: "MORE",
+    links: [
+      { label: "Careers", href: "/careers" },
+      { label: "Blog", href: "/blogs" },
+    ],
+  },
   hero: {
     titleLine1: "Stronger Sales Organization",
     titleLine2: "Better Bottom-Line Results.",
@@ -1398,8 +1405,8 @@ export const siteConfig = {
       title: "LISTEN TO OUR 2-MINUTE EXECUTIVE OVERVIEW",
       subtitle: "(90–120 SECONDS)",
       preferText: "Prefer to listen instead of watch?",
-      phoneNumber: "Call 888-555-POINT (7646) and press 1",
-      actionText: "to hear a brief overview of how we can help.",
+      actionText:
+        "Contact us to hear a brief overview of how we can help.",
     },
     investment: {
       title: "INVESTMENT",

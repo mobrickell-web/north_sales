@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -48,6 +48,8 @@ function scrollToHash(hash: string) {
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
   const [activeHash, setActiveHash] = useState<string>("#top");
   const pathname = usePathname();
   const router = useRouter();
@@ -62,7 +64,29 @@ export function SiteHeader() {
 
   useEffect(() => {
     setIsMenuOpen(false);
+    setIsMoreOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isMoreOpen) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      if (!moreMenuRef.current?.contains(event.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMoreOpen(false);
+    };
+
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isMoreOpen]);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -174,6 +198,59 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <div ref={moreMenuRef} className="relative flex h-full shrink-0">
+            <button
+              type="button"
+              id="site-nav-more-trigger"
+              aria-expanded={isMoreOpen}
+              aria-haspopup="true"
+              aria-controls="site-nav-more-menu"
+              onClick={() => setIsMoreOpen((open) => !open)}
+              className={cn(
+                "relative flex h-full shrink-0 items-center justify-center gap-1 whitespace-nowrap font-secondary text-[10px] font-bold uppercase leading-none tracking-[0.05em] text-white transition-colors hover:text-gold 2xl:text-[13px]",
+                isMoreOpen && "text-gold",
+              )}
+            >
+              {siteConfig.navMore.label}
+              <ChevronDown
+                className={cn(
+                  "size-3.5 shrink-0 transition-transform",
+                  isMoreOpen && "rotate-180",
+                )}
+                aria-hidden
+              />
+            </button>
+            {isMoreOpen && (
+              <div
+                id="site-nav-more-menu"
+                role="menu"
+                aria-labelledby="site-nav-more-trigger"
+                className="absolute left-1/2 top-full z-50 min-w-[180px] -translate-x-1/2 pt-2"
+              >
+                <div className="overflow-hidden rounded-md border border-white/15 bg-primary py-1 shadow-lg">
+                  {siteConfig.navMore.links.map((link) => {
+                    const isCurrent = pathname === link.href;
+
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        role="menuitem"
+                        aria-current={isCurrent ? "page" : undefined}
+                        onClick={() => setIsMoreOpen(false)}
+                        className={cn(
+                          "block px-4 py-2.5 font-secondary text-[11px] font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/10 hover:text-gold 2xl:text-[13px]",
+                          isCurrent && "text-gold",
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
 
         <button
@@ -226,6 +303,22 @@ export function SiteHeader() {
                 </Link>
               );
             })}
+            <p className="border-b border-white/10 py-3 pt-5 font-secondary text-xs font-bold uppercase tracking-[0.12em] text-white/60">
+              {siteConfig.navMore.label}
+            </p>
+            {siteConfig.navMore.links.map((link) => (
+              <Link
+                key={`mobile-${link.href}`}
+                href={link.href}
+                className={cn(
+                  "border-b border-white/10 py-4 pl-3 font-secondary text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:text-gold",
+                  pathname === link.href && "text-gold",
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
             <button
               type="button"
               className="mt-5 flex min-h-[52px] w-full items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"
