@@ -2916,7 +2916,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
     apply: {
       title: "How to Apply",
       text: "Please email your resume and cover letter to",
-      email: "careers@teennextstep.com",
+      email: "careers@northpointsalesgroup.com",
     },
   },
 
