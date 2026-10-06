@@ -2913,6 +2913,11 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
         "Experienced professionals. Performance-based compensation. Significant earning potential.",
       ],
     },
+    apply: {
+      title: "How to Apply",
+      text: "Please email your resume and cover letter to",
+      email: "careers@teennextstep.com",
+    },
   },
 
   privacyPolicy: {

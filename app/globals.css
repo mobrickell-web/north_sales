@@ -535,6 +535,13 @@
   margin-top: 0.9rem;
 }
 
+.careers-page__apply {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
 .careers-page__closing {
   margin-top: 2.5rem;
 }

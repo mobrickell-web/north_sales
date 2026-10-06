@@ -70,6 +70,21 @@ export function CareersPage() {
                     />
                   ))}
                 </div>
+                <div className="careers-page__apply">
+                  <p className="careers-page__group-title">
+                    {careers.apply.title}
+                  </p>
+                  <p className="legal-page__text">
+                    {careers.apply.text}{" "}
+                    <a
+                      href={`mailto:${careers.apply.email}`}
+                      className="legal-page__link"
+                    >
+                      {careers.apply.email}
+                    </a>
+                    .
+                  </p>
+                </div>
               </div>
             </details>
           ))}
