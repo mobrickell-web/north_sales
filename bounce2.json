@@ -1,0 +1,7 @@
+[
+  {
+    "email": "webhook-test@example.com",
+    "event": "bounce",
+    "message_id": "webhooktest0001@northpointsalesgroup.com"
+  }
+]

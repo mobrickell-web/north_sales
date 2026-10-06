@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CirclePlay } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
+import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 
 export function HeroSection() {
   const { hero } = siteConfig;

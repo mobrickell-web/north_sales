@@ -1,7 +1,7 @@
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { ScheduleAppointmentProvider } from "@/components/schedule/schedule-appointment-provider";
+import { ScheduleAppointmentProvider } from "@/components/schedule/schedule-provider";
 
 export default function LegalLayout({
   children,

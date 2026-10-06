@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
+import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 
 const HEADER_OFFSET = 110;
 

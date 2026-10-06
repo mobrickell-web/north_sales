@@ -90,7 +90,7 @@ export const siteConfig = {
     title: "ABOUT US",
     heading: "EXPERIENCE BEHIND NORTH POINT SALES GROUP",
     paragraphs: [
-      "The founder and team of NORTH POINT SALES GROUP bring decades of experience working with sales teams across small and mid-sized businesses, including organizations generating more than $250 million in annual retail sales.",
+      "The founder and team of NORTH POINT SALES GROUP bring decades of experience working with sales teams across small and mid-sized businesses, including organizations generating more than $250 million in annual sales.",
       "That experience forms the foundation of NORTH POINT SALES GROUP and gives us a practical understanding of what drives sales performance across an organization.",
       "Our work is focused on identifying opportunities that may help established sales organizations increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
     ] as const,
@@ -2680,11 +2680,11 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
           },
           {
             type: "heading",
-            text: "Lead Generation",
+            text: "LEAD STRUCTURE",
           },
           {
             type: "paragraph",
-            text: "This position is the exception to our warm-lead structure. Executive Account Development Specialists are responsible for developing their own outbound opportunities through targeted prospecting.",
+            text: "NORTH POINT SALES GROUP provides targeted prospect lists for this position. Executive Account Development Specialists are responsible for contacting those prospects through outbound calling and developing qualified opportunities.These are cold prospects rather than warm leads",
           },
           {
             type: "heading",

@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { ScheduleAppointmentDialog } from "@/components/schedule/schedule-appointment-dialog";
+import { ScheduleAppointmentDialog } from "@/components/schedule/schedule-dialoge";
 
 type ScheduleAppointmentContextValue = {
   open: boolean;

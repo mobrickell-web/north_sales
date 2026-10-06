@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { siteConfig } from "@/config/site";
-import { useScheduleAppointment } from "@/components/schedule/schedule-appointment-provider";
+import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
 
 const HEADER_OFFSET = 110;

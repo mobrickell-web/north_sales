@@ -1,266 +1,165 @@
-# Appointment System — Chunked Implementation Workflow
+# Implementation Workflow — North Sales Backend
 
-> Companion to `docs/APPOINTMENT-FLOW.md`. This file breaks the build into
-> **10 independently verifiable chunks**. Work one chunk at a time; each chunk
-> has tasks and an explicit _Definition of Done_ (DoD) you can tick off before
-> moving on.
->
-> Repo layout targets (separate repos):
->
-> - `../backend` — **own git repo** (`/projects/North-Landing/backend`),
->   NestJS + Prisma + PostgreSQL API
-> - this repo (`north_sales`) — Next.js frontend (marketing + booking + admin)
+Companion to `docs/APPOINTMENT-FLOW.md`. Backend repo: `north-landing/backend` (NestJS 12 + Prisma 7 + PostgreSQL on Docker). Frontend: `north_sales` (Next.js).
+
+Status legend: ✅ done · ⏳ in progress · ⬜ pending
 
 ---
 
-## Chunk 0 — Setup & Standalone Backend Scaffold ✅ Done
+## Chunk 0 — Prereqs
 
-- [x] Scaffold standalone NestJS app (Nest 12, TS 6, manual scaffold) in
-      `../backend` (own git repo, own `node_modules`, own `package-lock.json`),
-      install `@nestjs/jwt @nestjs/passport @nestjs/schedule prisma
-@prisma/client bcrypt class-validator class-transformer date-fns-tz
-nodemailer`.
-- [x] Define `backend/.env` / `backend/.env.example`:
-      `DATABASE_URL`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `MAIL_*`, `APP_URL`,
-      `INITIAL_ADMIN_EMAIL`, `INITIAL_ADMIN_PASSWORD` (required — no fallback).
-- [x] Wire VS Code CSS lint ignore (`css.lint.unknownAtRules: "ignore"`).
-- [ ] Create proxy setup later (Chunk 9) so Next.js dev can call NestJS on
-      `/api/v1`.
+- ✅ Native PostgreSQL on port 5432 had unknown credentials → Docker container `north-sales-postgres` (`postgres:16-alpine`) on **port 5434**, DB `north_sales`, user `postgres` / `mysecret123`, volume `north-sales-pgdata`.
+- ✅ `backend/.env` → `DATABASE_URL=postgresql://postgres:mysecret123@localhost:5434/north_sales?schema=public` (+ example with the docker run command).
+- ✅ `backend/tsconfig.json` `include: ["src/**/*"]` (fixes VS Code rootDir noise).
 
-> **Notes:** backend is fully separate now — not a workspace, not a folder in
-> this repo. Boot on `:3001` with global prefix `api/v1`
-> (`src/main.ts`, loads `backend/.env`). Frontend runs with plain `npm run dev`
-> (Next only). Run each app from its own directory. npm 11 requires approving
-> install scripts for `prisma`/`@prisma/engines`/`bcrypt`
-> (`npm approve-scripts --all`; recorded in `backend/package.json#allowScripts`).
-> Nest 12 requires TypeScript ≥6 (`^6.0.3`); Next stays on TS 5.
+## Chunk 1 — DB schema & seed ✅
 
-**DoD:** `npm run dev` boots both apps; `git status` clean after scaffolds.
+- ✅ Migration `20260929154746_init`: `admin_users`, `appointments`, `appointment_logs`.
+- ✅ Enums: single role `SUPER_ADMIN`; `AppointmentType` matches the site form (4 types); `AppointmentStatus` flow (CONFIRMED/RESCHEDULED/CANCELLED/COMPLETED; legacy unused `NO_SHOW` kept in DB only — provider can't `DROP VALUE`); `ActionType` log events.
+- ✅ Idempotent seed: `admin@northpointsales.com` / SUPER_ADMIN / active.
+- ✅ `appointment.rescheduleToken` + `cancelToken` unique UUIDs (email link tokens), `scheduledAtUtc`, `prospectTimezone`, `durationMinutes`, `cancellationReason`, reminder-flag columns.
 
----
+## Chunk 2 — Auth, envelope, refresh tokens ✅
 
-## Chunk 1 — Database Schema, Migrations & Seed
+- ✅ `POST /auth/login`, `GET /auth/me` (Local + JWT strategies, `@CurrentUser()`, `JwtAuthGuard`).
+- ✅ Rate limits (@nestjs/throttler): global 50/min, login 5/min.
+- ✅ Swagger (`/api-docs`) with bearer.
+- ✅ Response envelope everywhere: success `{status, data, meta:{timestamp, requestId}}`; errors `{status, message, statusCode, path, method, meta}` + `X-Request-Id` header (TransformInterceptor, AllExceptionsFilter, request-id middleware).
+- ✅ Refresh tokens: `admin_refresh_tokens` table (migration `20260929172605_add_refresh_tokens`), opaque tokens stored as SHA-256, rotation on refresh, **family revocation** on reuse, logout revokes. TTL from `JWT_REFRESH_EXPIRES_IN=7d`.
+- ✅ Failed-login audit loop in backend logs.
 
-**Goal:** Persistent layer with audit logging and a seeded Super Admin.
+## Chunk 3 — Public booking API ✅
 
-- [x] Encode `schema.prisma` as in APPOINTMENT-FLOW §3:
-      enums (`Role`, `AppointmentStatus`, `AppointmentType`, `ActionType`) and
-      models (`AdminUser`, `Appointment`, `AppointmentLog`) with the exact
-      `@map`/indexes.
-- [x] Run `prisma migrate dev` for initial migration on PostgreSQL.
-- [x] Implement `prisma/seed.ts`:
-  - [x] **Require** `INITIAL_ADMIN_EMAIL` and `INITIAL_ADMIN_PASSWORD` from env
-        (throw if missing) — **no hardcoded default password** (fixes §8).
-- [ ] `@nestjs/schedule` disabled until Chunk 5 (no cron yet).
+- ✅ `POST /api/v1/appointments` (201, no auth) — DTO mapped 1:1 to the site form: `contactName, companyName, email, appointmentType, date, time, timezone, duration`.
+- ✅ Human labels → DB enum (4 types), US-timezone labels → IANA (`date-fns-tz` `fromZonedTime`), `30/45/60 minutes` → `durationMinutes`, full time-slot whitelist.
+- ✅ `GET /api/v1/appointments/manage/:token` (accepts reschedule or cancel token) — internal loader for the reschedule/cancel pages.
+- ✅ `PATCH /api/v1/appointments/:token/reschedule` (rescheduleToken) → `RESCHEDULED`.
+- ✅ `DELETE /api/v1/appointments/:token/cancel` (cancelToken, optional reason) → `CANCELLED`.
+- ✅ Audit rows: `BOOKED`, `RESCHEDULED_BY_PROSPECT`, `CANCELLED_BY_PROSPECT` with previous/new times.
+- ✅ Guards: past time 400, no-op reschedule 400, 404 bad token, 409 on CANCELLED/COMPLETED/NO_SHOW (public links use `assertMutable()`). End-to-end verified. ⚠️ This is **not** the admin status contract — see Chunk 11 Step 6 for the looser admin rules.
 
-**DoD:** `prisma migrate dev` succeeds; `prisma db seed` creates only one Super
-Admin on re-run (idempotent); `prisma studio` shows the 3 tables.
+## Chunk 4 — Admin appointment management ✅
 
-> **Chunk 1 ✅ Done (2026-09-29).** Local DB runs via Docker dedicated container
-> `north-sales-postgres` (`postgres:16-alpine`) on port **5434** — native PG18 on
-> 5432 is unused for this project; `DATABASE_URL` reflects the container. Tables
-> verified: `admin_users`, `appointments`, `appointment_logs`; seeded
-> `admin@northpointsales.com` (role `SUPER_ADMIN`, active), idempotent on re-seed.
+- ✅ `GET /api/v1/admin/appointments` — **3 tabs**: `upcoming` (CONFIRMED+RESCHEDULED, `scheduledAtUtc >= now`), `completed`, `cancelled`; paginated (`skip`/`take`), search (name/company/email), `from`/`to` date filter.
+- ✅ `GET /api/v1/admin/appointments/:id` — detail + audit history, with `adminUser.name` flattened onto each history row as `adminUserName`.
+- ✅ `PATCH /api/v1/admin/appointments/:id/status` → `{ status: COMPLETED | CANCELLED, reason? }`; audited with `adminUserId` (`MARKED_COMPLETED_BY_ADMIN` / `CANCELLED_BY_ADMIN`). Error contract is documented in full under Chunk 11 Step 6 — note it is **not** the same as the public endpoints.
+- ✅ No-Shows tab removed. `NO_SHOW` removed from the product flow entirely.
+- ✅ JWT protected (admin only). Verified end-to-end: list tabs, detail, mark-completed, cancel, same-status 400, cancelled→409.
+- ℹ️ Legacy note: `NO_SHOW` stays as an **unused** DB enum value — this PostgreSQL build rejects `DROP VALUE` (checked on a scratch enum), so it stays forever in the type but is never used/exposed (docs: `APPOINTMENT-FLOW.md` §6). `MARKED_COMPLETED_BY_ADMIN` was added to `ActionType` (+ `prisma generate`).
 
----
+## Chunk 5 — Email delivery (SendGrid SMTP) ✅
 
-## Chunk 2 — Auth Module (Super Admin Login)
+- ✅ Backend `MailModule` + `MailService` (nodemailer, SMTP from `SMTP_*` env vars — `SMTP_PASS` already holds the SendGrid API key).
+- ✅ Templates (`mail.templates.ts`) reuse the frontend branding (logo, navy/bronze shell): booking confirmation, reschedule, cancellation — each with **prospect + admin (`SMTP_TO`)** copies and inline **reschedule / cancel** links (`APP_URL` base). No manage/view link: the email already carries the full form details.
+- ✅ Wired into `AppointmentsService`: book → confirmation (logs `CONFIRMATION_EMAIL_SENT`), reschedule → reschedule mail (old time shown), cancel → cancellation mail (reason shown).
+- ✅ Fire-and-forget — booking/API never fails because of email; `mail.dryRun` (`MAIL_DRY_RUN=true`) logs instead of sending.
+- ✅ Verified in dry-run: 6 emails (book/reschedule/cancel × prospect/admin) with correct subjects/recipients, links present in HTML+text, audit chain `BOOKED → CONFIRMATION_EMAIL_SENT → RESCHEDULED_BY_PROSPECT → CANCELLED_BY_PROSPECT`.
+- ✅ Frontend no longer sends email: `app/api/schedule-appointment` + `lib/appointment-emails.ts` **deleted** (that was backend code living in the frontend). Templates are now a **single source of truth in the backend** (`mail.templates.ts`, ported verbatim from the old frontend file, extended with reschedule/cancel + action buttons).
+- ✅ Verified **live** (no dry-run) via SendGrid: 6/6 emails actually delivered — `concept` booking, reschedule, cancel × prospect + admin (`SMTP_TO`).
 
-- [x] JWT Strategy + LocalStrategy; `POST /api/v1/auth/login` returns signed JWT
-      (configurable: HTTP-only cookie or Bearer).
-- [x] `@CurrentUser()` decorator + `JwtAuthGuard`. Single role only
-      (`SUPER_ADMIN`) — no `RolesGuard`/`@Roles()`.
-- [x] `GET /api/v1/auth/me` (any active admin).
-- [x] Rate-limit login attempts (e.g. `@nestjs/throttler` or express-rate-limit);
-      make failed login audit the Attempt.
-- [x] No public admin registration endpoint.
+## Chunk 6 — Frontend wiring: submit to backend ✅
 
-**DoD:** Unauthorized API calls return 401; wrong-password attempts are
-rate-limited; `me` returns the seeded admin profile.
+- ✅ `schedule-appointment-dialog.tsx` now POSTs to `${NEXT_PUBLIC_API_URL}/api/v1/appointments` (was `/api/schedule-appointment`); success/error driven by the response envelope.
+- ✅ Removed duplicate/backend-owned code from the frontend: deleted `app/api/schedule-appointment/route.ts` + `lib/appointment-emails.ts` (email templates/mailer now backend-only).
+- ✅ Frontend env: dropped `SMTP_*` (backend-only); added `NEXT_PUBLIC_API_URL` (+ kept `SITE_URL`) in `.env.local` / `.env.example`.
+- ✅ Added the pages the email links point to (all client components, token-gated, no duplicated backend logic):
+  - `/appointments/reschedule/[token]` — loads current booking via `GET /api/v1/appointments/manage/:token`, submits `PATCH /api/v1/appointments/:token/reschedule` (date/time/timezone from `siteConfig.appointmentForm`).
+  - `/appointments/cancel/[token]` — loads current booking, submits `DELETE /api/v1/appointments/:token/cancel` (optional reason).
+  - No Manage/View page (email already shows the full form details — only Reschedule + Cancel links are sent).
+- ✅ Shared frontend API client `lib/appointment-api.ts` (base URL + typed helpers, unwraps the `{status,data,meta}` envelope) and `components/schedule/appointment-page-shell.tsx` (brand shell/components).
+- ✅ Verified: `next build` clean (routes `/appointments/{reschedule,cancel}/[token]` generated), `eslint` clean.
 
-> **Chunk 2 ✅ Done (2026-09-29).** Swagger UI on `http://localhost:3001/api-docs`
-> (Bearer auth scheme). Verified: login 200 + JWT; wrong password 401; 6th login
-> in 60s → 429; `/me` 401 without token / 200 with token; failed logins audited
-> (`AuthService` warn) with client IP. Rate limits: global 50 req/min,
-> login route 5/min (via `@nestjs/throttler` v6).
->
-> **Refresh tokens added (DB-backed opaque, standards-style):** `POST
-/auth/refresh` rotates the pair (old token stored as revoked + `replaced_by_id`),
-> replaying a rotated token revokes the entire token family for that admin;
-> `POST /auth/logout` revokes the presented token; tokens stored as SHA-256 hashes
-> only, 7-day TTL (`JWT_REFRESH_EXPIRES_IN`). Verified: login → rotate → replay-old
-> 401 → logout (`revoked:true`) → refresh-after-logout 401. Model
-> `AdminRefreshToken`/`admin_refresh_tokens` added (migration `add_refresh_tokens`).
+## Chunk 7 — Reminders (cron) ✅
 
----
+- ✅ `ScheduleModule.forRoot()` in `app.module.ts` — this is what makes `@Cron` decorators live; without it the decorator is inert. `@nestjs/schedule@12` was already in `package.json` but never registered.
+- ✅ `backend/src/modules/appointments/reminders.service.ts` — `RemindersService`, `@Cron(CronExpression.EVERY_MINUTE)`, one tick per minute. No per-appointment timers.
+- ✅ Re-entrancy guard (`ticking` flag): a slow SMTP call can't let the next tick pile up. Top-level try/catch so one rejection can't kill the tick.
+- ✅ Windowed query per offset (`REMINDER_OFFSETS = [24, 1]`): `scheduledAtUtc > now - lookbackMinutes && <= now + offset`, `reminder*hSent = false`, and `status IN (CONFIRMED, RESCHEDULED)`. A narrow window means a reminder missed while the server was down is **skipped**, not fired late in bulk.
+- ✅ Claim-before-send via conditional `updateMany` (`where: { id, reminder*hSent: false }`) — a single atomic statement, so two API instances can't both win the same row.
+- ✅ If the send fails, the claim is **released** (flag → `false`, `sentAt` → `null`) so the next tick retries inside the window. Retries are bounded by the lookback window (~5 attempts at the default), so no infinite loop.
+- ✅ `buildReminderEmails(details, links, hoursBefore)` in `mail.templates.ts` — prospect-only (no admin copy; admin already has the booking notification). Reuses the on-brand shell, detail rows, and the reschedule/cancel/add-to-calendar action buttons. Subject: `Reminder: your appointment is in <24 hours|1 hour> — NORTH POINT SALES GROUP`.
+- ✅ `MailService.sendReminderNotifications(appointment, hoursBefore)`.
+- ✅ Audit rows `REMINDER_24H_SENT` / `REMINDER_1H_SENT` with notes `24h reminder email sent to <email>`.
+- ✅ **Reschedule resets all four reminder fields.** Offsets are relative to `scheduledAtUtc`, so a moved appointment needs a fresh pair of reminders against the new time; without this a moved appointment would either skip its reminder or double-send.
+- ✅ Env: `REMINDERS_ENABLED` (default on, set `false` to pause the cron without a code change), `REMINDER_LOOKBACK_MINUTES` (default `5`).
+- ✅ Verified live against `north-sales-postgres` under `MAIL_DRY_RUN=true` (no real emails sent): 24h fired once with flags + `REMINDER_24H_SENT` audit row; **two further ticks produced no duplicate** (atomic claim holds); 1h fired independently; moving an appointment from 24h-out to 1h-out did **not** re-fire 24h (flag still true); a `CANCELLED` appointment with flags reset was never claimed; reschedule with both flags `true` reset them to `false`/`null`. Test appointment + its 5 audit rows deleted afterwards.
 
-## Chunk 3 — Public Booking API + Token Management
+## Chunk 8 — Sendgrid webhooks ⬜
 
-- [ ] `POST /api/v1/appointments` — validate DTO
-      (`contactName`, `companyName`, `email`, `phone?`, `notes?`,
-      `appointmentType`, `durationMinutes`, `scheduledAtUtc` or
-      `date`+`timeSlot`, `prospectTimezone`).
-- [ ] Normalize to UTC with `date-fns-tz` (store `TIMESTAMPTZ`).
-- [ ] Generate `rescheduleToken` + `cancelToken` (UUIDv4), status `CONFIRMED`.
-- [ ] `GET /api/v1/appointments/manage/:token` — fetch booking details for the
-      prospect manage page (token-scoped, returns masked/expected fields only).
-- [ ] `PATCH /api/v1/appointments/:token/reschedule` — validate token, update
-      `scheduledAtUtc`, **reset** `reminder24hSent`/`reminder1hSent`, write
-      `RESCHEDULED_BY_PROSPECT` log.
-- [ ] `DELETE /api/v1/appointments/:token/cancel` — token-scoped, set status +
-      `cancellationReason`, write `CANCELLED_BY_PROSPECT` log.
-- [ ] Token expiry/invalid → 404 (don't reveal existence).
+- Optional: opened/clicked tracking into `appointment_logs` or email table.
 
-**DoD:** curl end-to-end happy path books, fetches, reschedules and cancels
-using only emailed tokens; db rows + logs correct.
+## Chunk 9 — Testing & hardening ⬜
 
----
+- ⚠️ **Nothing is automated.** The backend has no `test` script and no `*.spec.ts` / `*.e2e-spec.ts` files; `@nestjs/testing` is installed but unused. The frontend has no test setup either.
+- ⚠️ Everything verified so far ran as throwaway Node scripts under the OS temp dir, calling the real `lib/` and `dist/` modules against the live local stack: auth `15/15`, list `27/27`, detail `17/17`, status transitions `19/21` + `8/8` (the 2 failures were wrong assertions in the script, not product bugs), calendar links `30/30`, calendar emails `42/42`, calendar live `13/13`, admin-name `14/14`. **None of this survives — there is no regression safety net.**
+- Next: add Jest/Supertest to the backend and port these suites to run in CI against a disposable database.
+- Still to do: input fuzzing, rate-limit tuning for the public booking endpoint (currently the global 50/min applies — unauthenticated booking is the most exposed route), security headers (helmet/CSP), and an email-client render check for the new calendar button block.
 
-## Chunk 4 — Email & Calendar Integration
+## Chunk 10 — Deferred items ⬜
 
-- [ ] `MailService` abstraction over Nodemailer/Resend (template dir +
-      `transporter`).
-- [ ] Templates (Handlebars): `confirmation.hbs`,
-      `admin-notification.hbs`, `reminder-24h.hbs`, `reminder-1h.hbs`,
-      `cancellation.hbs`.
-- [ ] Calendar utilities: Google/Outlook web URLs + `.ics` builder
-      (`calendar.util.ts`).
-- [ ] On `create()` (after commit): send prospect confirmation + internal
-      NPSG alert to `sales@northpointsales.com` (fire-and-forget with
-      retry/queue).
-- [ ] Embed reschedule/cancel links + timezone-formatted times in emails.
-- [ ] **Idempotency:** guard against duplicate sends (flag check before send).
+- Admin password-reset flow (email + token).
+- Audit table for login events (currently only log lines).
+- Docs = source of truth; keep `APPOINTMENT-FLOW.md` in sync with the code. ✅ Kept in sync through Chunks 11/12; keep doing this when contracts change.
 
-**DoD:** Booking an appointment via API produces readable emails with working
-links + `.ics`; admin alert arrives; no duplicate sends on retry.
+## Chunk 11 — Admin frontend (login + dashboard) ⬜
 
----
+**Scope:** UI only. The backend admin API (Chunk 4) and auth (Chunk 2) are already built and verified — **no backend code is written in this chunk.**
 
-## Chunk 5 — Reminder Scheduler (24h & 1h)
+### Build order (strict — UI only after the API it calls is reachable)
 
-- [ ] `@nestjs/schedule` cron service:
-      `*/10 * * * *` → 24h reminders; `*/2 * * * *` → 1h reminders.
-- [ ] Query due appointments (`scheduledAtUtc` window AND
-      `reminder24hSent=false` / `reminder1hSent=false` AND status in
-      `CONFIRMED|RESCHEDULED`).
-- [ ] Send + flip flags, set `reminder24hSentAt` / `reminder1hSentAt`, write
-      `REMINDER_24H_SENT` / `REMINDER_1H_SENT` logs.
-- [ ] Idempotent & timezone-safe (compute windows in UTC).
+1. ✅ **Unblock the local backend.** Port `3001` is now served by the North Sales backend (the unrelated `Baked.pk` app is gone). `GET /api/v1/admin/appointments` returns **401 (not 404)** unauthenticated, confirming the route is registered and `JwtAuthGuard` is live. `main.ts` sets the global `api/v1` prefix and calls `app.enableCors()`.
+2. ✅ **`/admin/login`** — email + password form → `POST /api/v1/auth/login`. Store the access + refresh tokens, redirect to the dashboard. Handle 401 (wrong credentials) and 429 (rate limit: login is capped at 5/min by `@nestjs/throttler`) as distinct messages.
+3. ✅ **Auth guard for the admin area** — a client-side check that redirects to `/admin/login` when no valid token is present, plus token refresh via `POST /api/v1/auth/refresh` on `401`. **Note:** this is a UX guard, not a security boundary — the real protection is `JwtAuthGuard` on every admin endpoint.
+4. ✅ **`/admin/dashboard`** — `GET /api/v1/admin/appointments` with the existing query DTO: 3 tabs (`upcoming` = CONFIRMED+RESCHEDULED with `scheduledAtUtc >= now`, `completed`, `cancelled`), search across name/company/email, `from`/`to` date filter, `skip`/`take` pagination.
+5. ✅ **Detail view** — `GET /api/v1/admin/appointments/:id`, showing the `appointment_logs` audit trail (booking → confirmation email → reminders → reschedule/cancel) plus both link tokens. The endpoint flattens `adminUser.name` into `adminUserName` on every history row, so the UI shows _who_ performed an admin action (null for prospect/system rows).
+6. ✅ **Admin actions** — `PATCH /api/v1/admin/appointments/:id/status` for `COMPLETED` and `CANCELLED` (optional reason).
 
-**DoD:** Book an appointment 25h out → reminder arrives ~24h before; 65min out
-→ 1h reminder arrives; flags + logs update once.
+   **Error contract (verified live, do not assume it mirrors the public endpoints):**
+
+   | Case                                     | Status | Message                                    |
+   | ---------------------------------------- | ------ | ------------------------------------------ |
+   | Unknown `id`                             | `404`  | `Appointment not found`                    |
+   | Target status equals current status      | `400`  | `Appointment is already in this status`    |
+   | Appointment is **already `CANCELLED`**   | `409`  | `Cancelled appointments cannot be changed` |
+   | `status` outside `COMPLETED`/`CANCELLED` | `400`  | DTO validation                             |
+   | Not authenticated                        | `401`  | `JwtAuthGuard`                             |
+
+   Note the difference from the **public** reschedule/cancel endpoints (Chunk 3), which use `assertMutable()` and return `409` on `CANCELLED`, `COMPLETED` **and** `NO_SHOW`. The admin status endpoint is deliberately looser: it only guards `CANCELLED`, so **`COMPLETED → CANCELLED` is allowed** (returns `200`) and a completed appointment can still be reopened as cancelled. There is no `NO_SHOW` guard here at all, since `NO_SHOW` is unused in the product flow.
+
+   The UI hides the action buttons entirely once the appointment is `CANCELLED`, shows `400` in an info-toned alert and `409` in an error-toned alert, then refetches the detail so the status badge and audit trail update in place.
+
+### Access control
+
+- ✅ **Single role: `SUPER_ADMIN` only.** The schema has exactly one role value and every admin who can log in holds it, so there is no per-user permission branching to build. Anything authenticated is authorized — **do not add a role-check UI or a fake permission matrix.**
+- ✅ `is_active = false` admins are rejected by the backend at login, before the UI's redirect behaviour is relied on.
+
+### Environment notes
+
+- ✅ `NEXT_PUBLIC_API_URL` resolves to `http://localhost:3001` in development, which is where the backend actually listens. Nothing to repoint locally.
+- ⚠️ The dashboard works **locally** only. On Vercel the admin API is unreachable until the backend is deployed — the same blocker as the live booking form (`/appointments` currently 404s in production).
+- ⚠️ Do not reintroduce email sending in the frontend. `app/api/schedule-appointment` + `lib/appointment-emails.ts` were removed in Chunk 5/6 for being backend-owned; the admin UI must not recreate that duplication.
 
 ---
 
-## Chunk 6 — Super Admin Management APIs & Audit
+## Chunk 12 — Add to Calendar ✅
 
-- [ ] `GET /api/v1/admin/dashboard/stats` — totals (all time, week, month),
-      status breakdown.
-- [ ] `GET /api/v1/admin/appointments` — paginated list with search
-      (name/email/company/phone) + status filter; include UTC and ET-rendered
-      times.
-- [ ] `GET /api/v1/admin/appointments/:id` — detail + full history timeline.
-- [ ] `PATCH .../:id/reschedule` (Super Admin) — manual change,
-      notify prospect, log `RESCHEDULED_BY_ADMIN` (+ `adminUserId`).
-- [ ] `DELETE .../:id/cancel` — manual cancel + reason, log
-      `CANCELLED_BY_ADMIN`.
-- [ ] `POST /api/v1/admin/appointments/:id/resend-email` — resend
-      confirmation/`.ics`, log `EMAIL_RESENT_BY_ADMIN`.
-- [ ] `POST /api/v1/admin/users` (Super Admin only) — create/invite secondary
-      admins.
+**Goal:** clicking "Add to Calendar" must open the prospect's calendar app directly, never force a file download.
 
-**DoD:** All admin routes enforce roles; every mutation appends an
-`AppointmentLog` row attributable to the acting admin.
+- ✅ New `backend/src/modules/appointments/calendar-links.ts` — `calendarEventDetails()` is the single source of truth for the summary, description, location and start/end times, so the `.ics` file and the two deep links can never drift. Builds:
+  - **Google**: `calendar.google.com/calendar/render?action=TEMPLATE&text=…&dates=<compact UTC>/<compact UTC>&details=…&location=…&ctz=<IANA>`
+  - **Outlook**: `outlook.live.com/calendar/0/deeplink/compose?rru=addevent&subject=…&startdt=…&enddt=…&body=…&location=…`
+  - **`.ics` fallback**: the existing `GET /api/v1/appointments/:token/calendar.ics`, still served as an `attachment` on purpose (manual import for Apple Calendar and desktop clients, where deep links do not work).
+- ✅ `calendar-ics.ts` now consumes `calendarEventDetails()` instead of recomputing the summary/description.
+- ✅ `MailService.calendarLink()` → `calendarLinks()`, returning all three. Booking, reschedule and reminder emails render a dedicated **"Add to your calendar"** row with three buttons, plus the three URLs in the plain-text part. The block stays inside `<tr><td>` — a bare `<div>` inside the email table breaks Outlook/Gmail.
+- ✅ Frontend mirror `lib/calendar-links.ts` and a shared dropdown `components/schedule/add-to-calendar.tsx` (click-outside + Escape to close, `rel="noopener noreferrer"`, opens in a new tab).
+- ✅ Wired into the reschedule success screen and the admin detail "Prospect links" section. Hidden when the appointment is `CANCELLED`.
+- ⚠️ **Not on the cancel page or the cancellation email.** Cancelling an event and then offering to add it to a calendar is contradictory; those screens intentionally have no action buttons.
+- ⚠️ `lib/calendar-links.ts` (frontend) and `calendar-links.ts` (backend) hold the same logic because emails and pages render in different runtimes. If the summary/description wording changes, update both.
+- Verified: 30/30 link-builder, 42/42 email-template, 13/13 live (all three links resolve to the identical start instant). ⚠️ Dry-run HTML only — the rendered result in a real inbox still needs a look after deploy.
 
 ---
 
-## Chunk 7 — CSV Export
+## Environment
 
-- [ ] `GET /api/v1/admin/export/csv` (Super Admin) with date-range + status
-      filtering.
-- [ ] Streaming CSV in ET + prospect local time columns; filename includes
-      date range.
-- [ ] Audit: log export arrival as `ActionType` if desired; guard client-side by
-      role.
-
-**DoD:** Filtered export downloads as a valid CSV opening in Excel/Sheets with
-correct UTF-8/encoding.
-
----
-
-## Chunk 8 — Public Frontend (Booking Modal + Manage Pages)
-
-- [ ] Booking form/modal in the Next.js landing page; client-side validation,
-      timezone detection via `Intl.DateTimeFormat().resolvedOptions().timeZone`.
-- [ ] POST to NestJS `/api/v1/appointments` (via Next.js route handler or
-      rewrites).
-- [ ] `/reschedule?token=UUID` page — fetch manage data, pick new slot, PATCH.
-- [ ] `/cancel?token=UUID` page — confirm + reason, DELETE.
-- [ ] Success/error states + email copy consistent with template language.
-
-**DoD:** Book a real appointment from the landing page; complete
-reschedule **and** cancel flows from a real emailed link.
-
----
-
-## Chunk 9 — Admin Dashboard (Next.js /admin)
-
-- [ ] `/admin/login` — form posting to `/api/v1/auth/login`; store JWT
-      (cookie or memory) + route guard.
-- [ ] `/admin` — stats cards + appointments table with search/filter/pagination
-      (dual timezone: prospect local + ET).
-- [ ] Row actions: manual reschedule, cancel (+ reason modal), resend email.
-- [ ] Appointment detail drawer/route with full audit timeline.
-- [ ] CSV export button wired to protected download.
-- [ ] Users page (Super Admin only) to create/invite admins.
-- [ ] Dev proxy: Next rewrites `(/api/v1/*)` → NestJS so no CORS in dev.
-
-**DoD:** Log in as seeded Super Admin; view/update/cancel/export bookings;
-all role-gated UI hidden for non-admins.
-
----
-
-## Chunk 10 — Hardening, Secrets & Deploy
-
-- [ ] Remove default passwords everywhere; require `INITIAL_ADMIN_PASSWORD`.
-- [ ] JWT: strong `JWT_SECRET`, `JWT_EXPIRES_IN` (short access + optional
-      refresh); HTTPS-only cookies if using cookies.
-- [ ] Global exception filter → consistent error shape; hide internal errors.
-- [ ] Rate limit public booking (spam) and login; add basic request caps.
-- [ ] Email failure handling: queue/retry + dead-letter log.
-- [ ] DB: backups, `SELECT`-scoped db user for app if applicable.
-- [ ] Env validation (`configuration.ts`) fails fast on missing vars.
-- [ ] CI: lint + typecheck both apps; `prisma migrate deploy` migration step.
-- [ ] Deploy backend + frontend; replace placeholder production email address.
-
-**DoD:** Full smoke test on staging: book → confirm → reminders → reschedule →
-admin manage → export → audit trail; no secrets in repo; CI green.
-
----
-
-## Suggested Execution Order
-
-Backend-heavy first (Chunks 0–7) so the frontend has live APIs to point at;
-frontend (Chunks 8–9) then hardening (Chunk 10). Chunks 1–4 can be developed
-before auth is finished since public booking is unauthenticated.
-
-| Track               | Chunks                |
-| ------------------- | --------------------- |
-| Infrastructure / DB | 0 · 1                 |
-| Backend API         | 2 · 3 · 4 · 5 · 6 · 7 |
-| Frontend            | 8 · 9                 |
-| Production          | 10                    |
-
----
-
-## Known Spec Gaps to Resolve During Build
-
-1. `APPOINTMENT-FLOW.md` §8 hardcodes a seed fallback password — use required
-   env vars (addressed in Chunk 1 / 10).
-2. No concurrency guard on reminder cron — must be idempotent (Chunk 5).
-3. No rate limiting defined on public + login endpoints (Chunk 2 / 10).
-4. Calendar `.ics` spec (method, organizer, attendee) not detailed — pin down
-   during Chunk 4.
-5. Pagination cursor/offset and max page size unspecified (Chunk 6).
-6. Refresh tokens implemented (Chunk 2, DB-backed + rotation + reuse detection);
-   password-reset flow for admins still deferred to Chunk 10.
+`backend/.env`: `JWT_SECRET=yVxVXKrv…` (HS256), `JWT_EXPIRES_IN=15m`, `JWT_REFRESH_EXPIRES_IN=7d`, `INITIAL_ADMIN_EMAIL=admin@northpointsales.com`, SMTP/SendGrid vars.
+Health of a run: `npm run build` (clean) → `node dist/main.js` → `http://localhost:3001/api/v1`, Swagger `/api-docs`.

@@ -232,7 +232,7 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     `Hi ${details.contactName},`,
     "",
     "Thank you for scheduling an appointment with NORTH POINT SALES GROUP.",
-    "We have received your request and will follow up shortly.",
+    "Your request is confirmed on our side. We look forward to speaking with you.",
     "",
     "Your request details:",
     detailsText,
@@ -248,15 +248,14 @@ export function buildAppointmentEmails(details: AppointmentDetails) {
     introHtml: `
       <p style="margin:0 0 10px;">Hi <strong style="color:${BRAND.navy};">${escapeHtml(details.contactName)}</strong>,</p>
       <p style="margin:0 0 10px;">Thank you for scheduling an appointment with <strong style="color:${BRAND.navy};">NORTH POINT SALES GROUP</strong>.</p>
-      <p style="margin:0;">Your request is confirmed on our side. A member of our team will follow up shortly to finalize the conversation.</p>
+      <p style="margin:0;">Your request is confirmed on our side. We look forward to speaking with you.</p>
     `,
     detailsHeading: "Your Appointment Details",
     rows,
     afterHtml: `
-      <p style="margin:0 0 12px;">Need to change anything? Just reply to this email or reach us at
+      <p style="margin:0;">Need to change anything? Just reply to this email or reach us at
         <a href="mailto:contact@northpointsalesgroup.com" style="color:${BRAND.bronze};text-decoration:none;font-weight:700;">contact@northpointsalesgroup.com</a>.
       </p>
-      <p style="margin:0;color:${BRAND.navy};font-weight:600;">We look forward to speaking with you.</p>
     `,
     footerNote: "This is an automated confirmation of your website request",
   });

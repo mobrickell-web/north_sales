@@ -127,7 +127,8 @@ export function ScheduleAppointmentDialog({
     setError(null);
 
     try {
-      const response = await fetch("/api/schedule-appointment", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+      const response = await fetch(`${apiUrl}/api/v1/appointments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -143,13 +144,15 @@ export function ScheduleAppointmentDialog({
       });
 
       const data = (await response.json().catch(() => null)) as {
-        error?: string;
+        message?: string | string[];
       } | null;
 
       if (!response.ok) {
+        const message = Array.isArray(data?.message)
+          ? data.message.join(", ")
+          : data?.message;
         setError(
-          data?.error ||
-            "Unable to send appointment request. Please try again.",
+          message || "Unable to send appointment request. Please try again.",
         );
         return;
       }
