@@ -443,9 +443,71 @@
 }
 
 /* Careers page — reuses the legal-page shell, styles only the role meta lines */
+.careers-page__notice {
+  margin-bottom: 1.75rem;
+}
+
+.careers-page__roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.careers-page__role {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: #ebebeb;
+}
+
+.careers-page__role-summary {
+  display: flex;
+  min-height: 68px;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.35rem;
+}
+
+.careers-page__role-summary::-webkit-details-marker {
+  display: none;
+}
+
+.careers-page__role-title {
+  font-family: var(--font-body), var(--font-inter), sans-serif;
+  font-size: clamp(0.875rem, 2.4vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.careers-page__role-icon {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--primary);
+  transition: transform 0.2s ease;
+}
+
+.careers-page__role[open] .careers-page__role-icon {
+  transform: rotate(45deg);
+}
+
+.careers-page__role-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0 1.35rem 1.35rem;
+}
+
 .careers-page__income {
-  margin: 0 0 0.85rem;
+  margin: 0;
   display: inline-flex;
+  width: fit-content;
   align-items: center;
   border: 0.5px solid rgb(177 116 17 / 25%);
   border-radius: 999px;
@@ -473,8 +535,33 @@
   margin-top: 0.9rem;
 }
 
-.careers-page__notice {
-  margin-bottom: 1.75rem;
+.careers-page__closing {
+  margin-top: 2.5rem;
+}
+
+.careers-page__closing-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-body), var(--font-inter), sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.careers-page__closing-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.careers-page__closing-copy p {
+  margin: 0;
+  max-width: 72ch;
+  font-family: var(--font-body), var(--font-inter), sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #5c5f66;
 }
 
 /* Blog index & post pages */

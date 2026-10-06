@@ -43,49 +43,55 @@ export function CareersPage() {
           ))}
         </div>
 
-        <div className="legal-page__sections">
+        <div className="careers-page__roles">
           {careers.roles.map((role) => (
-            <section
+            <details
               key={role.id}
               id={role.id}
-              className="legal-page__section"
-              aria-labelledby={`${role.id}-title`}
+              name="careers-roles"
+              className="careers-page__role group"
             >
-              <h2 id={`${role.id}-title`} className="legal-page__section-title">
-                {role.number}. {role.title}
-              </h2>
-              <p className="careers-page__income">{role.income}</p>
-              <div className="legal-page__blocks careers-page__blocks">
-                {role.blocks.map((block, index) => (
-                  <ContentBlockContent
-                    key={`${role.id}-${block.type}-${index}`}
-                    block={block}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
+              <summary className="careers-page__role-summary">
+                <span id={`${role.id}-title`} className="careers-page__role-title">
+                  {role.title}
+                </span>
+                <span aria-hidden className="careers-page__role-icon">
+                  +
+                </span>
+              </summary>
 
-          <section
-            id={careers.closing.id}
-            className="legal-page__section"
-            aria-labelledby={`${careers.closing.id}-title`}
-          >
-            <h2
-              id={`${careers.closing.id}-title`}
-              className="legal-page__section-title"
-            >
-              {careers.closing.title}
-            </h2>
-            <div className="legal-page__blocks">
-              {careers.closing.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="legal-page__text">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </section>
+              <div className="careers-page__role-body">
+                <p className="careers-page__income">{role.income}</p>
+                <div className="legal-page__blocks careers-page__blocks">
+                  {role.blocks.map((block, index) => (
+                    <ContentBlockContent
+                      key={`${role.id}-${block.type}-${index}`}
+                      block={block}
+                    />
+                  ))}
+                </div>
+              </div>
+            </details>
+          ))}
         </div>
+
+        <section
+          id={careers.closing.id}
+          className="careers-page__closing"
+          aria-labelledby={`${careers.closing.id}-title`}
+        >
+          <h2
+            id={`${careers.closing.id}-title`}
+            className="careers-page__closing-title"
+          >
+            {careers.closing.title}
+          </h2>
+          <div className="careers-page__closing-copy">
+            {careers.closing.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
       </div>
     </article>
   );
