@@ -89,6 +89,36 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+:is(
+  #top,
+  #about-us,
+  #why-choose-us,
+  #results,
+  #how-we-work,
+  #30-60-focus,
+  #challenges,
+  #investment,
+  #faqs
+) {
+  scroll-margin-top: 88px;
+}
+
+@media (min-width: 1280px) {
+  :is(
+    #top,
+    #about-us,
+    #why-choose-us,
+    #results,
+    #how-we-work,
+    #30-60-focus,
+    #challenges,
+    #investment,
+    #faqs
+  ) {
+    scroll-margin-top: 118px;
+  }
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

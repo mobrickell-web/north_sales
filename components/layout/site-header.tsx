@@ -10,8 +10,6 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 
-const HEADER_OFFSET = 110;
-
 function toHash(href: string) {
   if (href.includes("#")) return `#${href.split("#")[1]}`;
   return null;
@@ -21,6 +19,12 @@ function toRoute(href: string) {
   const hash = toHash(href);
   if (!hash || hash === "#top") return "/";
   return `/${hash}`;
+}
+
+function getHeaderOffset() {
+  const bar = document.querySelector<HTMLElement>("[data-site-header-bar]");
+  const height = bar?.getBoundingClientRect().height ?? 80;
+  return Math.round(height);
 }
 
 function scrollToHash(hash: string) {
@@ -36,9 +40,9 @@ function scrollToHash(hash: string) {
   if (!el) return;
 
   const top =
-    el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+    el.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
 
-  window.scrollTo({ top, behavior: "smooth" });
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   window.history.pushState(null, "", hash);
 }
 
@@ -55,6 +59,10 @@ export function SiteHeader() {
     window.addEventListener("hashchange", syncHash);
     return () => window.removeEventListener("hashchange", syncHash);
   }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -74,7 +82,7 @@ export function SiteHeader() {
       .filter((id): id is string => Boolean(id));
 
     const updateActive = () => {
-      const marker = HEADER_OFFSET + 24;
+      const marker = getHeaderOffset() + 24;
       let current = "#top";
 
       for (const id of sectionIds) {
@@ -96,25 +104,37 @@ export function SiteHeader() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    setIsMenuOpen(false);
-
     const hash = toHash(href);
-    if (!hash) return;
-
-    e.preventDefault();
-    setActiveHash(hash);
-
-    if (pathname !== "/") {
-      router.push(toRoute(href));
+    if (!hash) {
+      setIsMenuOpen(false);
       return;
     }
 
-    scrollToHash(hash);
+    e.preventDefault();
+    setActiveHash(hash);
+    setIsMenuOpen(false);
+
+    const goToSection = () => {
+      if (pathname !== "/") {
+        router.push(toRoute(href));
+        return;
+      }
+
+      scrollToHash(hash);
+    };
+
+    // Wait until the mobile menu unmounts so section positions are accurate.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(goToSection);
+    });
   };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-primary shadow-md">
-      <div className="mx-auto flex min-h-[80px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8 xl:h-[110px] xl:min-h-0 xl:grid xl:grid-cols-[270px_minmax(0,1fr)_auto] xl:gap-x-0 xl:px-[24px]">
+      <div
+        data-site-header-bar
+        className="mx-auto flex min-h-[80px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8 xl:h-[110px] xl:min-h-0 xl:grid xl:grid-cols-[270px_minmax(0,1fr)_auto] xl:gap-x-0 xl:px-[24px]"
+      >
         <Link
           href="/"
           className="flex shrink-0 items-center gap-px self-center transition-opacity hover:opacity-90 lg:justify-start"
@@ -186,7 +206,7 @@ export function SiteHeader() {
       </div>
 
       {isMenuOpen && (
-        <div className="border-t border-white/15 bg-primary px-4 py-5 xl:hidden">
+        <div className="fixed inset-x-0 top-[80px] bottom-0 z-40 overflow-y-auto overscroll-contain border-t border-white/15 bg-primary px-4 py-5 xl:hidden">
           <nav aria-label="Mobile primary" className="flex flex-col">
             {siteConfig.nav.map((item) => {
               const itemHash = toHash(item.href);
