@@ -1401,13 +1401,6 @@ export const siteConfig = {
         },
       },
     ],
-    audioBanner: {
-      title: "LISTEN TO OUR 2-MINUTE EXECUTIVE OVERVIEW",
-      subtitle: "(90–120 SECONDS)",
-      preferText: "Prefer to listen instead of watch?",
-      actionText:
-        "Contact us to hear a brief overview of how we can help.",
-    },
     investment: {
       title: "INVESTMENT",
       subtitle: "WHAT THE ENGAGEMENT INCLUDES",

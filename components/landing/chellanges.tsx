@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Phone, X } from "lucide-react";
+import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -275,32 +275,6 @@ export function Challenges({ sectionNumber = 6 }: ChallengesProps) {
                     </p>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Audio / Executive Overview Banner */}
-          <div className="mt-8 w-full max-w-[1280px] rounded-2xl bg-[#112238] px-8 py-6 text-white shadow-md">
-            <div className="flex flex-col items-center justify-start gap-8 md:flex-row md:gap-12">
-              <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-5">
-                <Phone className="size-9 shrink-0 text-white stroke-[2.2]" />
-                <div className="flex flex-col">
-                  <h4 className="font-body text-[15px] font-extrabold tracking-wide text-[#B8860B] uppercase leading-snug">
-                    {challenges.audioBanner.title}
-                  </h4>
-                  <p className="mt-1 font-body text-[12px] font-bold tracking-wide text-white uppercase">
-                    {challenges.audioBanner.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <div className="hidden h-14 w-px bg-gray-500/40 md:block" />
-
-              <div className="flex flex-col gap-1 text-center md:text-left">
-                <p className="font-body text-[14px] font-bold text-white">
-                  {challenges.audioBanner.preferText}{" "}
-                  {challenges.audioBanner.actionText}
-                </p>
               </div>
             </div>
           </div>
