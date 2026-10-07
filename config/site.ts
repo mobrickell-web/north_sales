@@ -79,7 +79,7 @@ export const siteConfig = {
     titleLine1: "Stronger Sales Organization",
     titleLine2: "Better Bottom-Line Results.",
     eyebrow: "Driving Revenue Growth Through Sales Organization Excellence",
-    body: "We transform underperforming B2B sales organizations into high-performing revenue engines—turning untapped sales capacity into millions of dollars in additional revenue.",
+    body: "We transform underperforming B2B sales organizations into high-performing revenue engines—unlocking untapped sales capacity with the potential to generate millions of dollars in additional revenue.",
     primaryCta: {
       label: "Schedule a Consultation",
       href: "#cta",
@@ -914,16 +914,58 @@ export const siteConfig = {
         overview:
           "Strong sales performance begins with effective leadership. We evaluate how sales leadership is currently guiding, managing, developing and holding the sales organization accountable. The objective is not to judge leadership style, but to determine whether the current leadership structure is producing the level of consistency, direction and performance the organization requires.",
         areas: [
-          "Leadership roles and responsibilities",
-          "Communication of expectations",
-          "Coaching and performance management",
-          "Accountability standards",
-          "Sales meeting effectiveness",
-          "Decision-making authority",
-          "Manager-to-salesperson ratios",
-          "Leadership visibility into pipeline and activity",
-          "Alignment between leadership priorities and company objectives",
-          "Whether managers are spending their time where it creates the greatest value",
+          {
+            title: "Leadership Roles and Responsibilities",
+            detail:
+              "We examine whether sales leadership responsibilities are clearly defined and understood. This includes who sets direction, manages performance, coaches salespeople and resolves problems. Clear ownership helps prevent gaps, duplicated effort and inconsistent direction.",
+          },
+          {
+            title: "Communication of Expectations",
+            detail:
+              "We review how leaders communicate sales targets, activity expectations, priorities and performance standards. We determine whether salespeople understand what is expected, how success is measured and when expectations change.",
+          },
+          {
+            title: "Coaching and Performance Management",
+            detail:
+              "We examine how managers identify performance gaps, provide coaching and follow through on agreed improvements. We assess whether coaching addresses specific needs and produces measurable progress from each salesperson's starting baseline.",
+          },
+          {
+            title: "Accountability Standards",
+            detail:
+              "We review whether commitments, responsibilities and performance standards are consistently followed through. This includes how missed expectations are addressed, what support is provided and whether corrective actions lead to improvement.",
+          },
+          {
+            title: "Sales Meeting Effectiveness",
+            detail:
+              "We examine whether sales meetings help the team make decisions, resolve obstacles and advance opportunities. We review their purpose, frequency and follow-through to determine whether they justify the time invested.",
+          },
+          {
+            title: "Decision-Making Authority",
+            detail:
+              "We review who can approve pricing, discounts, account assignments and other sales decisions. We examine whether authority is clear and whether unnecessary approval delays are slowing opportunities or limiting managers' effectiveness.",
+          },
+          {
+            title: "Manager-to-Salesperson Ratios",
+            detail:
+              "We assess whether each manager has sufficient capacity to coach, supervise and support the salespeople they oversee. The appropriate ratio depends on team experience, sales complexity and the manager's other responsibilities.",
+          },
+          {
+            title: "Leadership Visibility into Pipeline and Activity",
+            detail:
+              "We examine whether leaders have an accurate, current view of sales activity, opportunity progress and pipeline quality. We assess whether the available information helps them identify stalled opportunities, provide timely support and make informed forecasts.",
+          },
+          {
+            title:
+              "Alignment Between Leadership Priorities and Company Objectives",
+            detail:
+              "We review whether sales leadership priorities support the company's revenue, profitability, customer retention and growth objectives. This includes whether targets, incentives and daily decisions direct the team toward the outcomes the company actually needs.",
+          },
+          {
+            title:
+              "Whether Managers Are Spending Their Time Where It Creates the Greatest Value",
+            detail:
+              "We examine how managers divide their time among coaching, planning, customer involvement, administration and problem-solving. We identify whether routine demands are crowding out the leadership activities most likely to improve team performance.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -936,18 +978,66 @@ export const siteConfig = {
         overview:
           "A strong sales organization should not depend entirely on individual salespeople figuring out what works. We evaluate the sales process from initial prospecting through qualification, presentation, closing, onboarding and account development to determine whether there is a clear, repeatable structure supporting the team.",
         areas: [
-          "Prospecting procedures",
-          "Lead handling",
-          "Qualification standards",
-          "Sales stages",
-          "Follow-up procedures",
-          "Proposal and quotation processes",
-          "Closing procedures",
-          "Handoff to operations or customer service",
-          "Account development procedures",
-          "Documentation and consistency",
-          "Bottlenecks or unnecessary steps",
-          "Areas where sales opportunities may be getting lost",
+          {
+            title: "Prospecting Procedures",
+            detail:
+              "We examine how the team identifies, researches and contacts potential customers. We assess whether prospecting follows a clear, repeatable approach that directs effort toward suitable prospects and supports a consistent flow of sales opportunities.",
+          },
+          {
+            title: "Lead Handling",
+            detail:
+              "We review how incoming leads are received, assigned and contacted. This includes response times, ownership and tracking to determine whether leads receive timely attention and remain accounted for throughout the sales process.",
+          },
+          {
+            title: "Qualification Standards",
+            detail:
+              "We examine how salespeople determine whether a prospect represents a realistic business opportunity. We review how customer needs, purchasing authority, budget and timing are established so the team can prioritize opportunities with a reasonable likelihood of progressing.",
+          },
+          {
+            title: "Sales Stages",
+            detail:
+              "We review whether the sales process has clearly defined stages and specific requirements for advancing between them. This helps determine whether opportunities are progressing based on actual customer commitments and completed actions.",
+          },
+          {
+            title: "Follow-Up Procedures",
+            detail:
+              "We examine how follow-up is scheduled, carried out and documented. We assess whether each contact has a clear purpose and next step, helping the team maintain momentum without allowing opportunities to become neglected.",
+          },
+          {
+            title: "Proposal and Quotation Processes",
+            detail:
+              "We review how proposals and quotations are prepared, approved, delivered and followed up. We examine whether they accurately address customer needs, communicate value and reach the customer promptly enough to support the buying decision.",
+          },
+          {
+            title: "Closing Procedures",
+            detail:
+              "We examine how salespeople confirm readiness to proceed, address remaining concerns and secure the customer's commitment. We review whether agreements, approvals and required paperwork are completed efficiently and accurately.",
+          },
+          {
+            title: "Handoff to Operations or Customer Service",
+            detail:
+              "We review how customer information, commitments and requirements are transferred after a sale. We assess whether the receiving team has what it needs to deliver as promised and whether responsibility for the transition is clear.",
+          },
+          {
+            title: "Account Development Procedures",
+            detail:
+              "We examine how the organization identifies additional opportunities within existing customer accounts. This includes reviewing customer needs, maintaining contact and coordinating appropriate renewals, repeat purchases or expanded services.",
+          },
+          {
+            title: "Documentation and Consistency",
+            detail:
+              "We review whether essential sales procedures and customer information are documented, accessible and consistently used. We assess whether the team has enough structure to work reliably, support new employees and maintain continuity when responsibilities change.",
+          },
+          {
+            title: "Bottlenecks or Unnecessary Steps",
+            detail:
+              "We examine where sales activity slows because of delays, repeated work, unclear responsibilities or unnecessary approvals. We determine which steps protect quality and which could be simplified to improve efficiency and customer responsiveness.",
+          },
+          {
+            title: "Areas Where Sales Opportunities May Be Getting Lost",
+            detail:
+              "We examine where prospects disengage, opportunities stall or potential sales leave the process without a clear explanation. We look for recurring patterns to determine whether the losses reflect customer decisions or preventable gaps in the sales process.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -960,18 +1050,66 @@ export const siteConfig = {
         overview:
           "An organization can have talented salespeople and still underperform as a team. We evaluate individual and collective sales performance to understand where the team is performing well, where inconsistencies exist and what may be preventing stronger overall results.",
         areas: [
-          "Individual production",
-          "Team production",
-          "Productivity levels",
-          "Activity levels",
-          "Conversion performance",
-          "Skill differences",
-          "Territory or account performance",
-          "Performance expectations",
-          "Consistency among representatives",
-          "Top-performer practices",
-          "Underperformance patterns",
-          "Management response to performance issues",
+          {
+            title: "Individual Production",
+            detail:
+              "We examine each salesperson's results against established targets and their current performance baseline. We consider revenue, profitability and new or existing account sales, along with differences in assignments and available opportunities.",
+          },
+          {
+            title: "Team Production",
+            detail:
+              "We review the team's combined results to determine whether the sales organization is meeting its objectives. We examine how individual contributions affect overall production and whether results depend too heavily on a small number of salespeople.",
+          },
+          {
+            title: "Productivity Levels",
+            detail:
+              "We examine the sales results generated relative to the time and resources invested. This helps identify whether administrative demands, inefficient processes or misplaced effort are limiting the team's capacity to produce more sales.",
+          },
+          {
+            title: "Activity Levels",
+            detail:
+              "We review the volume and quality of prospecting, customer conversations, meetings, proposals and follow-up. We establish the current activity baseline and assess whether those activities are sufficient and appropriately directed to support sales objectives.",
+          },
+          {
+            title: "Conversion Performance",
+            detail:
+              "We examine how effectively salespeople move opportunities from one sales stage to the next and ultimately into completed sales. We compare current conversion rates with prior results and comparable opportunities to identify where progress may be breaking down.",
+          },
+          {
+            title: "Skill Differences",
+            detail:
+              "We assess differences in prospecting, discovery, presentation, objection handling, negotiation and closing skills. We identify where specific coaching or support could help individual salespeople improve their results.",
+          },
+          {
+            title: "Territory or Account Performance",
+            detail:
+              "We review results across assigned territories and customer accounts, considering their potential, maturity and coverage requirements. This helps distinguish performance issues from differences in opportunity, workload or account assignments.",
+          },
+          {
+            title: "Performance Expectations",
+            detail:
+              "We examine whether production targets, activity standards and other expectations are clear, understood and supported by available resources. We assess whether salespeople know both the results required and the responsibilities involved in achieving them.",
+          },
+          {
+            title: "Consistency Among Representatives",
+            detail:
+              "We review how consistently salespeople produce results over time and follow established sales practices. We consider differences in experience and assignments to identify avoidable variation and opportunities for more dependable team performance.",
+          },
+          {
+            title: "Top-Performer Practices",
+            detail:
+              "We examine the approaches used by consistently successful salespeople to understand what contributes to their results. We assess which practices can be adapted and shared across the team, accounting for differences in customers, territories and selling styles.",
+          },
+          {
+            title: "Underperformance Patterns",
+            detail:
+              "We look for recurring shortfalls in activity, conversion, production or account development. We examine when and where those patterns occur to determine whether they reflect individual skill gaps, process problems, limited opportunities or other constraints.",
+          },
+          {
+            title: "Management Response to Performance Issues",
+            detail:
+              "We review how managers identify, discuss and address performance shortfalls. We assess whether their response includes clear expectations, appropriate support, agreed actions and follow-up against the salesperson's starting baseline.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -984,18 +1122,66 @@ export const siteConfig = {
         overview:
           "Revenue growth depends on having enough qualified opportunities entering the sales pipeline. We evaluate how prospects are identified, contacted, qualified, developed and moved toward meaningful sales conversations.",
         areas: [
-          "Target market definition",
-          "Prospect identification",
-          "Lead sources",
-          "Outbound prospecting",
-          "Inbound lead handling",
-          "Appointment setting",
-          "Initial messaging",
-          "Qualification criteria",
-          "Follow-up frequency",
-          "Lead nurturing",
-          "Referral development",
-          "Prospecting productivity",
+          {
+            title: "Target Market Definition",
+            detail:
+              "We examine whether the organization has clearly defined the types of companies and decision-makers it is best positioned to serve. This includes customer needs, industry, company size and other characteristics that help focus prospecting on suitable opportunities.",
+          },
+          {
+            title: "Prospect Identification",
+            detail:
+              "We review how potential customers are found, researched and selected for contact. We assess whether prospect information is accurate, current and relevant enough to help salespeople reach the appropriate people with a clear reason for contacting them.",
+          },
+          {
+            title: "Lead Sources",
+            detail:
+              "We examine where leads originate and which sources produce qualified opportunities and completed sales. We consider lead quality, volume and cost to determine where the organization's time and investment are producing the strongest results.",
+          },
+          {
+            title: "Outbound Prospecting",
+            detail:
+              "We review how the team initiates contact through calls, emails and other outreach. We assess whether targeting, messaging and follow-through work together to generate meaningful conversations with potential customers.",
+          },
+          {
+            title: "Inbound Lead Handling",
+            detail:
+              "We examine how inquiries are received, assigned, qualified and answered. We assess whether response times and follow-up procedures help convert customer interest into a meaningful sales conversation.",
+          },
+          {
+            title: "Appointment Setting",
+            detail:
+              "We review how initial interest is converted into scheduled sales conversations. We examine appointment quality, attendance and next steps to determine whether meetings involve suitable prospects and create opportunities to advance a sale.",
+          },
+          {
+            title: "Initial Messaging",
+            detail:
+              "We examine whether the first contact clearly explains why the prospect should consider a conversation. We assess whether the message addresses a relevant business need, communicates potential value and gives the prospect a straightforward next step.",
+          },
+          {
+            title: "Qualification Criteria",
+            detail:
+              "We review how the team determines whether a prospect has a relevant need, purchasing authority, financial capacity and a realistic timeframe. We assess whether qualification helps prioritize promising opportunities while allowing suitable prospects time to develop.",
+          },
+          {
+            title: "Follow-Up Frequency",
+            detail:
+              "We examine how often prospects are contacted and how that timing reflects their interest, circumstances and buying process. We assess whether follow-up maintains momentum and whether promising opportunities are being lost through gaps in contact.",
+          },
+          {
+            title: "Lead Nurturing",
+            detail:
+              "We review how the organization maintains contact with suitable prospects who are not yet ready to buy. We assess whether ongoing communication provides relevant value and helps identify when the prospect is ready for a more direct sales conversation.",
+          },
+          {
+            title: "Referral Development",
+            detail:
+              "We examine how the organization earns and develops introductions from customers, business relationships and other referral sources. We assess whether there is a consistent approach to requesting appropriate introductions and following through on referred opportunities.",
+          },
+          {
+            title: "Prospecting Productivity",
+            detail:
+              "We review the qualified opportunities generated relative to the time, effort and cost invested in prospecting. We establish the current baseline and identify where better targeting, contact methods or follow-up could improve results.",
+          },
           "Conversion from lead to qualified opportunity",
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
@@ -1009,20 +1195,76 @@ export const siteConfig = {
         overview:
           "A sales presentation should help a prospective customer understand value, recognize relevance and make an informed business decision. We evaluate how the organization communicates its value throughout the sales conversation.",
         areas: [
-          "Opening the sales conversation",
-          "Discovery questions",
-          "Needs identification",
-          "Value proposition",
-          "Differentiation",
-          "Presentation structure",
-          "Product or service positioning",
-          "Financial justification",
-          "Handling objections",
-          "Competitive comparisons",
-          "Proposal presentation",
-          "Closing conversations",
-          "Next-step agreements",
-          "Consistency of messaging across the team",
+          {
+            title: "Opening the Sales Conversation",
+            detail:
+              "We examine how salespeople establish relevance, explain the purpose of the conversation and engage the prospect. We assess whether the opening creates a clear reason to continue and sets appropriate expectations for the discussion.",
+          },
+          {
+            title: "Discovery Questions",
+            detail:
+              "We review the questions salespeople use to understand the prospect's situation, priorities and decision process. We assess whether those questions uncover useful information and support a focused business conversation.",
+          },
+          {
+            title: "Needs Identification",
+            detail:
+              "We examine how salespeople confirm the customer's needs and distinguish primary concerns from secondary preferences. We assess whether the proposed solution addresses what matters most and whether the customer agrees with that understanding.",
+          },
+          {
+            title: "Value Proposition",
+            detail:
+              "We review how clearly the team explains the business value of the offering. We assess whether salespeople connect its benefits to the customer's specific priorities and provide credible reasons to consider the investment.",
+          },
+          {
+            title: "Differentiation",
+            detail:
+              "We examine how salespeople explain the meaningful differences between their offering and available alternatives. We assess whether those differences matter to the customer and are supported by specific, credible information.",
+          },
+          {
+            title: "Presentation Structure",
+            detail:
+              "We review how the presentation moves from understanding the customer's situation to explaining the solution and discussing a decision. We assess whether the sequence is clear, focused and adaptable to the conversation.",
+          },
+          {
+            title: "Product or Service Positioning",
+            detail:
+              "We examine how the offering is presented in relation to the customer's needs, expectations and available options. We assess whether its purpose, scope and suitability are clear enough for the customer to evaluate.",
+          },
+          {
+            title: "Financial Justification",
+            detail:
+              "We review how salespeople explain the investment in relation to potential financial benefits, costs or savings. We assess whether calculations use reasonable assumptions and clearly distinguish supported figures from estimates.",
+          },
+          {
+            title: "Handling Objections",
+            detail:
+              "We examine how salespeople clarify and respond to concerns about price, timing, suitability and other decision factors. We assess whether responses address the actual concern and help the customer determine whether to proceed.",
+          },
+          {
+            title: "Competitive Comparisons",
+            detail:
+              "We review how the team compares its offering with competitors and other options, including keeping the current approach. We assess whether comparisons are accurate, relevant and focused on the factors that matter to the customer.",
+          },
+          {
+            title: "Proposal Presentation",
+            detail:
+              "We examine how salespeople walk customers through the recommended solution, scope, pricing and terms. We assess whether the proposal reinforces the agreed needs and gives the customer a clear basis for making a decision.",
+          },
+          {
+            title: "Closing Conversations",
+            detail:
+              "We review how salespeople confirm that key questions have been answered and ask for a decision. We assess whether they recognize readiness to proceed, address remaining concerns and make the commitment process clear.",
+          },
+          {
+            title: "Next-Step Agreements",
+            detail:
+              "We examine whether sales conversations end with an agreed action, a responsible person and a timeframe. We assess whether those agreements maintain progress and prevent opportunities from drifting without a clear direction.",
+          },
+          {
+            title: "Consistency of Messaging Across the Team",
+            detail:
+              "We review whether salespeople communicate the organization's value, capabilities, pricing and commitments accurately and consistently. We assess whether the team shares a clear core message while adapting the conversation to each customer.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -1035,20 +1277,76 @@ export const siteConfig = {
         overview:
           "A sales pipeline should provide leadership with a realistic picture of future revenue—not simply a list of possible deals. We evaluate how opportunities are entered, categorized, advanced, forecast and managed.",
         areas: [
-          "Pipeline stages",
-          "Opportunity qualification",
-          "Stage definitions",
-          "Deal progression",
-          "Probability assumptions",
-          "Forecast accuracy",
-          "Pipeline coverage",
-          "Sales cycle length",
-          "Stalled opportunities",
-          "Follow-up discipline",
-          "Opportunity aging",
-          "Closing-date accuracy",
-          "Lost-deal analysis",
-          "Management pipeline reviews",
+          {
+            title: "Pipeline Stages",
+            detail:
+              "We examine whether the pipeline's stages reflect the customer's actual buying process. We assess whether they give the team a useful structure for managing opportunities and give leadership a clear view of progress toward a sale.",
+          },
+          {
+            title: "Opportunity Qualification",
+            detail:
+              "We review the requirements for accepting an opportunity into the pipeline. We assess whether there is sufficient evidence of customer need, purchasing ability and a realistic decision process to justify continued sales effort.",
+          },
+          {
+            title: "Stage Definitions",
+            detail:
+              "We examine whether each stage has clear entry and completion requirements. We assess whether salespeople categorize opportunities consistently and advance them based on evidence of progress.",
+          },
+          {
+            title: "Deal Progression",
+            detail:
+              "We review how opportunities move through the pipeline and what actions support that movement. We assess whether progress reflects meaningful customer involvement, resolved questions and agreed commitments.",
+          },
+          {
+            title: "Probability Assumptions",
+            detail:
+              "We examine how the likelihood of winning an opportunity is estimated. We assess whether those estimates reflect historical conversion results and the circumstances of the deal, and whether they are updated as new information becomes available.",
+          },
+          {
+            title: "Forecast Accuracy",
+            detail:
+              "We compare forecast revenue with actual results to establish the current accuracy baseline. We examine recurring differences to determine whether qualification, timing, deal values or probability assumptions need improvement.",
+          },
+          {
+            title: "Pipeline Coverage",
+            detail:
+              "We review the value of qualified opportunities available to support the sales target for a defined period. We assess whether coverage is sufficient based on actual win rates, expected closing dates and the time required to develop additional opportunities.",
+          },
+          {
+            title: "Sales Cycle Length",
+            detail:
+              "We examine how long opportunities take to move from a defined starting point to a completed sale. We establish the current baseline and review differences by customer type, deal size or offering to identify avoidable delays.",
+          },
+          {
+            title: "Stalled Opportunities",
+            detail:
+              "We review opportunities that have stopped making meaningful progress. We examine the reasons, confirm whether customer interest remains active and determine what action is needed to advance, defer or close out the opportunity.",
+          },
+          {
+            title: "Follow-Up Discipline",
+            detail:
+              "We examine whether agreed follow-up actions are completed on time and recorded accurately. We assess whether each active opportunity has a clear next step, an accountable salesperson and a realistic date for action.",
+          },
+          {
+            title: "Opportunity Aging",
+            detail:
+              "We review how long open opportunities have remained in the pipeline and in each stage. We compare that time with typical sales patterns to identify deals that require attention or may no longer belong in the active pipeline.",
+          },
+          {
+            title: "Closing-Date Accuracy",
+            detail:
+              "We examine whether expected closing dates are supported by the customer's decision process and remaining requirements. We review repeated date changes to identify unrealistic assumptions or unresolved obstacles affecting the forecast.",
+          },
+          {
+            title: "Lost-Deal Analysis",
+            detail:
+              "We review why opportunities were lost, including decisions to postpone purchasing or keep the current approach. We look for recurring patterns in qualification, value, pricing, competition and execution that could inform future improvements.",
+          },
+          {
+            title: "Management Pipeline Reviews",
+            detail:
+              "We examine how managers review pipeline quality, deal progress and forecast reliability with the team. We assess whether those discussions lead to useful decisions, specific actions and follow-through on opportunities that need attention.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -1061,20 +1359,76 @@ export const siteConfig = {
         overview:
           "A CRM should support the sales organization—not become an administrative burden that salespeople avoid using. We evaluate how effectively the CRM is supporting sales activity, visibility, follow-up and management decision-making.",
         areas: [
-          "CRM adoption",
-          "Data accuracy",
-          "Opportunity tracking",
-          "Contact management",
-          "Activity documentation",
-          "Follow-up reminders",
-          "Reporting",
-          "Pipeline visibility",
-          "Sales forecasting",
-          "Management usage",
-          "Duplicate or unnecessary data entry",
-          "Automation opportunities",
-          "Integration with other systems",
-          "Whether the CRM reflects the actual sales process",
+          {
+            title: "CRM Adoption",
+            detail:
+              "We examine how consistently salespeople and managers use the CRM in their daily work. We identify where limited use reflects unclear expectations, insufficient training or practical difficulties that prevent the system from supporting the team.",
+          },
+          {
+            title: "Data Accuracy",
+            detail:
+              "We review whether customer details, opportunity values, sales stages and other essential information are accurate and current. We assess whether missing or outdated information is affecting follow-up, reporting or management decisions.",
+          },
+          {
+            title: "Opportunity Tracking",
+            detail:
+              "We examine how sales opportunities are recorded, assigned and updated. We assess whether each record clearly shows the current situation, responsible salesperson, remaining requirements and next action.",
+          },
+          {
+            title: "Contact Management",
+            detail:
+              "We review how customer and prospect contacts are organized and maintained. We assess whether the team can readily identify decision-makers, understand their roles and access relevant communication history.",
+          },
+          {
+            title: "Activity Documentation",
+            detail:
+              "We examine how calls, meetings, emails and other meaningful sales activities are recorded. We assess whether documentation provides enough context for effective follow-through and continuity without creating excessive administrative work.",
+          },
+          {
+            title: "Follow-Up Reminders",
+            detail:
+              "We review how reminders and task assignments help salespeople complete agreed actions. We assess whether they are timely, useful and connected to clear responsibilities so important follow-up is less likely to be missed.",
+          },
+          {
+            title: "Reporting",
+            detail:
+              "We examine whether CRM reports provide accurate, relevant information about sales activity and results. We assess whether reports help leaders identify performance gaps, monitor progress and make decisions without unnecessary complexity.",
+          },
+          {
+            title: "Pipeline Visibility",
+            detail:
+              "We review whether the CRM gives salespeople and leaders a clear view of active opportunities, their status and outstanding actions. We assess whether that visibility helps identify stalled deals, coverage gaps and opportunities requiring support.",
+          },
+          {
+            title: "Sales Forecasting",
+            detail:
+              "We examine how CRM information is used to estimate future sales revenue. We assess whether deal values, probabilities and expected closing dates are maintained well enough to support realistic forecasts.",
+          },
+          {
+            title: "Management Usage",
+            detail:
+              "We review how managers use the CRM to prepare for coaching, conduct pipeline reviews and monitor commitments. We assess whether the system supports timely decisions and follow-through as part of their regular management responsibilities.",
+          },
+          {
+            title: "Duplicate or Unnecessary Data Entry",
+            detail:
+              "We examine where employees repeatedly enter the same information or complete fields with little practical value. We identify opportunities to simplify data entry while preserving the information needed for sales execution and management.",
+          },
+          {
+            title: "Automation Opportunities",
+            detail:
+              "We review repetitive tasks that could be handled through appropriate CRM automation, such as reminders, lead assignments and routine updates. We assess where automation could save time and improve consistency while maintaining clear ownership and appropriate customer communication.",
+          },
+          {
+            title: "Integration with Other Systems",
+            detail:
+              "We examine how the CRM exchanges information with email, marketing, quoting, accounting and other relevant systems. We assess whether disconnected information or unreliable transfers are creating extra work, errors or gaps in visibility.",
+          },
+          {
+            title: "Whether the CRM Reflects the Actual Sales Process",
+            detail:
+              "We review whether CRM stages, fields and workflows match how the organization actually sells. We assess whether the setup guides useful action, captures meaningful progress and accommodates the requirements of the business.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -1087,20 +1441,76 @@ export const siteConfig = {
         overview:
           "What gets measured should help leadership make better decisions. We evaluate whether the organization is measuring the right indicators and whether those measurements are helping improve performance.",
         areas: [
-          "Revenue",
-          "Gross profit",
-          "New accounts",
-          "Existing-account growth",
-          "Average transaction value",
-          "Sales activity",
-          "Appointment generation",
-          "Conversion rates",
-          "Proposal-to-close ratios",
-          "Sales cycle length",
-          "Pipeline coverage",
-          "Customer retention",
-          "Forecast accuracy",
-          "Individual and team productivity",
+          {
+            title: "Revenue",
+            detail:
+              "We review sales revenue for a defined period and compare it with the starting baseline, targets and prior results. We examine trends by salesperson, customer or offering to understand what is driving growth or limiting production.",
+          },
+          {
+            title: "Gross Profit",
+            detail:
+              "We examine sales revenue after subtracting the direct costs of the products or services sold. We review both gross profit dollars and gross margin percentage to determine whether increased sales are producing sufficient financial value.",
+          },
+          {
+            title: "New Accounts",
+            detail:
+              "We review the number and value of new customer accounts secured during a defined period. We assess whether new-account production is supporting growth and attracting the types of customers the organization intends to serve.",
+          },
+          {
+            title: "Existing-Account Growth",
+            detail:
+              "We examine increases in sales from established customers through repeat purchases, expanded services or additional product sales. We compare results with the starting baseline and consider purchasing patterns to identify meaningful account development.",
+          },
+          {
+            title: "Average Transaction Value",
+            detail:
+              "We review average revenue per completed sale, calculated by dividing sales revenue by the number of transactions in the same period. We examine whether changes reflect pricing, product mix, discounting or the team's ability to address broader customer needs.",
+          },
+          {
+            title: "Sales Activity",
+            detail:
+              "We examine the volume and quality of calls, customer conversations, meetings, proposals and follow-up. We establish the current activity baseline and assess which activities contribute to qualified opportunities and completed sales.",
+          },
+          {
+            title: "Appointment Generation",
+            detail:
+              "We review how many qualified sales appointments are scheduled and how many actually take place. We assess whether appointment volume, attendance and quality are sufficient to support the organization's sales objectives.",
+          },
+          {
+            title: "Conversion Rates",
+            detail:
+              "We examine the percentage of prospects or opportunities that advance between clearly defined sales stages. We establish baseline rates for each relevant transition to identify where the organization is progressing effectively and where potential sales are being lost.",
+          },
+          {
+            title: "Proposal-to-Close Ratios",
+            detail:
+              "We review the percentage of proposals that result in completed sales, using a defined group of proposals and allowing for the normal decision period. We examine whether qualification, proposal quality, pricing or follow-through is affecting results.",
+          },
+          {
+            title: "Sales Cycle Length",
+            detail:
+              "We measure the time from a clearly defined starting point, such as opportunity qualification, to a completed sale. We compare results with the starting baseline and examine where delays occur, accounting for differences in deal size and complexity.",
+          },
+          {
+            title: "Pipeline Coverage",
+            detail:
+              "We compare the value of qualified opportunities expected to close within a defined period with the sales target for that period. We assess whether coverage is sufficient based on actual win rates and realistic closing dates.",
+          },
+          {
+            title: "Customer Retention",
+            detail:
+              "We review the percentage of existing customers who continue doing business with the organization over a defined period. We establish what counts as an active or retained customer and examine losses, renewals and repeat-purchase patterns to identify retention opportunities.",
+          },
+          {
+            title: "Forecast Accuracy",
+            detail:
+              "We compare the sales forecast recorded at a defined point with the actual results for the forecast period. We establish an accuracy baseline and examine recurring differences in deal value, timing and expected outcomes.",
+          },
+          {
+            title: "Individual and Team Productivity",
+            detail:
+              "We examine sales output relative to the time and resources invested by individual salespeople and the team. We compare results with the starting baseline, considering differences in responsibilities and opportunities, to identify where better use of existing capacity could improve performance.",
+          },
         ],
         note: "We also examine whether too much is being measured, too little is being measured, or whether the organization is focusing on metrics that do not materially improve decision-making.",
         objective:
@@ -1113,20 +1523,76 @@ export const siteConfig = {
         overview:
           "Compensation should reward the behaviors and results the organization wants to produce. We evaluate whether current compensation and incentive programs support company objectives while remaining understandable and motivating to the sales team.",
         areas: [
-          "Base salary and commission structure",
-          "Straight commission structures",
-          "Commission percentages",
-          "Accelerators",
-          "Bonuses",
-          "Gross-margin incentives",
-          "New-account incentives",
-          "Existing-account incentives",
-          "Team incentives",
-          "Quotas",
-          "Thresholds",
-          "Commission timing",
-          "Territory considerations",
-          "Incentive clarity",
+          {
+            title: "Base Salary and Commission Structure",
+            detail:
+              "We examine how fixed pay and performance-based earnings work together. We assess whether the balance supports the role's responsibilities, motivates sales production and remains financially practical for the organization.",
+          },
+          {
+            title: "Straight Commission Structures",
+            detail:
+              "We review arrangements in which earnings depend entirely on sales results. We assess whether earning opportunities, sales cycles and responsibilities make the structure workable and whether it rewards the outcomes the organization needs.",
+          },
+          {
+            title: "Commission Percentages",
+            detail:
+              "We examine commission rates and the amounts on which they are calculated, such as revenue, collected revenue or gross profit. We assess whether payouts provide meaningful motivation while supporting company profitability.",
+          },
+          {
+            title: "Accelerators",
+            detail:
+              "We review increased commission rates that apply after defined performance levels are reached. We assess whether they encourage additional production and whether the qualifying rules and financial impact are clearly understood.",
+          },
+          {
+            title: "Bonuses",
+            detail:
+              "We examine additional payments tied to specific achievements, milestones or business objectives. We assess whether the requirements are clear, the rewards are meaningful and the program encourages results that justify its cost.",
+          },
+          {
+            title: "Gross-Margin Incentives",
+            detail:
+              "We review incentives tied to gross profit dollars or gross margin percentage. We assess whether they encourage profitable selling and appropriate pricing, considering how much control salespeople have over prices and direct costs.",
+          },
+          {
+            title: "New-Account Incentives",
+            detail:
+              "We examine rewards for acquiring new customers. We assess whether they encourage accounts with suitable revenue potential, profitability and long-term value, and whether the requirements for earning the incentive are clear.",
+          },
+          {
+            title: "Existing-Account Incentives",
+            detail:
+              "We review how salespeople are rewarded for retaining and developing established customers. We assess whether incentives support repeat business, renewals and account expansion while distinguishing ongoing sales effort from routine orders.",
+          },
+          {
+            title: "Team Incentives",
+            detail:
+              "We examine rewards based on shared sales objectives or collective results. We assess whether they encourage useful cooperation, recognize contributions fairly and maintain clear individual responsibilities.",
+          },
+          {
+            title: "Quotas",
+            detail:
+              "We review sales targets used to determine expected performance and incentive eligibility. We assess whether quotas reflect territory potential, available opportunities, sales cycles and company objectives, and whether salespeople understand how they are established.",
+          },
+          {
+            title: "Thresholds",
+            detail:
+              "We examine minimum performance requirements that must be met before particular commissions or incentives apply. We assess whether those requirements are attainable, clearly explained and structured to maintain motivation throughout the performance period.",
+          },
+          {
+            title: "Commission Timing",
+            detail:
+              "We review when commissions are earned and paid, including whether payment depends on an order, delivery or customer payment. We assess whether timing and adjustments for cancellations, returns or unpaid invoices are clearly defined and consistently applied.",
+          },
+          {
+            title: "Territory Considerations",
+            detail:
+              "We examine how territory size, customer potential, account maturity and workload affect earning opportunities. We assess whether compensation and quotas reasonably account for those differences and whether credit for shared accounts is clearly assigned.",
+          },
+          {
+            title: "Incentive Clarity",
+            detail:
+              "We review whether salespeople can readily understand how their earnings are calculated and what actions affect their compensation. We assess whether written terms, examples and earnings statements provide clear answers and reduce avoidable disputes.",
+          },
           "Unintended behaviors created by the compensation plan",
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
@@ -1140,21 +1606,81 @@ export const siteConfig = {
         overview:
           "Sales performance begins before a salesperson ever speaks with a prospect. We evaluate how sales talent is identified, selected, introduced to the organization and prepared to become productive.",
         areas: [
-          "Position requirements",
-          "Ideal candidate profile",
-          "Recruiting sources",
-          "Job advertisements",
-          "Screening procedures",
-          "Interview process",
-          "Sales assessments",
-          "Reference checks",
-          "Compensation communication",
-          "New-hire orientation",
-          "Product and service knowledge",
-          "Sales-process training",
-          "CRM training",
-          "Initial performance expectations",
-          "30-, 60- and 90-day productivity milestones",
+          {
+            title: "Position Requirements",
+            detail:
+              "We examine whether the role's responsibilities, required skills and expected results are clearly defined. We assess whether those requirements reflect the actual work and provide a practical foundation for recruiting and evaluating candidates.",
+          },
+          {
+            title: "Ideal Candidate Profile",
+            detail:
+              "We review the experience, abilities and working approach most likely to support success in the role. We assess whether the profile reflects the organization's customers, sales process and management environment.",
+          },
+          {
+            title: "Recruiting Sources",
+            detail:
+              "We examine where candidates are being found and which sources produce suitable applicants and successful hires. We assess whether recruiting efforts reach the right talent and justify the time and cost invested.",
+          },
+          {
+            title: "Job Advertisements",
+            detail:
+              "We review whether job advertisements clearly explain the opportunity, responsibilities, compensation structure and essential qualifications. We assess whether the wording attracts suitable candidates and sets accurate expectations about the position.",
+          },
+          {
+            title: "Screening Procedures",
+            detail:
+              "We examine how applicants are reviewed before advancing to interviews. We assess whether screening consistently identifies relevant qualifications, confirms essential requirements and gives promising candidates appropriate consideration.",
+          },
+          {
+            title: "Interview Process",
+            detail:
+              "We review how interviews explore a candidate's experience, judgment and ability to perform the work. We assess whether questions and evaluation standards provide a consistent basis for comparing candidates.",
+          },
+          {
+            title: "Sales Assessments",
+            detail:
+              "We examine how practical exercises, role-play or other assessments are used to evaluate sales ability. We assess whether they reflect the actual role and provide useful evidence of skills such as discovery, presentation, objection handling and closing.",
+          },
+          {
+            title: "Reference Checks",
+            detail:
+              "We review how references are used to confirm relevant experience, responsibilities and past performance. We assess whether the information gathered helps clarify important questions about the candidate's suitability for the role.",
+          },
+          {
+            title: "Compensation Communication",
+            detail:
+              "We examine how compensation, earning opportunities and payment conditions are explained during hiring. We assess whether candidates understand the structure, performance requirements and assumptions behind any stated income potential.",
+          },
+          {
+            title: "New-Hire Orientation",
+            detail:
+              "We review how new salespeople are introduced to the organization, their responsibilities and the people who support their work. We assess whether they receive the information, access and direction needed to begin effectively.",
+          },
+          {
+            title: "Product and Service Knowledge",
+            detail:
+              "We examine how new hires learn the offering's purpose, capabilities, limitations and customer value. We assess whether they can explain it accurately, recognize suitable applications and know when to seek additional support.",
+          },
+          {
+            title: "Sales-Process Training",
+            detail:
+              "We review how new salespeople learn the organization's approach to prospecting, qualification, presentation, follow-up and closing. We assess whether training includes practical application and clear standards for moving opportunities forward.",
+          },
+          {
+            title: "CRM Training",
+            detail:
+              "We examine how new hires learn to manage contacts, document activity, update opportunities and schedule follow-up in the CRM. We assess whether they can use the system correctly and efficiently in their daily work.",
+          },
+          {
+            title: "Initial Performance Expectations",
+            detail:
+              "We review the activity, learning and production expectations established for a new salesperson's early weeks. We assess whether those expectations are clear, realistic and supported by appropriate coaching, resources and opportunities.",
+          },
+          {
+            title: "30-, 60- and 90-Day Productivity Milestones",
+            detail:
+              "We examine the checkpoints used to evaluate progress during the first three months. We assess whether milestones reflect the normal sales cycle and provide measurable evidence of learning, effective activity, pipeline development and sales production as appropriate.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -1167,20 +1693,76 @@ export const siteConfig = {
         overview:
           "Some of the most valuable revenue opportunities may already exist within the current customer base. We evaluate how the organization maintains, strengthens and expands existing customer relationships.",
         areas: [
-          "Customer retention",
-          "Account communication",
-          "Account reviews",
-          "Renewal processes",
-          "Cross-selling",
-          "Upselling",
-          "Additional-location opportunities",
-          "Additional-product or service opportunities",
-          "Referral generation",
-          "Dormant-account reactivation",
-          "Customer concentration",
-          "At-risk accounts",
-          "Account ownership",
-          "Customer lifetime value",
+          {
+            title: "Customer Retention",
+            detail:
+              "We examine how consistently customers continue doing business with the organization. We review repeat purchases, renewals and customer losses to identify what supports lasting relationships and where preventable losses may be occurring.",
+          },
+          {
+            title: "Account Communication",
+            detail:
+              "We review how the organization maintains contact with existing customers. We assess whether communication is timely, relevant and sufficient to understand changing needs, address concerns and maintain a productive business relationship.",
+          },
+          {
+            title: "Account Reviews",
+            detail:
+              "We examine how customer accounts are periodically reviewed for satisfaction, results and future needs. We assess whether these conversations lead to specific actions that strengthen the relationship and identify appropriate opportunities for additional business.",
+          },
+          {
+            title: "Renewal Processes",
+            detail:
+              "We review how upcoming renewals are identified, prepared for and managed. We assess whether responsibilities, timing and customer discussions provide enough notice to address concerns and support continued business.",
+          },
+          {
+            title: "Cross-Selling",
+            detail:
+              "We examine how salespeople identify complementary products or services that could benefit existing customers. We assess whether recommendations address a relevant need and whether the team consistently recognizes suitable opportunities.",
+          },
+          {
+            title: "Upselling",
+            detail:
+              "We review opportunities to increase the scope, capacity or level of a product or service the customer already uses. We assess whether the additional investment is justified by the customer's needs and the value provided.",
+          },
+          {
+            title: "Additional-Location Opportunities",
+            detail:
+              "We examine whether existing customer relationships could extend to other branches, offices or operating locations. We review purchasing arrangements, decision-making authority and location-specific needs to determine where expansion may be appropriate.",
+          },
+          {
+            title: "Additional-Product or Service Opportunities",
+            detail:
+              "We review customer needs that the organization could address through offerings the account is not currently purchasing. We assess whether customers understand the available options and whether relevant needs are being overlooked.",
+          },
+          {
+            title: "Referral Generation",
+            detail:
+              "We examine how satisfied customers are invited to make appropriate introductions to other potential customers. We assess whether referral requests are well timed, clearly framed and followed through in a way that respects the existing relationship.",
+          },
+          {
+            title: "Dormant-Account Reactivation",
+            detail:
+              "We review accounts that previously purchased but have become inactive. We examine why business stopped, whether needs or circumstances have changed and whether there is a practical opportunity to reestablish the relationship.",
+          },
+          {
+            title: "Customer Concentration",
+            detail:
+              "We examine how much revenue and gross profit depend on a small number of customers. We assess the potential effect of losing a major account and whether account development and new-customer efforts provide a reasonable balance.",
+          },
+          {
+            title: "At-Risk Accounts",
+            detail:
+              "We review signs that a customer relationship may be weakening, such as declining purchases, unresolved concerns or reduced engagement. We assess whether those signals are recognized early and followed by appropriate action.",
+          },
+          {
+            title: "Account Ownership",
+            detail:
+              "We examine whether responsibility for each customer relationship is clearly assigned. We assess whether sales, service and management understand their roles and coordinate effectively so customer needs and development opportunities receive attention.",
+          },
+          {
+            title: "Customer Lifetime Value",
+            detail:
+              "We review the estimated financial contribution a customer generates over the course of the relationship. We consider revenue, gross profit, service costs and retention patterns to help the organization make informed decisions about acquiring, supporting and developing accounts.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review.",
         objective:
@@ -1193,22 +1775,86 @@ export const siteConfig = {
         overview:
           "Training should address actual performance needs rather than simply provide more information. We evaluate whether salespeople and sales managers have the knowledge, skills and support necessary to perform effectively.",
         areas: [
-          "Prospecting skills",
-          "Discovery",
-          "Qualification",
-          "Presentation skills",
-          "Value communication",
-          "Objection handling",
-          "Negotiation",
-          "Closing",
-          "Account development",
-          "CRM usage",
-          "Pipeline management",
-          "Sales management skills",
-          "Coaching",
-          "Product knowledge",
-          "Industry knowledge",
-          "Continuing development",
+          {
+            title: "Prospecting Skills",
+            detail:
+              "We examine the team's ability to identify suitable prospects, initiate contact and generate meaningful sales conversations. We assess where targeted practice and coaching could improve the quality and productivity of outreach.",
+          },
+          {
+            title: "Discovery",
+            detail:
+              "We review how salespeople use questions and listening to understand the customer's situation, priorities and decision process. We assess whether they gather enough relevant information to guide the conversation and recommend an appropriate solution.",
+          },
+          {
+            title: "Qualification",
+            detail:
+              "We examine the team's ability to determine whether an opportunity warrants further sales effort. We assess how effectively salespeople establish customer need, purchasing authority, financial capacity and timing.",
+          },
+          {
+            title: "Presentation Skills",
+            detail:
+              "We review how clearly and confidently salespeople organize and deliver their presentations. We assess their ability to engage the customer, adapt to the discussion and explain the offering in terms the customer understands.",
+          },
+          {
+            title: "Value Communication",
+            detail:
+              "We examine how salespeople connect the offering's benefits to the customer's specific business needs. We assess whether they can explain the expected value credibly and support it with relevant examples, evidence or reasonable calculations.",
+          },
+          {
+            title: "Objection Handling",
+            detail:
+              "We review how salespeople uncover the concern behind an objection and respond to it. We assess whether they clarify the issue, provide a relevant answer and confirm whether the concern has been resolved.",
+          },
+          {
+            title: "Negotiation",
+            detail:
+              "We examine how salespeople discuss pricing, terms, scope and other conditions of an agreement. We assess whether they protect profitability, understand customer priorities and exchange concessions thoughtfully within their authority.",
+          },
+          {
+            title: "Closing",
+            detail:
+              "We review the team's ability to recognize buying readiness, resolve remaining questions and ask for a commitment. We assess whether salespeople guide customers through a clear decision process and accurately confirm the agreed terms.",
+          },
+          {
+            title: "Account Development",
+            detail:
+              "We examine how salespeople maintain customer relationships and identify additional needs. We assess their ability to conduct useful account conversations, recognize growth opportunities and recommend appropriate next steps.",
+          },
+          {
+            title: "CRM Usage",
+            detail:
+              "We review whether salespeople have the practical skills to manage contacts, update opportunities, document activity and organize follow-up. We assess where training could improve accuracy, consistency and efficient use of the system.",
+          },
+          {
+            title: "Pipeline Management",
+            detail:
+              "We examine the team's ability to qualify, prioritize and advance opportunities through the pipeline. We assess whether salespeople maintain realistic stages and closing dates, recognize stalled deals and plan useful next actions.",
+          },
+          {
+            title: "Sales Management Skills",
+            detail:
+              "We review managers' ability to set expectations, interpret performance information and direct team effort. We assess development needs in planning, accountability, performance discussions and the effective use of management time.",
+          },
+          {
+            title: "Coaching",
+            detail:
+              "We examine managers' ability to identify specific skill gaps, demonstrate effective approaches and guide practice. We assess whether coaching includes clear improvement goals and follow-up against each salesperson's starting baseline.",
+          },
+          {
+            title: "Product Knowledge",
+            detail:
+              "We review whether the team understands the offering's capabilities, applications, limitations and customer benefits. We assess whether salespeople can answer relevant questions accurately and recognize when specialist support is needed.",
+          },
+          {
+            title: "Industry Knowledge",
+            detail:
+              "We examine how well salespeople understand their customers' operating environment, terminology and business priorities. We assess whether that knowledge helps them ask relevant questions, recognize needs and hold credible business conversations.",
+          },
+          {
+            title: "Continuing Development",
+            detail:
+              "We review how skills and knowledge are strengthened after initial training. We assess whether ongoing coaching, practice and learning address changing needs and produce measurable improvements in day-to-day performance.",
+          },
         ],
         note: "Depending on the organization and the issue being addressed, only the areas most relevant to performance may require review. Training recommendations are based on identified needs. If training is not necessary, we do not recommend it.",
         objective:

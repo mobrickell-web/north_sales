@@ -52,7 +52,10 @@ export function CareersPage() {
               className="careers-page__role group"
             >
               <summary className="careers-page__role-summary">
-                <span id={`${role.id}-title`} className="careers-page__role-title">
+                <span
+                  id={`${role.id}-title`}
+                  className="careers-page__role-title"
+                >
                   {role.title}
                 </span>
                 <span aria-hidden className="careers-page__role-icon">

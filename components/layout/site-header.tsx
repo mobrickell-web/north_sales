@@ -62,10 +62,12 @@ export function SiteHeader() {
     return () => window.removeEventListener("hashchange", syncHash);
   }, []);
 
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setIsMenuOpen(false);
     setIsMoreOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (!isMoreOpen) return;

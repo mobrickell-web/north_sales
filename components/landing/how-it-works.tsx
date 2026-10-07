@@ -17,7 +17,7 @@ interface ModalComponent {
   title: string;
   desc: string;
   overview?: string;
-  areas?: readonly string[]; // Updated to accept readonly arrays
+  areas?: readonly (string | { title: string; detail?: string })[]; // Updated to accept readonly arrays
   note?: string;
   objective?: string;
 }
@@ -421,18 +421,38 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                                   <h4 className="font-body text-[13px] font-bold text-primary uppercase">
                                     Areas We May Examine Include:
                                   </h4>
-                                  <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                                    {activeComponent.areas.map(
-                                      (area: string, i: number) => (
+                                  <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                    {activeComponent.areas.map((area, i) => {
+                                      const title =
+                                        typeof area === "string"
+                                          ? area
+                                          : area.title;
+                                      const detail =
+                                        typeof area === "string"
+                                          ? undefined
+                                          : area.detail;
+
+                                      return (
                                         <li
                                           key={i}
                                           className="flex items-start gap-2.5 font-body text-[13px] text-gray-600"
                                         >
-                                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#b17411]" />
-                                          <span>{area}</span>
+                                          <span className="mt-0.5 shrink-0 font-body text-[13px] font-bold text-[#b17411]">
+                                            {i + 1}.
+                                          </span>
+                                          <div className="flex flex-col gap-1">
+                                            <span className="font-bold text-primary">
+                                              {title}
+                                            </span>
+                                            {detail && (
+                                              <span className="leading-relaxed text-[#5C5F66]">
+                                                {detail}
+                                              </span>
+                                            )}
+                                          </div>
                                         </li>
-                                      ),
-                                    )}
+                                      );
+                                    })}
                                   </ul>
                                 </div>
                               )}
