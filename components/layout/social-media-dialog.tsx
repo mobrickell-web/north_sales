@@ -17,7 +17,7 @@ export function SocialMediaDialog() {
           type="button"
           className="cursor-pointer text-left font-body text-[12px] text-white/50 transition-colors hover:text-white"
         >
-          Social Media
+          Social Media Policy
         </button>
       </Dialog.Trigger>
 
