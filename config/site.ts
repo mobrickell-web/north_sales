@@ -66,7 +66,7 @@ export const siteConfig = {
     { label: "INVESTMENT", href: "#investment" },
 
     // { href: "#solutions", label: "Solutions" },
-    { href: "#faqs", label: "FAQ's" },
+    { href: "#faqs", label: "FAQs" },
   ],
   navMore: {
     label: "MORE",
@@ -2118,6 +2118,10 @@ export const siteConfig = {
               "The engagement includes direct one-on-one work with up to three selected salespeople.",
               "Additional individual coaching or work beyond the initial 30 days can be added based on the company's needs.",
             ],
+            upgradeHeading: "UPGRADE CREDIT",
+            upgradeParagraphs: [
+              "If a client moves directly from the $7,500 Sales Team Performance Engagement into a Full Sales Performance Implementation, the $7,500 engagement fee will be credited toward the implementation fee.",
+            ],
             outcomeHeading: "ENGAGEMENT OUTCOME",
             outcomeParagraphs: [
               "The objective is to determine where sales performance is being constrained, address the highest-priority issues, and give sales leadership a clear path for improving execution and accountability.",
@@ -2335,6 +2339,10 @@ export const siteConfig = {
               "The $9,500 professional fee covers the 30-day focused assessment, analysis, executive recommendations, and implementation roadmap. Select 30-DAY WORK SEQUENCE to view the general day-by-day work sequence.",
               "The engagement does not include full implementation of recommended changes or significant third-party costs such as website development, advertising spend, media, technology, or specialized production.",
               "If the scope of the sales operation or level of analysis required is substantially greater, the engagement may be expanded accordingly.",
+            ],
+            upgradeHeading: "UPGRADE CREDIT",
+            upgradeParagraphs: [
+              "If a client moves directly from the $9,500 30-Day Focused Sales Performance Engagement into a Full Sales Performance Implementation, the $9,500 engagement fee will be credited toward the implementation fee.",
             ],
             sequenceInNestedPopup: true,
             sequenceHeading: "30-DAY WORK SEQUENCE",
@@ -2867,7 +2875,7 @@ export const siteConfig = {
     ],
   },
   faq: {
-    badge: "FAQ's",
+    badge: "FAQs",
     title: "Resources & Insights",
     questions: [
       {
@@ -3037,7 +3045,7 @@ export const siteConfig = {
   results: {
     badge: "Results",
     title: "SALES PERFORMANCE IMPROVEMENT ACROSS THE ORGANIZATION",
-    intro: "Our clients achieve sustainable revenue growth through:",
+    intro: "We help organizations pursue sustainable revenue growth through:",
     checkmark: "/icons/checkmark.svg",
     bullets: [
       {
@@ -3225,7 +3233,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
               { label: "Investment", href: "/#investment" },
 
               // { label: "Solutions", href: "/#solutions" },
-              { label: "FAQ's", href: "/#faqs" },
+              { label: "FAQs", href: "/#faqs" },
 
               { label: "Careers", href: "/careers" },
               { label: "Blog", href: "/blogs" },
@@ -3250,6 +3258,19 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
         "We respect that privacy. What we do for a client is their business, and we keep it that way.",
       ],
     },
+
+    socialMediaNote: {
+      title: "OUR APPROACH TO SOCIAL MEDIA",
+      paragraphs: [
+        "NORTH POINT SALES GROUP is structured to work with a limited number of clients at any given time, allowing us to devote the attention, resources, and expertise necessary to make a meaningful difference in their sales performance.",
+        "Our business development approach emphasizes carefully selected relationships and direct engagement with business owners and senior executives rather than broad-based marketing or social media outreach.",
+        "While we recognize the value of professional networking platforms such as LinkedIn, given our business model and approach to client engagements, maintaining a LinkedIn company page is not part of our current business development strategy.",
+        "Our approach is intentionally focused, relationship-driven, and consistent with the highly personalized nature of the services we provide.",
+      ],
+    },
+
+    copyrightNotice:
+      "Except as permitted by applicable law, no part of this website's copyrighted content—including articles, written materials, graphics, and downloadable resources—may be reproduced, republished, distributed, or adapted without prior written permission from NORTH POINT SALES GROUP.",
 
     legal: [
       { label: "Privacy Policy", href: "/privacy-policy" },

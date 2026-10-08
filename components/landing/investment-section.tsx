@@ -26,6 +26,8 @@ type InvestmentPopup = {
   deliverableParagraphs?: readonly string[];
   parametersHeading?: string;
   parametersParagraphs?: readonly string[];
+  upgradeHeading?: string;
+  upgradeParagraphs?: readonly string[];
   sequenceHeading?: string;
   sequenceIntro?: string;
   sequenceGroups?: readonly InvestmentGroup[];
@@ -230,6 +232,12 @@ export function InvestmentSection({
                       renderSectionBlock(
                         popup.parametersHeading,
                         popup.parametersParagraphs,
+                      )}
+
+                    {popup.upgradeHeading &&
+                      renderSectionBlock(
+                        popup.upgradeHeading,
+                        popup.upgradeParagraphs,
                       )}
 
                     {showSequenceInline &&

@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
+import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
 
 const HEADER_OFFSET = 110;
 
@@ -214,15 +215,17 @@ export function SiteFooter() {
 
           <div className="border-t border-white/10 pt-6">
             <div className="flex flex-col items-center justify-between gap-4 font-body text-[12px] text-white/50 sm:flex-row">
-              <p className="text-center sm:text-left">
-                © {new Date().getFullYear()} {name}. All rights reserved.
+              <p className="max-w-[760px] text-center sm:text-left">
+                © {new Date().getFullYear()} {name}. All rights reserved.{" "}
+                {footer.copyrightNotice}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
-                {footer.legal.map((item, index) => (
+                <span className="flex items-center gap-4">
+                  <SocialMediaDialog />
+                </span>
+                {footer.legal.map((item) => (
                   <span key={item.label} className="flex items-center gap-4">
-                    {index > 0 && (
-                      <span className="h-3 w-px bg-white/20" aria-hidden />
-                    )}
+                    <span className="h-3 w-px bg-white/20" aria-hidden />
                     <Link
                       href={item.href}
                       className="transition-colors hover:text-white"
