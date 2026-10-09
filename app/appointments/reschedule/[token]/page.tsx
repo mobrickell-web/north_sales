@@ -22,7 +22,70 @@ import {
   getAppointmentByToken,
   rescheduleAppointment,
 } from "@/lib/appointment-api";
-import { buildCalendarLinks } from "@/lib/calendar-links";
+import { buildCalendarLinks, ianaForTimezone } from "@/lib/calendar-links";
+
+function slotParts(slot: string) {
+  const match = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec(slot.trim());
+  if (!match) return null;
+  let hour = Number(match[1]);
+  const minute = Number(match[2]);
+  const period = match[3].toUpperCase();
+  if (period === "PM" && hour !== 12) hour += 12;
+  if (period === "AM" && hour === 12) hour = 0;
+  return { hour, minute };
+}
+
+/** UTC ms for a wall-clock time in an IANA zone (samples the offset twice to
+ *  stay correct across daylight-saving boundaries). */
+function zonedTimeToUtcMs(
+  dateValue: string,
+  hour: number,
+  minute: number,
+  iana: string,
+) {
+  const [year, month, day] = dateValue.split("-").map(Number);
+  const utcGuess = Date.UTC(year, month - 1, day, hour, minute);
+  const offsetAt = (ts: number) => {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: iana,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).formatToParts(new Date(ts));
+    const get = (type: string) =>
+      Number(parts.find((part) => part.type === type)?.value ?? 0);
+    const asUtc = Date.UTC(
+      get("year"),
+      get("month") - 1,
+      get("day"),
+      get("hour") % 24,
+      get("minute"),
+      get("second"),
+    );
+    return asUtc - ts;
+  };
+  let ts = utcGuess - offsetAt(utcGuess);
+  ts = utcGuess - offsetAt(ts);
+  return ts;
+}
+
+function isPastSlot(dateValue: string, slot: string, timezone: string) {
+  if (!dateValue) return false;
+  const parts = slotParts(slot);
+  if (!parts) return false;
+  return (
+    zonedTimeToUtcMs(
+      dateValue,
+      parts.hour,
+      parts.minute,
+      ianaForTimezone(timezone),
+    ) <= Date.now()
+  );
+}
 
 export default function RescheduleAppointmentPage() {
   const { token } = useParams<{ token: string }>();
@@ -61,6 +124,10 @@ export default function RescheduleAppointmentPage() {
     event.preventDefault();
     if (!token || !date || !time || !timezone) {
       setSubmitError("Please choose a new date, time and time zone.");
+      return;
+    }
+    if (isPastSlot(date, time, timezone)) {
+      setSubmitError("Please choose a future date and time.");
       return;
     }
 
@@ -125,7 +192,7 @@ export default function RescheduleAppointmentPage() {
   }
 
   const locked =
-    appointment.status === "CANCELLED" || appointment.status === "COMPLETED";
+    appointment.status === "COMPLETED" || appointment.status === "NO_SHOW";
 
   return (
     <AppointmentPageShell
@@ -144,6 +211,13 @@ export default function RescheduleAppointmentPage() {
           />
         </div>
 
+        {appointment.status === "CANCELLED" ? (
+          <AppointmentStateMessage tone="info">
+            This appointment was cancelled. Pick a new date and time below to
+            reinstate it — the time must be different from the cancelled slot.
+          </AppointmentStateMessage>
+        ) : null}
+
         {locked ? (
           <AppointmentStateMessage>
             This appointment can no longer be rescheduled.
@@ -159,7 +233,12 @@ export default function RescheduleAppointmentPage() {
                 type="date"
                 min={today}
                 value={date}
-                onChange={(event) => setDate(event.target.value)}
+                onChange={(event) => {
+                  const nextDate = event.target.value;
+                  setDate(nextDate);
+                  if (isPastSlot(nextDate, time, timezone)) setTime("");
+                  setSubmitError(null);
+                }}
                 className={appointmentInputClass}
                 required
               />
@@ -180,7 +259,11 @@ export default function RescheduleAppointmentPage() {
                   Select a time
                 </option>
                 {timeSlots.map((slot) => (
-                  <option key={slot} value={slot}>
+                  <option
+                    key={slot}
+                    value={slot}
+                    disabled={isPastSlot(date, slot, timezone)}
+                  >
                     {slot}
                   </option>
                 ))}

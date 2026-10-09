@@ -328,22 +328,8 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                           : "pointer-events-none opacity-0",
                       )}
                     >
-                      {/* Title + Back (detail view only) */}
+                      {/* Title */}
                       <div className="mt-8 flex flex-col gap-2 border-b border-gray-300/60 pb-4">
-                        <div className="flex items-center justify-between">
-                          {selectedCompIndex !== null ? (
-                            <button
-                              type="button"
-                              onClick={handleBack}
-                              className="inline-flex cursor-pointer items-center gap-1 font-body text-[13px] font-bold text-primary hover:text-[#b17411]"
-                            >
-                              <ChevronLeft className="size-4" />
-                              Back to Components
-                            </button>
-                          ) : (
-                            <div />
-                          )}
-                        </div>
                         <span className="w-full text-center font-body text-[11px] font-bold tracking-wider text-primary uppercase sm:text-[13px] lg:text-[14px]">
                           THE 12 SALES PERFORMANCE COMPONENTS™
                         </span>
@@ -468,6 +454,15 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                                 {activeComponent.objective}
                               </p>
                             )}
+
+                            <button
+                              type="button"
+                              onClick={handleBack}
+                              className="inline-flex w-fit cursor-pointer items-center gap-1 font-body text-[13px] font-bold text-primary hover:text-[#b17411]"
+                            >
+                              <ChevronLeft className="size-4" />
+                              Back to Components
+                            </button>
                           </div>
                         )
                       )}

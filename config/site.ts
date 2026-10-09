@@ -3259,6 +3259,493 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
       ],
     },
 
+    salesKpiGuide: {
+      title: "Sales KPI Guide",
+      intro: [
+        "Each KPI pop-out explains what it measures, why it matters, and how NORTH POINT SALES GROUP uses it to evaluate potential opportunities for improved sales performance.",
+        "All KPIs should be evaluated against an established baseline. Not every KPI needs to be actively monitored for every client.",
+      ],
+      categories: [
+        {
+          title: "Activity Metrics",
+          summary:
+            "The volume, consistency, and effectiveness of sales activities that contribute to developing new business and moving existing opportunities forward.",
+          kpis: [
+            {
+              title: "Total Prospecting Activity",
+              measures:
+                "The total number of outbound activities conducted to identify and engage potential customers, including calls, emails, networking contacts, and other prospecting efforts.",
+              matters:
+                "Helps determine whether sufficient prospecting activity is taking place to support the organization's sales objectives.",
+              evaluate:
+                "Activity volume, consistency, prospect quality, and resulting opportunities.",
+            },
+            {
+              title: "Qualified Follow-Up Activity",
+              measures:
+                "The number of meaningful follow-up actions conducted with qualified prospects or existing sales opportunities.",
+              matters:
+                "Consistent, timely follow-up can prevent valuable opportunities from being overlooked or delayed.",
+              evaluate:
+                "Follow-up frequency, timing, quality, and resulting progression through the sales process.",
+            },
+            {
+              title: "New Opportunities Created",
+              measures:
+                "The number of new potential sales opportunities entered into the organization's pipeline during a defined period.",
+              matters:
+                "Indicates whether sales activities are generating sufficient new business opportunities to support future revenue.",
+              evaluate:
+                "Opportunity volume, qualification standards, sources, and potential value.",
+            },
+            {
+              title: "Calls Made",
+              measures:
+                "The number of outbound sales calls completed by individual salespeople or the entire sales team.",
+              matters:
+                "Provides visibility into telephone prospecting and follow-up activity.",
+              evaluate:
+                "Call volume, connection rates, conversation quality, and opportunities generated.",
+            },
+            {
+              title: "Emails Sent",
+              measures:
+                "The number of sales-related emails sent to prospects and existing opportunities.",
+              matters:
+                "Helps evaluate email outreach as part of the organization's overall sales development process.",
+              evaluate:
+                "Email volume, relevance, response rates, and resulting sales conversations.",
+            },
+            {
+              title: "Meetings Scheduled",
+              measures:
+                "The number of prospect meetings, discovery conversations, presentations, and other sales-related appointments scheduled.",
+              matters:
+                "Indicates how effectively initial sales activities are creating opportunities for meaningful customer engagement.",
+              evaluate:
+                "Appointment volume, prospect qualification, attendance rates, and resulting pipeline advancement.",
+            },
+            {
+              title: "Proposals Submitted",
+              measures:
+                "The number of formal sales proposals, quotations, or commercial offers presented to prospective customers.",
+              matters:
+                "Helps evaluate the organization's ability to advance qualified opportunities toward purchasing decisions.",
+              evaluate:
+                "Proposal volume, qualification, decision timelines, and conversion into completed sales.",
+            },
+            {
+              title: "Demos or Presentations",
+              measures:
+                "The number of product demonstrations or sales presentations conducted with prospective customers.",
+              matters:
+                "Helps determine how effectively salespeople are engaging prospects and communicating the organization's value.",
+              evaluate:
+                "Presentation effectiveness, customer engagement, objections, and advancement to the next sales stage.",
+            },
+            {
+              title: "Average Follow-Ups per Opportunity",
+              measures:
+                "The average number of follow-up contacts made for each sales opportunity during a defined period.",
+              matters:
+                "Helps identify whether opportunities are receiving appropriate attention without unnecessary or unproductive contact.",
+              evaluate:
+                "Follow-up frequency, timing, quality, and its relationship to sales conversion.",
+            },
+          ],
+        },
+        {
+          title: "Pipeline Metrics",
+          summary:
+            "The structure, quality, movement, and potential value of sales opportunities throughout the organization's sales process.",
+          kpis: [
+            {
+              title: "Total Opportunities",
+              measures:
+                "The total number of open sales opportunities within the organization's pipeline.",
+              matters:
+                "Provides an overview of current potential business and future sales production.",
+              evaluate:
+                "Opportunity volume, distribution, aging, and overall pipeline quality.",
+            },
+            {
+              title: "Qualified Opportunities",
+              measures:
+                "The number of opportunities that meet the organization's established qualification criteria.",
+              matters:
+                "Helps distinguish realistic sales opportunities from contacts that are unlikely to become customers.",
+              evaluate:
+                "Qualification consistency, customer requirements, purchasing authority, and potential purchasing timelines.",
+            },
+            {
+              title: "Pipeline Value (Total)",
+              measures:
+                "The combined estimated revenue value of all open sales opportunities.",
+              matters:
+                "Provides visibility into the potential future sales represented by the existing pipeline.",
+              evaluate:
+                "Total value, opportunity quality, probability of closing, and potential contribution to future revenue.",
+            },
+            {
+              title: "Pipeline by Stage",
+              measures:
+                "How opportunities are distributed across the organization's defined sales stages, from initial qualification through closing.",
+              matters:
+                "Helps identify where opportunities accumulate, stall, or move successfully toward completed sales.",
+              evaluate:
+                "Stage distribution, bottlenecks, progression patterns, and consistency of sales processes.",
+            },
+            {
+              title: "Stage Progression Rate",
+              measures:
+                "The percentage of opportunities advancing from a particular sales stage to the next within a defined period.",
+              matters:
+                "Helps determine how effectively sales opportunities are moving through the sales process.",
+              evaluate:
+                "Progression rates, delays, obstacles, and opportunities to improve advancement.",
+            },
+            {
+              title: "Pipeline Stage Compliance",
+              measures:
+                "How consistently salespeople follow the organization's established requirements for each pipeline stage.",
+              matters:
+                "Improves pipeline reliability, management visibility, and the consistency of sales activities.",
+              evaluate:
+                "Proper stage classification, required information, CRM accuracy, and adherence to established procedures.",
+            },
+            {
+              title: "Opportunities with Next Step",
+              measures:
+                "The percentage of active sales opportunities that have a clearly defined next action or agreed follow-up commitment.",
+              matters:
+                "Opportunities without defined next steps are more likely to lose momentum or remain inactive.",
+              evaluate:
+                "Next-step documentation, assigned responsibility, scheduled dates, and completion.",
+            },
+            {
+              title: "Average Days in Stage",
+              measures:
+                "The average amount of time opportunities remain within each stage of the sales pipeline.",
+              matters:
+                "Helps identify delays that may unnecessarily extend the sales cycle.",
+              evaluate:
+                "Stage duration, causes of delays, and opportunities to improve progression.",
+            },
+            {
+              title: "Pipeline Velocity",
+              measures:
+                "The estimated rate at which qualified opportunities move through the sales process and generate revenue.",
+              matters:
+                "Helps determine how effectively the organization converts its pipeline into sales over time.",
+              evaluate:
+                "Opportunity volume, deal value, win rates, and sales cycle length.",
+            },
+            {
+              title: "Pipeline Coverage Ratio",
+              measures:
+                "How the value of the sales pipeline compares against a defined future sales target.",
+              matters:
+                "Helps determine whether sufficient potential business exists to support anticipated sales production.",
+              evaluate:
+                "Pipeline value, revenue targets, historical win rates, and the amount of qualified pipeline required.",
+            },
+          ],
+        },
+        {
+          title: "Conversion Metrics",
+          summary:
+            "How effectively the organization's sales activities and opportunities turn into qualified prospects, proposals, and completed sales.",
+          kpis: [
+            {
+              title: "Prospect to Opportunity Rate",
+              measures:
+                "The percentage of prospects who become qualified sales opportunities.",
+              matters:
+                "Indicates how effectively the organization identifies and develops prospects with legitimate purchasing potential.",
+              evaluate:
+                "Prospect quality, qualification procedures, sales conversations, and conversion rates.",
+            },
+            {
+              title: "Opportunity to Proposal Rate",
+              measures:
+                "The percentage of qualified opportunities that advance to a formal proposal or quotation.",
+              matters:
+                "Helps determine how effectively salespeople move potential customers toward a purchasing decision.",
+              evaluate:
+                "Discovery effectiveness, qualification, presentations, objections, and proposal readiness.",
+            },
+            {
+              title: "Proposal to Close Rate",
+              measures:
+                "The percentage of proposals that result in completed sales.",
+              matters:
+                "Identifies how effectively the organization converts formal offers into revenue.",
+              evaluate:
+                "Proposal quality, pricing, competitive positioning, customer objections, and closing practices.",
+            },
+            {
+              title: "Overall Win Rate",
+              measures:
+                "The percentage of closed sales opportunities that result in successful sales rather than losses.",
+              matters:
+                "Provides a broad indication of the organization's ability to convert qualified opportunities into customers.",
+              evaluate:
+                "Win rates by salesperson, opportunity type, market, product, and sales process.",
+            },
+            {
+              title: "Loss Rate (and Reasons)",
+              measures:
+                "The percentage of closed opportunities that are lost and identifies the primary reasons those opportunities were unsuccessful.",
+              matters:
+                "Reveals patterns that may be preventing additional sales.",
+              evaluate:
+                "Pricing concerns, competitive losses, customer objections, qualification problems, timing, and sales execution.",
+            },
+            {
+              title: "Average Sales Cycle Length",
+              measures:
+                "The average time required to move an opportunity from a defined starting point to a completed sale.",
+              matters:
+                "Helps identify unnecessary delays that can reduce sales productivity and postpone revenue.",
+              evaluate:
+                "Sales cycle duration, stage delays, follow-up practices, and opportunities to shorten the process.",
+            },
+            {
+              title: "Days to Next Follow-Up",
+              measures:
+                "The time between a sales activity and the next scheduled follow-up with a prospect or customer.",
+              matters:
+                "Helps determine whether sales opportunities are receiving timely attention.",
+              evaluate:
+                "Follow-up intervals, customer expectations, scheduling consistency, and unnecessary delays.",
+            },
+            {
+              title: "Stage-to-Stage Conversion Rates",
+              measures:
+                "The percentage of opportunities successfully advancing from one defined pipeline stage to another.",
+              matters:
+                "Identifies where the organization converts opportunities effectively and where potential sales are being lost.",
+              evaluate:
+                "Conversion patterns, stage-specific obstacles, process effectiveness, and improvement opportunities.",
+            },
+            {
+              title: "Cost per Opportunity",
+              measures:
+                "The average sales and marketing cost required to generate a qualified sales opportunity.",
+              matters:
+                "Helps determine whether the organization's business development activities are producing opportunities economically.",
+              evaluate:
+                "Acquisition costs, prospecting productivity, lead sources, and opportunity quality.",
+            },
+            {
+              title: "ROI on Sales Activity",
+              measures:
+                "The financial return generated by defined sales activities relative to their associated costs.",
+              matters:
+                "Helps determine whether sales resources are being used effectively and profitably.",
+              evaluate:
+                "Sales activity costs, attributable revenue, profit contribution, and overall financial return.",
+            },
+          ],
+        },
+        {
+          title: "Revenue Metrics",
+          summary:
+            "The financial results generated by the sales organization, including revenue production, growth, forecasting, and contribution from different parts of the business.",
+          kpis: [
+            {
+              title: "New Revenue (Booked Sales)",
+              measures:
+                "The value of new sales commitments secured during a defined period.",
+              matters:
+                "Provides a direct indication of sales production and newly secured business.",
+              evaluate:
+                "Booked sales, production trends, sales targets, and expected financial contribution.",
+            },
+            {
+              title: "Average Deal Size",
+              measures:
+                "The average revenue value of completed sales transactions.",
+              matters:
+                "Helps determine whether the organization is maximizing the potential value of its sales opportunities.",
+              evaluate:
+                "Deal value, product mix, pricing, cross-selling, upselling, and profitability.",
+            },
+            {
+              title: "Total Pipeline Value",
+              measures:
+                "The combined estimated revenue value of all open sales opportunities.",
+              matters:
+                "Helps management evaluate the potential future revenue available within the existing sales pipeline.",
+              evaluate:
+                "Pipeline value, probability of closing, opportunity quality, and alignment with revenue objectives.",
+            },
+            {
+              title: "Revenue by Product/Service",
+              measures:
+                "Revenue generated by individual products, services, or product categories.",
+              matters:
+                "Helps identify which offerings contribute most effectively to the organization's sales production.",
+              evaluate:
+                "Revenue concentration, sales trends, product demand, and profit contribution.",
+            },
+            {
+              title: "Revenue by Market/Region",
+              measures:
+                "Revenue generated from specific geographic territories, industries, customer segments, or markets.",
+              matters:
+                "Helps identify stronger-performing markets and potential opportunities for expansion or improvement.",
+              evaluate:
+                "Market performance, territory productivity, customer demand, and growth potential.",
+            },
+            {
+              title: "Revenue by Salesperson",
+              measures:
+                "The revenue generated by each member of the sales organization.",
+              matters:
+                "Helps management understand individual production and identify opportunities to improve sales performance.",
+              evaluate:
+                "Revenue contribution, assigned opportunities, territory differences, production trends, and individual improvement needs.",
+            },
+            {
+              title: "Revenue Growth Rate",
+              measures:
+                "The percentage increase or decrease in revenue over a defined period compared with an appropriate earlier period.",
+              matters:
+                "Provides a direct measurement of whether the organization is expanding or contracting its sales production.",
+              evaluate:
+                "Growth trends, seasonal effects, changes in customer demand, and contributing sales activities.",
+            },
+            {
+              title: "Forecasted Revenue",
+              measures:
+                "The estimated revenue expected to be generated during a future period.",
+              matters:
+                "Supports management planning, resource allocation, and informed financial decisions.",
+              evaluate:
+                "Pipeline quality, opportunity probabilities, anticipated closing dates, and historical forecasting accuracy.",
+            },
+            {
+              title: "Actual vs. Forecasted Revenue",
+              measures:
+                "How actual revenue generated during a period compares with the revenue originally forecasted for that same period.",
+              matters:
+                "Helps determine how accurately the organization predicts sales production.",
+              evaluate:
+                "Forecast variances, underlying causes, pipeline reliability, and opportunities to improve forecasting.",
+            },
+            {
+              title: "Recurring Revenue (If Applicable)",
+              measures:
+                "Revenue generated through ongoing contracts, subscriptions, repeat service agreements, or other recurring customer arrangements.",
+              matters:
+                "Provides insight into the stability and predictability of revenue where recurring business is part of the company's model.",
+              evaluate:
+                "Recurring revenue trends, customer renewals, retention, expansion opportunities, and revenue concentration.",
+            },
+          ],
+        },
+        {
+          title: "Team Performance Metrics",
+          summary:
+            "Individual and collective sales productivity, effectiveness, development, and the organization's ability to maintain a productive sales team.",
+          kpis: [
+            {
+              title: "Activity per Salesperson",
+              measures:
+                "The volume of defined sales activities completed by each salesperson during a specified period.",
+              matters:
+                "Helps identify differences in activity levels, work patterns, and productivity across the sales team.",
+              evaluate:
+                "Activity consistency, effectiveness, workload, and resulting sales opportunities.",
+            },
+            {
+              title: "Opportunities per Salesperson",
+              measures:
+                "The number of active or newly generated sales opportunities assigned to individual salespeople.",
+              matters:
+                "Helps evaluate opportunity distribution, workload, and potential production capacity.",
+              evaluate:
+                "Opportunity volume, quality, assignment balance, and conversion results.",
+            },
+            {
+              title: "Win Rate per Salesperson",
+              measures:
+                "The percentage of closed sales opportunities successfully won by each salesperson.",
+              matters:
+                "Helps identify individual strengths and opportunities for improvement in sales execution.",
+              evaluate:
+                "Win rates, opportunity quality, customer objections, closing practices, and coaching opportunities.",
+            },
+            {
+              title: "Average Deal Size per Salesperson",
+              measures:
+                "The average revenue value of completed sales generated by individual salespeople.",
+              matters:
+                "Helps determine whether salespeople are effectively developing the financial potential of their opportunities.",
+              evaluate:
+                "Deal values, sales approaches, pricing consistency, product mix, and account development.",
+            },
+            {
+              title: "Revenue per Salesperson",
+              measures:
+                "The total revenue produced by individual salespeople during a defined period.",
+              matters:
+                "Provides a direct measurement of individual sales production.",
+              evaluate:
+                "Revenue trends, opportunity availability, territory conditions, individual performance, and improvement potential.",
+            },
+            {
+              title: "Quota Attainment",
+              measures:
+                "The percentage of an established sales target achieved by each salesperson or the entire team.",
+              matters:
+                "Helps determine whether sales production is meeting organizational expectations.",
+              evaluate:
+                "Target achievement, quota realism, individual performance, and factors affecting results.",
+            },
+            {
+              title: "Ramp Time for New Hires",
+              measures:
+                "The time required for newly hired salespeople to reach a defined level of expected productivity.",
+              matters:
+                "Helps evaluate the effectiveness of recruiting, onboarding, training, and early performance support.",
+              evaluate:
+                "Time to productivity, onboarding procedures, development milestones, and management support.",
+            },
+            {
+              title: "Sales Cycle Length by Salesperson",
+              measures:
+                "The average time individual salespeople require to move an opportunity through the sales process to completion.",
+              matters:
+                "Helps identify differences in sales efficiency and potential opportunities to shorten purchasing timelines.",
+              evaluate:
+                "Individual sales cycles, opportunity complexity, follow-up effectiveness, and process adherence.",
+            },
+            {
+              title: "Team Productivity Index",
+              measures:
+                "A combined performance measurement that evaluates sales production relative to selected activities, resources, and expected performance standards.",
+              matters:
+                "Provides management with a broader indication of how efficiently the sales team converts its resources into measurable results.",
+              evaluate:
+                "Selected productivity indicators, established baselines, individual contributions, and overall team performance.",
+              note: "The specific calculation is established for each client based on its business model and sales objectives.",
+            },
+            {
+              title: "Retention Rate (Sales Team)",
+              measures:
+                "The percentage of sales employees who remain with the organization during a defined period.",
+              matters:
+                "Helps evaluate workforce stability and the organization's ability to retain experienced sales personnel.",
+              evaluate:
+                "Employee retention trends, turnover patterns, management practices, compensation structures, and development opportunities.",
+            },
+          ],
+        },
+      ],
+    },
+
     socialMediaNote: {
       title: "OUR APPROACH TO SOCIAL MEDIA",
       paragraphs: [

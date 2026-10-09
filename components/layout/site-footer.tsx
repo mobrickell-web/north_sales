@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
+import { SalesKpiGuideDialog } from "@/components/layout/sales-kpi-guide-dialog";
 import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
 
 const HEADER_OFFSET = 110;
@@ -157,6 +158,9 @@ export function SiteFooter() {
                 ))}
                 <li>
                   <TestimonialsDialog variant="link" />
+                </li>
+                <li>
+                  <SalesKpiGuideDialog />
                 </li>
               </ul>
             </div>
