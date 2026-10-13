@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Compass, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface InvestmentSectionProps {
   sectionNumber?: number | string;
@@ -16,6 +17,13 @@ type InvestmentGroup = {
   outro?: string;
 };
 
+type InvestmentComparison = {
+  intro: string;
+  columns: readonly string[];
+  rows: readonly { label: string; values: readonly string[] }[];
+  closing: readonly (readonly { text: string; bold?: boolean }[])[];
+};
+
 type InvestmentPopup = {
   title: string;
   fee: string;
@@ -26,6 +34,7 @@ type InvestmentPopup = {
   deliverableParagraphs?: readonly string[];
   parametersHeading?: string;
   parametersParagraphs?: readonly string[];
+  comparison?: InvestmentComparison;
   upgradeHeading?: string;
   upgradeParagraphs?: readonly string[];
   sequenceHeading?: string;
@@ -69,6 +78,66 @@ function renderGroups(groups: readonly InvestmentGroup[]) {
       )}
     </div>
   ));
+}
+
+function renderComparison(comparison: InvestmentComparison) {
+  return (
+    <div className="flex flex-col gap-4 border-t border-gray-100 pt-4">
+      <p>{comparison.intro}</p>
+      <div className="-mx-1 sm:mx-0">
+        <table className="w-full table-fixed border-collapse text-left text-[11px] leading-snug text-[#5C5F66] min-[420px]:text-[12px] sm:text-[14px] sm:leading-relaxed">
+          <thead>
+            <tr className="bg-[#6D9EEB] text-[#001528]">
+              <th className="w-[24%] border-r border-white/80 px-1.5 py-2.5 sm:w-[20%] sm:px-3 sm:py-3.5" />
+              {comparison.columns.map((column, index) => (
+                <th
+                  key={column}
+                  className={cn(
+                    "px-1.5 py-2.5 text-center text-[11px] font-extrabold leading-tight break-words min-[420px]:text-[12px] sm:px-3 sm:py-3.5 sm:text-[15px] sm:leading-snug",
+                    index < comparison.columns.length - 1 &&
+                      "border-r border-white/80",
+                  )}
+                >
+                  {column}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.rows.map((row) => (
+              <tr key={row.label} className="align-top">
+                <th className="px-1.5 py-3 font-extrabold break-words text-[#001528] sm:px-3 sm:py-5">
+                  {row.label}
+                </th>
+                {row.values.map((value, index) => (
+                  <td
+                    key={`${row.label}-${index}`}
+                    className="px-1.5 py-3 break-words sm:px-3 sm:py-5"
+                  >
+                    {value}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {comparison.closing.map((paragraph, index) => (
+        <p key={index}>
+          {paragraph.map((part, partIndex) => (
+            <span
+              key={partIndex}
+              className={
+                part.bold ? "font-extrabold text-[#001528]" : undefined
+              }
+            >
+              {part.text}
+            </span>
+          ))}
+        </p>
+      ))}
+    </div>
+  );
 }
 
 function renderSectionBlock(
@@ -189,7 +258,14 @@ export function InvestmentSection({
 
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
-          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 max-h-[90vh] w-[95vw] max-w-[620px] translate-x-[-50%] translate-y-[-50%] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+          <Dialog.Content
+            className={cn(
+              "fixed left-[50%] top-[50%] z-50 max-h-[90vh] w-[95vw] translate-x-[-50%] translate-y-[-50%] overflow-y-auto rounded-2xl bg-white shadow-2xl transition-all animate-in fade-in-0 zoom-in-95",
+              popup?.comparison
+                ? "max-w-[860px] p-4 sm:p-8"
+                : "max-w-[620px] p-6 sm:p-8",
+            )}
+          >
             <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
               <X className="size-5" />
               <span className="sr-only">Close</span>
@@ -233,6 +309,8 @@ export function InvestmentSection({
                         popup.parametersHeading,
                         popup.parametersParagraphs,
                       )}
+
+                    {popup.comparison && renderComparison(popup.comparison)}
 
                     {popup.upgradeHeading &&
                       renderSectionBlock(

@@ -77,7 +77,7 @@ export function buildCalendarLinks(
   const description = [
     `${humanizeAppointmentType(appointment.appointmentType)} with ${CALENDAR_ORG}.`,
     `When: ${when} (${timezoneLabel})`,
-    `Contact: ${appointment.contactName}${appointment.companyName ? ` — ${appointment.companyName}` : ""}`,
+    `Contact: ${appointment.contactName}`,
     ...(rescheduleUrl
       ? [`Need to change this? Reschedule: ${rescheduleUrl}`]
       : []),

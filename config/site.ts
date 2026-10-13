@@ -61,7 +61,7 @@ export const siteConfig = {
     { href: "#results", label: "Results" },
 
     { label: "HOW WE WORK", href: "#how-we-work" },
-    { label: "30-60 DAY FOCUS", href: "#30-60-focus" },
+    { label: "30-90 DAY FOCUS", href: "#30-90-focus" },
     { label: "CHALLENGES", href: "#challenges" },
     { label: "INVESTMENT", href: "#investment" },
 
@@ -136,9 +136,9 @@ export const siteConfig = {
       },
       {
         id: "evaluate-organization",
-        title: "Evaluate the Entire Sales Organization",
+        title: "Begin With Sales Team Performance",
         description:
-          "We look at the sales organization as an interconnected revenue-producing system rather than assuming the salespeople themselves are the problem.",
+          "We begin by evaluating the performance of your existing salespeople—their skills, execution, productivity, and results. We then examine the leadership, processes, systems, and other factors influencing that performance to determine where improvements are needed.",
         icon: "/icons/data.svg",
         popout: {
           paragraphs: [
@@ -228,34 +228,34 @@ export const siteConfig = {
       pillars: [
         {
           id: "diagnose-before-prescribe",
-          title: "Diagnose Before We Prescribe",
+          title: "Begin With Sales Team Performance",
           description:
             "We first determine what is working, what may be restricting performance, and where meaningful opportunities for improvement exist.",
           icon: "/icons/data.svg",
           popout: {
-            title: "Determine What Is Working Before Recommending Change",
+            title: "Begin With Sales Team Performance",
             paragraphs: [
-              "We do not begin with a predetermined solution.",
-              "Every sales organization is different, and performance can be influenced by leadership, people, process, messaging, lead generation, training, accountability, technology, market conditions, or a combination of factors.",
-              "Our first responsibility is to understand what is already working well, what may be restricting performance, and where meaningful opportunities for improvement may exist.",
-              "That can include reviewing areas such as:",
-              "The objective is to avoid unnecessary change and concentrate attention on the areas that actually warrant it.",
+              "We begin by evaluating the performance of your existing salespeople—their skills, execution, productivity, and results.",
+              "That evaluation helps identify what is working, where performance is being restricted, and which supporting factors need closer examination.",
+              "Depending on what we find, that may include reviewing:",
+              "The objective is to determine what is influencing sales team performance and focus on the improvements most likely to strengthen results.",
             ],
             list: [
               "Sales leadership",
-              "Sales team performance",
               "Prospecting and lead generation",
               "Sales process",
               "Messaging and presentations",
-              "Pipeline management",
+              "Follow-up and pipeline management",
+              "CRM utilization",
               "Training and coaching",
               "Accountability",
+              "Compensation and incentives",
               "Recruiting and onboarding",
               "Conversion performance",
               "Customer retention and expansion",
             ],
             nextStep:
-              "We begin by evaluating the areas most relevant to your objectives so that any recommendations are based on what we find rather than assumptions made in advance.",
+              "We establish the recommended priorities and next steps based on our findings. The depth of evaluation and the work performed depend on the engagement selected.",
           },
         },
         {
@@ -389,11 +389,12 @@ export const siteConfig = {
   },
   //steps section
   salesEngagement: {
-    badge: "30-60 DAY FOCUS",
-    title: "OUR 30-60 DAY IMPLEMENTATION PROCESS",
+    badge: "30-90 DAY FOCUS",
+    title: "OUR 30-90 DAY IMPLEMENTATION PROCESS",
     subtitle: [
-      "30 days for focused implementation when the work can be completed efficiently within a shorter Timeframe.",
-      "60 days when the engagement requires broader implementation, coaching, measurement, or follow-through.",
+      "30 days for focused implementation when the work can be completed efficiently within a concentrated timeframe.",
+      "60 days for broader implementation requiring additional coaching, measurement, refinement, or follow-through.",
+      "90 days for larger or more complex sales organizations requiring more extensive implementation across multiple areas.",
     ],
     steps: [
       {
@@ -1868,7 +1869,7 @@ export const siteConfig = {
     subheading: "IS YOUR SALES ORGANIZATION",
     title: "Performing at Its Full Potential?",
     intro:
-      "Many businesses hit a plateau in sales growth. The problem is rarely the product or the market—it's usually the systems, processes, leadership, and accountability behind the sales team.",
+      "Sales growth can be restricted by individual skills and execution, as well as the leadership, processes, systems, and accountability supporting the sales team. We begin with the salespeople’s performance, then determine what is influencing their results and what needs to improve.",
     highlightText: "That's where NORTH POINT SALES GROUP can help.",
     sectionTitle: "COMMON CHALLENGES WE HELP SOLVE",
     items: [
@@ -2340,6 +2341,59 @@ export const siteConfig = {
               "The engagement does not include full implementation of recommended changes or significant third-party costs such as website development, advertising spend, media, technology, or specialized production.",
               "If the scope of the sales operation or level of analysis required is substantially greater, the engagement may be expanded accordingly.",
             ],
+            comparison: {
+              intro:
+                "The primary difference is hands-on sales team improvement versus broader assessment and planning. Based on the current Investment section and pop-outs:",
+              columns: [
+                "$7,500 Sales Team Performance",
+                "$9,500 30-Day Focused Sales Performance",
+              ],
+              rows: [
+                {
+                  label: "Main focus",
+                  values: [
+                    "Improve the existing sales team's execution.",
+                    "Determine where the broader sales operation needs attention.",
+                  ],
+                },
+                {
+                  label: "Direct work",
+                  values: [
+                    "One-on-one coaching with up to three salespeople, plus sales leadership sessions and practical improvements.",
+                    "Review relevant areas such as leadership, processes, CRM, compensation, recruiting, lead generation, and team performance.",
+                  ],
+                },
+                {
+                  label: "Final deliverable",
+                  values: [
+                    "Performance findings, work completed, and a team improvement plan.",
+                    "Executive findings, priorities, recommendations, and an implementation roadmap.",
+                  ],
+                },
+                {
+                  label: "Duration",
+                  values: ["30 days", "30 days"],
+                },
+              ],
+              closing: [
+                [
+                  {
+                    text: "No, the $9,500 option does not currently include everything in the $7,500 option.",
+                    bold: true,
+                  },
+                  {
+                    text: " It does not explicitly include the one-on-one coaching with up to three representatives or the same direct performance-improvement work.",
+                  },
+                ],
+                [
+                  { text: "The $9,500 fee buys " },
+                  { text: "greater breadth of diagnosis", bold: true },
+                  {
+                    text: ", rather than everything in the first option plus additional services.",
+                  },
+                ],
+              ],
+            },
             upgradeHeading: "UPGRADE CREDIT",
             upgradeParagraphs: [
               "If a client moves directly from the $9,500 30-Day Focused Sales Performance Engagement into a Full Sales Performance Implementation, the $9,500 engagement fee will be credited toward the implementation fee.",
@@ -2459,7 +2513,7 @@ export const siteConfig = {
             "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.",
           popout: {
             title: "FULL SALES PERFORMANCE IMPLEMENTATION",
-            fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–60 Days",
+            fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–90 Days",
             intro:
               "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside sales-performance resource to examine, improve, and implement changes across the sales operation.\n\nOption 3 includes the applicable assessment and diagnostic services described in Options 1 and 2, plus the hands-on implementation, performance management, measurement, and ongoing support required to put recommended changes into operation.\n\nThe scope, professional fee, and implementation period are determined by the number, complexity, and depth of the changes required—not simply the size of the company.\n\nProfessional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work.\n\nA higher-fee engagement does not necessarily require a longer implementation period; for example, a $100,000 engagement may sometimes be completed within 30 days when the required work can be effectively implemented within that timeframe.",
             includedHeading: "INCLUDED SERVICES",
@@ -2598,7 +2652,7 @@ export const siteConfig = {
               "THIRD-PARTY COSTS\nSignificant third-party costs—including website development, advertising spend, media, technology development, specialized production, or other outside services—are separate from the NORTH POINT SALES GROUP professional fee and require client approval.",
             ],
             sequenceInNestedPopup: true,
-            sequenceHeading: "30–60 DAY WORK SEQUENCE",
+            sequenceHeading: "30–90 DAY WORK SEQUENCE",
             sequenceIntro:
               "The Full Sales Performance Implementation follows a structured process that moves from discovery and diagnosis to implementation, measurement, adjustment, and performance stabilization.\n\nThe sequence is not a rigid checklist. The amount of time devoted to each phase depends on what NORTH POINT SALES GROUP finds and the depth of implementation required. A focused implementation may be completed in approximately 30 days, while broader or more complex implementations may continue through 60 days.",
             sequenceGroups: [
@@ -2742,7 +2796,7 @@ export const siteConfig = {
               {
                 title: "IMPORTANT",
                 intro:
-                  "A 30-day engagement does not automatically become a 60-day engagement. The additional 30 days are used when the depth, breadth, or complexity of implementation requires more time to implement, measure, refine, and stabilize the changes.\n\nLikewise, the $50,000–$150,000 professional fee is based on the scope and depth of the work required, including the level of implementation involvement and resources required—not simply the number of days.",
+                  "The scope, professional fee, and implementation period are determined by the size and complexity of the sales organization and the number, complexity, and depth of the changes required. Professional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work. A higher professional fee does not necessarily require a longer implementation period.",
               },
             ],
           },
@@ -2883,7 +2937,7 @@ export const siteConfig = {
         answer: [
           "Our engagements are customized based on the scope of the sales-performance issues, the areas requiring attention, the size and complexity of the sales organization, and the level of implementation support required.",
           "NORTH POINT SALES GROUP offers engagements ranging from focused 30-day sales-performance engagements beginning at $7,500 and $9,500 to comprehensive Full Sales Performance Implementation engagements ranging from $50,000 to $150,000.",
-          "Full Sales Performance Implementation engagements typically run 30 to 60 days, depending on the scope and complexity of the implementation.",
+          "Full Sales Performance Implementation engagements typically run 30 to 90 days, depending on the size and complexity of the sales organization, the scope of work, and the depth of implementation required.",
           "For comprehensive implementations, the investment is determined by the actual scope of work—not simply the size of the company. The greater the number of performance areas involved, organizational complexity, level of hands-on implementation, and duration of NPSG involvement, the greater the investment.",
           {
             linkLine: {
@@ -2919,11 +2973,11 @@ export const siteConfig = {
       {
         question: "How long does a typical engagement last?",
         answer: [
-          "Our 30–60 day implementation process",
-          "Most NORTH POINT SALES GROUP implementation engagements are completed within 30–60 days.",
-          "The appropriate duration depends on the size of the sales organization, the areas being addressed, and the depth of implementation required.",
-          "Duration and professional fees are determined independently—a larger engagement does not necessarily require a longer engagement period.",
-          "For example, a substantial $100,000 implementation may sometimes be effectively completed within 30 days, while another engagement may require 45–60 days because of the implementation and follow-through involved.",
+          "Our 30–90 Day Implementation Process",
+          "Most Full Sales Performance Implementation engagements are completed within 30–90 days.",
+          "The appropriate duration depends on the size and complexity of the sales organization, the areas being addressed, and the depth of implementation required.",
+          "Duration and professional fees are determined independently. A larger investment does not necessarily require a longer engagement.",
+          // "For example, a substantial $100,000 implementation may sometimes be effectively completed within 30 days, while another engagement may require 45–60 days because of the implementation and follow-through involved.",
         ],
       },
       {
@@ -3016,15 +3070,16 @@ export const siteConfig = {
           // "Our standard investment schedule is straightforward.",
           {
             bullets: [
-              "For a 30-day engagement, 50% is due when the engagement begins and the remaining 50% is due approximately halfway through the 30-day period.",
-              "For a 60-day engagement, one-third is due at the beginning, one-third at approximately Day 30, and the final one-third is due near the end of the engagement.",
+              "For a 30-day engagement, 50% is due when the engagement begins and the remaining 50% is due approximately halfway through the engagement.",
+              "For a 60-day engagement, one-third is due at the beginning, one-third at approximately Day 30, and the final one-third is due near completion.",
+              "For a 90-day engagement, one-third is due at the beginning, one-third at approximately Day 30, and the final one-third at approximately Day 60.",
             ],
           },
           // "These are quick but vital. Please see if they can change them now. I appreciate it.",
         ],
       },
       {
-        question: "What happens after the 60-day engagement?",
+        question: "What happens after the implementation engagement?",
         answer: [
           "Many organizations continue implementing the systems, processes, and leadership improvements established during the engagement.",
           "Others choose to retain NORTH POINT SALES GROUP for ongoing executive advisory services, quarterly business reviews, leadership coaching, or future organizational initiatives.",
@@ -3228,7 +3283,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
               { label: "Results", href: "/#results" },
 
               { label: "How we work", href: "/#how-we-work" },
-              { label: "30-60 DAY Focus", href: "/#30-60-focus" },
+              { label: "30-90 DAY Focus", href: "/#30-90-focus" },
               { label: "Challenges", href: "/#challenges" },
               { label: "Investment", href: "/#investment" },
 

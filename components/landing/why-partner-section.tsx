@@ -35,6 +35,7 @@ export function WhyPartnerSection() {
 
   const approachListIntroPhrases = [
     "That can include reviewing areas such as:",
+    "Depending on what we find, that may include reviewing:",
     "That may mean prioritizing:",
     "Depending on the engagement, that may include:",
     "We can evaluate areas such as:",

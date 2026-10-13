@@ -1,14 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { CirclePlay } from "lucide-react";
+import { CirclePlay, X } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 
 export function HeroSection() {
   const { hero } = siteConfig;
   const { openSchedule } = useScheduleAppointment();
+  const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
   return (
     <section
@@ -42,15 +44,34 @@ export function HeroSection() {
             >
               {hero.primaryCta.label}
             </button>
-            <Link
-              href={hero.secondaryCta.href}
-              className="inline-flex min-h-[43px] w-full items-center justify-center gap-2 border-2 border-bronze px-5 text-center font-secondary text-[11px] font-bold tracking-[0.04em] whitespace-normal text-bronze uppercase sm:w-auto sm:whitespace-nowrap"
+            <button
+              type="button"
+              onClick={() => setComingSoonOpen(true)}
+              className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center gap-2 border-2 border-bronze px-5 text-center font-secondary text-[11px] font-bold tracking-[0.04em] whitespace-normal text-bronze uppercase sm:w-auto sm:whitespace-nowrap"
             >
               <CirclePlay className="size-4 shrink-0" aria-hidden />
               {hero.secondaryCta.label}
-            </Link>
+            </button>
           </div>
         </div>
+
+        <Dialog.Root open={comingSoonOpen} onOpenChange={setComingSoonOpen}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+            <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] max-w-[420px] translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+              <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+                <X className="size-5" />
+                <span className="sr-only">Close</span>
+              </Dialog.Close>
+              <Dialog.Title className="pr-8 font-body text-[18px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[20px]">
+                Coming Soon
+              </Dialog.Title>
+              <Dialog.Description className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                This overview is not available yet.
+              </Dialog.Description>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
 
         {/* Right image — in normal flow on mobile; absolute on lg so it can't spill into the footer */}
         <div className="relative isolate h-[260px] w-full shrink-0 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[55%]">

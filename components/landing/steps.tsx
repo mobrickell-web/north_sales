@@ -95,7 +95,7 @@ export function Steps({ sectionNumber = 5 }: StepsProps) {
 
   return (
     <section
-      id="30-60-focus"
+      id="30-90-focus"
       aria-labelledby="sales-engagement-heading"
       className="relative w-full overflow-hidden bg-white py-12 lg:py-16"
     >
