@@ -2343,7 +2343,7 @@ export const siteConfig = {
             ],
             comparison: {
               intro:
-                "The primary difference is hands-on sales team improvement versus broader assessment and planning. Based on the current Investment section and pop-outs:",
+                "The primary difference between the $7500 and $9500 engagement is the hands-on sales team improvement versus broader assessment and planning.See below:",
               columns: [
                 "$7,500 Sales Team Performance",
                 "$9,500 30-Day Focused Sales Performance",
@@ -2631,7 +2631,7 @@ export const siteConfig = {
             ],
             deliverableHeading: "ENGAGEMENT SCOPE CLARITY",
             deliverableParagraphs: [
-              "30–60 DAY IMPLEMENTATION PERIOD\nThe Full Sales Performance Implementation is a 30–60 day hands-on engagement.\n\nThe 30–60 day period is not simply a matter of scheduling. The duration reflects the depth of implementation required.\n\nA focused implementation may be completed within approximately 30 days. A broader or more complex implementation may require up to 60 days to properly implement, measure, adjust, and reinforce the changes.",
+              "30–90 DAY IMPLEMENTATION PERIOD\nThe Full Sales Performance Implementation is a 30–90 day hands-on engagement.\n\nThe 30–90 day period is not simply a matter of scheduling. The duration reflects the depth of implementation required.\n\nA focused implementation may be completed within approximately 30 days. A broader or more complex implementation may require up to 60 days to properly implement, measure, adjust, and reinforce the changes.",
               "APPROXIMATELY 30 DAYS — FOCUSED IMPLEMENTATION\nA 30-day implementation is generally appropriate when:\n• The number of performance areas requiring attention is relatively focused.\n• The sales organization is reasonably straightforward.\n• The required changes can be implemented within a concentrated period.\n• A limited number of salespeople or management personnel require extensive direct involvement.\n• Process, management, or performance changes can be put into operation without an extended implementation period.\n\nDuring a focused implementation, NORTH POINT SALES GROUP will:\n• Complete the necessary discovery and assessment.\n• Establish implementation priorities.\n• Implement the highest-priority changes.\n• Work directly with leadership and sales personnel.\n• Establish appropriate performance expectations and accountability.\n• Begin measuring the effect of implemented changes.\n• Review results and make appropriate adjustments.",
               "APPROXIMATELY 60-90 DAYS — DEEPER IMPLEMENTATION\nA 60-90 days implementation is generally appropriate when the changes require greater depth, broader involvement, or additional time to implement and evaluate.\n\nThis may include:\n• Multiple interconnected performance areas.\n• Multiple sales teams or management levels.\n• Multiple locations, divisions, markets, or sales channels.\n• More extensive direct work with salespeople and leadership.\n• Significant changes to sales processes, systems, management practices, or accountability.\n• Lead-generation and sales-conversion improvements requiring additional implementation time.\n• CRM, reporting, pipeline, or performance-measurement changes.\n• Additional time required to observe results and make informed adjustments.\n\nThe additional time allows NORTH POINT SALES GROUP to move beyond initial implementation and determine how the changes are performing in actual operation.",
             ],
@@ -2654,7 +2654,7 @@ export const siteConfig = {
             sequenceInNestedPopup: true,
             sequenceHeading: "30–90 DAY WORK SEQUENCE",
             sequenceIntro:
-              "The Full Sales Performance Implementation follows a structured process that moves from discovery and diagnosis to implementation, measurement, adjustment, and performance stabilization.\n\nThe sequence is not a rigid checklist. The amount of time devoted to each phase depends on what NORTH POINT SALES GROUP finds and the depth of implementation required. A focused implementation may be completed in approximately 30 days, while broader or more complex implementations may continue through 60 days.",
+              "The Full Sales Performance Implementation follows a structured process that moves from discovery and diagnosis to implementation, measurement, adjustment, and performance stabilization.\n\nThe sequence is not a rigid checklist. The amount of time devoted to each phase depends on what NORTH POINT SALES GROUP finds and the depth of implementation required. A focused implementation may be completed in approximately 30-60 days, while broader or more complex implementations may continue through 60-90 days.",
             sequenceGroups: [
               {
                 title: "DAYS 1–5 — EXECUTIVE DISCOVERY & INITIAL ASSESSMENT",
