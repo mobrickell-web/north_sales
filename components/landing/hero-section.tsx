@@ -64,10 +64,10 @@ export function HeroSection() {
                 <span className="sr-only">Close</span>
               </Dialog.Close>
               <Dialog.Title className="pr-8 font-body text-[18px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[20px]">
-                Coming Soon
+                Video Coming Soon
               </Dialog.Title>
-              <Dialog.Description className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                This overview is not available yet.
+              <Dialog.Description className="sr-only">
+                Video Coming Soon
               </Dialog.Description>
             </Dialog.Content>
           </Dialog.Portal>

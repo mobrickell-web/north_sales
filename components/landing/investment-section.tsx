@@ -140,6 +140,65 @@ function renderComparison(comparison: InvestmentComparison) {
   );
 }
 
+function renderLeadParagraph(text: string, leadPattern: RegExp) {
+  const [lead, ...description] = text.split("\n");
+  if (!leadPattern.test(lead)) {
+    return <p className="whitespace-pre-wrap">{text}</p>;
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <p className="font-extrabold text-[#001528]">{lead}</p>
+      {description.length > 0 ? (
+        <p className="whitespace-pre-wrap">{description.join("\n")}</p>
+      ) : null}
+    </div>
+  );
+}
+
+function renderSectionParagraph(paragraph: string, key: string) {
+  const investmentHeading = "SCOPE-BASED INVESTMENT EXAMPLES";
+  const optionHeading = "HOW OPTION 3 DIFFERS FROM OPTIONS 1 AND 2";
+  const sectionHeadingClass =
+    "font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]";
+
+  if (paragraph.startsWith("Approximately $")) {
+    return (
+      <div key={key}>{renderLeadParagraph(paragraph, /^Approximately \$/)}</div>
+    );
+  }
+
+  if (paragraph.startsWith(investmentHeading)) {
+    const rest = paragraph.slice(investmentHeading.length).replace(/^\n+/, "");
+    return (
+      <div key={key} className="mt-5 flex flex-col gap-3">
+        <p className={sectionHeadingClass}>{investmentHeading}</p>
+        {rest ? renderLeadParagraph(rest, /^Approximately \$/) : null}
+      </div>
+    );
+  }
+
+  if (paragraph.startsWith(optionHeading)) {
+    const rest = paragraph.slice(optionHeading.length).replace(/^\n+/, "");
+    return (
+      <div key={key} className="mt-5 flex flex-col gap-3">
+        <p className={sectionHeadingClass}>{optionHeading}</p>
+        {rest.split("\n\n").map((block, index) => (
+          <div key={`${key}-option-${index}`}>
+            {renderLeadParagraph(block, /^Option [123] — \$/)}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <p key={key} className="whitespace-pre-wrap">
+      {paragraph}
+    </p>
+  );
+}
+
 function renderSectionBlock(
   heading: string,
   paragraphs?: readonly string[],
@@ -150,11 +209,9 @@ function renderSectionBlock(
       <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
         {heading}
       </h4>
-      {paragraphs?.map((paragraph, index) => (
-        <p key={`${heading}-${index}`} className="whitespace-pre-wrap">
-          {paragraph}
-        </p>
-      ))}
+      {paragraphs?.map((paragraph, index) =>
+        renderSectionParagraph(paragraph, `${heading}-${index}`),
+      )}
       {groups && groups.length > 0 && (
         <div className="flex flex-col gap-4">{renderGroups(groups)}</div>
       )}

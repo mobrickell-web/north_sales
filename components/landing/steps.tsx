@@ -122,14 +122,26 @@ export function Steps({ sectionNumber = 5 }: StepsProps) {
             </h2>
             {salesEngagement.subtitle && (
               <div className="mt-2 max-w-[900px] space-y-1">
-                {salesEngagement.subtitle.map((line, index) => (
-                  <p
-                    key={index}
-                    className="font-body text-[14px] leading-relaxed text-gray-600 sm:text-[16px]"
-                  >
-                    {line}
-                  </p>
-                ))}
+                {salesEngagement.subtitle.map((line, index) => {
+                  const lead = line.match(/^(30 days|60 days|90 days)(\s.*)?$/);
+                  return (
+                    <p
+                      key={index}
+                      className="font-body text-[14px] leading-relaxed text-gray-600 sm:text-[16px]"
+                    >
+                      {lead ? (
+                        <>
+                          <span className="font-bold text-[#001528]">
+                            {lead[1]}
+                          </span>
+                          {lead[2]}
+                        </>
+                      ) : (
+                        line
+                      )}
+                    </p>
+                  );
+                })}
               </div>
             )}
           </div>

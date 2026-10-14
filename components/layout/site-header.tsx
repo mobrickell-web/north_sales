@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Mail, Menu, Phone, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -49,11 +50,19 @@ function scrollToHash(hash: string) {
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const moreMenuRef = useRef<HTMLDivElement>(null);
   const [activeHash, setActiveHash] = useState<string>("#top");
   const pathname = usePathname();
   const router = useRouter();
   const { openSchedule } = useScheduleAppointment();
+  const { phone, email } = siteConfig.footer.contact;
+
+  const openContact = () => {
+    setIsMoreOpen(false);
+    setIsMenuOpen(false);
+    setIsContactOpen(true);
+  };
 
   useEffect(() => {
     const syncHash = () => setActiveHash(window.location.hash || "#top");
@@ -249,6 +258,14 @@ export function SiteHeader() {
                       </Link>
                     );
                   })}
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={openContact}
+                    className="block w-full px-4 py-2.5 text-left font-secondary text-[11px] font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/10 hover:text-gold 2xl:text-[13px]"
+                  >
+                    Contact
+                  </button>
                 </div>
               </div>
             )}
@@ -323,6 +340,13 @@ export function SiteHeader() {
             ))}
             <button
               type="button"
+              className="w-full border-b border-white/10 py-4 pl-3 text-left font-secondary text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:text-gold"
+              onClick={openContact}
+            >
+              Contact
+            </button>
+            <button
+              type="button"
               className="mt-5 flex min-h-[52px] w-full items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"
               onClick={() => {
                 setIsMenuOpen(false);
@@ -334,6 +358,50 @@ export function SiteHeader() {
           </nav>
         </div>
       )}
+
+      <Dialog.Root open={isContactOpen} onOpenChange={setIsContactOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] max-w-[420px] translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+            <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+              <X className="size-5" />
+              <span className="sr-only">Close</span>
+            </Dialog.Close>
+            <Dialog.Title className="pr-8 font-body text-[18px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[20px]">
+              Contact
+            </Dialog.Title>
+            <Dialog.Description className="sr-only">
+              Phone number and email address
+            </Dialog.Description>
+            <div className="mt-5 flex flex-col gap-3">
+              <a
+                href={`tel:+1${phone.replace(/\D/g, "")}`}
+                className="flex items-center gap-3 rounded-xl border border-black/10 px-4 py-3 font-body text-[16px] font-bold text-[#001528] transition-colors hover:border-[#b17411] hover:text-[#b17411]"
+              >
+                <Phone className="size-4 shrink-0 text-[#b17411]" aria-hidden />
+                <span>
+                  <span className="block text-[11px] font-semibold tracking-[0.08em] text-[#5C5F66] uppercase">
+                    Phone
+                  </span>
+                  {phone}
+                </span>
+              </a>
+              <a
+                href={`mailto:${email}`}
+                className="flex items-center gap-3 rounded-xl border border-black/10 px-4 py-3 font-body text-[15px] font-bold text-[#001528] transition-colors hover:border-[#b17411] hover:text-[#b17411]"
+              >
+                <Mail className="size-4 shrink-0 text-[#b17411]" aria-hidden />
+                <span className="min-w-0">
+                  <span className="block text-[11px] font-semibold tracking-[0.08em] text-[#5C5F66] uppercase">
+                    Email
+                  </span>
+                  <span className="block break-all">{email}</span>
+                </span>
+              </a>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </header>
   );
 }

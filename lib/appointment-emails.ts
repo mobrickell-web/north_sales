@@ -148,7 +148,7 @@ function emailShell({
                     <p style="margin:0 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#C9D1D9;">
                       <a href="mailto:contact@northpointsalesgroup.com" style="color:${BRAND.bronzeSoft};text-decoration:none;">contact@northpointsalesgroup.com</a>
                       &nbsp;·&nbsp;
-                      <a href="tel:+19702501439" style="color:${BRAND.bronzeSoft};text-decoration:none;">(970) 250-1439</a>
+                      <a href="tel:+18006966971" style="color:${BRAND.bronzeSoft};text-decoration:none;">800-696-6971</a>
                     </p>
                     <p style="margin:8px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#9AA3AD;">
                       ${escapeHtml(footerNote)}

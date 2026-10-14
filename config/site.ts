@@ -85,7 +85,7 @@ export const siteConfig = {
       href: "#cta",
     },
     secondaryCta: {
-      label: "See How We Help in 60 Seconds",
+      label: "Watch How We Can Help",
       href: "#video",
     },
     image: {
@@ -138,7 +138,7 @@ export const siteConfig = {
         id: "evaluate-organization",
         title: "Begin With Sales Team Performance",
         description:
-          "We begin by evaluating the performance of your existing salespeople—their skills, execution, productivity, and results. We then examine the leadership, processes, systems, and other factors influencing that performance to determine where improvements are needed.",
+          "We evaluate your salespeople’s skills, execution, productivity, and results, then examine the leadership, processes, and systems affecting performance to identify needed improvements.",
         icon: "/icons/data.svg",
         popout: {
           paragraphs: [
@@ -2633,7 +2633,7 @@ export const siteConfig = {
             deliverableParagraphs: [
               "30–60 DAY IMPLEMENTATION PERIOD\nThe Full Sales Performance Implementation is a 30–60 day hands-on engagement.\n\nThe 30–60 day period is not simply a matter of scheduling. The duration reflects the depth of implementation required.\n\nA focused implementation may be completed within approximately 30 days. A broader or more complex implementation may require up to 60 days to properly implement, measure, adjust, and reinforce the changes.",
               "APPROXIMATELY 30 DAYS — FOCUSED IMPLEMENTATION\nA 30-day implementation is generally appropriate when:\n• The number of performance areas requiring attention is relatively focused.\n• The sales organization is reasonably straightforward.\n• The required changes can be implemented within a concentrated period.\n• A limited number of salespeople or management personnel require extensive direct involvement.\n• Process, management, or performance changes can be put into operation without an extended implementation period.\n\nDuring a focused implementation, NORTH POINT SALES GROUP will:\n• Complete the necessary discovery and assessment.\n• Establish implementation priorities.\n• Implement the highest-priority changes.\n• Work directly with leadership and sales personnel.\n• Establish appropriate performance expectations and accountability.\n• Begin measuring the effect of implemented changes.\n• Review results and make appropriate adjustments.",
-              "APPROXIMATELY 60 DAYS — DEEPER IMPLEMENTATION\nA 60-day implementation is generally appropriate when the changes require greater depth, broader involvement, or additional time to implement and evaluate.\n\nThis may include:\n• Multiple interconnected performance areas.\n• Multiple sales teams or management levels.\n• Multiple locations, divisions, markets, or sales channels.\n• More extensive direct work with salespeople and leadership.\n• Significant changes to sales processes, systems, management practices, or accountability.\n• Lead-generation and sales-conversion improvements requiring additional implementation time.\n• CRM, reporting, pipeline, or performance-measurement changes.\n• Additional time required to observe results and make informed adjustments.\n\nThe additional time allows NORTH POINT SALES GROUP to move beyond initial implementation and determine how the changes are performing in actual operation.",
+              "APPROXIMATELY 60-90 DAYS — DEEPER IMPLEMENTATION\nA 60-90 days implementation is generally appropriate when the changes require greater depth, broader involvement, or additional time to implement and evaluate.\n\nThis may include:\n• Multiple interconnected performance areas.\n• Multiple sales teams or management levels.\n• Multiple locations, divisions, markets, or sales channels.\n• More extensive direct work with salespeople and leadership.\n• Significant changes to sales processes, systems, management practices, or accountability.\n• Lead-generation and sales-conversion improvements requiring additional implementation time.\n• CRM, reporting, pipeline, or performance-measurement changes.\n• Additional time required to observe results and make informed adjustments.\n\nThe additional time allows NORTH POINT SALES GROUP to move beyond initial implementation and determine how the changes are performing in actual operation.",
             ],
             parametersHeading: "HOW THE PROFESSIONAL FEE IS DETERMINED",
             parametersParagraphs: [
@@ -2745,9 +2745,9 @@ export const siteConfig = {
               },
               {
                 title:
-                  "DAYS 46–60 — MEASUREMENT, REFINEMENT & PERFORMANCE STABILIZATION",
+                  "DAYS 46–90 — MEASUREMENT, REFINEMENT & PERFORMANCE STABILIZATION",
                 intro:
-                  "Used when the scope requires a full 60-day implementation period.\nThe final phase focuses on measuring results, refining the implementation, and establishing a sustainable operating approach.\nWork may include:",
+                  "Used when the scope requires a full 46–90 days implementation period.\nThe final phase focuses on measuring results, refining the implementation, and establishing a sustainable operating approach.\nWork may include:",
                 items: [
                   "Reviewing performance against established measures.",
                   "Determining what improvements are occurring.",
@@ -2762,7 +2762,7 @@ export const siteConfig = {
                   "Objective: Move the organization from implementation toward a sustainable system for maintaining and continuing sales-performance improvement.",
               },
               {
-                title: "CLIENT PARTICIPATION THROUGHOUT THE 30–60 DAYS",
+                title: "CLIENT PARTICIPATION THROUGHOUT THE 30–90 DAYS",
                 intro:
                   "The client remains an active participant throughout the engagement.\nLeadership and designated personnel are expected to provide:",
                 items: [
@@ -3299,7 +3299,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
     ],
 
     contact: {
-      phone: "(970) 250-1439",
+      phone: "800-696-6971",
       email: "contact@northpointsalesgroup.com",
       scope: "Serving Clients Nationwide",
     },
@@ -4420,7 +4420,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
             type: "contact",
             company: "NORTH POINT SALES GROUP",
             email: "contact@northpointsalesgroup.com",
-            phone: "(970) 250-1439",
+            phone: "800-696-6971",
           },
         ],
       },
@@ -4803,7 +4803,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
             type: "contact",
             company: "NORTH POINT SALES GROUP",
             email: "contact@northpointsalesgroup.com",
-            phone: "(970) 250-1439",
+            phone: "800-696-6971",
           },
         ],
       },
