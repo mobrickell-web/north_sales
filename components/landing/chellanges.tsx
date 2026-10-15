@@ -163,7 +163,7 @@ export function Challenges({ sectionNumber = 6 }: ChallengesProps) {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
-              {challenges.items.map((item) => (
+              {challenges.items.map((item, index) => (
                 <button
                   key={item.id}
                   type="button"
@@ -176,8 +176,11 @@ export function Challenges({ sectionNumber = 6 }: ChallengesProps) {
                       nextStep: item.popout.nextStep,
                     })
                   }
-                  className="group flex cursor-pointer flex-col items-center rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-xs transition-shadow hover:border-[#b17411]/30 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b17411]/40"
+                  className="group relative flex cursor-pointer flex-col items-center rounded-2xl border border-gray-100 bg-white p-5 text-center shadow-xs transition-shadow hover:border-[#b17411]/30 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#b17411]/40"
                 >
+                  <span className="absolute left-3 top-3 font-body text-[13px] font-extrabold leading-none text-[#b17411]">
+                    {index + 1}
+                  </span>
                   <div className="flex h-12 items-center justify-center">
                     <Image
                       src={item.icon}

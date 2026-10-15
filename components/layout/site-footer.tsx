@@ -3,12 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
 import { SalesKpiGuideDialog } from "@/components/layout/sales-kpi-guide-dialog";
 import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
+import { ContactDialog } from "@/components/layout/contact-dialog";
 
 const HEADER_OFFSET = 110;
 
@@ -51,6 +53,7 @@ export function SiteFooter() {
   const pathname = usePathname();
   const router = useRouter();
   const { openSchedule } = useScheduleAppointment();
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const handleSectionClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -110,13 +113,13 @@ export function SiteFooter() {
             >
               {cta.label}
             </button>
-            <Link
-              href={footer.contactHref}
-              onClick={(e) => handleSectionClick(e, footer.contactHref)}
-              className="font-body text-[11px] text-white/80 underline-offset-4 hover:underline sm:text-[13px]"
+            <button
+              type="button"
+              onClick={() => setIsContactOpen(true)}
+              className="cursor-pointer font-body text-[11px] text-white/80 underline-offset-4 hover:underline sm:text-[13px]"
             >
               {footer.contactLinkLabel}
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -187,9 +190,10 @@ export function SiteFooter() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={`mailto:${footer.contact.email}`}
-                    className="flex items-center gap-3 rounded-lg border border-white/8 bg-white/[0.03] px-3.5 py-3 transition-colors hover:border-[#d48c27]/40 hover:bg-white/[0.05] hover:text-white"
+                  <button
+                    type="button"
+                    onClick={() => setIsContactOpen(true)}
+                    className="flex w-full cursor-pointer items-center gap-3 rounded-lg border border-white/8 bg-white/[0.03] px-3.5 py-3 text-left transition-colors hover:border-[#d48c27]/40 hover:bg-white/[0.05] hover:text-white"
                   >
                     <Image
                       src="/icons/email.svg"
@@ -200,7 +204,7 @@ export function SiteFooter() {
                       unoptimized
                     />
                     <span className="break-all">{footer.contact.email}</span>
-                  </a>
+                  </button>
                 </li>
                 <li className="flex items-center gap-3 rounded-lg border border-white/8 bg-white/[0.03] px-3.5 py-3">
                   <Image
@@ -243,6 +247,8 @@ export function SiteFooter() {
           </div>
         </div>
       </section>
+
+      <ContactDialog open={isContactOpen} onOpenChange={setIsContactOpen} />
     </footer>
   );
 }

@@ -1871,7 +1871,7 @@ export const siteConfig = {
     intro:
       "Sales growth can be restricted by individual skills and execution, as well as the leadership, processes, systems, and accountability supporting the sales team. We begin with the salespeople’s performance, then determine what is influencing their results and what needs to improve.",
     highlightText: "That's where NORTH POINT SALES GROUP can help.",
-    sectionTitle: "COMMON CHALLENGES WE HELP SOLVE",
+    sectionTitle: "6 COMMON CHALLENGES WE HELP SOLVE",
     items: [
       {
         id: "inconsistent-revenue",

@@ -245,6 +245,9 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
               >
                 {/* 3 Dark Pillars */}
                 <div className="flex flex-col items-center">
+                  <h3 className="w-full text-center font-body text-[13px] font-bold tracking-wide text-primary uppercase sm:text-[16px] lg:text-[22px]">
+                    THREE CORE AREAS OF SALES ORGANIZATION IMPROVEMENT
+                  </h3>
                   <div className="mt-6 grid w-full grid-cols-1 gap-6 md:grid-cols-3">
                     {howItWorks.modalPillars.map((pillar, index) => (
                       <div
