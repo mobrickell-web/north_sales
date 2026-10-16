@@ -78,7 +78,7 @@ export function AdminDashboardShell() {
         <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <span className="inline-flex w-fit rounded-lg bg-[#020B1E] px-3 py-2">
             <Image
-              src="/logo/Group%20150.svg"
+              src="/logo/Group%20151.svg"
               alt="NORTH POINT SALES GROUP"
               width={345}
               height={116}

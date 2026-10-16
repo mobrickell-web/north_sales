@@ -3318,6 +3318,61 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
       ],
     },
 
+    remoteWork: {
+      linkLabel: "Remote Services",
+      title: "Examples of What We Can Implement Remotely",
+      intro: [
+        "NORTH POINT SALES GROUP can evaluate, improve, and implement changes across multiple areas of a company's sales organization without requiring an on-site presence.",
+        "Depending on the needs of the organization, our remote implementation services may include:",
+      ],
+      items: [
+        {
+          title: "Individual Sales Coaching",
+          description:
+            "Work directly with sales representatives to improve presentations, prospecting, objection handling, follow-up, and closing effectiveness.",
+        },
+        {
+          title: "Sales Leadership Development",
+          description:
+            "Coach existing managers, strengthen leadership practices, and assist with recruiting and onboarding new sales leaders when necessary.",
+        },
+        {
+          title: "KPI Measurement and Accountability",
+          description:
+            "Establish performance baselines, track key performance indicators, and implement accountability procedures.",
+        },
+        {
+          title: "Sales Responsibilities and Workflow",
+          description:
+            "Evaluate and adjust responsibilities, assignments, and procedures to improve efficiency and productivity.",
+        },
+        {
+          title: "CRM Optimization",
+          description:
+            "Improve CRM procedures, establish consistent usage expectations, and strengthen pipeline visibility.",
+        },
+        {
+          title: "Sales Team Meetings",
+          description:
+            "Establish structured meetings to review performance, address obstacles, and coordinate improvement initiatives.",
+        },
+        {
+          title: "Sales Organization Assessment",
+          description:
+            "Evaluate sales representatives, leadership, productivity, and existing sales processes to identify opportunities for improvement.",
+        },
+        {
+          title: "Ongoing Performance Monitoring",
+          description:
+            "Implement reporting dashboards, regular performance reviews, and accountability systems to help ensure improvements are maintained.",
+        },
+      ],
+      tagline:
+        "Remote Implementation. Measurable Accountability. Practical Improvements.",
+      closing:
+        "Our objective is not simply to recommend improvements. It is to work directly with your people to implement appropriate changes, measure their effectiveness, and establish procedures that support sustainable sales performance.",
+    },
+
     salesKpiGuide: {
       title: "Sales KPI Guide",
       intro: [

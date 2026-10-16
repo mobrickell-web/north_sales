@@ -27,9 +27,9 @@ const BRAND = {
 const LOGO_CID = "north-logo-01";
 
 export function getEmailLogoAttachment() {
-  const logoPath = path.join(process.cwd(), "public", "logo", "Group 150.svg");
+  const logoPath = path.join(process.cwd(), "public", "logo", "Group 151.svg");
   return {
-    filename: "Group 150.svg",
+    filename: "Group 151.svg",
     content: readFileSync(logoPath),
     cid: LOGO_CID,
     contentType: "image/svg+xml" as const,

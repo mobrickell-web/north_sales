@@ -8,6 +8,7 @@ import { useState } from "react";
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
+import { RemoteWorkDialog } from "@/components/layout/remote-work-dialog";
 import { SalesKpiGuideDialog } from "@/components/layout/sales-kpi-guide-dialog";
 import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
 import { ContactDialog } from "@/components/layout/contact-dialog";
@@ -136,7 +137,7 @@ export function SiteFooter() {
             <div className="flex max-w-[420px] flex-col gap-6">
               <Link href="/" className="inline-flex w-fit items-center">
                 <Image
-                  src="/logo/Group%20150.svg"
+                  src="/logo/Group%20151.svg"
                   alt={name}
                   width={345}
                   height={116}
@@ -185,6 +186,9 @@ export function SiteFooter() {
                     </Link>
                   </li>
                 ) : null}
+                <li>
+                  <RemoteWorkDialog />
+                </li>
               </ul>
             </div>
 

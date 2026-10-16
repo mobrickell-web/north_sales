@@ -9,7 +9,7 @@ export default function AdminLoginPage() {
         <div className="mb-8 flex justify-center">
           <span className="inline-flex rounded-xl bg-[#020B1E] px-4 py-3">
             <Image
-              src="/logo/Group%20150.svg"
+              src="/logo/Group%20151.svg"
               alt="NORTH POINT SALES GROUP"
               width={345}
               height={116}
