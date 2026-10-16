@@ -2804,7 +2804,7 @@ export const siteConfig = {
       ],
     },
     modal: {
-      title: "WHAT COULD A SMALL IMPROVEMENT BE WORTH?",
+      title: "WHAT COULD EVEN A SMALL, CONSERVATIVE IMPROVEMENT BE WORTH?",
       revenueTiers: [
         {
           revenue: "$20 MILLION",
