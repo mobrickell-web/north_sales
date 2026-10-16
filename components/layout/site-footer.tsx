@@ -49,7 +49,13 @@ function scrollToHash(hash: string) {
 
 export function SiteFooter() {
   const { footer, cta, name } = siteConfig;
-  const quickLinks = footer.columns[0]?.groups[0]?.links ?? [];
+  const allQuickLinks = footer.columns[0]?.groups[0]?.links ?? [];
+  const assessmentLink = allQuickLinks.find(
+    (link) => link.href === "/sales-alignment-assessment",
+  );
+  const quickLinks = allQuickLinks.filter(
+    (link) => link.href !== "/sales-alignment-assessment",
+  );
   const pathname = usePathname();
   const router = useRouter();
   const { openSchedule } = useScheduleAppointment();
@@ -130,10 +136,10 @@ export function SiteFooter() {
             <div className="flex max-w-[420px] flex-col gap-6">
               <Link href="/" className="inline-flex w-fit items-center">
                 <Image
-                  src="/logo/north-logo-01.svg"
+                  src="/logo/Group%20150.svg"
                   alt={name}
-                  width={500}
-                  height={160}
+                  width={345}
+                  height={116}
                   className="h-auto w-[280px] sm:w-[320px]"
                 />
               </Link>
@@ -165,6 +171,20 @@ export function SiteFooter() {
                 <li>
                   <SalesKpiGuideDialog />
                 </li>
+                {assessmentLink ? (
+                  <li>
+                    <Link
+                      href={assessmentLink.href}
+                      className="inline-flex items-start gap-2 leading-snug transition-colors hover:text-[#d48c27]"
+                    >
+                      <span
+                        aria-hidden
+                        className="mt-1.5 size-1 shrink-0 rounded-full bg-[#d48c27]/70"
+                      />
+                      {assessmentLink.label}
+                    </Link>
+                  </li>
+                ) : null}
               </ul>
             </div>
 

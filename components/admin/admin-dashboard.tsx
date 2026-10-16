@@ -76,14 +76,16 @@ export function AdminDashboardShell() {
     <div className="min-h-screen bg-[#FAF9F5]">
       <header className="border-b border-[#E8E4DC] bg-white">
         <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <Image
-            src="/logo/north-logo.svg"
-            alt="NORTH POINT SALES GROUP"
-            width={190}
-            height={40}
-            className="h-10 w-auto"
-            priority
-          />
+          <span className="inline-flex w-fit rounded-lg bg-[#020B1E] px-3 py-2">
+            <Image
+              src="/logo/Group%20150.svg"
+              alt="NORTH POINT SALES GROUP"
+              width={345}
+              height={116}
+              className="h-auto w-[200px]"
+              priority
+            />
+          </span>
 
           <div className="flex items-center justify-between gap-4 sm:justify-end">
             {admin ? (

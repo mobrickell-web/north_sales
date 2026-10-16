@@ -89,7 +89,7 @@ export function ContactDialog({ open, onOpenChange }: ContactDialogProps) {
                 <span className="block text-[11px] font-semibold tracking-[0.08em] text-[#5C5F66] uppercase">
                   Phone
                 </span>
-                {phone}
+                <span className="text-[#6D9EEB]">{phone}</span>
               </span>
             </a>
             <div className="flex items-center gap-3 rounded-xl border border-black/10 px-4 py-3 font-body text-[14px] font-bold text-[#001528]">

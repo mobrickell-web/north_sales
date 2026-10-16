@@ -7,14 +7,16 @@ export default function AdminLoginPage() {
     <main className="flex min-h-screen flex-col items-center bg-[#FAF9F5] px-4 py-10 sm:py-16">
       <div className="w-full max-w-[460px]">
         <div className="mb-8 flex justify-center">
-          <Image
-            src="/logo/north-logo.svg"
-            alt="NORTH POINT SALES GROUP"
-            width={230}
-            height={48}
-            className="h-11 w-auto"
-            priority
-          />
+          <span className="inline-flex rounded-xl bg-[#020B1E] px-4 py-3">
+            <Image
+              src="/logo/Group%20150.svg"
+              alt="NORTH POINT SALES GROUP"
+              width={345}
+              height={116}
+              className="h-auto w-[240px]"
+              priority
+            />
+          </span>
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-[#E8E4DC] bg-white shadow-[0_8px_28px_rgba(0,21,40,0.08)]">

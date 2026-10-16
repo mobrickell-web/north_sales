@@ -3100,7 +3100,7 @@ export const siteConfig = {
   results: {
     badge: "Results",
     title: "SALES PERFORMANCE IMPROVEMENT ACROSS THE ORGANIZATION",
-    intro: "We help organizations pursue sustainable revenue growth through:",
+    intro: "We help organizations grow revenue through:",
     checkmark: "/icons/checkmark.svg",
     bullets: [
       {
@@ -3292,6 +3292,10 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
 
               { label: "Careers", href: "/careers" },
               { label: "Blog", href: "/blogs" },
+              {
+                label: "Sales Alignment Assessment",
+                href: "/sales-alignment-assessment",
+              },
             ],
           },
         ],
@@ -4808,6 +4812,168 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
         ],
       },
     ],
+  },
+
+  salesAlignmentAssessment: {
+    title: "Sales Alignment Assessment",
+    description:
+      "Rate 10 statements about sales performance, systems, and leadership. See an overall score, three pillar ratings, and the areas that could benefit from closer review.",
+    canonical: "/sales-alignment-assessment",
+    badge: "Free Sales Alignment Assessment",
+    headlineLine1: "How well is your sales",
+    headlineLine2: "organization",
+    headlineHighlight: "aligned",
+    headlineMark: "?",
+    intro:
+      "Get an immediate profile of your sales performance, systems, and leadership—and identify areas that could benefit from better alignment.",
+    meta: ["10 statements", "2–3 minutes", "Instant results"],
+    form: {
+      title: "Rate your organization as it stands today.",
+      scaleLow: "1",
+      scaleLowLabel: "Completely disagree",
+      scaleHigh: "10",
+      scaleHighLabel: "Completely agree",
+      progress: "{answered} of {total} answered",
+      guidance:
+        "Base your answers on current performance. Accurate responses make your results more useful.",
+      legend:
+        "Rate {title} from 1, completely disagree, to 10, completely agree",
+    },
+    scale: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    reviewThreshold: 6,
+    closestCount: 2,
+    pillars: [
+      {
+        number: "01",
+        title: "Sales Performance",
+        description: "The execution and results of your salespeople.",
+        questions: [
+          {
+            id: "sales-target-achievement",
+            title: "Sales Target Achievement",
+            prompt:
+              "Our salespeople consistently meet their individual sales targets.",
+          },
+          {
+            id: "sales-execution",
+            title: "Sales Execution",
+            prompt:
+              "Our salespeople effectively communicate value, handle objections, and move opportunities toward a decision.",
+          },
+          {
+            id: "prospect-follow-up",
+            title: "Prospect Follow-Up",
+            prompt:
+              "Our salespeople consistently follow up with qualified prospects within established timeframes.",
+          },
+        ],
+      },
+      {
+        number: "02",
+        title: "Sales Systems",
+        description: "The processes and information supporting your team.",
+        questions: [
+          {
+            id: "sales-process",
+            title: "Sales Process",
+            prompt:
+              "Our sales team consistently follows a clearly defined sales process.",
+          },
+          {
+            id: "lead-quality",
+            title: "Lead Quality",
+            prompt:
+              "Our lead generation efforts consistently produce opportunities that fit our target customer.",
+          },
+          {
+            id: "crm-accuracy",
+            title: "CRM Accuracy",
+            prompt:
+              "Our CRM accurately reflects the status and next steps of each sales opportunity.",
+          },
+          {
+            id: "performance-visibility",
+            title: "Performance Visibility",
+            prompt:
+              "Our KPI dashboard makes performance problems visible early enough to take action.",
+          },
+        ],
+      },
+      {
+        number: "03",
+        title: "Sales Leadership",
+        description: "The coaching and accountability that sustain progress.",
+        questions: [
+          {
+            id: "individual-coaching",
+            title: "Individual Coaching",
+            prompt:
+              "Our sales leaders regularly coach representatives based on their individual performance needs.",
+          },
+          {
+            id: "accountability",
+            title: "Accountability",
+            prompt:
+              "Our sales leaders hold team members accountable for clear expectations, agreed actions, and results.",
+          },
+          {
+            id: "sustaining-improvements",
+            title: "Sustaining Improvements",
+            prompt:
+              "Our sales leaders verify that agreed improvements remain in use over time.",
+          },
+        ],
+      },
+    ],
+    nextStep: {
+      eyebrow: "Your next step",
+      title: "See where your sales organization stands.",
+      subtitle:
+        "Your overall score, three pillar ratings, and areas for closer review.",
+      incomplete: "Please rate all 10 statements to view your results.",
+      button: "View My Results",
+      note: "Free. Immediate. No account required.",
+    },
+    results: {
+      eyebrow: "Your results",
+      outOf: "out of 10",
+      areasTitle: "Areas for closer review",
+      areasBelow: "These statements scored 6 or below.",
+      areasStrong:
+        "No statement scored 6 or below. These are the lowest-rated areas, and the best place to look next.",
+      scheduleLabel: "Schedule a Consultation",
+      scheduleHref: "/#cta",
+      resetLabel: "Start over",
+      bands: [
+        {
+          min: 8.5,
+          label: "Strong alignment",
+          note: "The ratings describe consistent execution across the statements you scored. The useful next step is to confirm that the same standard holds across the team, not only in the areas that already feel strong.",
+        },
+        {
+          min: 7,
+          label: "Generally aligned",
+          note: "The organization looks aligned overall, with specific statements that would benefit from a closer look before they limit growth.",
+        },
+        {
+          min: 5,
+          label: "Mixed alignment",
+          note: "Several statements point to a gap between the way the organization expects to sell and the way work is happening today.",
+        },
+        {
+          min: 0,
+          label: "Significant gaps",
+          note: "The ratings suggest performance, systems, or leadership need attention before additional growth effort is likely to hold.",
+        },
+      ],
+    },
+    closing: {
+      eyebrow: "Better alignment. Clearer direction.",
+      line1: "Understand where to look.",
+      line2: "Then measure what matters.",
+      disclaimer:
+        "This self-assessment reflects your responses. It does not independently verify performance or predict results.",
+    },
   },
 } as const;
 

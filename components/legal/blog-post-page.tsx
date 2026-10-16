@@ -11,7 +11,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
       className="legal-page blog-page"
       aria-labelledby="blog-post-heading"
     >
-      <header className="legal-page__hero">
+      <header className="legal-page__hero blog-page__post-hero">
         <Image
           src={blog.hero.image.src}
           alt={blog.hero.image.alt}

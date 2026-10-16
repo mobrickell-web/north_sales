@@ -629,3 +629,39 @@
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   line-height: 1.2;
 }
+
+/* Keeps the article title and subtitle visible while reading. `top` matches the
+   site header height (80px, 110px from xl), so the banner sits just below it. */
+.legal-page__hero.blog-page__post-hero {
+  position: sticky;
+  top: 80px;
+  z-index: 30;
+  min-height: 0;
+  box-shadow: 0 6px 18px rgb(2 11 30 / 25%);
+}
+
+.blog-page__post-hero .legal-page__hero-content {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.blog-page__post-hero .legal-page__hero-title {
+  margin-top: 0.6rem;
+}
+
+.blog-page__post-hero .legal-page__hero-subtitle {
+  margin-top: 0.4rem;
+}
+
+@media (min-width: 640px) {
+  .blog-page__post-hero .legal-page__hero-content {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .legal-page__hero.blog-page__post-hero {
+    top: 110px;
+  }
+}
