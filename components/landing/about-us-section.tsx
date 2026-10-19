@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site";
+import { MeetTheFounderDialog } from "@/components/landing/meet-the-founder-dialog";
 
 interface AboutUsSectionProps {
   sectionNumber?: number | string;
@@ -40,6 +41,10 @@ export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
               {paragraph}
             </p>
           ))}
+        </div>
+
+        <div className="pt-1">
+          <MeetTheFounderDialog />
         </div>
       </div>
     </section>

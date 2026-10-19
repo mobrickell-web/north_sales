@@ -45,6 +45,9 @@ export function SalesAlignmentAssessment() {
   const [scores, setScores] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [detailsError, setDetailsError] = useState<string | null>(null);
 
   const answered = Object.keys(scores).length;
   const complete = answered === questions.length;
@@ -86,6 +89,7 @@ export function SalesAlignmentAssessment() {
       const missing = questions.find((question) => scores[question.id] == null);
       setHighlightedId(missing?.id ?? null);
       setShowResults(false);
+      setDetailsError(null);
       if (missing) {
         document.getElementById(missing.id)?.scrollIntoView({
           behavior: "smooth",
@@ -95,6 +99,17 @@ export function SalesAlignmentAssessment() {
       return;
     }
 
+    if (!firstName.trim() || !email.trim()) {
+      setDetailsError(assessment.nextStep.missingDetails);
+      setShowResults(false);
+      document.getElementById("assessment-lead-capture")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      return;
+    }
+
+    setDetailsError(null);
     setHighlightedId(null);
     setShowResults(true);
     requestAnimationFrame(() => {
@@ -258,24 +273,84 @@ export function SalesAlignmentAssessment() {
             ))}
           </div>
 
-          <div className="mt-4 grid gap-6 border-t border-[#E8E4DC] pt-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-            <div>
-              <p className="font-body text-[11px] font-bold tracking-[0.16em] text-[#8A8F98] uppercase">
-                {assessment.nextStep.eyebrow}
+          <div
+            id="assessment-lead-capture"
+            className="mt-4 scroll-mt-32 border-t border-[#E8E4DC] pt-7"
+          >
+            <p className="font-body text-[11px] font-bold tracking-[0.16em] text-[#8A8F98] uppercase">
+              {assessment.nextStep.eyebrow}
+            </p>
+            <h2 className="mt-2 max-w-[720px] font-body text-[22px] font-bold text-[#001528] sm:text-[26px]">
+              {assessment.nextStep.title}
+            </h2>
+            <p className="mt-2 max-w-[720px] font-body text-[14px] leading-relaxed text-[#5C5F66]">
+              {assessment.nextStep.subtitle}
+            </p>
+
+            {complete ? null : (
+              <p className="mt-4 font-body text-[13px] text-[#8A8F98]">
+                {assessment.nextStep.incomplete}
               </p>
-              <h2 className="mt-2 font-body text-[22px] font-bold text-[#001528] sm:text-[26px]">
-                {assessment.nextStep.title}
-              </h2>
-              <p className="mt-2 font-body text-[14px] text-[#5C5F66]">
-                {assessment.nextStep.subtitle}
-              </p>
-              {complete ? null : (
-                <p className="mt-4 font-body text-[13px] text-[#8A8F98]">
-                  {assessment.nextStep.incomplete}
-                </p>
-              )}
+            )}
+
+            <div className="mt-5 grid max-w-[720px] grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="assessment-first-name"
+                  className="mb-1 block font-body text-[12px] font-bold tracking-[0.04em] text-[#001528] uppercase"
+                >
+                  {assessment.nextStep.firstNameLabel}
+                </label>
+                <input
+                  id="assessment-first-name"
+                  type="text"
+                  autoComplete="given-name"
+                  value={firstName}
+                  onChange={(event) => {
+                    setFirstName(event.target.value);
+                    setDetailsError(null);
+                  }}
+                  className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="assessment-email"
+                  className="mb-1 block font-body text-[12px] font-bold tracking-[0.04em] text-[#001528] uppercase"
+                >
+                  {assessment.nextStep.emailLabel}
+                </label>
+                <input
+                  id="assessment-email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    setDetailsError(null);
+                  }}
+                  className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20"
+                />
+              </div>
             </div>
-            <div className="lg:text-right">
+
+            <p className="mt-3 max-w-[720px] font-body text-[13px] leading-relaxed text-[#8A8F98]">
+              {assessment.nextStep.privacy}{" "}
+              <Link
+                href={assessment.nextStep.privacyHref}
+                className="underline underline-offset-2 transition-colors hover:text-[#b17411]"
+              >
+                {assessment.nextStep.privacyLinkLabel}
+              </Link>
+            </p>
+
+            {detailsError ? (
+              <p className="mt-3 font-body text-[13px] text-[#8f2d2d]">
+                {detailsError}
+              </p>
+            ) : null}
+
+            <div className="mt-5">
               <button
                 type="button"
                 onClick={viewResults}
@@ -284,7 +359,7 @@ export function SalesAlignmentAssessment() {
                 {assessment.nextStep.button}
                 <ArrowUpRight className="size-4" aria-hidden />
               </button>
-              <p className="mt-2 font-body text-[12px] text-[#8A8F98] lg:text-right">
+              <p className="mt-2 font-body text-[12px] text-[#8A8F98]">
                 {assessment.nextStep.note}
               </p>
             </div>
@@ -380,6 +455,9 @@ export function SalesAlignmentAssessment() {
                     setScores({});
                     setShowResults(false);
                     setHighlightedId(null);
+                    setFirstName("");
+                    setEmail("");
+                    setDetailsError(null);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
                   className="inline-flex h-[46px] cursor-pointer items-center justify-center border border-[#E8E4DC] px-6 font-body text-[13px] font-bold tracking-[0.08em] text-[#001528] uppercase transition-colors hover:border-[#b17411]"

@@ -101,6 +101,21 @@ export const siteConfig = {
       "That experience forms the foundation of NORTH POINT SALES GROUP and gives us a practical understanding of what drives sales performance across an organization.",
       "Our work is focused on identifying opportunities that may help established sales organizations increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
     ] as const,
+    founder: {
+      buttonLabel: "Meet the Founder",
+      name: "Michael O. Brickell",
+      role: "Founder | NORTH POINT SALES GROUP",
+      paragraphs: [
+        "Michael O. Brickell brings more than 40 years of experience in sales, sales management, marketing, business development, and entrepreneurship, with a strong record of sales performance and leadership.",
+        "Throughout his career, Michael has worked directly within the sales organizations of companies generating between $1 million and $250 million in annual revenue. Beginning as a frontline sales representative in the 1970s, he gained firsthand experience in selling, customer relationships, sales execution, and the factors that influence individual and organizational performance.",
+        "In the early 1990s, Michael owned and operated a lead-generation business serving the mortgage industry, managing 15 sales representatives. He also established and operated an advertising agency, gaining extensive experience across multiple advertising and media channels and how they support lead generation and sales performance.",
+        "Recognizing the emerging opportunities in digital publishing, Michael subsequently shifted his focus to developing online businesses. Working with professional website development teams, he directed the creation of two online publishing and educational directory platforms, combining website strategy, search engine optimization, and online and offline marketing to establish strong competitive positions.",
+        "Under his leadership, both platforms ranked among the top five online school directories in the United States in organic search results. He ultimately sold both businesses, demonstrating his ability to recognize market opportunities, develop commercial ventures, build business value, and achieve successful exits.",
+        "His experience across multiple business disciplines provides a broad understanding of how sales, marketing, technology, operational systems, and leadership work together to influence organizational performance. This perspective enables him to look beyond individual problems, recognize connections between business functions, and identify practical opportunities for improvement that might otherwise be overlooked.",
+        "Michael founded NORTH POINT SALES GROUP to bring this combination of frontline sales experience, sales leadership, business ownership, and multidisciplinary expertise to established organizations seeking stronger sales performance and sustainable revenue growth.",
+        "His philosophy is straightforward: Identify what's working, correct what's not, and avoid unnecessary changes or expenses.",
+      ],
+    },
   },
 
   whyChooseUs: {
@@ -788,6 +803,10 @@ export const siteConfig = {
                 "Build improvements into the sales organization so results are not dependent on a temporary push or a few individual performers. The objective is a stronger sales operation with the processes, leadership, accountability, measurement, and capabilities needed to continue improving and support future growth.",
               ],
             },
+          },
+          {
+            label: "AI Sales Integration",
+            sharedDialog: "aiSalesIntegration",
           },
         ],
       },
@@ -2747,7 +2766,7 @@ export const siteConfig = {
                 title:
                   "DAYS 46–90 — MEASUREMENT, REFINEMENT & PERFORMANCE STABILIZATION",
                 intro:
-                  "Used when the scope requires a full 46–90 days implementation period.\nThe final phase focuses on measuring results, refining the implementation, and establishing a sustainable operating approach.\nWork may include:",
+                  "For engagements extending beyond 45 days, this final phase focuses on measuring results, refining the implementation, and establishing a sustainable operating approach.\nWork may include:",
                 items: [
                   "Reviewing performance against established measures.",
                   "Determining what improvements are occurring.",
@@ -3035,8 +3054,7 @@ export const siteConfig = {
       {
         question: "What industries do you serve?",
         answer: [
-          "Our methodology applies across many industries where professional sales organizations play a critical role in business growth.",
-          "Rather than specializing in one specific industry, we specialize in improving the performance of sales organizations.",
+          "Our methodology applies across many industries where professional sales organizations play a critical role in business growth. Rather than specializing in one industry, we specialize in improving sales performance through stronger people, systems, and leadership.",
         ],
       },
       {
@@ -3858,6 +3876,75 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
           ],
         },
       ],
+    },
+
+    aiSalesIntegration: {
+      linkLabel: "AI Sales Integration",
+      title: "AI Sales Opportunities",
+      headline:
+        "Could Artificial Intelligence Help Your Existing Sales Organization Produce More?",
+      intro: [
+        "Artificial intelligence is creating opportunities for businesses to increase sales productivity, identify more qualified prospects, reduce time-consuming administrative work, and improve the effectiveness of their existing sales operations.",
+        "At NORTH POINT SALES GROUP, we evaluate where AI could provide a practical, measurable advantage.",
+        "Potential applications include:",
+      ],
+      applications: [
+        {
+          title: "Lead Generation",
+          description:
+            "Use AI to help find prospective companies from available business information and organize them by industry, location, company size, and likely fit for your services.",
+        },
+        {
+          title: "Lead Qualification",
+          description:
+            "Use AI to research prospects and compare them against your ideal customer criteria, helping salespeople prioritize the most promising opportunities.",
+        },
+        {
+          title: "CRM Efficiency",
+          description:
+            "Use AI to help enter and update CRM information, flag missing or inconsistent records, and reduce repetitive administrative work so salespeople have more time to sell.",
+        },
+        {
+          title: "Sales Follow-Up",
+          description:
+            "Use AI to help schedule follow-up activities, create reminders, and draft personalized messages based on previous interactions, helping salespeople stay consistent and reduce missed opportunities.",
+        },
+        {
+          title: "Sales Forecasting",
+          description:
+            "Use AI to examine current opportunities, past sales results, and deal progress to help estimate which sales may close and when, while flagging stalled deals or other risks that could affect the forecast.",
+        },
+        {
+          title: "Performance Monitoring",
+          description:
+            "Use AI to review CRM data and sales KPIs, flag potential problems—such as declining conversion rates, stalled opportunities, or missing follow-up records—and alert the appropriate person. By examining related measurements together, AI can help identify possible causes for your team to investigate.",
+        },
+      ],
+      approach: {
+        title: "Our Approach",
+        paragraphs: [
+          "We don't recommend AI simply because the technology is available.",
+          "We first evaluate your existing sales organization to determine whether incorporating AI could improve performance, reduce unnecessary work, or create additional revenue opportunities.",
+          "Where appropriate, we help identify suitable technology providers and work with qualified specialists to coordinate and oversee approved implementations.",
+          "Solutions are selected according to your organization's actual requirements, existing technology, and available budget.",
+        ],
+      },
+      cost: {
+        title: "What Does It Cost?",
+        paragraphs: [
+          "AI solutions range from relatively inexpensive monthly software subscriptions to more sophisticated systems requiring specialized integration.",
+          "We evaluate potential financial benefits against implementation and ongoing costs before recommending a solution.",
+          "Third-party software, technology, and technical implementation expenses are separately identified and subject to client approval.",
+        ],
+      },
+      partOfApproach: {
+        title: "Part of Our Sales Performance Approach",
+        paragraphs: [
+          "AI opportunities may be evaluated during any of our three sales performance engagements.",
+          "Where implementation falls outside the agreed engagement scope, additional NORTH POINT SALES GROUP services can be arranged separately.",
+          "Our objective remains the same: Improve the performance of the sales organization you already have, using practical solutions that justify their investment.",
+        ],
+      },
     },
 
     socialMediaNote: {
@@ -4982,12 +5069,18 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
     ],
     nextStep: {
       eyebrow: "Your next step",
-      title: "See where your sales organization stands.",
+      title: "View Your FREE Sales Alignment Results",
       subtitle:
-        "Your overall score, three pillar ratings, and areas for closer review.",
+        "Enter your first name and email to view your personalized Sales Alignment Assessment results and identify areas where your sales organization may benefit from improvement.",
       incomplete: "Please rate all 10 statements to view your results.",
+      firstNameLabel: "First name",
+      emailLabel: "Email",
+      privacy: "We respect your privacy. No spam, ever.",
+      privacyLinkLabel: "View our privacy policy.",
+      privacyHref: "/privacy-policy",
       button: "View My Results",
       note: "Free. Immediate. No account required.",
+      missingDetails: "Please enter your first name and email to continue.",
     },
     results: {
       eyebrow: "Your results",

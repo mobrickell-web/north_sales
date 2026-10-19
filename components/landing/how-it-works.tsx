@@ -6,6 +6,7 @@ import { Check, ChevronLeft, Target, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { AiSalesIntegrationDialog } from "@/components/layout/ai-sales-integration-dialog";
 
 interface HowItWorksProps {
   sectionNumber?: number | string;
@@ -38,15 +39,20 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     paragraphs: readonly string[];
     list?: readonly string[];
   } | null>(null);
+  const [aiSalesOpen, setAiSalesOpen] = useState(false);
 
   const outerPanelRef = useRef<HTMLDivElement>(null);
   const innerPanelRef = useRef<HTMLDivElement>(null);
 
   // Escape closes the deepest open level first
   useEffect(() => {
-    if (!expanded && !popup) return;
+    if (!expanded && !popup && !aiSalesOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
+      if (aiSalesOpen) {
+        setAiSalesOpen(false);
+        return;
+      }
       if (popup) {
         setPopup(null);
         return;
@@ -57,7 +63,7 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [expanded, componentsOpen, selectedCompIndex, popup]);
+  }, [expanded, componentsOpen, selectedCompIndex, popup, aiSalesOpen]);
 
   const toggleOuter = () => {
     const willExpand = !expanded;
@@ -261,38 +267,33 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                           {pillar.title}
                         </h3>
                         <ul className="mt-6 flex flex-col gap-3 font-body text-[14px] text-gray-200">
-                          {pillar.bullets.map(
-                            (
-                              bullet: {
-                                label: string;
-                                popout: {
-                                  title: string;
-                                  paragraphs: readonly string[];
-                                };
-                              },
-                              idx: number,
-                            ) => (
-                              <li
-                                key={idx}
-                                className="flex items-start gap-2.5"
-                              >
-                                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
-                                <button
-                                  type="button"
-                                  onClick={() =>
+                          {pillar.bullets.map((bullet, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (
+                                    "sharedDialog" in bullet &&
+                                    bullet.sharedDialog === "aiSalesIntegration"
+                                  ) {
+                                    setAiSalesOpen(true);
+                                    return;
+                                  }
+                                  if ("popout" in bullet && bullet.popout) {
                                     setPopup({
                                       bulletHeading: pillar.title,
                                       title: bullet.popout.title,
                                       paragraphs: bullet.popout.paragraphs,
-                                    })
+                                    });
                                   }
-                                  className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
-                                >
-                                  {bullet.label}
-                                </button>
-                              </li>
-                            ),
-                          )}
+                                }}
+                                className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                              >
+                                {bullet.label}
+                              </button>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     ))}
@@ -535,6 +536,12 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
+
+      <AiSalesIntegrationDialog
+        open={aiSalesOpen}
+        onOpenChange={setAiSalesOpen}
+        hideTrigger
+      />
     </section>
   );
 }

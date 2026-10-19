@@ -10,6 +10,7 @@ import { useScheduleAppointment } from "@/components/schedule/schedule-provider"
 import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
 import { RemoteWorkDialog } from "@/components/layout/remote-work-dialog";
 import { SalesKpiGuideDialog } from "@/components/layout/sales-kpi-guide-dialog";
+import { AiSalesIntegrationDialog } from "@/components/layout/ai-sales-integration-dialog";
 import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
 import { ContactDialog } from "@/components/layout/contact-dialog";
 
@@ -172,6 +173,9 @@ export function SiteFooter() {
                 <li>
                   <SalesKpiGuideDialog />
                 </li>
+                <li>
+                  <RemoteWorkDialog />
+                </li>
                 {assessmentLink ? (
                   <li>
                     <Link
@@ -187,7 +191,7 @@ export function SiteFooter() {
                   </li>
                 ) : null}
                 <li>
-                  <RemoteWorkDialog />
+                  <AiSalesIntegrationDialog />
                 </li>
               </ul>
             </div>
