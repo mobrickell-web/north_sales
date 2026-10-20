@@ -4,7 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Check, ChevronLeft, Target, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { siteConfig } from "@/config/site";
+import {
+  siteConfig,
+  componentKpisIntro,
+  getSalesComponentKpis,
+  type SalesComponentKpi,
+  aiIntegrationKpisNote,
+  getPillarThemeKpis,
+  pillarKpisFootnote,
+  pillarKpisIntro,
+} from "@/config/site";
 import { cn } from "@/lib/utils";
 import { AiSalesIntegrationDialog } from "@/components/layout/ai-sales-integration-dialog";
 
@@ -19,6 +28,8 @@ interface ModalComponent {
   desc: string;
   overview?: string;
   areas?: readonly (string | { title: string; detail?: string })[]; // Updated to accept readonly arrays
+  kpisIntro?: readonly string[];
+  kpis?: readonly { title: string; detail: string }[];
   note?: string;
   objective?: string;
 }
@@ -38,7 +49,37 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     title: string;
     paragraphs: readonly string[];
     list?: readonly string[];
+    kpis?: readonly { title: string; detail: string }[];
+    footnote?: string;
+    kpiDetail?: { title: string; detail: string };
   } | null>(null);
+
+  const openThemeExampleKpis = (
+    pillarId: string,
+    pillarTitle: string,
+    themeLabel: string,
+  ) => {
+    const kpis = getPillarThemeKpis(pillarId, themeLabel);
+    if (!kpis?.length) return;
+
+    const extraParagraphs: string[] = [];
+    if (themeLabel === "AI Sales Integration") {
+      extraParagraphs.push(aiIntegrationKpisNote);
+    }
+
+    const footnote =
+      pillarId === "sales-leadership"
+        ? pillarKpisFootnote["sales-leadership"]
+        : undefined;
+
+    setPopup({
+      bulletHeading: pillarTitle,
+      title: `${themeLabel} — Example KPIs`,
+      paragraphs: [pillarKpisIntro, ...extraParagraphs],
+      kpis,
+      footnote,
+    });
+  };
   const [aiSalesOpen, setAiSalesOpen] = useState(false);
 
   const outerPanelRef = useRef<HTMLDivElement>(null);
@@ -54,6 +95,10 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
         return;
       }
       if (popup) {
+        if (popup.kpiDetail) {
+          setPopup({ ...popup, kpiDetail: undefined });
+          return;
+        }
         setPopup(null);
         return;
       }
@@ -103,6 +148,15 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     selectedCompIndex !== null
       ? (howItWorks.modalComponents[selectedCompIndex] as ModalComponent)
       : null;
+
+  const activeComponentKpis: readonly SalesComponentKpi[] | false =
+    activeComponent
+      ? (activeComponent.kpis ??
+        getSalesComponentKpis(activeComponent.num) ??
+        [])
+      : false;
+  const activeComponentKpisIntro =
+    activeComponent && (activeComponent.kpisIntro ?? componentKpisIntro);
 
   // Render icons for the 3 main process cards
   const renderCardIcon = (index: number) => {
@@ -267,33 +321,61 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                           {pillar.title}
                         </h3>
                         <ul className="mt-6 flex flex-col gap-3 font-body text-[14px] text-gray-200">
-                          {pillar.bullets.map((bullet, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5">
-                              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  if (
-                                    "sharedDialog" in bullet &&
-                                    bullet.sharedDialog === "aiSalesIntegration"
-                                  ) {
-                                    setAiSalesOpen(true);
-                                    return;
-                                  }
-                                  if ("popout" in bullet && bullet.popout) {
-                                    setPopup({
-                                      bulletHeading: pillar.title,
-                                      title: bullet.popout.title,
-                                      paragraphs: bullet.popout.paragraphs,
-                                    });
-                                  }
-                                }}
-                                className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                          {pillar.bullets.map((bullet, idx) => {
+                            const themeKpis = getPillarThemeKpis(
+                              pillar.id,
+                              bullet.label,
+                            );
+
+                            return (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-2.5"
                               >
-                                {bullet.label}
-                              </button>
-                            </li>
-                          ))}
+                                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
+                                <div className="flex flex-col gap-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (
+                                        "sharedDialog" in bullet &&
+                                        bullet.sharedDialog ===
+                                          "aiSalesIntegration"
+                                      ) {
+                                        setAiSalesOpen(true);
+                                        return;
+                                      }
+                                      if ("popout" in bullet && bullet.popout) {
+                                        setPopup({
+                                          bulletHeading: pillar.title,
+                                          title: bullet.popout.title,
+                                          paragraphs: bullet.popout.paragraphs,
+                                        });
+                                      }
+                                    }}
+                                    className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                                  >
+                                    {bullet.label}
+                                  </button>
+                                  {themeKpis && themeKpis.length > 0 ? (
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        openThemeExampleKpis(
+                                          pillar.id,
+                                          pillar.title,
+                                          bullet.label,
+                                        )
+                                      }
+                                      className="w-fit cursor-pointer text-left font-body text-[12px] font-bold text-[#efb862] transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
+                                    >
+                                      Example KPIs
+                                    </button>
+                                  ) : null}
+                                </div>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ))}
@@ -447,6 +529,45 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                                 </div>
                               )}
 
+                            {activeComponentKpis &&
+                              activeComponentKpis.length > 0 && (
+                                <div className="rounded-xl border border-gray-100 bg-gray-50 p-6">
+                                  <h4 className="font-body text-[13px] font-bold text-primary uppercase">
+                                    Example {activeComponent.title} KPIs
+                                  </h4>
+                                  {activeComponentKpisIntro &&
+                                    activeComponentKpisIntro.length > 0 && (
+                                      <div className="mt-3 flex flex-col gap-2 font-body text-[13px] leading-relaxed text-[#5C5F66]">
+                                        {activeComponentKpisIntro.map(
+                                          (paragraph) => (
+                                            <p key={paragraph}>{paragraph}</p>
+                                          ),
+                                        )}
+                                      </div>
+                                    )}
+                                  <ul className="mt-4 flex flex-col gap-2">
+                                    {activeComponentKpis.map((kpi) => (
+                                      <li key={kpi.title}>
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            setPopup({
+                                              bulletHeading:
+                                                activeComponent.title,
+                                              title: kpi.title,
+                                              paragraphs: [kpi.detail],
+                                            })
+                                          }
+                                          className="cursor-pointer text-left font-body text-[13px] font-bold text-[#b17411] hover:underline focus:outline-none"
+                                        >
+                                          {kpi.title}
+                                        </button>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+
                             {activeComponent.note && (
                               <p className="font-body text-[12px] italic text-gray-500">
                                 {activeComponent.note}
@@ -488,49 +609,105 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
 
             {popup && (
               <div className="flex flex-col gap-3">
-                {popup.bulletHeading && (
-                  <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
-                    {popup.bulletHeading}
-                  </Dialog.Title>
-                )}
-                <p
-                  className={cn(
-                    "font-body font-extrabold tracking-wide text-[#061525] uppercase",
-                    popup.bulletHeading
-                      ? "text-[14px] sm:text-[16px]"
-                      : "text-[16px] sm:text-[18px]",
-                  )}
-                >
-                  {popup.title}
-                </p>
-                <Dialog.Description asChild>
-                  <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                    {popup.paragraphs.map((paragraph, index) => {
-                      const listIntroPhrases = [
-                        "We look for opportunities such as:",
-                        "Depending on the engagement, this may include changes to:",
-                        "Depending on the engagement, implementation may include:",
-                      ];
-                      const showListAfter =
-                        popup.list &&
-                        popup.list.length > 0 &&
-                        listIntroPhrases.includes(paragraph);
+                {popup.kpiDetail ? (
+                  <>
+                    {popup.bulletHeading && (
+                      <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                        {popup.bulletHeading}
+                      </Dialog.Title>
+                    )}
+                    <p className="font-body text-[14px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[16px]">
+                      {popup.kpiDetail.title}
+                    </p>
+                    <Dialog.Description asChild>
+                      <p className="font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                        {popup.kpiDetail.detail}
+                      </p>
+                    </Dialog.Description>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setPopup((prev) =>
+                          prev ? { ...prev, kpiDetail: undefined } : prev,
+                        )
+                      }
+                      className="inline-flex w-fit cursor-pointer items-center gap-1 font-body text-[13px] font-bold text-primary hover:text-[#b17411]"
+                    >
+                      <ChevronLeft className="size-4" />
+                      Back to example KPIs
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {popup.bulletHeading && (
+                      <Dialog.Title className="font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                        {popup.bulletHeading}
+                      </Dialog.Title>
+                    )}
+                    <p
+                      className={cn(
+                        "font-body font-extrabold tracking-wide text-[#061525] uppercase",
+                        popup.bulletHeading
+                          ? "text-[14px] sm:text-[16px]"
+                          : "text-[16px] sm:text-[18px]",
+                      )}
+                    >
+                      {popup.title}
+                    </p>
+                    <Dialog.Description asChild>
+                      <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                        {popup.paragraphs.map((paragraph, index) => {
+                          const listIntroPhrases = [
+                            "We look for opportunities such as:",
+                            "Depending on the engagement, this may include changes to:",
+                            "Depending on the engagement, implementation may include:",
+                          ];
+                          const showListAfter =
+                            popup.list &&
+                            popup.list.length > 0 &&
+                            listIntroPhrases.includes(paragraph);
 
-                      return (
-                        <div key={`${paragraph}-${index}`}>
-                          <p>{paragraph}</p>
-                          {showListAfter && popup.list && (
-                            <ul className="mt-2 list-disc space-y-1.5 pl-5">
-                              {popup.list.map((item) => (
-                                <li key={item}>{item}</li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </Dialog.Description>
+                          return (
+                            <div key={`${paragraph}-${index}`}>
+                              <p>{paragraph}</p>
+                              {showListAfter && popup.list && (
+                                <ul className="mt-2 list-disc space-y-1.5 pl-5">
+                                  {popup.list.map((item) => (
+                                    <li key={item}>{item}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          );
+                        })}
+                        {popup.kpis && popup.kpis.length > 0 && (
+                          <ul className="mt-1 flex flex-col gap-2">
+                            {popup.kpis.map((kpi) => (
+                              <li key={kpi.title}>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setPopup((prev) =>
+                                      prev ? { ...prev, kpiDetail: kpi } : prev,
+                                    )
+                                  }
+                                  className="cursor-pointer text-left font-body text-[13px] font-bold text-[#b17411] hover:underline focus:outline-none"
+                                >
+                                  {kpi.title}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {popup.footnote && (
+                          <p className="mt-2 text-[13px] italic">
+                            {popup.footnote}
+                          </p>
+                        )}
+                      </div>
+                    </Dialog.Description>
+                  </>
+                )}
               </div>
             )}
           </Dialog.Content>

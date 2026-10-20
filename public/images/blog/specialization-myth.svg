@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b17411" stop-opacity="0.85" />
+      <stop offset="1" stop-color="#efb862" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="88" text-anchor="middle" fill="#ffffff" fill-opacity="0.92" font-size="17" font-weight="700" letter-spacing="0.12em">SYMPTOM VS. UNDERLYING CAUSE</text>
+
+    <!-- Visible symptom -->
+    <g>
+      <rect x="420" y="130" width="360" height="110" rx="12" fill="url(#bar)" />
+      <text x="600" y="172" text-anchor="middle" fill="#001528" font-size="16" font-weight="700" letter-spacing="0.10em">VISIBLE SYMPTOM</text>
+      <text x="600" y="204" text-anchor="middle" fill="#001528" fill-opacity="0.88" font-size="15" font-weight="600">Weak pipeline or low close rates</text>
+    </g>
+
+    <path d="M600 250v55" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M588 293l12 12 12-12" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Specialist-only fix -->
+    <g opacity="0.55">
+      <rect x="130" y="330" width="320" height="150" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5" stroke-dasharray="8 6" />
+      <text x="290" y="368" text-anchor="middle" fill="#ffffff" fill-opacity="0.75" font-size="13" font-weight="600" letter-spacing="0.08em">SPECIALIST-ONLY FIX</text>
+      <text x="290" y="404" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">Pipeline training alone</text>
+      <text x="290" y="428" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">Closing techniques alone</text>
+      <text x="290" y="452" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">CRM tweaks alone</text>
+    </g>
+
+    <!-- System view -->
+    <g>
+      <rect x="750" y="330" width="320" height="280" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" stroke-width="2" />
+      <text x="910" y="368" text-anchor="middle" fill="#efb862" font-size="13" font-weight="700" letter-spacing="0.08em">SYSTEM VIEW</text>
+
+      <g font-size="13" font-weight="600" fill="#ffffff" fill-opacity="0.82">
+        <rect x="780" y="390" width="260" height="36" rx="18" fill="#ffffff" fill-opacity="0.08" />
+        <text x="910" y="413" text-anchor="middle">Lead qualification</text>
+        <rect x="780" y="438" width="260" height="36" rx="18" fill="#ffffff" fill-opacity="0.08" />
+        <text x="910" y="461" text-anchor="middle">Presentations and messaging</text>
+        <rect x="780" y="486" width="260" height="36" rx="18" fill="#ffffff" fill-opacity="0.08" />
+        <text x="910" y="509" text-anchor="middle">Follow-up and process</text>
+        <rect x="780" y="534" width="260" height="36" rx="18" fill="#ffffff" fill-opacity="0.08" />
+        <text x="910" y="557" text-anchor="middle">Management and KPIs</text>
+      </g>
+    </g>
+
+    <!-- Arrows from causes to symptom -->
+    <g fill="none" stroke="#efb862" stroke-width="2" stroke-opacity="0.65" stroke-linecap="round">
+      <path d="M750 420C680 380 620 320 600 240" />
+      <path d="M750 500C680 460 620 320 600 240" />
+      <path d="M290 480C360 420 500 280 560 220" stroke-dasharray="6 5" stroke-opacity="0.35" />
+    </g>
+
+    <text x="290" y="520" text-anchor="middle" fill="#ffffff" fill-opacity="0.45" font-size="12">May miss the real cause</text>
+    <text x="910" y="610" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">Diagnose the system,</text>
+    <text x="910" y="632" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">then focus the work</text>
+  </g>
+
+  <g>
+    <rect x="70" y="696" width="1060" height="2" fill="#ffffff" fill-opacity="0.12" />
+    <circle cx="98" cy="726" r="5" fill="#b17411" />
+    <text x="118" y="731" fill="#ffffff" fill-opacity="0.72" font-family="Inter, Arial, sans-serif" font-size="15">Performance problems often appear in one place while the cause sits elsewhere in the sales organization.</text>
+  </g>
+</svg>

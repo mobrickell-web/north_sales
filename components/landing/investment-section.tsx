@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Compass, X } from "lucide-react";
+import { ChevronDown, Compass, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -30,10 +30,19 @@ type InvestmentPopup = {
   intro: string;
   includedHeading: string;
   groups: readonly InvestmentGroup[];
+  expandableIncluded?: boolean;
   deliverableHeading?: string;
+  deliverableIntro?: string;
+  deliverableItems?: readonly string[];
   deliverableParagraphs?: readonly string[];
   parametersHeading?: string;
   parametersParagraphs?: readonly string[];
+  implementationPeriodHeading?: string;
+  implementationPeriodParagraphs?: readonly string[];
+  differencesHeading?: string;
+  differencesParagraphs?: readonly string[];
+  thirdPartyHeading?: string;
+  thirdPartyParagraphs?: readonly string[];
   comparison?: InvestmentComparison;
   upgradeHeading?: string;
   upgradeParagraphs?: readonly string[];
@@ -41,9 +50,79 @@ type InvestmentPopup = {
   sequenceIntro?: string;
   sequenceGroups?: readonly InvestmentGroup[];
   sequenceInNestedPopup?: boolean;
+  sequenceLinkHint?: string;
   outcomeHeading?: string;
   outcomeParagraphs?: readonly string[];
 };
+
+function IncludedServiceGroup({
+  group,
+  isOpen,
+  onToggle,
+}: {
+  group: InvestmentGroup;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <li className="border-b border-[#E8E4DC] last:border-b-0">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-[#FAF9F5]"
+      >
+        <span className="font-body text-[14px] font-semibold text-[#001528]">
+          {group.title}
+        </span>
+        <ChevronDown
+          aria-hidden
+          className={cn(
+            "size-4 shrink-0 text-[#b17411] transition-transform",
+            isOpen && "rotate-180",
+          )}
+        />
+      </button>
+      {isOpen ? (
+        <div className="flex flex-col gap-3 bg-[#FAF9F5] px-4 pt-1 pb-4 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+          {group.intro && <p className="whitespace-pre-wrap">{group.intro}</p>}
+          {group.items && group.items.length > 0 && (
+            <ul className="list-disc space-y-1.5 pl-5">
+              {group.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          )}
+          {group.outro && <p className="whitespace-pre-wrap">{group.outro}</p>}
+        </div>
+      ) : null}
+    </li>
+  );
+}
+
+function ExpandableIncludedGroups({
+  groups,
+}: {
+  groups: readonly InvestmentGroup[];
+}) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  return (
+    <ul className="flex flex-col overflow-hidden rounded-xl border border-[#E8E4DC]">
+      {groups.map((group) => {
+        const key = group.title;
+        return (
+          <IncludedServiceGroup
+            key={key}
+            group={group}
+            isOpen={expanded === key}
+            onToggle={() => setExpanded((prev) => (prev === key ? null : key))}
+          />
+        );
+      })}
+    </ul>
+  );
+}
 
 function renderGroups(groups: readonly InvestmentGroup[]) {
   return groups.map((group) => (
@@ -78,6 +157,31 @@ function renderGroups(groups: readonly InvestmentGroup[]) {
       )}
     </div>
   ));
+}
+
+function renderDeliverables(popup: InvestmentPopup) {
+  if (!popup.deliverableHeading) return null;
+
+  return (
+    <div className="flex flex-col gap-3 border-t border-gray-100 pt-4">
+      <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
+        {popup.deliverableHeading}
+      </h4>
+      {popup.deliverableIntro && <p>{popup.deliverableIntro}</p>}
+      {popup.deliverableItems && popup.deliverableItems.length > 0 && (
+        <ul className="list-disc space-y-1.5 pl-5">
+          {popup.deliverableItems.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+      {popup.deliverableParagraphs?.map((paragraph, index) => (
+        <p key={`${paragraph}-${index}`} className="whitespace-pre-wrap">
+          {paragraph}
+        </p>
+      ))}
+    </div>
+  );
 }
 
 function renderComparison(comparison: InvestmentComparison) {
@@ -162,9 +266,13 @@ function renderSectionParagraph(paragraph: string, key: string) {
   const sectionHeadingClass =
     "font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]";
 
-  if (paragraph.startsWith("Approximately $")) {
+  if (
+    paragraph.startsWith("Approximately $") ||
+    paragraph.startsWith("Approximately 30 Days") ||
+    paragraph.startsWith("Approximately 60")
+  ) {
     return (
-      <div key={key}>{renderLeadParagraph(paragraph, /^Approximately \$/)}</div>
+      <div key={key}>{renderLeadParagraph(paragraph, /^Approximately /)}</div>
     );
   }
 
@@ -352,19 +460,37 @@ export function InvestmentSection({
                       <h4 className="font-body text-[13px] font-extrabold tracking-[0.06em] text-[#001528] uppercase sm:text-[14px]">
                         {popup.includedHeading}
                       </h4>
-                      {renderGroups(popup.groups)}
+                      {popup.expandableIncluded !== false ? (
+                        <>
+                          <p className="font-body text-[13px] leading-relaxed text-[#5C5F66]">
+                            The detailed service bullets describe what each
+                            engagement may include within its agreed scope.
+                          </p>
+                          <ExpandableIncludedGroups groups={popup.groups} />
+                        </>
+                      ) : (
+                        renderGroups(popup.groups)
+                      )}
                     </div>
 
-                    {popup.deliverableHeading &&
-                      renderSectionBlock(
-                        popup.deliverableHeading,
-                        popup.deliverableParagraphs,
-                      )}
+                    {renderDeliverables(popup)}
 
                     {popup.parametersHeading &&
                       renderSectionBlock(
                         popup.parametersHeading,
                         popup.parametersParagraphs,
+                      )}
+
+                    {popup.implementationPeriodHeading &&
+                      renderSectionBlock(
+                        popup.implementationPeriodHeading,
+                        popup.implementationPeriodParagraphs,
+                      )}
+
+                    {popup.differencesHeading &&
+                      renderSectionBlock(
+                        popup.differencesHeading,
+                        popup.differencesParagraphs,
                       )}
 
                     {popup.comparison && renderComparison(popup.comparison)}
@@ -373,6 +499,12 @@ export function InvestmentSection({
                       renderSectionBlock(
                         popup.upgradeHeading,
                         popup.upgradeParagraphs,
+                      )}
+
+                    {popup.thirdPartyHeading &&
+                      renderSectionBlock(
+                        popup.thirdPartyHeading,
+                        popup.thirdPartyParagraphs,
                       )}
 
                     {showSequenceInline &&
@@ -412,7 +544,8 @@ export function InvestmentSection({
                           {popup.sequenceHeading}
                         </button>
                         <p className="font-body text-[13px] text-[#5C5F66]">
-                          Click to view the full day-by-day work sequence.
+                          {popup.sequenceLinkHint ??
+                            "Click to view the full day-by-day work sequence."}
                         </p>
                       </div>
                     )}

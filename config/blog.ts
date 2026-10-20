@@ -1,5 +1,161 @@
 export const blogPosts = [
   {
+    slug: "the-myth-of-specialization-in-sales-consulting",
+    title: "The Myth of Specialization in Sales Consulting",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "NORTH POINT SALES GROUP | SALES MANAGEMENT INSIGHTS",
+      },
+      {
+        type: "paragraph",
+        text: "Sales consulting offers specialists in nearly every function: prospecting, pipeline management, sales coaching, closing techniques, and CRM optimization.",
+      },
+      {
+        type: "paragraph",
+        text: "Specialists can provide valuable expertise. But hiring one before identifying the underlying problem can leave a company addressing symptoms while the actual cause remains unresolved.",
+      },
+      {
+        type: "paragraph",
+        text: "A sales organization operates as an interconnected system. Improving one component requires understanding what affects it.",
+      },
+      {
+        type: "heading",
+        text: "Your Pipeline Problem May Start Somewhere Else",
+      },
+      {
+        type: "paragraph",
+        text: "Consider a company whose pipeline contains plenty of opportunities but produces disappointing sales.",
+      },
+      {
+        type: "paragraph",
+        text: "Does it need better pipeline management? Possibly. But the underlying causes could include:",
+      },
+      {
+        type: "list",
+        items: [
+          "Prospects entering the pipeline before being properly qualified.",
+          "Managers emphasizing activity volume over opportunity quality.",
+          "Inconsistent follow-up.",
+          "Presentations that fail to address customer needs.",
+          "Poorly defined qualification standards.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "New pipeline procedures may help, but they may accomplish little if those conditions continue.",
+      },
+      {
+        type: "paragraph",
+        text: "The same applies to closing performance. A salesperson's low closing ratio could reflect weak selling skills—or poorly qualified leads, ineffective presentations, or obstacles within the sales process.",
+      },
+      {
+        type: "paragraph",
+        text: "The first question should be: Have we identified the cause, or simply where the symptoms appear?",
+      },
+      {
+        type: "image",
+        src: "/images/blog/specialization-myth.svg",
+        alt: "Diagram contrasting a specialist-only fix on pipeline or closing with a system view of qualification, presentations, follow-up, and management as underlying causes of weak results.",
+        caption:
+          "A symptom in the pipeline or close rate often traces back to conditions elsewhere in the sales organization.",
+      },
+      {
+        type: "heading",
+        text: "Look Broadly, Focus the Work",
+      },
+      {
+        type: "paragraph",
+        text: "Understanding the entire sales organization does not mean examining every component in equal detail or recommending changes everywhere.",
+      },
+      {
+        type: "paragraph",
+        text: "At NORTH POINT SALES GROUP, we typically begin with the existing sales team. We examine how salespeople prospect, qualify opportunities, present, follow up, manage their pipelines, and close business.",
+      },
+      {
+        type: "paragraph",
+        text: "From there, we investigate the systems and leadership affecting their performance.",
+      },
+      {
+        type: "paragraph",
+        text: "If the evidence points to CRM procedures, coaching, lead quality, or management expectations, those areas receive attention. Components already functioning effectively can remain in place.",
+      },
+      {
+        type: "paragraph",
+        text: "A broad understanding allows us to focus implementation where it can make the greatest difference.",
+      },
+      {
+        type: "heading",
+        text: "Support the Sales Manager",
+      },
+      {
+        type: "paragraph",
+        text: "Sales managers play a central role in sustaining improvement. Yet success as a salesperson does not automatically prepare someone to coach a team, analyze KPIs, establish accountability, and diagnose performance problems.",
+      },
+      {
+        type: "paragraph",
+        text: "When managers need additional support, our objective is to strengthen their effectiveness and help them succeed in their existing roles.",
+      },
+      {
+        type: "paragraph",
+        text: "That may involve clearer expectations, better coaching practices, more useful KPI measurements, or stronger follow-through on agreed actions.",
+      },
+      {
+        type: "heading",
+        text: "Put Improvements Into Practice—and Measure Them",
+      },
+      {
+        type: "paragraph",
+        text: "Diagnosis is only the beginning. Recommendations have value when they become consistent working practices.",
+      },
+      {
+        type: "paragraph",
+        text: "Our typical 30-to-90-day implementation engagements help companies introduce practical improvements with their existing personnel and leadership.",
+      },
+      {
+        type: "paragraph",
+        text: "Depending on the findings, the work may include:",
+      },
+      {
+        type: "list",
+        items: [
+          "Refining prospect qualification.",
+          "Strengthening sales coaching and presentations.",
+          "Improving CRM practices and follow-up.",
+          "Establishing clearer management responsibilities.",
+          "Defining relevant KPIs and accountability.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "We establish baseline KPI measurements, compare subsequent results, and use that information to identify progress and areas requiring adjustment.",
+      },
+      {
+        type: "paragraph",
+        text: "The objective is to help the organization understand the changes, apply them consistently, and sustain the improvements.",
+      },
+      {
+        type: "heading",
+        text: "Diagnose Before You Specialize",
+      },
+      {
+        type: "paragraph",
+        text: "Some needs call for specialized expertise, particularly complex technical work. But choosing that expertise should follow a clear understanding of the problem.",
+      },
+      {
+        type: "paragraph",
+        text: "Our approach is straightforward: identify the underlying causes, concentrate on what needs improvement, implement practical changes, and measure the results.",
+      },
+      {
+        type: "paragraph",
+        text: "The value of comprehensive sales management expertise is knowing how the pieces work together—and where focused action can improve overall performance.",
+      },
+    ],
+    conclusion:
+      "NORTH POINT SALES GROUP helps established B2B companies identify untapped sales capacity, improve performance and profitability, and strengthen their existing sales organizations.",
+    cta: "Learn how we diagnose the full sales system before focusing implementation where it can make the greatest difference.",
+  },
+  {
     slug: "how-ai-can-transform-sales-lead-generation",
     title: "How AI Can Transform Sales Lead Generation",
     blocks: [
@@ -112,6 +268,13 @@ export const blogPosts = [
       {
         type: "paragraph",
         text: "The information still requires appropriate verification, and the system's priorities are not guarantees of purchasing intent. But the initial research and screening can become considerably more efficient.",
+      },
+      {
+        type: "image",
+        src: "/images/blog/ai-lead-generation.svg",
+        alt: "Diagram showing a large prospect pool processed by AI into Priority A, B, and C groups so salespeople can focus on selling instead of manual research.",
+        caption:
+          "High-volume prospecting becomes valuable when AI filters and prioritizes companies against your ideal customer profile.",
       },
       {
         type: "heading",

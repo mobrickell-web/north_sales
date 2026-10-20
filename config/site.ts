@@ -1,3 +1,1369 @@
+/** Static content: investment tier pop-outs, component KPIs, pillar theme KPIs (Section 4 & 7). */
+
+/** Section 7 — investment tier pop-out content (replaces prior copy). */
+
+const sharedSequenceHint =
+  "Click to view the general day-by-day work sequence.";
+
+const salesTeamPerformancePopout = {
+  title: "SALES TEAM PERFORMANCE ENGAGEMENT",
+  fee: "Professional Fee: Beginning at $7,500\nEngagement Period: 30 Days",
+  intro:
+    "This engagement focuses on improving the performance of your existing sales team. We work directly with sales leadership and selected salespeople to identify performance gaps, improve execution, and strengthen accountability.",
+  includedHeading: "WHAT IS INCLUDED",
+  expandableIncluded: true,
+  groups: [
+    {
+      title: "1. Sales Team and Performance Assessment",
+      items: [
+        "Review the current sales-team structure, roles, responsibilities, and expectations.",
+        "Review available sales-performance data and individual KPIs.",
+        "Evaluate prospecting, qualification, presentations, follow-up, pipeline management, and closing practices.",
+        "Identify individual and team performance gaps affecting sales results.",
+        "Establish available starting baselines for measuring improvement.",
+      ],
+    },
+    {
+      title: "2. Sales Process Review",
+      items: [
+        "Review the sales process from lead receipt through closed sale.",
+        "Identify breakdowns, inefficiencies, and missed opportunities.",
+        "Evaluate how consistently salespeople follow the established process.",
+        "Identify practical changes that could improve execution during the engagement.",
+      ],
+    },
+    {
+      title: "3. Individual Sales Performance Coaching",
+      items: [
+        "Provide direct one-on-one coaching with up to three selected salespeople.",
+        "Address the specific performance issues identified during assessment.",
+        "Work on prospecting, qualification, presentations, objection handling, follow-up, pipeline management, and closing, as applicable.",
+        "Review available recorded sales conversations or conduct practice calls where appropriate.",
+        "Provide practical direction and accountability throughout the engagement.",
+        "Evaluate progress against each salesperson's starting baseline and appropriate KPIs.",
+      ],
+    },
+    {
+      title: "4. Sales Leadership Sessions",
+      items: [
+        "Work directly with sales leadership throughout the 30-day engagement.",
+        "Review individual and team performance observations.",
+        "Clarify expectations for sales activity, pipeline management, and results.",
+        "Address management practices affecting sales execution.",
+        "Help leadership reinforce coaching and follow through on agreed improvements.",
+      ],
+    },
+    {
+      title: "5. Performance Improvement Plan",
+      items: [
+        "Summarize the primary performance issues identified.",
+        "Document coaching and improvement work completed.",
+        "Review progress against established KPIs, where measurable during the engagement.",
+        "Recommend continued development priorities for the salespeople coached.",
+        "Establish leadership actions for maintaining expectations and accountability.",
+        "Identify additional coaching, process work, or support that may be needed.",
+      ],
+    },
+  ],
+  deliverableHeading: "ENGAGEMENT DELIVERABLES",
+  deliverableIntro: "At the conclusion of the engagement, leadership receives:",
+  deliverableItems: [
+    "A summary of performance findings and work completed.",
+    "Individual recommendations for the salespeople directly coached.",
+    "Progress against established KPIs, where measurable.",
+    "A practical plan for continued sales-team improvement.",
+    "Recommendations for maintaining coaching and accountability.",
+  ],
+  parametersHeading: "ENGAGEMENT PARAMETERS",
+  parametersParagraphs: [
+    "The starting fee covers a focused 30-day engagement, including one-on-one work with up to three selected salespeople. Companies with larger sales teams may participate by selecting representatives for direct coaching.",
+    "Additional coaching, a broader scope, or work beyond the initial 30 days can be arranged separately. Any additional fees are agreed upon in advance.",
+  ],
+  upgradeHeading: "UPGRADE CREDIT",
+  upgradeParagraphs: [
+    "If you move directly into a Full Sales Performance Implementation, the professional fee paid for this engagement will be credited toward the implementation fee.",
+  ],
+  sequenceInNestedPopup: true,
+  sequenceHeading: "30-DAY SALES TEAM PERFORMANCE ENGAGEMENT WORK SEQUENCE",
+  sequenceLinkHint: sharedSequenceHint,
+} as const;
+
+const focusedSalesPerformancePopout = {
+  title: "30-DAY FOCUSED SALES PERFORMANCE ENGAGEMENT",
+  fee: "Professional Fee: Beginning at $9,500\nEngagement Period: 30 Days",
+  intro:
+    "This engagement provides a broader assessment of your existing sales operation, identifies the most significant opportunities for improvement, and establishes a practical implementation roadmap.\n\nIt is designed for companies that want to understand what needs attention before committing to broader implementation.",
+  includedHeading: "WHAT IS INCLUDED",
+  expandableIncluded: true,
+  groups: [
+    {
+      title: "1. Executive Discovery",
+      items: [
+        "Discuss current sales objectives, challenges, and expectations with company leadership.",
+        "Review the existing sales organization and operating environment.",
+        "Identify management concerns and areas where performance may be falling short.",
+        "Clarify current priorities and constraints.",
+        "Establish the areas requiring examination.",
+      ],
+    },
+    {
+      title: "2. Sales Operation Review",
+      intro:
+        "Examine relevant areas of the sales operation, which may include:",
+      items: [
+        "Sales Leadership: Leadership responsibilities, communication of expectations, coaching, and accountability.",
+        "Systems & Processes: How the sales process supports consistent execution from prospecting through closing and account development.",
+        "Team Performance: Individual and team productivity, skills, consistency, and results.",
+        "Prospecting & Lead Development: How opportunities are identified, qualified, developed, and moved forward.",
+        "Sales Presentations: How salespeople communicate value, handle objections, and guide buying decisions.",
+        "Pipeline Management: Opportunity stages, follow-up, stalled deals, pipeline accuracy, and forecasting.",
+        "CRM Utilization: Recordkeeping, usage consistency, workflows, and management visibility.",
+        "Performance Measurement: Existing KPIs, available baselines, reporting, and how measurements guide decisions.",
+        "Compensation & Incentives: How compensation supports desired activities and results.",
+        "Recruiting & Onboarding: How salespeople are selected, prepared, and brought to productivity.",
+        "Customer Retention & Development: How existing relationships are maintained and account-growth opportunities are pursued.",
+        "Training & Development: How skill gaps are identified and addressed.",
+      ],
+      outro:
+        "The depth of review depends on the organization's needs and the opportunities identified.",
+    },
+    {
+      title: "3. Lead Generation and Conversion Review",
+      intro: "Where applicable:",
+      items: [
+        "Review opportunities generated through website activity, paid advertising, social media, referrals, outbound prospecting, and other sources.",
+        "Examine how incoming leads are assigned and contacted.",
+        "Review lead qualification and follow-up practices.",
+        "Evaluate how opportunities move from initial inquiry through presentation, proposal, and closed sale.",
+        "Identify where leads are being lost or sales opportunities are stalling.",
+        "Determine whether lead generation and sales execution are working together effectively.",
+      ],
+    },
+    {
+      title: "4. Findings and Priorities",
+      items: [
+        "Identify what is working and should be maintained.",
+        "Identify where sales opportunities are being lost.",
+        "Determine which issues appear to have the greatest effect on performance.",
+        "Establish what should be addressed first.",
+        "Identify issues that do not warrant immediate attention.",
+      ],
+    },
+    {
+      title: "5. Executive Recommendations",
+      items: [
+        "Present recommended actions and areas of focus.",
+        "Explain the performance issues each recommendation addresses.",
+        "Identify internal resources and capabilities required.",
+        "Recommend leadership and sales-team responsibilities.",
+        "Identify where outside specialists may be appropriate.",
+        "Evaluate potential AI applications where they could provide a practical, measurable advantage.",
+      ],
+    },
+    {
+      title: "6. Implementation Roadmap",
+      items: [
+        "Establish recommended actions in priority order.",
+        "Define the proposed implementation sequence.",
+        "Identify who should be responsible for each action.",
+        "Identify required internal resources.",
+        "Identify activities that may require outside specialists.",
+        "Recommend KPIs and available starting baselines.",
+        "Establish how leadership can evaluate whether implemented changes are producing improvement.",
+      ],
+    },
+  ],
+  deliverableHeading: "ENGAGEMENT DELIVERABLES",
+  deliverableIntro:
+    "Leadership receives an executive presentation and implementation roadmap covering:",
+  deliverableItems: [
+    "Sales-performance findings.",
+    "The most significant improvement opportunities.",
+    "Recommended priorities and actions.",
+    "Proposed responsibilities and implementation sequence.",
+    "Required resources and potential outside support.",
+    "Recommended KPIs and available starting baselines.",
+  ],
+  parametersHeading: "ENGAGEMENT PARAMETERS",
+  parametersParagraphs: [
+    "The starting fee covers a focused 30-day assessment, analysis, executive recommendations, and implementation roadmap. A substantially broader scope or deeper analysis may require an adjusted fee, agreed upon in advance.",
+    "This engagement does not include full implementation of the recommendations or the one-on-one coaching provided in the Sales Team Performance Engagement.",
+    "Third-party expenses—including software, advertising, website development, and specialized technical services—are separate and require client approval.",
+  ],
+  differencesHeading: "HOW THIS DIFFERS FROM THE $7,500 ENGAGEMENT",
+  differencesParagraphs: [
+    "The $7,500 engagement focuses on direct improvement of selected salespeople's execution. This engagement examines the broader sales operation and establishes the priorities and roadmap for implementation.",
+  ],
+  upgradeHeading: "UPGRADE CREDIT",
+  upgradeParagraphs: [
+    "If you move directly into a Full Sales Performance Implementation, the professional fee paid for this engagement will be credited toward the implementation fee.",
+  ],
+  sequenceInNestedPopup: true,
+  sequenceHeading: "30-DAY WORK SEQUENCE",
+  sequenceLinkHint: sharedSequenceHint,
+} as const;
+
+const fullSalesPerformancePopout = {
+  title: "FULL SALES PERFORMANCE IMPLEMENTATION",
+  fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–90 Days",
+  intro:
+    "This engagement combines assessment with hands-on implementation across the areas of your sales organization requiring improvement.\n\nWe work directly with leadership and sales personnel to identify opportunities, implement agreed-upon changes, establish KPIs and accountability, and refine the approach as results become available.",
+  includedHeading: "WHAT IS INCLUDED",
+  expandableIncluded: true,
+  groups: [
+    {
+      title: "1. Executive Discovery and Leadership Assessment",
+      items: [
+        "Discuss sales objectives, challenges, expectations, and current performance.",
+        "Review sales leadership responsibilities and management practices.",
+        "Identify leadership concerns and organizational constraints affecting results.",
+        "Review how expectations are communicated and commitments are followed through.",
+        "Establish the initial areas requiring examination.",
+      ],
+    },
+    {
+      title: "2. Sales Team and Individual Performance Assessment",
+      items: [
+        "Review sales-team structure, roles, responsibilities, and expectations.",
+        "Review available individual and team performance data.",
+        "Assess prospecting, qualification, presentations, follow-up, pipeline management, and closing practices.",
+        "Identify skill gaps, inconsistent execution, and barriers to productivity.",
+        "Identify effective practices that should be maintained or reinforced.",
+        "Establish available starting baselines for measuring progress.",
+      ],
+    },
+    {
+      title: "3. Sales Process and Operations Review",
+      items: [
+        "Review the sales process from prospecting or lead receipt through closed sale and account development.",
+        "Examine sales procedures, responsibilities, and handoffs.",
+        "Review CRM utilization, reporting, pipeline management, and forecasting.",
+        "Identify process breakdowns, inefficiencies, and missed opportunities.",
+        "Examine existing KPIs and accountability practices.",
+        "Review compensation, incentives, recruiting, onboarding, training, and customer retention where relevant.",
+      ],
+      outro:
+        "Areas presenting greater potential impact receive greater attention.",
+    },
+    {
+      title: "4. Lead Generation and Sales Conversion",
+      intro: "Where applicable:",
+      items: [
+        "Review leads generated through website activity, advertising, social media, referrals, outbound prospecting, and other sources.",
+        "Improve lead assignment, response, qualification, and follow-up procedures.",
+        "Address breakdowns between lead generation and sales execution.",
+        "Improve how opportunities move from inquiry to qualified opportunity and customer.",
+        "Establish appropriate KPIs for lead quality, response, conversion, and sales results.",
+        "Coordinate approved changes requiring outside marketing or technical specialists.",
+      ],
+    },
+    {
+      title: "5. Findings, Priorities, and Implementation Roadmap",
+      items: [
+        "Identify what is working and should be maintained.",
+        "Identify where opportunities are being lost.",
+        "Establish the performance issues requiring priority attention.",
+        "Agree with leadership on recommended changes.",
+        "Define the implementation sequence and responsibilities.",
+        "Identify required resources and outside specialists.",
+        "Establish appropriate KPIs and available starting baselines.",
+        "Clarify which activities fall within the agreed engagement scope.",
+      ],
+    },
+    {
+      title: "6. Sales Performance Implementation",
+      intro: "Depending on the agreed scope:",
+      items: [
+        "Improve prospecting and lead-development practices.",
+        "Strengthen qualification, sales presentations, objection handling, follow-up, and closing.",
+        "Provide direct coaching to selected salespeople.",
+        "Strengthen sales leadership, coaching, and performance management.",
+        "Improve sales processes, responsibilities, assignments, and workflows.",
+        "Strengthen pipeline management and forecasting.",
+        "Improve CRM procedures, usage expectations, and reporting.",
+        "Establish structured sales meetings and accountability procedures.",
+        "Improve compensation, recruiting, onboarding, training, or customer development practices where required.",
+        "Coordinate implementation across affected areas.",
+      ],
+    },
+    {
+      title: "7. AI Sales Integration",
+      intro: "Where appropriate:",
+      items: [
+        "Evaluate whether AI could improve productivity, reduce administrative work, or create additional sales opportunities.",
+        "Examine potential applications in lead generation, lead qualification, CRM efficiency, follow-up, forecasting, and performance monitoring.",
+        "Review compatibility with existing systems and available data.",
+        "Evaluate potential financial benefits against implementation and ongoing costs.",
+        "Help identify suitable technology providers and qualified specialists.",
+        "Coordinate and oversee approved implementation within the agreed scope.",
+        "Establish appropriate KPIs for evaluating effectiveness.",
+      ],
+      outro:
+        "Third-party software and technical implementation expenses are separately identified and require client approval. Work outside the agreed engagement scope is quoted separately.",
+    },
+    {
+      title: "8. KPI Measurement and Accountability",
+      items: [
+        "Establish KPIs relevant to the agreed improvement priorities.",
+        "Document available starting baselines.",
+        "Clarify performance expectations and responsibilities.",
+        "Establish reporting dashboards and review procedures as appropriate.",
+        "Compare results with baselines and agreed objectives.",
+        "Investigate performance gaps, inconsistent records, and missed commitments.",
+        "Adjust activities and priorities as evidence becomes available.",
+      ],
+    },
+    {
+      title: "9. Implementation Support and Reinforcement",
+      items: [
+        "Work with leadership and sales personnel throughout the implementation period.",
+        "Address obstacles affecting progress.",
+        "Review whether new procedures are being followed.",
+        "Reinforce coaching, expectations, and accountability.",
+        "Refine changes that are not producing the expected improvement.",
+        "Establish internal ownership of implemented practices.",
+        "Recommend next steps for maintaining progress after the engagement.",
+      ],
+    },
+  ],
+  deliverableHeading: "ENGAGEMENT DELIVERABLES",
+  deliverableIntro: "Leadership receives:",
+  deliverableItems: [
+    "Sales-performance findings and agreed improvement priorities.",
+    "An implementation roadmap with responsibilities and required resources.",
+    "Agreed-upon improvements put into operation.",
+    "KPI reporting showing progress against established baselines, where measurable.",
+    "A closing review of work completed, results observed, remaining priorities, and recommended next steps.",
+  ],
+  implementationPeriodHeading: "IMPLEMENTATION PERIOD",
+  implementationPeriodParagraphs: [
+    "Approximately 30 Days\nFocused changes that can be implemented within a concentrated period, with limited complexity and a defined number of priorities.",
+    "Approximately 60–90 Days\nBroader implementation involving multiple performance areas, teams, management levels, locations, or systems, with additional time for coaching, measurement, and refinement.\n\nSome revenue results may take longer to become evident, depending on the company's sales cycle.",
+  ],
+  parametersHeading: "HOW THE PROFESSIONAL FEE IS DETERMINED",
+  parametersParagraphs: [
+    "The $50,000–$150,000 fee reflects:",
+    "Number of salespeople and managers involved.\nNumber of locations, divisions, markets, or sales channels.\nNumber and depth of performance areas requiring improvement.\nComplexity of existing processes and systems.\nAmount of individual coaching and implementation required.\nMeasurement and reporting requirements.\nEngagement duration and NORTH POINT SALES GROUP resources needed.",
+    "A higher fee does not automatically require a longer engagement. Scope, professional fee, and implementation period are established before work begins.",
+  ],
+  differencesHeading: "HOW THIS DIFFERS FROM THE OTHER ENGAGEMENTS",
+  differencesParagraphs: [
+    "Sales Team Performance — Beginning at $7,500: Direct improvement of selected salespeople's execution within a focused 30-day engagement.",
+    "30-Day Focused Sales Performance — Beginning at $9,500: Broader assessment, executive recommendations, and an implementation roadmap.",
+    "Full Sales Performance Implementation — $50,000–$150,000: Assessment and hands-on implementation across the agreed areas, with coaching, KPI measurement, accountability, and refinement.",
+  ],
+  upgradeHeading: "UPGRADE CREDIT",
+  upgradeParagraphs: [
+    "If you move directly from either introductory engagement into Full Sales Performance Implementation, the professional fee paid for that engagement will be credited toward the implementation fee.",
+  ],
+  thirdPartyHeading: "THIRD-PARTY COSTS AND ADDITIONAL SERVICES",
+  thirdPartyParagraphs: [
+    "Third-party expenses—including software, advertising, website development, and specialized technical services—are separate from our professional fee and require client approval.",
+    "Services beyond the agreed scope or implementation period can be arranged separately.",
+  ],
+  sequenceInNestedPopup: true,
+  sequenceHeading: "30–90 DAY WORK SEQUENCE",
+  sequenceLinkHint: sharedSequenceHint,
+} as const;
+
+export const componentKpisIntro = [
+  "Below are example KPIs for this component. Each can be selected according to the client's needs—not every KPI needs to be actively monitored for every client.",
+  "For each KPI selected, establish the client's baseline, target, and reporting schedule. Use consistent definitions so comparisons remain meaningful.",
+] as const;
+
+export const salesComponentKpis = {
+  1: [
+    {
+      title: "Sales Target Attainment",
+      detail:
+        "Measures actual sales against the established sales target. Divide actual sales by the target and multiply by 100. Track this for the team and individual salespeople.",
+    },
+    {
+      title: "Salespeople Meeting Target",
+      detail:
+        "Measures the percentage of salespeople reaching their individual sales targets. This helps show whether results are broadly supported or depend heavily on a few people.",
+    },
+    {
+      title: "Coaching Sessions Completed",
+      detail:
+        "Measures the percentage of scheduled individual coaching sessions that actually occur. Count sessions that include a performance discussion, specific guidance, and agreed next steps.",
+    },
+    {
+      title: "Coaching Actions Completed",
+      detail:
+        "Measures the percentage of actions agreed upon during coaching that are completed by their deadlines. This helps determine whether coaching produces follow-through.",
+    },
+    {
+      title: "Performance Reviews Completed",
+      detail:
+        "Measures the percentage of scheduled individual performance reviews completed on time. Reviews should compare actual performance with expectations and identify needed action.",
+    },
+    {
+      title: "Sales Meetings Completed",
+      detail:
+        "Measures the percentage of planned sales meetings held as scheduled. Review meeting quality separately to determine whether those meetings support decisions and execution.",
+    },
+    {
+      title: "Management Response Time",
+      detail:
+        "Measures the average time a sales manager takes to respond to a request requiring management support. Define the types of requests and when the response clock starts and stops.",
+    },
+    {
+      title: "Management Commitments Completed",
+      detail:
+        "Measures the percentage of management commitments completed by their agreed deadlines. Examples include resolving pricing questions, arranging support, or removing obstacles affecting sales.",
+    },
+    {
+      title: "Sales Team Turnover",
+      detail:
+        "Measures salespeople leaving during a period as a percentage of average sales headcount. Review voluntary departures and company-initiated departures separately to understand the causes.",
+    },
+    {
+      title: "Improvement Plan Results",
+      detail:
+        "Measures the percentage of salespeople on formal improvement plans who reach the agreed performance standard by the deadline. Evaluate results against the specific expectations documented in each plan.",
+    },
+  ],
+  2: [
+    {
+      title: "Sales Process Compliance",
+      detail:
+        "Measures the percentage of reviewed opportunities that follow the required sales process. Check whether necessary steps were completed before an opportunity moved forward.",
+    },
+    {
+      title: "Average Sales-Cycle Length",
+      detail:
+        "Measures the average number of days from an agreed starting point to a completed sale. Use the same starting point consistently, such as the date an opportunity becomes qualified.",
+    },
+    {
+      title: "Stage Conversion Rate",
+      detail:
+        "Measures the percentage of opportunities moving from one sales stage to the next. Review each transition separately to identify where opportunities are being lost.",
+    },
+    {
+      title: "On-Time Follow-Up",
+      detail:
+        "Measures the percentage of scheduled follow-ups completed by their due dates. This helps identify whether opportunities receive attention when promised.",
+    },
+    {
+      title: "Lead Assignment Time",
+      detail:
+        "Measures the average time between receiving a lead and assigning it to the responsible salesperson. Delays can leave interested prospects waiting without a clear owner.",
+    },
+    {
+      title: "Sales Handoff Accuracy",
+      detail:
+        "Measures the percentage of transfers between people or departments that include all required information. Examples include handing a lead to sales or a completed sale to service.",
+    },
+    {
+      title: "Proposal Turnaround Time",
+      detail:
+        "Measures the average time between receiving the information needed for a proposal and delivering it to the prospect. Review avoidable approval and preparation delays.",
+    },
+    {
+      title: "Pricing Approval Time",
+      detail:
+        "Measures the average time required to approve pricing or discount requests. This helps identify whether internal decisions are delaying otherwise active opportunities.",
+    },
+    {
+      title: "Sales Order Accuracy",
+      detail:
+        "Measures the percentage of submitted sales orders requiring no correction. Errors may involve pricing, product selection, quantities, customer details, or agreed terms.",
+    },
+    {
+      title: "Selling Time",
+      detail:
+        "Measures the percentage of salespeople’s working time spent on defined selling activities. Agree on which activities count, then examine administrative work that reduces selling capacity.",
+    },
+  ],
+  3: [
+    {
+      title: "Sales Revenue",
+      detail:
+        "Measures the sales revenue credited to a salesperson or team during the reporting period. Use a consistent basis, such as booked sales or recognized revenue.",
+    },
+    {
+      title: "Sales Target Attainment",
+      detail:
+        "Measures actual sales as a percentage of the established target. This shows how close each salesperson or team is to meeting expectations.",
+    },
+    {
+      title: "Salespeople Meeting Target",
+      detail:
+        "Measures the percentage of salespeople who achieve their assigned targets. It helps distinguish consistent team performance from results concentrated among a few top producers.",
+    },
+    {
+      title: "Opportunity Win Rate",
+      detail:
+        "Measures the percentage of decided opportunities that become sales. Divide opportunities won by opportunities won plus opportunities lost, and multiply by 100.",
+    },
+    {
+      title: "Average Sale Value",
+      detail:
+        "Measures the average value of completed sales. Divide total sales value by the number of sales completed during the same period.",
+    },
+    {
+      title: "Profit Contribution",
+      detail:
+        "Measures sales revenue remaining after the costs included in the company’s agreed contribution calculation. Use a consistent cost definition to avoid overstating performance.",
+    },
+    {
+      title: "Sales Revenue per Salesperson",
+      detail:
+        "Measures team sales revenue divided by average sales headcount during the period. This provides a broad view of sales productivity.",
+    },
+    {
+      title: "Sales Completed",
+      detail:
+        "Measures the number of completed sales during the reporting period. Review alongside sale value and profit contribution so volume alone does not determine success.",
+    },
+    {
+      title: "New Customers Acquired",
+      detail:
+        "Measures the number of first-time customers won during the period. Define when a prospect officially becomes a customer, such as upon an accepted order or signed contract.",
+    },
+    {
+      title: "Sales Target Consistency",
+      detail:
+        "Measures the percentage of reporting periods in which a salesperson or team meets the sales target. This helps evaluate the reliability of performance over time.",
+    },
+  ],
+  4: [
+    {
+      title: "Prospecting Activity Completed",
+      detail:
+        "Measures the number of prospecting activities completed, such as calls, emails, or other approved outreach. Review alongside resulting conversations and opportunities to evaluate effectiveness.",
+    },
+    {
+      title: "Prospect Contact Rate",
+      detail:
+        "Measures the percentage of outreach attempts that produce a conversation with an intended contact. Define which contacts and types of conversations qualify.",
+    },
+    {
+      title: "Decision-Maker Conversations",
+      detail:
+        "Measures the number of conversations with people who can authorize or meaningfully influence a purchase. This helps distinguish productive contact from general activity.",
+    },
+    {
+      title: "Qualified Leads Generated",
+      detail:
+        "Measures the number of leads meeting the company’s agreed qualification requirements. Those requirements should reflect fit and a credible potential need.",
+    },
+    {
+      title: "Lead Qualification Rate",
+      detail:
+        "Measures the percentage of reviewed leads that meet the qualification requirements. This helps evaluate whether prospecting reaches suitable companies and contacts.",
+    },
+    {
+      title: "Appointments Scheduled",
+      detail:
+        "Measures the number of sales appointments arranged with prospective customers. Count appointments that meet the company’s minimum requirements for a useful sales discussion.",
+    },
+    {
+      title: "Conversation-to-Appointment Rate",
+      detail:
+        "Measures the percentage of prospect conversations that result in a scheduled appointment. This can help evaluate targeting, opening statements, and the relevance of the offer.",
+    },
+    {
+      title: "Appointment Attendance Rate",
+      detail:
+        "Measures the percentage of appointments due to occur that actually take place. Track cancellations and no-shows separately to understand why meetings are missed.",
+    },
+    {
+      title: "Lead-to-Opportunity Conversion",
+      detail:
+        "Measures the percentage of leads that become qualified sales opportunities. Use clear requirements for when a lead has progressed far enough to enter the pipeline.",
+    },
+    {
+      title: "New Lead Response Time",
+      detail:
+        "Measures the time between receiving a new inquiry and making the first meaningful response. Review whether delays are affecting the ability to engage interested prospects.",
+    },
+  ],
+  5: [
+    {
+      title: "Presentations Completed",
+      detail:
+        "Measures the number of sales presentations delivered to prospective customers. Define what qualifies as a presentation so routine conversations are not counted inconsistently.",
+    },
+    {
+      title: "Decision-Maker Participation",
+      detail:
+        "Measures the percentage of presentations attended by a person with purchasing authority. This helps identify whether presentations are reaching the people needed to advance a decision.",
+    },
+    {
+      title: "Presentation Quality Score",
+      detail:
+        "Measures presentation performance against an agreed scoring checklist. Review areas such as preparation, questioning, explanation of value, objection handling, and requests for a next step.",
+    },
+    {
+      title: "Needs Confirmation Rate",
+      detail:
+        "Measures the percentage of reviewed presentations in which the salesperson confirms the prospect’s needs and priorities. Use call recordings or documented reviews to verify completion.",
+    },
+    {
+      title: "Agreed Next-Step Rate",
+      detail:
+        "Measures the percentage of presentations ending with a specific next action accepted by the prospect. A useful next step identifies what will happen, who is responsible, and when.",
+    },
+    {
+      title: "Presentation-to-Proposal Conversion",
+      detail:
+        "Measures the percentage of presentations that lead to a proposal. Review whether proposals represent real buying interest and appropriate qualification.",
+    },
+    {
+      title: "Presentation-to-Sale Conversion",
+      detail:
+        "Measures the percentage of presentations that eventually produce a sale. Follow the same group of presentations through a defined period so the comparison is meaningful.",
+    },
+    {
+      title: "Proposal-to-Sale Conversion",
+      detail:
+        "Measures the percentage of decided proposals that result in sales. Review unsuccessful proposals to identify issues involving value, fit, pricing, authority, or timing.",
+    },
+    {
+      title: "Objection Resolution Rate",
+      detail:
+        "Measures the percentage of documented objections that prospects confirm have been satisfactorily addressed. An answered objection should not be considered resolved solely because the salesperson provided a response.",
+    },
+    {
+      title: "Presentation-to-Decision Time",
+      detail:
+        "Measures the average time from a presentation to a recorded buying decision. Review lengthy delays to identify unclear next steps, missing decision-makers, or unresolved concerns.",
+    },
+  ],
+  6: [
+    {
+      title: "Qualified Pipeline Value",
+      detail:
+        "Measures the total potential sales value of open opportunities meeting the qualification requirements. Remove opportunities that no longer represent credible potential business.",
+    },
+    {
+      title: "Pipeline Coverage",
+      detail:
+        "Compares qualified pipeline value expected to close during a period with the remaining sales target for that period. Divide pipeline value by the remaining target to express coverage as a multiple.",
+    },
+    {
+      title: "Opportunity Win Rate",
+      detail:
+        "Measures opportunities won as a percentage of all opportunities decided during the period. Review by salesperson, opportunity source, or customer type when useful.",
+    },
+    {
+      title: "Stage Conversion Rate",
+      detail:
+        "Measures the percentage of opportunities progressing between pipeline stages. It helps locate points where deals repeatedly stop advancing.",
+    },
+    {
+      title: "Time in Stage",
+      detail:
+        "Measures how long opportunities remain in each pipeline stage. Compare actual time with reasonable expectations for that type of sale.",
+    },
+    {
+      title: "Stalled Opportunities",
+      detail:
+        "Measures the percentage of open opportunities without meaningful progress beyond an agreed time limit. Define progress as a substantive customer action or confirmed development.",
+    },
+    {
+      title: "Documented Next Steps",
+      detail:
+        "Measures the percentage of open opportunities with a specific next action, responsible person, and due date. This supports active opportunity management.",
+    },
+    {
+      title: "Overdue Opportunity Follow-Up",
+      detail:
+        "Measures the percentage of open opportunities with follow-up past its due date. Review whether overdue work reflects missed activity, poor scheduling, or incomplete records.",
+    },
+    {
+      title: "Closing-Date Changes",
+      detail:
+        "Measures the percentage of opportunities whose expected closing dates are pushed beyond the original reporting period. Repeated changes can indicate weak qualification or unrealistic forecasting.",
+    },
+    {
+      title: "Forecast Accuracy",
+      detail:
+        "Measures the difference between forecasted and actual sales for the same period. Show the amount and whether the forecast was too high or too low; use a consistent method for percentage comparisons.",
+    },
+  ],
+  7: [
+    {
+      title: "Required Information Completion",
+      detail:
+        "Measures the percentage of reviewed CRM records containing all required information. Required fields should support sales execution, reporting, or customer service.",
+    },
+    {
+      title: "CRM Data Accuracy",
+      detail:
+        "Measures the percentage of reviewed entries verified as correct. Compare CRM information with appropriate source records, communications, or confirmed customer details.",
+    },
+    {
+      title: "Activity Recording Compliance",
+      detail:
+        "Measures the percentage of required sales activities entered into the CRM. Verify against available activity records to distinguish unrecorded work from work that was never completed.",
+    },
+    {
+      title: "Timely Activity Recording",
+      detail:
+        "Measures the percentage of activities entered within the company’s required timeframe. Prompt recording helps keep follow-up and reporting current.",
+    },
+    {
+      title: "Opportunity Update Compliance",
+      detail:
+        "Measures the percentage of open opportunities reviewed and updated on schedule. Updates should reflect current customer information and actual progress.",
+    },
+    {
+      title: "Documented Next Steps",
+      detail:
+        "Measures the percentage of open opportunities containing a specific next action and due date. This makes it easier to see what should happen next.",
+    },
+    {
+      title: "Overdue CRM Tasks",
+      detail:
+        "Measures the percentage of CRM tasks past their due dates. Review whether tasks were missed, completed without being recorded, or left open unnecessarily.",
+    },
+    {
+      title: "Duplicate Records",
+      detail:
+        "Measures the percentage of reviewed records identified as duplicates. Duplicate customer, contact, or opportunity records can distort reports and create conflicting follow-up.",
+    },
+    {
+      title: "Sales Stage Accuracy",
+      detail:
+        "Measures the percentage of reviewed opportunities assigned to the correct sales stage. Check whether the evidence required for that stage is present.",
+    },
+    {
+      title: "CRM Usage Compliance",
+      detail:
+        "Measures the percentage of salespeople completing their required CRM responsibilities during the period. Evaluate meaningful required actions rather than logins alone.",
+    },
+  ],
+  8: [
+    {
+      title: "KPI Definition Completion",
+      detail:
+        "Measures the percentage of selected KPIs with a documented definition and calculation. Each should specify what is counted, what is excluded, and the reporting period.",
+    },
+    {
+      title: "Baseline Completion",
+      detail:
+        "Measures the percentage of selected KPIs with a verified starting result. Identify the period used and any limitations affecting the baseline.",
+    },
+    {
+      title: "Target Completion",
+      detail:
+        "Measures the percentage of selected KPIs with a documented target and deadline. Targets should relate to the improvement the organization is trying to achieve.",
+    },
+    {
+      title: "Reporting Ownership Assigned",
+      detail:
+        "Measures the percentage of selected KPIs with a named person responsible for producing the report. Clear ownership reduces missing or inconsistent reporting.",
+    },
+    {
+      title: "On-Time KPI Reporting",
+      detail:
+        "Measures the percentage of required KPI reports delivered by their deadlines. Timely reporting supports decisions while there is still time to act.",
+    },
+    {
+      title: "Reporting Accuracy",
+      detail:
+        "Measures the percentage of reviewed reported figures verified as correct. Check source information, calculations, and reporting-period consistency.",
+    },
+    {
+      title: "Data Availability",
+      detail:
+        "Measures the percentage of selected KPIs that can be calculated from available information. Missing information may require changes to recording practices or systems.",
+    },
+    {
+      title: "Performance Reviews Completed",
+      detail:
+        "Measures the percentage of scheduled KPI review meetings actually completed. Reviews should identify relevant changes and determine whether action is needed.",
+    },
+    {
+      title: "Corrective Actions Assigned",
+      detail:
+        "Measures the percentage of performance issues requiring action that receive a documented action, owner, and deadline. Agree on what constitutes an issue requiring intervention.",
+    },
+    {
+      title: "Corrective Actions Completed",
+      detail:
+        "Measures the percentage of corrective actions completed by their deadlines. Review subsequent KPI results separately to determine whether those actions worked.",
+    },
+  ],
+  9: [
+    {
+      title: "Sales Compensation as a Percentage of Revenue",
+      detail:
+        "Measures total sales compensation divided by sales revenue, multiplied by 100. Define consistently whether compensation includes salary, commissions, bonuses, and benefits.",
+    },
+    {
+      title: "Sales Compensation as a Percentage of Gross Profit",
+      detail:
+        "Measures sales compensation relative to gross profit generated. This helps evaluate compensation costs in relation to the profit available to support them.",
+    },
+    {
+      title: "Profit Contribution After Sales Compensation",
+      detail:
+        "Measures the contribution remaining after deducting sales compensation and other costs included in the agreed calculation. Avoid deducting the same expense twice.",
+    },
+    {
+      title: "Incentive Qualification Rate",
+      detail:
+        "Measures the percentage of eligible salespeople meeting the requirements for an incentive. Review whether the requirements encourage the intended performance.",
+    },
+    {
+      title: "Incentive-Linked Sales",
+      detail:
+        "Measures sales generated from products, services, or activities specifically covered by an incentive. An increase alone does not establish that the incentive caused it.",
+    },
+    {
+      title: "Minimum Profit Compliance",
+      detail:
+        "Measures the percentage of incentive-eligible sales meeting the company’s minimum profit requirements. This helps identify whether incentives reward sales that deliver acceptable financial value.",
+    },
+    {
+      title: "Discounting on Incentive-Eligible Sales",
+      detail:
+        "Measures discounts on sales covered by an incentive, using a consistent comparison with standard pricing. Review whether discounting is reducing the value of the additional sales.",
+    },
+    {
+      title: "Compensation Calculation Accuracy",
+      detail:
+        "Measures the percentage of reviewed commission and bonus calculations requiring no correction. Errors can affect trust, administration, and compensation expense.",
+    },
+    {
+      title: "On-Time Incentive Payments",
+      detail:
+        "Measures the percentage of incentive payments made by their scheduled dates. Use the payment schedule communicated to the sales team.",
+    },
+    {
+      title: "Compensation Disputes",
+      detail:
+        "Measures the number of compensation disputes relative to payments or statements issued. Review recurring causes such as unclear rules, incorrect credit, or calculation errors.",
+    },
+  ],
+  10: [
+    {
+      title: "Time to Fill a Sales Position",
+      detail:
+        "Measures the number of days from approval to recruit until an accepted offer. Review delays in sourcing, interviewing, evaluation, or offer approval.",
+    },
+    {
+      title: "Qualified Applicant Rate",
+      detail:
+        "Measures the percentage of reviewed applicants meeting the position’s documented requirements. This helps evaluate whether recruiting reaches suitable candidates.",
+    },
+    {
+      title: "Offer Acceptance Rate",
+      detail:
+        "Measures the percentage of formal job offers accepted. Review declined offers for issues involving compensation, role expectations, timing, or the hiring process.",
+    },
+    {
+      title: "Cost per Hire",
+      detail:
+        "Measures defined recruiting costs divided by the number of hires. Apply the same cost categories consistently when comparing periods or recruiting sources.",
+    },
+    {
+      title: "Onboarding Completion",
+      detail:
+        "Measures the percentage of new hires completing required onboarding steps on schedule. Completion should include demonstrated readiness where appropriate.",
+    },
+    {
+      title: "Time to Sales Readiness",
+      detail:
+        "Measures the time required for a new salesperson to demonstrate the minimum skills and knowledge needed to sell independently. Use an agreed assessment standard.",
+    },
+    {
+      title: "Time to First Sale",
+      detail:
+        "Measures the number of days from a salesperson’s start date to their first completed sale. Interpret results in light of the normal sales cycle and opportunities provided.",
+    },
+    {
+      title: "Time to Expected Productivity",
+      detail:
+        "Measures how long new salespeople take to reach the company’s defined productivity standard. Establish that standard before comparing hires.",
+    },
+    {
+      title: "New-Hire Target Attainment",
+      detail:
+        "Measures actual results against the adjusted targets established for new salespeople. Use expectations appropriate to their stage of onboarding.",
+    },
+    {
+      title: "90-Day New-Hire Retention",
+      detail:
+        "Measures the percentage of new hires still employed after 90 days. Review departures individually to understand selection, onboarding, management, or role-fit problems.",
+    },
+  ],
+  11: [
+    {
+      title: "Customer Retention Rate",
+      detail:
+        "Measures the percentage of customers present at the beginning of a period who remain customers at the end. Exclude newly acquired customers from this calculation.",
+    },
+    {
+      title: "Customer Loss Rate",
+      detail:
+        "Measures the percentage of customers present at the beginning of a period who are lost during that period. Define what counts as a lost customer for the business.",
+    },
+    {
+      title: "Renewal Rate",
+      detail:
+        "Measures the percentage of contracts or subscriptions due for renewal that are renewed. Review reasons for nonrenewal to identify preventable losses.",
+    },
+    {
+      title: "Repeat Purchase Rate",
+      detail:
+        "Measures the percentage of customers in a defined group who make another purchase within a specified period. Select a period appropriate to the normal buying cycle.",
+    },
+    {
+      title: "Existing-Customer Revenue Growth",
+      detail:
+        "Measures the change in revenue from the same group of existing customers across comparable periods. This helps distinguish account development from new-customer acquisition.",
+    },
+    {
+      title: "Average Revenue per Customer",
+      detail:
+        "Measures customer revenue divided by the number of customers included in the reporting period. Review whether changes reflect larger purchases, pricing, or changes in the customer mix.",
+    },
+    {
+      title: "Additional Product or Service Adoption",
+      detail:
+        "Measures the percentage of eligible existing customers purchasing an additional product or service. Define eligibility so the measure reflects relevant opportunities.",
+    },
+    {
+      title: "Account Expansion Conversion",
+      detail:
+        "Measures the percentage of decided opportunities to expand existing accounts that result in additional sales. Track these opportunities separately from new-customer sales.",
+    },
+    {
+      title: "Customer Review Meetings Completed",
+      detail:
+        "Measures the percentage of planned customer review meetings completed. These meetings can help identify changing needs, service concerns, and development opportunities.",
+    },
+    {
+      title: "Customer Issue Resolution Time",
+      detail:
+        "Measures the average time from a customer issue being reported to its confirmed resolution. Review issues affecting retention or future sales with the responsible service team.",
+    },
+  ],
+  12: [
+    {
+      title: "Training Completion",
+      detail:
+        "Measures the percentage of assigned salespeople completing required training by the deadline. Completion records show participation; demonstrated ability should be measured separately.",
+    },
+    {
+      title: "Knowledge Assessment Results",
+      detail:
+        "Measures performance on assessments covering the material taught. Compare results before and after training when practical to identify learning progress.",
+    },
+    {
+      title: "Demonstrated Skill Proficiency",
+      detail:
+        "Measures the percentage of participants meeting an agreed standard in practice calls, role-playing, or demonstrations. Use a consistent scoring checklist.",
+    },
+    {
+      title: "Skills Applied in Sales Conversations",
+      detail:
+        "Measures the percentage of reviewed actual sales conversations showing correct use of the skills taught. This helps determine whether learning transfers into daily work.",
+    },
+    {
+      title: "Time to Skill Proficiency",
+      detail:
+        "Measures how long participants take to meet the required skill standard. This helps identify who needs additional practice or coaching.",
+    },
+    {
+      title: "Skill Retention",
+      detail:
+        "Measures the percentage of participants still meeting the skill standard at a later review. Establish the review interval in advance.",
+    },
+    {
+      title: "Sales Conversion Improvement",
+      detail:
+        "Measures the change in sales conversion following training. Compare equivalent periods and consider other changes that may also influence results.",
+    },
+    {
+      title: "Average Sale Value Improvement",
+      detail:
+        "Measures the change in average sale value following relevant training. Review alongside discounting and profit contribution to understand the financial effect.",
+    },
+    {
+      title: "Sales-Cycle Improvement",
+      detail:
+        "Measures the change in average sales-cycle length following training. Compare similar opportunities and check that faster decisions are accompanied by acceptable sales results.",
+    },
+    {
+      title: "Sales Productivity Improvement",
+      detail:
+        "Measures the change in sales output per salesperson or selling hour following training. Define the output measure and consider other factors that may have affected performance.",
+    },
+  ],
+} as const;
+
+export type SalesComponentKpi = {
+  readonly title: string;
+  readonly detail: string;
+};
+
+export function getSalesComponentKpis(
+  componentNum: number,
+): readonly SalesComponentKpi[] | undefined {
+  if (!(componentNum in salesComponentKpis)) return undefined;
+  return salesComponentKpis[componentNum as keyof typeof salesComponentKpis];
+}
+
+export const pillarKpisIntro =
+  "Below are examples of KPIs we may employ for each item. We select KPIs based on the company's priorities, available information, and areas needing improvement. Some KPIs may support more than one area." as const;
+
+export const pillarKpisFootnote = {
+  "sales-leadership":
+    "For implementation: Each selected KPI should have a clear definition, calculation, information source, target, review schedule, and person responsible for monitoring it.",
+} as const;
+
+export type PillarThemeKpi = {
+  readonly title: string;
+  readonly detail: string;
+};
+
+export const pillarThemeKpis = {
+  "sales-performance": {
+    "Increase Productivity": [
+      {
+        title: "Revenue per salesperson",
+        detail:
+          "Sales revenue generated by each salesperson during a defined period.",
+      },
+      {
+        title: "Qualified opportunities per salesperson",
+        detail:
+          "Number of opportunities each salesperson develops that meet agreed qualification requirements.",
+      },
+      {
+        title: "Sales per salesperson",
+        detail:
+          "Number of sales each salesperson closes during a defined period.",
+      },
+    ],
+    "Improve Consistency": [
+      {
+        title: "Sales target achievement rate",
+        detail: "Percentage of salespeople meeting their sales targets.",
+      },
+      {
+        title: "Periods meeting sales targets",
+        detail:
+          "Percentage of weeks, months, or quarters in which agreed sales targets are achieved.",
+      },
+      {
+        title: "On-time follow-up rate",
+        detail:
+          "Percentage of required prospect and client follow-ups completed by their deadlines.",
+      },
+    ],
+    "Shorten Sales Cycles": [
+      {
+        title: "Average sales cycle length",
+        detail:
+          "Average number of days from a defined starting point, such as qualification, to a completed sale.",
+      },
+      {
+        title: "Average time in each sales stage",
+        detail: "Average number of days opportunities remain in each stage.",
+      },
+      {
+        title: "Stalled opportunity rate",
+        detail:
+          "Percentage of open opportunities exceeding an agreed time limit without meaningful progress.",
+      },
+    ],
+    "Improve Forecasting": [
+      {
+        title: "Revenue forecast accuracy",
+        detail:
+          "How closely forecasted revenue matches actual revenue for the same period.",
+      },
+      {
+        title: "Expected closing date accuracy",
+        detail:
+          "Percentage of opportunities expected to close in a period that actually close during that period.",
+      },
+      {
+        title: "Forecast slippage rate",
+        detail:
+          "Percentage of forecasted opportunities moved to a later period.",
+      },
+    ],
+    "Increase Profitability": [
+      {
+        title: "Gross profit margin on sales",
+        detail:
+          "Percentage of sales revenue remaining after the direct costs of delivering the product or service.",
+      },
+      {
+        title: "Average discount rate",
+        detail: "Average percentage reduction from standard pricing.",
+      },
+      {
+        title: "Gross profit per salesperson",
+        detail:
+          "Gross profit generated by each salesperson during a defined period.",
+      },
+    ],
+    "Create Sustainable Growth": [
+      {
+        title: "Revenue growth rate",
+        detail:
+          "Percentage increase in revenue compared with a previous comparable period.",
+      },
+      {
+        title: "Client retention rate",
+        detail:
+          "Percentage of existing clients retained during a defined period.",
+      },
+      {
+        title: "Revenue growth from existing clients",
+        detail:
+          "Increase in revenue from additional purchases, upgrades, or expanded services among existing clients.",
+      },
+      {
+        title: "New client revenue",
+        detail: "Revenue generated from newly acquired clients.",
+      },
+    ],
+    "AI Sales Integration": [
+      {
+        title: "Sales time saved",
+        detail:
+          "Hours saved on tasks such as prospect research, data entry, and follow-up preparation through AI assistance.",
+      },
+      {
+        title: "AI-assisted lead qualification rate",
+        detail:
+          "Percentage of AI-identified prospects that meet the company's agreed qualification requirements.",
+      },
+      {
+        title: "AI-assisted outreach response rate",
+        detail:
+          "Percentage of AI-assisted prospecting communications that receive a response.",
+      },
+      {
+        title: "AI-assisted follow-up completion rate",
+        detail:
+          "Percentage of follow-ups supported by AI reminders or scheduling that are completed on time.",
+      },
+      {
+        title: "AI-assisted opportunity win rate",
+        detail:
+          "Percentage of closed opportunities supported by AI that result in a sale.",
+      },
+    ],
+  },
+  "sales-systems": {
+    "Sales Process": [
+      {
+        title: "Sales stage conversion rate",
+        detail:
+          "Percentage of opportunities moving from one stage to the next.",
+      },
+      {
+        title: "Sales process compliance rate",
+        detail:
+          "Percentage of reviewed opportunities with required sales steps completed and documented.",
+      },
+      {
+        title: "Qualified opportunity win rate",
+        detail:
+          "Percentage of closed, qualified opportunities that result in a sale.",
+      },
+    ],
+    "CRM Optimization": [
+      {
+        title: "Required information completion rate",
+        detail:
+          "Percentage of active records containing all required information.",
+      },
+      {
+        title: "Activity recording compliance rate",
+        detail:
+          "Percentage of verified sales activities recorded within the required timeframe.",
+      },
+      {
+        title: "CRM record accuracy rate",
+        detail:
+          "Percentage of reviewed records that accurately reflect verified prospect, client, and opportunity information.",
+      },
+    ],
+    "Pipeline Management": [
+      {
+        title: "Pipeline coverage",
+        detail:
+          "Value of qualified open opportunities relative to the remaining sales target for the same period.",
+      },
+      {
+        title: "Opportunities with confirmed next steps",
+        detail:
+          "Percentage of open opportunities with a documented next action, responsible person, and due date.",
+      },
+      {
+        title: "Stalled opportunity rate",
+        detail:
+          "Percentage of open opportunities exceeding agreed limits for inactivity or time in a stage.",
+      },
+    ],
+    Forecasting: [
+      {
+        title: "Revenue forecast accuracy",
+        detail: "How closely forecasted revenue matches actual revenue.",
+      },
+      {
+        title: "Forecast update compliance rate",
+        detail:
+          "Percentage of required forecast updates completed by the deadline.",
+      },
+      {
+        title: "Forecast data completeness",
+        detail:
+          "Percentage of forecasted opportunities containing required information, such as value, stage, expected closing date, and next step.",
+      },
+    ],
+    "Performance Dashboards": [
+      {
+        title: "KPI data accuracy rate",
+        detail:
+          "Percentage of reviewed dashboard measurements that match their source information.",
+      },
+      {
+        title: "Dashboard update timeliness",
+        detail: "Percentage of scheduled data updates completed on time.",
+      },
+      {
+        title: "KPI review completion rate",
+        detail:
+          "Percentage of scheduled management reviews in which assigned KPIs are reviewed and follow-up actions documented.",
+      },
+    ],
+    "Sales Meetings": [
+      {
+        title: "Meeting action completion rate",
+        detail:
+          "Percentage of assigned meeting actions completed by their deadlines.",
+      },
+      {
+        title: "Opportunity review completion rate",
+        detail:
+          "Percentage of opportunities scheduled for discussion that receive a documented review.",
+      },
+      {
+        title: "Overdue issue resolution time",
+        detail:
+          "Average time required to resolve sales issues that have passed their agreed deadlines.",
+      },
+    ],
+    "Accountability Systems": [
+      {
+        title: "Commitment completion rate",
+        detail:
+          "Percentage of agreed commitments completed by their deadlines.",
+      },
+      {
+        title: "Corrective action completion rate",
+        detail: "Percentage of required corrective actions completed on time.",
+      },
+      {
+        title: "Repeated missed commitment rate",
+        detail:
+          "Percentage of commitments missed repeatedly by the same individual during a defined period.",
+      },
+    ],
+  },
+  "sales-leadership": {
+    "Develop Stronger Sales Leaders": [
+      {
+        title: "Team sales target attainment",
+        detail:
+          "Actual team sales expressed as a percentage of the team's target.",
+      },
+      {
+        title: "Management action completion rate",
+        detail:
+          "Percentage of agreed leadership actions completed by their deadlines.",
+      },
+      {
+        title: "Salesperson improvement rate",
+        detail:
+          "Percentage of salespeople meeting their individual KPI improvement targets during a defined period.",
+      },
+    ],
+    "Improve Accountability": [
+      {
+        title: "Individual sales target achievement rate",
+        detail:
+          "Percentage of salespeople meeting their assigned sales targets.",
+      },
+      {
+        title: "Performance review completion rate",
+        detail:
+          "Percentage of scheduled individual performance reviews completed and documented.",
+      },
+      {
+        title: "Performance improvement action completion rate",
+        detail:
+          "Percentage of agreed improvement actions completed by their deadlines.",
+      },
+    ],
+    "Improve Coaching": [
+      {
+        title: "Coaching completion rate",
+        detail: "Percentage of planned coaching sessions completed.",
+      },
+      {
+        title: "Coaching action completion rate",
+        detail:
+          "Percentage of agreed practice or improvement activities completed by their deadlines.",
+      },
+      {
+        title: "Post-coaching KPI improvement",
+        detail:
+          "Change in the specific KPI addressed through coaching, such as appointment conversion, proposal conversion, or win rate.",
+      },
+    ],
+    "Create High-Performing Teams": [
+      {
+        title: "Team sales target attainment",
+        detail:
+          "Actual team sales expressed as a percentage of the team's target.",
+      },
+      {
+        title: "Percentage of salespeople meeting targets",
+        detail: "How broadly sales success is distributed across the team.",
+      },
+      {
+        title: "New salesperson ramp-up time",
+        detail:
+          "Average time required for a new salesperson to reach an agreed level of productivity.",
+      },
+      {
+        title: "Team qualified opportunity win rate",
+        detail:
+          "Percentage of the team's closed, qualified opportunities that result in sales.",
+      },
+    ],
+  },
+} as const;
+
+export const aiIntegrationKpisNote =
+  "Compare results with performance before AI was introduced, where practical, to evaluate whether it is contributing to improvement.";
+
+export type PillarId = keyof typeof pillarThemeKpis;
+
+export function getPillarThemeKpis(
+  pillarId: string,
+  themeLabel: string,
+): readonly PillarThemeKpi[] | undefined {
+  if (!(pillarId in pillarThemeKpis)) return undefined;
+  const pillar = pillarThemeKpis[pillarId as PillarId];
+  if (!(themeLabel in pillar)) return undefined;
+  return pillar[themeLabel as keyof typeof pillar];
+}
+
 export const siteConfig = {
   name: "NORTH POINT SALES GROUP",
   shortName: "NORTH POINT SALES GROUP",
@@ -2076,80 +3442,10 @@ export const siteConfig = {
           description:
             "Focused specifically on improving the performance of the existing sales team.",
           popout: {
-            title: "SALES TEAM PERFORMANCE ENGAGEMENT",
-            fee: "Beginning at $7,500 — 30-Day Engagement",
-            intro:
-              "This engagement is designed for companies that believe the primary opportunity is within the performance of their existing sales team. NORTH POINT SALES GROUP works directly with sales leadership and selected salespeople to identify performance gaps, improve execution, and strengthen the sales process.",
-            includedHeading: "30-DAY ENGAGEMENT DELIVERABLES",
-            groups: [
-              {
-                title: "1. Sales Team & Performance Assessment",
-                items: [
-                  "Review the current sales team structure, roles, responsibilities, and expectations.",
-                  "Review available sales performance data and individual metrics.",
-                  "Evaluate prospecting, qualification, presentations, follow-up, pipeline management, and closing practices.",
-                  "Identify the primary performance gaps affecting sales results.",
-                ],
-              },
-              {
-                title: "2. Sales Process Review",
-                items: [
-                  "Review the sales process from lead receipt through closed sale.",
-                  "Identify breakdowns, inefficiencies, and missed opportunities.",
-                  "Evaluate how consistently the sales team is following the established process.",
-                  "Identify immediate opportunities to improve execution.",
-                ],
-              },
-              {
-                title: "3. Individual Sales Performance Coaching",
-                items: [
-                  "Provide direct one-on-one coaching with up to three selected salespeople.",
-                  "Address the specific performance issues identified during the assessment.",
-                  "Work on sales conversations, prospecting, qualification, presentations, follow-up, pipeline management, and closing as applicable.",
-                  "Provide practical direction and accountability throughout the engagement.",
-                ],
-              },
-              {
-                title: "4. Sales Leadership Sessions",
-                items: [
-                  "Work directly with sales leadership throughout the 30-day engagement.",
-                  "Review individual and team performance observations.",
-                  "Establish clearer expectations for sales activity, pipeline management, and performance.",
-                  "Address management practices that may be affecting sales execution.",
-                ],
-              },
-              {
-                title: "5. 30-Day Performance Improvement Plan",
-                intro:
-                  "At the conclusion of the engagement, NORTH POINT SALES GROUP will provide leadership with:",
-                items: [
-                  "A summary of the primary performance issues identified.",
-                  "Recommended priorities and corrective actions.",
-                  "Individual performance recommendations for the salespeople directly coached.",
-                  "Recommended sales activity and performance measures.",
-                  "Leadership recommendations for maintaining accountability and continued improvement.",
-                  "Identification of areas that may require additional sales coaching, process work, or an extended engagement.",
-                ],
-              },
-            ],
-            parametersHeading: "ENGAGEMENT PARAMETERS",
-            parametersParagraphs: [
-              "The $7,500 investment covers a 30-day engagement and may be applied to sales teams of any size.",
-              "The engagement includes direct one-on-one work with up to three selected salespeople.",
-              "Additional individual coaching or work beyond the initial 30 days can be added based on the company's needs.",
-            ],
-            upgradeHeading: "UPGRADE CREDIT",
-            upgradeParagraphs: [
-              "If a client moves directly from the $7,500 Sales Team Performance Engagement into a Full Sales Performance Implementation, the $7,500 engagement fee will be credited toward the implementation fee.",
-            ],
-            outcomeHeading: "ENGAGEMENT OUTCOME",
-            outcomeParagraphs: [
-              "The objective is to determine where sales performance is being constrained, address the highest-priority issues, and give sales leadership a clear path for improving execution and accountability.",
-              "The engagement is designed to improve the effectiveness of the existing sales team before assuming that adding more salespeople is the answer.",
-            ],
+            ...salesTeamPerformancePopout,
             sequenceInNestedPopup: true,
             sequenceHeading:
-              "30-DAY SALES TEAM PERFOMANCE ENGAGEMENT WORK SEQUENCE",
+              "30-DAY SALES TEAM PERFORMANCE ENGAGEMENT WORK SEQUENCE",
             sequenceGroups: [
               {
                 title: "INTRODUCTION",
@@ -2261,162 +3557,7 @@ export const siteConfig = {
           description:
             "Broader assessment of the sales operation, executive findings, priorities, and implementation roadmap.",
           popout: {
-            title: "30-DAY FOCUSED SALES PERFORMANCE ENGAGEMENT",
-            fee: "Professional Fee: Beginning at $9,500",
-            intro:
-              "This engagement is designed for companies that want NORTH POINT SALES GROUP to examine their existing sales operation, identify the most significant opportunities, and establish a clear plan before committing to a larger implementation engagement.",
-            includedHeading: "WHAT IS INCLUDED",
-            groups: [
-              {
-                title: "1. Executive Discovery",
-                items: [
-                  "Discussions with company leadership regarding current sales objectives, challenges, and expectations.",
-                  "Review of the existing sales organization and operating environment.",
-                  "Identification of management concerns and areas where leadership believes sales performance may be falling short.",
-                ],
-              },
-              {
-                title: "2. Sales Operation Review",
-                intro:
-                  "NORTH POINT SALES GROUP examines the relevant components of the existing sales operation, which may include:",
-                items: [
-                  "Sales leadership",
-                  "Systems and processes",
-                  "Team performance",
-                  "Prospecting and lead development",
-                  "Sales presentations",
-                  "Pipeline management",
-                  "CRM utilization",
-                  "Performance measurement",
-                  "Compensation and incentives",
-                  "Recruiting and onboarding",
-                  "Customer retention and development",
-                  "Sales training",
-                ],
-                outro:
-                  "The review is focused on identifying where meaningful sales-performance opportunities exist rather than simply checking boxes.",
-              },
-              {
-                title: "3. Lead Generation and Conversion Review",
-                intro:
-                  "Where applicable, the engagement may examine how sales opportunities are generated through:",
-                items: [
-                  "Website activity",
-                  "Paid advertising",
-                  "Social media",
-                  "Referrals",
-                  "Outbound prospecting",
-                  "Live sales calls",
-                  "Other lead sources",
-                ],
-                outro:
-                  "The objective is to determine whether lead generation and the sales process are working together effectively.",
-              },
-              {
-                title: "4. Findings and Priorities",
-                intro: "NORTH POINT SALES GROUP identifies:",
-                items: [
-                  "What is working.",
-                  "Where opportunities are being lost.",
-                  "Which issues appear to have the greatest impact on sales performance.",
-                  "What should be addressed first.",
-                  "What should not be prioritized at this stage.",
-                ],
-              },
-              {
-                title: "5. Executive Recommendations",
-                intro:
-                  "Leadership receives a clear presentation of the findings and recommended priorities, including:",
-                items: [
-                  "Recommended actions",
-                  "Expected areas of focus",
-                  "Resources and capabilities that may be required",
-                  "Internal responsibilities",
-                  "Areas where outside expertise may be appropriate",
-                ],
-              },
-              {
-                title: "6. Implementation Roadmap",
-                intro:
-                  "NORTH POINT SALES GROUP develops a practical roadmap showing:",
-                items: [
-                  "Recommended actions",
-                  "Priority and sequence",
-                  "Who should be responsible",
-                  "Areas requiring internal resources",
-                  "Areas that may require outside specialists",
-                  "Recommended measurements for determining whether changes are producing results",
-                ],
-              },
-            ],
-            deliverableHeading: "30-DAY ENGAGEMENT DELIVERABLE",
-            deliverableParagraphs: [
-              "At the conclusion of the engagement, leadership receives an executive presentation of the findings, priorities, recommendations, and implementation roadmap.",
-              "The objective is to provide leadership with a clear understanding of where its sales-performance opportunities exist, what should be addressed first, and what a larger implementation would involve.",
-            ],
-            parametersHeading: "ENGAGEMENT PARAMETERS",
-            parametersParagraphs: [
-              "The $9,500 professional fee covers the 30-day focused assessment, analysis, executive recommendations, and implementation roadmap. Select 30-DAY WORK SEQUENCE to view the general day-by-day work sequence.",
-              "The engagement does not include full implementation of recommended changes or significant third-party costs such as website development, advertising spend, media, technology, or specialized production.",
-              "If the scope of the sales operation or level of analysis required is substantially greater, the engagement may be expanded accordingly.",
-            ],
-            comparison: {
-              intro:
-                "The primary difference between the $7500 and $9500 engagement is the hands-on sales team improvement versus broader assessment and planning.See below:",
-              columns: [
-                "$7,500 Sales Team Performance",
-                "$9,500 30-Day Focused Sales Performance",
-              ],
-              rows: [
-                {
-                  label: "Main focus",
-                  values: [
-                    "Improve the existing sales team's execution.",
-                    "Determine where the broader sales operation needs attention.",
-                  ],
-                },
-                {
-                  label: "Direct work",
-                  values: [
-                    "One-on-one coaching with up to three salespeople, plus sales leadership sessions and practical improvements.",
-                    "Review relevant areas such as leadership, processes, CRM, compensation, recruiting, lead generation, and team performance.",
-                  ],
-                },
-                {
-                  label: "Final deliverable",
-                  values: [
-                    "Performance findings, work completed, and a team improvement plan.",
-                    "Executive findings, priorities, recommendations, and an implementation roadmap.",
-                  ],
-                },
-                {
-                  label: "Duration",
-                  values: ["30 days", "30 days"],
-                },
-              ],
-              closing: [
-                [
-                  {
-                    text: "No, the $9,500 option does not currently include everything in the $7,500 option.",
-                    bold: true,
-                  },
-                  {
-                    text: " It does not explicitly include the one-on-one coaching with up to three representatives or the same direct performance-improvement work.",
-                  },
-                ],
-                [
-                  { text: "The $9,500 fee buys " },
-                  { text: "greater breadth of diagnosis", bold: true },
-                  {
-                    text: ", rather than everything in the first option plus additional services.",
-                  },
-                ],
-              ],
-            },
-            upgradeHeading: "UPGRADE CREDIT",
-            upgradeParagraphs: [
-              "If a client moves directly from the $9,500 30-Day Focused Sales Performance Engagement into a Full Sales Performance Implementation, the $9,500 engagement fee will be credited toward the implementation fee.",
-            ],
+            ...focusedSalesPerformancePopout,
             sequenceInNestedPopup: true,
             sequenceHeading: "30-DAY WORK SEQUENCE",
             sequenceIntro:
@@ -2531,145 +3672,7 @@ export const siteConfig = {
           description:
             "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.",
           popout: {
-            title: "FULL SALES PERFORMANCE IMPLEMENTATION",
-            fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–90 Days",
-            intro:
-              "This is the comprehensive NORTH POINT SALES GROUP engagement for companies that want an outside sales-performance resource to examine, improve, and implement changes across the sales operation.\n\nOption 3 includes the applicable assessment and diagnostic services described in Options 1 and 2, plus the hands-on implementation, performance management, measurement, and ongoing support required to put recommended changes into operation.\n\nThe scope, professional fee, and implementation period are determined by the number, complexity, and depth of the changes required—not simply the size of the company.\n\nProfessional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work.\n\nA higher-fee engagement does not necessarily require a longer implementation period; for example, a $100,000 engagement may sometimes be completed within 30-60 days when the required work can be effectively implemented within that timeframe.",
-            includedHeading: "INCLUDED SERVICES",
-            groups: [
-              {
-                title: "1. EXECUTIVE DISCOVERY & LEADERSHIP ASSESSMENT",
-                items: [
-                  "Executive discovery with company leadership.",
-                  "Review of sales objectives, challenges, expectations, and current performance.",
-                  "Review of sales leadership structure and management practices.",
-                  "Identification of leadership concerns and organizational constraints affecting sales performance.",
-                  "Establishment of the initial areas requiring examination.",
-                ],
-              },
-              {
-                title: "2. SALES TEAM & INDIVIDUAL PERFORMANCE ASSESSMENT",
-                items: [
-                  "Review of sales-team structure, roles, responsibilities, and expectations.",
-                  "Review of available sales-performance data and individual metrics.",
-                  "Assessment of prospecting, qualification, presentations, follow-up, pipeline management, and closing practices.",
-                  "Direct one-on-one performance work with selected salespeople as appropriate to the engagement.",
-                  "Identification of individual and team performance gaps.",
-                  "Identification of performance practices that should be strengthened, changed, or reinforced.",
-                ],
-              },
-              {
-                title: "3. SALES PROCESS & OPERATIONS REVIEW",
-                items: [
-                  "Review of the sales process from lead receipt through closed sale.",
-                  "Examination of sales systems, procedures, CRM utilization, reporting, and pipeline management.",
-                  "Identification of process breakdowns, inefficiencies, and missed opportunities.",
-                  "Review of sales-performance measurement and accountability.",
-                  "Review of compensation, incentives, recruiting, onboarding, training, retention, and development where relevant.",
-                ],
-                outro:
-                  "The depth of this review is determined by what the initial assessment reveals. Areas that present greater potential impact receive greater attention.",
-              },
-              {
-                title: "4. LEAD GENERATION & SALES CONVERSION",
-                intro: "Where applicable, review of:",
-                items: [
-                  "Website-generated leads",
-                  "Paid advertising",
-                  "Social media",
-                  "Referrals",
-                  "Outbound prospecting",
-                  "Other lead sources",
-                  "Lead qualification and response",
-                  "Conversion from inquiry to opportunity",
-                  "Conversion from opportunity to customer",
-                ],
-                outro:
-                  "The objective is to determine whether lead generation and the sales organization are working together effectively and where opportunities are being lost.",
-              },
-              {
-                title: "5. FINDINGS, PRIORITIES & RECOMMENDATIONS",
-                intro: "NORTH POINT SALES GROUP identifies:",
-                items: [
-                  "What is working.",
-                  "Where opportunities are being lost.",
-                  "Which issues are having the greatest impact on sales performance.",
-                  "What should be addressed first.",
-                  "What should not be prioritized.",
-                  "What actions are recommended.",
-                  "What resources and capabilities are required.",
-                  "What should be implemented internally and where outside resources may be required.",
-                ],
-              },
-              {
-                title: "6. SALES PERFORMANCE IMPLEMENTATION",
-                intro:
-                  "Unlike Options 1 and 2, this engagement includes hands-on implementation of the recommended improvements.\n\nImplementation may include:",
-                items: [
-                  "Improving sales processes and procedures.",
-                  "Improving prospecting and lead development.",
-                  "Improving sales presentations and sales conversations.",
-                  "Strengthening pipeline management and follow-up.",
-                  "Improving CRM utilization and sales reporting.",
-                  "Establishing sales activity and performance standards.",
-                  "Addressing individual and team performance issues.",
-                  "Strengthening sales management and accountability.",
-                  "Implementing new processes and operating practices.",
-                  "Working directly with sales leadership and sales personnel.",
-                  "Coordinating implementation across affected areas.",
-                  "Reinforcing changes to increase the likelihood that improvements become part of normal sales operations.",
-                ],
-              },
-              {
-                title: "7. PERFORMANCE MEASUREMENT & ACCOUNTABILITY",
-                intro:
-                  "NORTH POINT SALES GROUP works with leadership to establish and monitor appropriate performance measures.\n\nProgress is evaluated through five executive questions:",
-                items: [
-                  "Where are we?",
-                  "What have we found?",
-                  "What are we doing about it?",
-                  "Who is responsible for what?",
-                  "What results are we getting?",
-                ],
-                outro:
-                  "Performance measures, priorities, and implementation activities may be adjusted as actual results become available.",
-              },
-              {
-                title: "8. IMPLEMENTATION ROADMAP & ONGOING SUPPORT",
-                items: [
-                  "Establish the implementation sequence and priorities.",
-                  "Establish responsibilities and required resources.",
-                  "Identify internal capabilities and outside resources required.",
-                  "Provide ongoing leadership and sales-team support.",
-                  "Monitor implementation progress.",
-                  "Identify areas requiring adjustment or additional attention.",
-                  "Measure results against established objectives.",
-                  "Reinforce implemented changes and address areas that are not producing the expected improvement.",
-                ],
-              },
-            ],
-            deliverableHeading: "ENGAGEMENT SCOPE CLARITY",
-            deliverableParagraphs: [
-              "30–90 DAY IMPLEMENTATION PERIOD\nThe Full Sales Performance Implementation is a 30–90 day hands-on engagement.\n\nThe 30–90 day period is not simply a matter of scheduling. The duration reflects the depth of implementation required.\n\nA focused implementation may be completed within approximately 30 days. A broader or more complex implementation may require up to 60 days to properly implement, measure, adjust, and reinforce the changes.",
-              "APPROXIMATELY 30 DAYS — FOCUSED IMPLEMENTATION\nA 30-day implementation is generally appropriate when:\n• The number of performance areas requiring attention is relatively focused.\n• The sales organization is reasonably straightforward.\n• The required changes can be implemented within a concentrated period.\n• A limited number of salespeople or management personnel require extensive direct involvement.\n• Process, management, or performance changes can be put into operation without an extended implementation period.\n\nDuring a focused implementation, NORTH POINT SALES GROUP will:\n• Complete the necessary discovery and assessment.\n• Establish implementation priorities.\n• Implement the highest-priority changes.\n• Work directly with leadership and sales personnel.\n• Establish appropriate performance expectations and accountability.\n• Begin measuring the effect of implemented changes.\n• Review results and make appropriate adjustments.",
-              "APPROXIMATELY 60-90 DAYS — DEEPER IMPLEMENTATION\nA 60-90 days implementation is generally appropriate when the changes require greater depth, broader involvement, or additional time to implement and evaluate.\n\nThis may include:\n• Multiple interconnected performance areas.\n• Multiple sales teams or management levels.\n• Multiple locations, divisions, markets, or sales channels.\n• More extensive direct work with salespeople and leadership.\n• Significant changes to sales processes, systems, management practices, or accountability.\n• Lead-generation and sales-conversion improvements requiring additional implementation time.\n• CRM, reporting, pipeline, or performance-measurement changes.\n• Additional time required to observe results and make informed adjustments.\n\nThe additional time allows NORTH POINT SALES GROUP to move beyond initial implementation and determine how the changes are performing in actual operation.",
-            ],
-            parametersHeading: "HOW THE PROFESSIONAL FEE IS DETERMINED",
-            parametersParagraphs: [
-              "The $50,000–$150,000 professional fee is based on the scope and depth of the implementation—not simply the size of the company.",
-              "NORTH POINT SALES GROUP considers:\n• Number of salespeople and managers involved.\n• Number of locations or divisions.\n• Number of sales channels or markets.\n• Number and significance of performance areas requiring improvement.\n• Complexity of the existing sales process and systems.\n• Amount of individual sales-team work required.\n• Extent of process or management changes required.\n• Depth of implementation required.\n• Length of implementation.\n• Level of ongoing leadership involvement.\n• NORTH POINT SALES GROUP personnel and resources required.",
-              "SCOPE-BASED INVESTMENT EXAMPLES\n\nApproximately $50,000\nA company with a relatively focused sales operation requiring substantial improvement in a defined number of areas—for example, sales management, prospecting, pipeline management, and sales-team execution—with a limited number of locations and a focused implementation period.",
-              "Approximately $75,000–$100,000\nA company requiring broader implementation across several sales-performance areas, with a larger sales organization, multiple management levels, greater process complexity, and more extensive direct involvement with sales leadership and personnel.",
-              "Approximately $100,000–$125,000\nA company requiring significant changes across multiple areas of the sales operation, such as sales management, team performance, lead generation, sales process, CRM, performance measurement, and accountability, with substantial hands-on implementation and ongoing measurement.",
-              "Approximately $125,000–$150,000\nA highly comprehensive implementation involving a large or complex sales organization, multiple locations, divisions, markets, or sales channels, numerous performance areas, extensive sales-team involvement, significant process changes, and a deeper or longer period of NORTH POINT SALES GROUP implementation support.",
-              "These are examples of scope, not fixed packages or guaranteed prices. The actual professional fee is established after the required scope, depth of implementation, resources, and level of involvement have been determined.",
-              "HOW OPTION 3 DIFFERS FROM OPTIONS 1 AND 2\n\nOption 1 — $7,500\nFocuses primarily on the performance of the existing sales team, including direct one-on-one work with up to three selected representatives. The objective is to identify and address individual and team performance issues within a focused 30-day engagement.\n\nOption 2 — $9,500\nExamines the broader sales operation, identifies the highest-priority opportunities, and provides recommendations and an implementation roadmap. The client receives a clear understanding of what should change, why it should change, and how it should be implemented.\nIt does not include carrying out the full implementation of broader recommended changes.\n\nOption 3 — $50,000–$150,000\nGoes beyond assessment and recommendations. NORTH POINT SALES GROUP works with the company to implement the recommended changes, provide ongoing leadership and sales-team support, establish accountability, measure results, and make adjustments as implementation progresses.\n\nThe distinction is straightforward:\nOption 1 improves selected sales-team performance.\nOption 2 determines what the broader sales operation needs and provides the roadmap.\nOption 3 implements the changes and remains involved through the implementation and measurement process.",
-            ],
-            outcomeHeading: "ENGAGEMENT OUTCOME",
-            outcomeParagraphs: [
-              "The objective is to move beyond assessment and recommendations into measurable sales-performance improvement.\n\nNORTH POINT SALES GROUP serves as an outside sales-performance resource working with company leadership and the existing sales organization to diagnose opportunities, prioritize actions, implement improvements, establish accountability, measure results, and adjust the approach as necessary.\n\nThe goal is to make the sales organization as effective as it can be before determining whether additional sales capacity or other resources are necessary.",
-              "THIRD-PARTY COSTS\nSignificant third-party costs—including website development, advertising spend, media, technology development, specialized production, or other outside services—are separate from the NORTH POINT SALES GROUP professional fee and require client approval.",
-            ],
+            ...fullSalesPerformancePopout,
             sequenceInNestedPopup: true,
             sequenceHeading: "30–90 DAY WORK SEQUENCE",
             sequenceIntro:
@@ -4982,8 +5985,6 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
         "Rate {title} from 1, completely disagree, to 10, completely agree",
     },
     scale: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    reviewThreshold: 6,
-    closestCount: 2,
     pillars: [
       {
         number: "01",
@@ -5072,7 +6073,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
       title: "View Your FREE Sales Alignment Results",
       subtitle:
         "Enter your first name and email to view your personalized Sales Alignment Assessment results and identify areas where your sales organization may benefit from improvement.",
-      incomplete: "Please rate all 10 statements to view your results.",
+      incomplete: "Please rate all 10 statements before submitting.",
       firstNameLabel: "First name",
       emailLabel: "Email",
       privacy: "We respect your privacy. No spam, ever.",
@@ -5084,36 +6085,20 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
     },
     results: {
       eyebrow: "Your results",
-      outOf: "out of 10",
-      areasTitle: "Areas for closer review",
-      areasBelow: "These statements scored 6 or below.",
-      areasStrong:
-        "No statement scored 6 or below. These are the lowest-rated areas, and the best place to look next.",
+      overallScoreLabel: "YOUR SALES ALIGNMENT SCORE",
+      overallScoreSuffix: "/100",
+      pillarScoreSuffix: "/10",
+      statementScoresTitle: "Your statement scores",
+      areasTitle: "AREAS FOR CLOSER REVIEW",
+      areasSameRating:
+        "All areas received the same rating; no area ranked below the others.",
+      relativeReviewNote:
+        "These are relative areas for closer review based on your other responses—not a diagnosed performance problem.",
+      disclaimer:
+        "Based on your assessment of your organization’s current performance. These results identify areas for discussion and closer review; they do not independently verify performance or predict revenue growth.",
       scheduleLabel: "Schedule a Consultation",
       scheduleHref: "/#cta",
       resetLabel: "Start over",
-      bands: [
-        {
-          min: 8.5,
-          label: "Strong alignment",
-          note: "The ratings describe consistent execution across the statements you scored. The useful next step is to confirm that the same standard holds across the team, not only in the areas that already feel strong.",
-        },
-        {
-          min: 7,
-          label: "Generally aligned",
-          note: "The organization looks aligned overall, with specific statements that would benefit from a closer look before they limit growth.",
-        },
-        {
-          min: 5,
-          label: "Mixed alignment",
-          note: "Several statements point to a gap between the way the organization expects to sell and the way work is happening today.",
-        },
-        {
-          min: 0,
-          label: "Significant gaps",
-          note: "The ratings suggest performance, systems, or leadership need attention before additional growth effort is likely to hold.",
-        },
-      ],
     },
     closing: {
       eyebrow: "Better alignment. Clearer direction.",

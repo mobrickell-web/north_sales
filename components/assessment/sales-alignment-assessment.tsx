@@ -36,9 +36,35 @@ const questions = assessment.pillars.flatMap((pillar, pillarIndex) =>
   })),
 );
 
-function band(score: number) {
-  const match = assessment.results.bands.find((item) => score >= item.min);
-  return match ?? assessment.results.bands[assessment.results.bands.length - 1];
+function sum(values: number[]) {
+  return values.reduce((total, value) => total + value, 0);
+}
+
+function computeCloserReview(
+  scored: Array<(typeof questions)[number] & { score: number }>,
+) {
+  const sorted = [...scored].sort((a, b) =>
+    a.score !== b.score ? a.score - b.score : a.number - b.number,
+  );
+  const allSame = sorted[0].score === sorted[sorted.length - 1].score;
+  if (allSame) {
+    return {
+      allSame: true,
+      review: [] as typeof scored,
+      lowestScore: sorted[0].score,
+    };
+  }
+  const thirdLowestRating = sorted[2].score;
+  const review = scored
+    .filter((item) => item.score <= thirdLowestRating)
+    .sort((a, b) =>
+      a.score !== b.score ? a.score - b.score : a.number - b.number,
+    );
+  return {
+    allSame: false,
+    review,
+    lowestScore: review[0]?.score ?? thirdLowestRating,
+  };
 }
 
 export function SalesAlignmentAssessment() {
@@ -60,27 +86,20 @@ export function SalesAlignmentAssessment() {
       score: average(pillar.questions.map((question) => scores[question.id])),
     }));
 
-    const overall = average(questions.map((question) => scores[question.id]));
+    const overall = sum(questions.map((question) => scores[question.id]));
     const scored = questions.map((question) => ({
       ...question,
       score: scores[question.id],
     }));
-    const below = scored
-      .filter((question) => question.score <= assessment.reviewThreshold)
-      .sort((a, b) => a.score - b.score);
-    const review =
-      below.length > 0
-        ? below
-        : [...scored]
-            .sort((a, b) => a.score - b.score)
-            .slice(0, assessment.closestCount);
+    const { allSame, review, lowestScore } = computeCloserReview(scored);
 
     return {
       overall,
       pillars,
+      scored,
       review,
-      allStrong: below.length === 0,
-      summary: band(overall),
+      allSame,
+      showRelativeNote: !allSame && review.length > 0 && lowestScore >= 9,
     };
   }, [complete, scores]);
 
@@ -373,20 +392,15 @@ export function SalesAlignmentAssessment() {
               <p className="font-body text-[11px] font-bold tracking-[0.16em] text-[#8A8F98] uppercase">
                 {assessment.results.eyebrow}
               </p>
-              <div className="mt-4 grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-end">
-                <div>
-                  <p className="font-heading text-[64px] leading-none text-[#001528]">
-                    {formatScore(results.overall)}
-                  </p>
-                  <p className="mt-1 font-body text-[13px] text-[#5C5F66]">
-                    {assessment.results.outOf}
-                  </p>
-                  <p className="mt-3 font-body text-[16px] font-bold text-[#001528]">
-                    {results.summary.label}
-                  </p>
-                </div>
-                <p className="max-w-[640px] font-body text-[15px] leading-relaxed text-[#5C5F66]">
-                  {results.summary.note}
+              <div className="mt-4">
+                <p className="font-body text-[11px] font-bold tracking-[0.14em] text-[#5C5F66] uppercase">
+                  {assessment.results.overallScoreLabel}
+                </p>
+                <p className="mt-2 font-heading text-[64px] leading-none text-[#001528]">
+                  {results.overall}
+                  <span className="font-body text-[28px] font-bold text-[#5C5F66]">
+                    {assessment.results.overallScoreSuffix}
+                  </span>
                 </p>
               </div>
 
@@ -399,6 +413,7 @@ export function SalesAlignmentAssessment() {
                       </p>
                       <p className="font-body text-[14px] font-bold text-[#001528]">
                         {formatScore(pillar.score)}
+                        {assessment.results.pillarScoreSuffix}
                       </p>
                     </div>
                     <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#E8E4DC]">
@@ -413,15 +428,10 @@ export function SalesAlignmentAssessment() {
 
               <div className="mt-8">
                 <h3 className="font-body text-[13px] font-extrabold tracking-[0.14em] text-[#001528] uppercase">
-                  {assessment.results.areasTitle}
+                  {assessment.results.statementScoresTitle}
                 </h3>
-                <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                  {results.allStrong
-                    ? assessment.results.areasStrong
-                    : assessment.results.areasBelow}
-                </p>
                 <ul className="mt-4 flex flex-col gap-3">
-                  {results.review.map((item) => (
+                  {results.scored.map((item) => (
                     <li
                       key={item.id}
                       className="flex items-start justify-between gap-4 border-b border-[#E8E4DC] pb-3"
@@ -434,13 +444,58 @@ export function SalesAlignmentAssessment() {
                           {item.pillar.title}
                         </p>
                       </div>
-                      <p className="font-body text-[15px] font-bold text-[#001528]">
+                      <p className="shrink-0 font-body text-[15px] font-bold text-[#001528]">
                         {item.score}
+                        {assessment.results.pillarScoreSuffix}
                       </p>
                     </li>
                   ))}
                 </ul>
               </div>
+
+              <div className="mt-8">
+                <h3 className="font-body text-[13px] font-extrabold tracking-[0.14em] text-[#001528] uppercase">
+                  {assessment.results.areasTitle}
+                </h3>
+                {results.allSame ? (
+                  <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                    {assessment.results.areasSameRating}
+                  </p>
+                ) : (
+                  <>
+                    {results.showRelativeNote ? (
+                      <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                        {assessment.results.relativeReviewNote}
+                      </p>
+                    ) : null}
+                    <ul className="mt-4 flex flex-col gap-3">
+                      {results.review.map((item) => (
+                        <li
+                          key={item.id}
+                          className="flex items-start justify-between gap-4 rounded-lg border border-[#b17411]/30 bg-[#b17411]/5 px-3 py-3"
+                        >
+                          <div>
+                            <p className="font-body text-[15px] font-bold text-[#001528]">
+                              {item.number}. {item.title}
+                            </p>
+                            <p className="mt-1 font-body text-[13px] text-[#5C5F66]">
+                              {item.pillar.title}
+                            </p>
+                          </div>
+                          <p className="shrink-0 font-body text-[15px] font-bold text-[#001528]">
+                            {item.score}
+                            {assessment.results.pillarScoreSuffix}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+
+              <p className="mt-8 max-w-[640px] font-body text-[13px] leading-relaxed text-[#8A8F98]">
+                {assessment.results.disclaimer}
+              </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link

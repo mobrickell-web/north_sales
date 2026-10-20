@@ -40,14 +40,27 @@ export function ContentBlockContent({
     case "image":
       return (
         <figure className="legal-page__figure">
-          <Image
-            src={block.src}
-            alt={block.alt}
-            width={1200}
-            height={750}
-            unoptimized
-            className="legal-page__figure-image"
-          />
+          {block.src.endsWith(".svg") ? (
+            // eslint-disable-next-line @next/next/no-img-element -- SVGs from /public render reliably as a plain img
+            <img
+              src={block.src}
+              alt={block.alt}
+              width={1200}
+              height={750}
+              loading="lazy"
+              decoding="async"
+              className="legal-page__figure-image"
+            />
+          ) : (
+            <Image
+              src={block.src}
+              alt={block.alt}
+              width={1200}
+              height={750}
+              unoptimized
+              className="legal-page__figure-image"
+            />
+          )}
           {block.caption && (
             <figcaption className="legal-page__figure-caption">
               {block.caption}

@@ -327,11 +327,19 @@
 }
 
 .legal-page__figure-image {
+  display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
   border-radius: 1rem;
   border: 1px solid rgb(0 21 40 / 8%);
   background-color: #f2f2f3;
+}
+
+.legal-page__figure [data-nimg] {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
 }
 
 .legal-page__figure-caption {
