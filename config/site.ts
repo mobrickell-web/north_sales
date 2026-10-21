@@ -367,8 +367,8 @@ const fullSalesPerformancePopout = {
 } as const;
 
 export const componentKpisIntro = [
-  "Below are example KPIs for this component. Each can be selected according to the client's needs—not every KPI needs to be actively monitored for every client.",
-  "For each KPI selected, establish the client's baseline, target, and reporting schedule. Use consistent definitions so comparisons remain meaningful.",
+  "Below are example KPIs for this component. Not every KPI needs to be actively monitored for every client.",
+  "For each selected KPI, we will establish your current baseline, target, and reporting schedule.",
 ] as const;
 
 export const salesComponentKpis = {
@@ -1011,12 +1011,10 @@ export function getSalesComponentKpis(
 }
 
 export const pillarKpisIntro =
-  "Below are examples of KPIs we may employ for each item. We select KPIs based on the company's priorities, available information, and areas needing improvement. Some KPIs may support more than one area." as const;
+  "Below are examples of KPIs we may employ for only item. We select KPIs based on the company's priorities, available information, and areas needing improvement. Some KPIs may support more than one area." as const;
 
-export const pillarKpisFootnote = {
-  "sales-leadership":
-    "For implementation: Each selected KPI should have a clear definition, calculation, information source, target, review schedule, and person responsible for monitoring it.",
-} as const;
+export const pillarKpisFootnote =
+  "For implementation: Each selected KPI should have a clear definition, calculation, information source, target, review schedule, and person responsible for monitoring it." as const;
 
 export type PillarThemeKpi = {
   readonly title: string;
@@ -3434,6 +3432,7 @@ export const siteConfig = {
       },
     ],
     investment: {
+      badge: "INVESTMENT",
       title: "INVESTMENT",
       subtitle: "WHAT THE ENGAGEMENT INCLUDES",
       tiers: [
@@ -3553,7 +3552,8 @@ export const siteConfig = {
           },
         },
         {
-          title: "30-Day Focused Sales Performance Engagement — $9,500",
+          title:
+            "30-Day Focused Sales Performance Engagement — Beginning at $9,500",
           description:
             "Broader assessment of the sales operation, executive findings, priorities, and implementation roadmap.",
           popout: {

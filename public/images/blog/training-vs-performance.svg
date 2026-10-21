@@ -35,43 +35,40 @@
     </g>
 
     <g>
-      <rect x="630" y="110" width="500" height="300" rx="16" fill="#b17411" fill-opacity="0.16" stroke="#efb862" stroke-width="2" />
+      <rect x="630" y="110" width="500" height="340" rx="16" fill="#b17411" fill-opacity="0.16" stroke="#efb862" stroke-width="2" />
       <g fill="#efb862" font-size="15" font-weight="700" letter-spacing="0.14em" text-anchor="middle">
         <text x="880" y="168">PERFORMANCE IMPROVEMENT</text>
       </g>
 
       <g fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round">
-        <circle cx="700" cy="240" r="14" />
-        <path d="M686 268h28" />
-        <circle cx="700" cy="330" r="14" />
-        <path d="M686 358h28" />
-        <circle cx="700" cy="420" r="0" />
+        <circle cx="700" cy="230" r="14" />
+        <path d="M686 258h28" />
+        <circle cx="700" cy="310" r="14" />
+        <path d="M686 338h28" />
       </g>
       <g font-size="14" fill="#ffffff" fill-opacity="0.80" text-anchor="middle">
-        <text x="700" y="296">Process</text>
-        <text x="700" y="386">Accountability</text>
-        <text x="700" y="430"></text>
+        <text x="700" y="286">Process</text>
+        <text x="700" y="366">Accountability</text>
       </g>
 
       <g fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round">
-        <path d="M756 240h44" />
-        <path d="M756 330h44" />
-        <path d="M756 400h44" />
-        <path d="M800 240v160" />
+        <path d="M756 230h44" />
+        <path d="M756 310h44" />
+        <path d="M756 390h44" />
+        <path d="M800 230v160" />
       </g>
-      <circle cx="884" cy="240" r="26" fill="none" stroke="#efb862" stroke-width="2.5" />
-      <circle cx="884" cy="330" r="26" fill="none" stroke="#efb862" stroke-width="2.5" />
-      <circle cx="884" cy="420" r="26" fill="none" stroke="#efb862" stroke-width="2.5" />
+      <circle cx="884" cy="230" r="26" fill="none" stroke="#efb862" stroke-width="2.5" />
+      <circle cx="884" cy="310" r="26" fill="none" stroke="#efb862" stroke-width="2.5" />
+      <circle cx="884" cy="390" r="26" fill="none" stroke="#efb862" stroke-width="2.5" />
       <g fill="#efb862" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="0.06em">
-        <text x="884" y="245">SYSTEM</text>
-        <text x="884" y="335">LEAD FLOW</text>
-        <text x="884" y="425">GOALS</text>
+        <text x="884" y="235">SYSTEM</text>
+        <text x="884" y="315">LEAD FLOW</text>
+        <text x="884" y="395">GOALS</text>
       </g>
-      <path d="M756 400h44" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" />
-      <path d="M940 240v180" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" />
-      <path d="M928 408l12 12 12-12" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-      <text x="996" y="330" text-anchor="middle" fill="#ffffff" fill-opacity="0.80" font-size="14">The whole</text>
-      <text x="996" y="352" text-anchor="middle" fill="#ffffff" fill-opacity="0.80" font-size="14">operation</text>
+      <path d="M940 230v160" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M928 378l12 12 12-12" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="996" y="310" text-anchor="middle" fill="#ffffff" fill-opacity="0.80" font-size="14">The whole</text>
+      <text x="996" y="332" text-anchor="middle" fill="#ffffff" fill-opacity="0.80" font-size="14">operation</text>
     </g>
   </g>
 

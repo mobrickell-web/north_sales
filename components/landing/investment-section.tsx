@@ -374,13 +374,15 @@ export function InvestmentSection({
         }}
       >
         <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center px-5 sm:px-10 lg:px-16">
-          <div className="flex w-full max-w-[1280px] flex-col items-center gap-2 text-center">
+          <div className="flex w-full max-w-[1280px] flex-col items-center gap-3 text-center">
+            <span className="inline-flex items-center rounded-full border border-black/15 bg-white px-4 py-1 font-body text-[11px] font-semibold tracking-[0.08em] text-bronze uppercase shadow-xs">
+              {investment.badge}
+            </span>
             <h2
               id="investment-heading"
               className="font-body text-[20px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[24px]"
             >
-              <span className="block">{investment.title}</span>
-              <span className="mt-1 block">{investment.subtitle}</span>
+              {investment.subtitle}
             </h2>
           </div>
 
@@ -462,9 +464,9 @@ export function InvestmentSection({
                       </h4>
                       {popup.expandableIncluded !== false ? (
                         <>
-                          <p className="font-body text-[13px] leading-relaxed text-[#5C5F66]">
-                            The detailed service bullets describe what each
-                            engagement may include within its agreed scope.
+                          <p className="font-body text-[13px] font-bold leading-relaxed text-[#5C5F66]">
+                            Select a heading below to view details. Services are
+                            tailored to the agreed engagement scope.
                           </p>
                           <ExpandableIncludedGroups groups={popup.groups} />
                         </>

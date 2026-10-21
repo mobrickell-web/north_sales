@@ -40,7 +40,7 @@
 
     <!-- System view -->
     <g>
-      <rect x="750" y="330" width="320" height="280" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" stroke-width="2" />
+      <rect x="750" y="330" width="320" height="260" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" stroke-width="2" />
       <text x="910" y="368" text-anchor="middle" fill="#efb862" font-size="13" font-weight="700" letter-spacing="0.08em">SYSTEM VIEW</text>
 
       <g font-size="13" font-weight="600" fill="#ffffff" fill-opacity="0.82">
@@ -63,8 +63,8 @@
     </g>
 
     <text x="290" y="520" text-anchor="middle" fill="#ffffff" fill-opacity="0.45" font-size="12">May miss the real cause</text>
-    <text x="910" y="610" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">Diagnose the system,</text>
-    <text x="910" y="632" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">then focus the work</text>
+    <text x="910" y="628" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">Diagnose the system,</text>
+    <text x="910" y="650" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="13">then focus the work</text>
   </g>
 
   <g>

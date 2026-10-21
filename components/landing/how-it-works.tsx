@@ -9,7 +9,6 @@ import {
   componentKpisIntro,
   getSalesComponentKpis,
   type SalesComponentKpi,
-  aiIntegrationKpisNote,
   getPillarThemeKpis,
   pillarKpisFootnote,
   pillarKpisIntro,
@@ -34,6 +33,20 @@ interface ModalComponent {
   objective?: string;
 }
 
+/** Keep "KPIs" casing when a parent uses CSS `uppercase` (otherwise it renders as KPIS). */
+function withKpisCasing(text: string) {
+  const parts = text.split(/(KPIs)/g);
+  return parts.map((part, index) =>
+    part === "KPIs" ? (
+      <span key={index} className="normal-case">
+        KPIs
+      </span>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
   const { howItWorks } = siteConfig;
 
@@ -49,41 +62,21 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     title: string;
     paragraphs: readonly string[];
     list?: readonly string[];
+    /** Theme KPIs available for this bullet — shown after expanding Example KPIs */
+    themeKpis?: readonly { title: string; detail: string }[];
+    themeKpisFootnote?: string;
+    themeKpisExpanded?: boolean;
     kpis?: readonly { title: string; detail: string }[];
     footnote?: string;
     kpiDetail?: { title: string; detail: string };
   } | null>(null);
 
-  const openThemeExampleKpis = (
-    pillarId: string,
-    pillarTitle: string,
-    themeLabel: string,
-  ) => {
-    const kpis = getPillarThemeKpis(pillarId, themeLabel);
-    if (!kpis?.length) return;
-
-    const extraParagraphs: string[] = [];
-    if (themeLabel === "AI Sales Integration") {
-      extraParagraphs.push(aiIntegrationKpisNote);
-    }
-
-    const footnote =
-      pillarId === "sales-leadership"
-        ? pillarKpisFootnote["sales-leadership"]
-        : undefined;
-
-    setPopup({
-      bulletHeading: pillarTitle,
-      title: `${themeLabel} — Example KPIs`,
-      paragraphs: [pillarKpisIntro, ...extraParagraphs],
-      kpis,
-      footnote,
-    });
-  };
   const [aiSalesOpen, setAiSalesOpen] = useState(false);
 
   const outerPanelRef = useRef<HTMLDivElement>(null);
   const innerPanelRef = useRef<HTMLDivElement>(null);
+  const outerCtaRef = useRef<HTMLDivElement>(null);
+  const innerCtaRef = useRef<HTMLDivElement>(null);
 
   // Escape closes the deepest open level first
   useEffect(() => {
@@ -97,6 +90,10 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
       if (popup) {
         if (popup.kpiDetail) {
           setPopup({ ...popup, kpiDetail: undefined });
+          return;
+        }
+        if (popup.themeKpisExpanded) {
+          setPopup({ ...popup, themeKpisExpanded: false });
           return;
         }
         setPopup(null);
@@ -114,26 +111,47 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     const willExpand = !expanded;
     setExpanded(willExpand);
     if (!willExpand) {
-      // Collapse everything and keep the button in view
+      // Collapse everything and scroll back up to the first MORE/LESS CTA.
       setComponentsOpen(false);
       setSelectedCompIndex(null);
+      window.setTimeout(() => {
+        outerCtaRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 120);
+      return;
+    }
+    // Wait for the expand animation, then scroll to the three core areas panel.
+    window.setTimeout(() => {
       outerPanelRef.current?.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "start",
       });
-    }
+    }, 120);
   };
 
   const toggleInner = () => {
     const willExpand = !componentsOpen;
     setComponentsOpen(willExpand);
     if (!willExpand) {
+      // Collapse and scroll back up to the pillars / second MORE/LESS CTA.
       setSelectedCompIndex(null);
+      window.setTimeout(() => {
+        innerCtaRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 120);
+      return;
+    }
+    // Wait for the expand animation so the 12-components panel is visible, then scroll to it.
+    window.setTimeout(() => {
       innerPanelRef.current?.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "start",
       });
-    }
+    }, 120);
   };
 
   const handleOpenComponentDetail = (index: number) => {
@@ -142,6 +160,16 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
 
   const handleBack = () => {
     setSelectedCompIndex(null);
+    // Detail view is taller than the grid; without this, collapsing leaves the
+    // viewport scrolled into the next section (e.g. Challenges).
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        innerPanelRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    });
   };
 
   const activeComponent =
@@ -273,7 +301,10 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
           </div>
 
           {/* CTA Button — toggles the details panel inline (no popup) */}
-          <div className="mt-8 flex w-full max-w-[1280px] justify-center sm:justify-end">
+          <div
+            ref={outerCtaRef}
+            className="mt-8 flex w-full max-w-[1280px] scroll-mt-28 justify-center sm:justify-end"
+          >
             <button
               type="button"
               onClick={toggleOuter}
@@ -290,7 +321,7 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
             id="how-it-works-details"
             ref={outerPanelRef}
             className={cn(
-              "grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+              "scroll-mt-28 grid w-full max-w-[1280px] transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
               expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
             )}
           >
@@ -321,67 +352,52 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                           {pillar.title}
                         </h3>
                         <ul className="mt-6 flex flex-col gap-3 font-body text-[14px] text-gray-200">
-                          {pillar.bullets.map((bullet, idx) => {
-                            const themeKpis = getPillarThemeKpis(
-                              pillar.id,
-                              bullet.label,
-                            );
+                          {pillar.bullets.map((bullet, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (
+                                    "sharedDialog" in bullet &&
+                                    bullet.sharedDialog === "aiSalesIntegration"
+                                  ) {
+                                    setAiSalesOpen(true);
+                                    return;
+                                  }
+                                  if ("popout" in bullet && bullet.popout) {
+                                    const themeKpis = getPillarThemeKpis(
+                                      pillar.id,
+                                      bullet.label,
+                                    );
 
-                            return (
-                              <li
-                                key={idx}
-                                className="flex items-start gap-2.5"
+                                    setPopup({
+                                      bulletHeading: pillar.title,
+                                      title: bullet.popout.title,
+                                      paragraphs: bullet.popout.paragraphs,
+                                      themeKpis,
+                                      themeKpisFootnote: themeKpis?.length
+                                        ? pillarKpisFootnote
+                                        : undefined,
+                                      themeKpisExpanded: false,
+                                    });
+                                  }
+                                }}
+                                className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
                               >
-                                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-white" />
-                                <div className="flex flex-col gap-1">
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      if (
-                                        "sharedDialog" in bullet &&
-                                        bullet.sharedDialog ===
-                                          "aiSalesIntegration"
-                                      ) {
-                                        setAiSalesOpen(true);
-                                        return;
-                                      }
-                                      if ("popout" in bullet && bullet.popout) {
-                                        setPopup({
-                                          bulletHeading: pillar.title,
-                                          title: bullet.popout.title,
-                                          paragraphs: bullet.popout.paragraphs,
-                                        });
-                                      }
-                                    }}
-                                    className="cursor-pointer text-left font-body text-[14px] text-gray-200 transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
-                                  >
-                                    {bullet.label}
-                                  </button>
-                                  {themeKpis && themeKpis.length > 0 ? (
-                                    <button
-                                      type="button"
-                                      onClick={() =>
-                                        openThemeExampleKpis(
-                                          pillar.id,
-                                          pillar.title,
-                                          bullet.label,
-                                        )
-                                      }
-                                      className="w-fit cursor-pointer text-left font-body text-[12px] font-bold text-[#efb862] transition-colors hover:text-[#b17411] hover:underline focus:outline-none"
-                                    >
-                                      Example KPIs
-                                    </button>
-                                  ) : null}
-                                </div>
-                              </li>
-                            );
-                          })}
+                                {bullet.label}
+                              </button>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-8 flex w-full justify-center sm:justify-end">
+                  <div
+                    ref={innerCtaRef}
+                    className="mt-8 flex w-full scroll-mt-28 justify-center sm:justify-end"
+                  >
                     <button
                       type="button"
                       onClick={toggleInner}
@@ -399,7 +415,7 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                   id="how-it-works-components"
                   ref={innerPanelRef}
                   className={cn(
-                    "grid w-full transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
+                    "scroll-mt-28 grid w-full transition-[grid-template-rows] duration-500 ease-in-out motion-reduce:transition-none",
                     componentsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                   )}
                 >
@@ -416,9 +432,9 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                     >
                       {/* Title */}
                       <div className="mt-8 flex flex-col gap-2 border-b border-gray-300/60 pb-4">
-                        <span className="w-full text-center font-body text-[11px] font-bold tracking-wider text-primary uppercase sm:text-[13px] lg:text-[14px]">
+                        <h3 className="w-full text-center font-body text-[13px] font-bold tracking-wide text-primary uppercase sm:text-[16px] lg:text-[22px]">
                           THE 12 SALES PERFORMANCE COMPONENTS™
-                        </span>
+                        </h3>
                       </div>
 
                       {/* Components grid — swaps to detail view when a component is selected */}
@@ -457,11 +473,11 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                             <Target className="size-8 shrink-0 text-[#b17411]" />
                             <div className="flex flex-col">
                               <h5 className="font-body text-[13px] font-extrabold text-primary uppercase">
-                                WE DONT ASSUME THE SOLUTION—WE IDENTIFY THE
-                                OPPORTUNITY.
+                                WE DON&apos;T ASSUME THE SOLUTION—WE IDENTIFY
+                                THE OPPORTUNITY.
                               </h5>
                               <p className="font-body text-[11px] text-[#5C5F66]">
-                                We dont walk in with a preset answer. We
+                                We don&apos;t walk in with a preset answer. We
                                 examine, analyze and determine where the
                                 greatest performance opportunities exist.
                               </p>
@@ -533,7 +549,9 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                               activeComponentKpis.length > 0 && (
                                 <div className="rounded-xl border border-gray-100 bg-gray-50 p-6">
                                   <h4 className="font-body text-[13px] font-bold text-primary uppercase">
-                                    Example {activeComponent.title} KPIs
+                                    {withKpisCasing(
+                                      `Example ${activeComponent.title} KPIs`,
+                                    )}
                                   </h4>
                                   {activeComponentKpisIntro &&
                                     activeComponentKpisIntro.length > 0 && (
@@ -652,7 +670,7 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                           : "text-[16px] sm:text-[18px]",
                       )}
                     >
-                      {popup.title}
+                      {withKpisCasing(popup.title)}
                     </p>
                     <Dialog.Description asChild>
                       <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
@@ -680,6 +698,57 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                             </div>
                           );
                         })}
+
+                        {popup.themeKpis &&
+                        popup.themeKpis.length > 0 &&
+                        !popup.themeKpisExpanded ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPopup((prev) =>
+                                prev
+                                  ? { ...prev, themeKpisExpanded: true }
+                                  : prev,
+                              )
+                            }
+                            className="w-fit cursor-pointer text-left font-body text-[13px] font-bold text-[#b17411] transition-colors hover:underline focus:outline-none"
+                          >
+                            Example KPIs
+                          </button>
+                        ) : null}
+
+                        {popup.themeKpisExpanded &&
+                          popup.themeKpis &&
+                          popup.themeKpis.length > 0 && (
+                            <div className="mt-1 flex flex-col gap-3 border-t border-gray-100 pt-4">
+                              <p>{pillarKpisIntro}</p>
+                              <ul className="flex flex-col gap-2">
+                                {popup.themeKpis.map((kpi) => (
+                                  <li key={kpi.title}>
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setPopup((prev) =>
+                                          prev
+                                            ? { ...prev, kpiDetail: kpi }
+                                            : prev,
+                                        )
+                                      }
+                                      className="cursor-pointer text-left font-body text-[13px] font-bold text-[#b17411] hover:underline focus:outline-none"
+                                    >
+                                      {kpi.title}
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                              {popup.themeKpisFootnote ? (
+                                <p className="text-[13px] italic">
+                                  {popup.themeKpisFootnote}
+                                </p>
+                              ) : null}
+                            </div>
+                          )}
+
                         {popup.kpis && popup.kpis.length > 0 && (
                           <ul className="mt-1 flex flex-col gap-2">
                             {popup.kpis.map((kpi) => (
