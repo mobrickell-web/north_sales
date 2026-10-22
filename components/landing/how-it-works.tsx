@@ -49,6 +49,7 @@ function withKpisCasing(text: string) {
 
 export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
   const { howItWorks } = siteConfig;
+  const leadershipSupport = howItWorks.salesLeadershipImplementationSupport;
 
   // Outer panel (3 pillars) and inner panel (12 components) expand inline
   const [expanded, setExpanded] = useState(false);
@@ -60,8 +61,15 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
   const [popup, setPopup] = useState<{
     bulletHeading?: string;
     title: string;
+    subtitle?: string;
     paragraphs: readonly string[];
     list?: readonly string[];
+    sections?: readonly {
+      title: string;
+      subtitle?: string;
+      paragraphs: readonly string[];
+      list?: readonly string[];
+    }[];
     /** Theme KPIs available for this bullet — shown after expanding Example KPIs */
     themeKpis?: readonly { title: string; detail: string }[];
     themeKpisFootnote?: string;
@@ -72,6 +80,7 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
   } | null>(null);
 
   const [aiSalesOpen, setAiSalesOpen] = useState(false);
+  const [leadershipSupportOpen, setLeadershipSupportOpen] = useState(false);
 
   const outerPanelRef = useRef<HTMLDivElement>(null);
   const innerPanelRef = useRef<HTMLDivElement>(null);
@@ -80,11 +89,15 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
 
   // Escape closes the deepest open level first
   useEffect(() => {
-    if (!expanded && !popup && !aiSalesOpen) return;
+    if (!expanded && !popup && !aiSalesOpen && !leadershipSupportOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (aiSalesOpen) {
         setAiSalesOpen(false);
+        return;
+      }
+      if (leadershipSupportOpen) {
+        setLeadershipSupportOpen(false);
         return;
       }
       if (popup) {
@@ -105,7 +118,14 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [expanded, componentsOpen, selectedCompIndex, popup, aiSalesOpen]);
+  }, [
+    expanded,
+    componentsOpen,
+    selectedCompIndex,
+    popup,
+    aiSalesOpen,
+    leadershipSupportOpen,
+  ]);
 
   const toggleOuter = () => {
     const willExpand = !expanded;
@@ -358,12 +378,21 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                               <button
                                 type="button"
                                 onClick={() => {
-                                  if (
-                                    "sharedDialog" in bullet &&
-                                    bullet.sharedDialog === "aiSalesIntegration"
-                                  ) {
-                                    setAiSalesOpen(true);
-                                    return;
+                                  if ("sharedDialog" in bullet) {
+                                    if (
+                                      bullet.sharedDialog ===
+                                      "aiSalesIntegration"
+                                    ) {
+                                      setAiSalesOpen(true);
+                                      return;
+                                    }
+                                    if (
+                                      bullet.sharedDialog ===
+                                      "salesLeadershipImplementationSupport"
+                                    ) {
+                                      setLeadershipSupportOpen(true);
+                                      return;
+                                    }
                                   }
                                   if ("popout" in bullet && bullet.popout) {
                                     const themeKpis = getPillarThemeKpis(
@@ -672,6 +701,11 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                     >
                       {withKpisCasing(popup.title)}
                     </p>
+                    {popup.subtitle ? (
+                      <p className="font-body text-[12px] font-bold tracking-[0.06em] text-[#b17411] uppercase sm:text-[13px]">
+                        {popup.subtitle}
+                      </p>
+                    ) : null}
                     <Dialog.Description asChild>
                       <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
                         {popup.paragraphs.map((paragraph, index) => {
@@ -679,6 +713,8 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                             "We look for opportunities such as:",
                             "Depending on the engagement, this may include changes to:",
                             "Depending on the engagement, implementation may include:",
+                            "Depending on the engagement:",
+                            "Areas of responsibility may include:",
                           ];
                           const showListAfter =
                             popup.list &&
@@ -698,6 +734,41 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                             </div>
                           );
                         })}
+
+                        {popup.sections?.map((section) => (
+                          <div
+                            key={section.title}
+                            className="mt-2 flex flex-col gap-3 border-t border-gray-100 pt-4"
+                          >
+                            <p className="font-body text-[13px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[14px]">
+                              {section.title}
+                            </p>
+                            {section.subtitle ? (
+                              <p className="font-body text-[13px] font-semibold text-[#001528]">
+                                {section.subtitle}
+                              </p>
+                            ) : null}
+                            {section.paragraphs.map((paragraph, index) => {
+                              const showListAfter =
+                                section.list &&
+                                section.list.length > 0 &&
+                                paragraph ===
+                                  "Areas of responsibility may include:";
+                              return (
+                                <div key={`${section.title}-${index}`}>
+                                  <p>{paragraph}</p>
+                                  {showListAfter && section.list ? (
+                                    <ul className="mt-2 list-disc space-y-1.5 pl-5">
+                                      {section.list.map((item) => (
+                                        <li key={item}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  ) : null}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ))}
 
                         {popup.themeKpis &&
                         popup.themeKpis.length > 0 &&
@@ -721,6 +792,9 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                           popup.themeKpis &&
                           popup.themeKpis.length > 0 && (
                             <div className="mt-1 flex flex-col gap-3 border-t border-gray-100 pt-4">
+                              <p className="font-body text-[13px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[14px]">
+                                Example KPIs
+                              </p>
                               <p>{pillarKpisIntro}</p>
                               <ul className="flex flex-col gap-2">
                                 {popup.themeKpis.map((kpi) => (
@@ -788,6 +862,110 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
         onOpenChange={setAiSalesOpen}
         hideTrigger
       />
+
+      <Dialog.Root
+        open={leadershipSupportOpen}
+        onOpenChange={setLeadershipSupportOpen}
+      >
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 flex max-h-[90vh] w-[95vw] max-w-[720px] translate-x-[-50%] translate-y-[-50%] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl transition-all animate-in fade-in-0 zoom-in-95">
+            <Dialog.Close className="absolute right-4 top-4 z-10 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
+              <X className="size-5" />
+              <span className="sr-only">Close</span>
+            </Dialog.Close>
+
+            <div className="shrink-0 border-b border-black/8 px-6 pt-6 pb-4 sm:px-8">
+              <Dialog.Title className="pr-8 font-body text-[18px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[20px]">
+                {leadershipSupport.title}
+              </Dialog.Title>
+              <Dialog.Description asChild>
+                <div className="mt-3 flex flex-col gap-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                  <p className="font-extrabold text-[#001528]">
+                    {leadershipSupport.headline}
+                  </p>
+                  {leadershipSupport.intro.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </Dialog.Description>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-6 py-5 sm:px-8">
+              <ul className="flex flex-col gap-4">
+                {leadershipSupport.engagementOptions.map((item) => (
+                  <li key={item.title} className="flex gap-3">
+                    <span
+                      aria-hidden
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
+                    />
+                    <p className="font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                      <span className="font-extrabold text-[#001528]">
+                        {item.title}:
+                      </span>{" "}
+                      {item.description}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-5 flex flex-col gap-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                {leadershipSupport.closing.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+
+              {leadershipSupport.roles.map((role) => (
+                <section
+                  key={role.title}
+                  className="mt-6 border-t border-[#E8E4DC] pt-5"
+                >
+                  <h3 className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase">
+                    {role.title}
+                  </h3>
+                  <p className="mt-2 font-body text-[14px] font-extrabold text-[#001528]">
+                    {role.headline}
+                  </p>
+                  <div className="mt-2 flex flex-col gap-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                    {role.intro.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                  <ul className="mt-4 flex flex-col gap-4">
+                    {role.responsibilities.map((item) => (
+                      <li key={item.title} className="flex gap-3">
+                        <span
+                          aria-hidden
+                          className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
+                        />
+                        <p className="font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                          <span className="font-extrabold text-[#001528]">
+                            {item.title}:
+                          </span>{" "}
+                          {item.description}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                    {role.objective}
+                  </p>
+                </section>
+              ))}
+
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={() => setLeadershipSupportOpen(false)}
+                  className="inline-flex h-[44px] min-w-[160px] cursor-pointer items-center justify-center bg-[#b17411] px-6 font-body text-[13px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#8f5d0e]"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </section>
   );
 }

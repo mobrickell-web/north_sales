@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { TwelveAdvantagesDialog } from "@/components/layout/twelve-advantages-dialog";
 
 type PopupParagraph =
   string | { readonly text: string; readonly bold?: boolean };
@@ -20,7 +21,9 @@ function popupParagraphBold(paragraph: PopupParagraph) {
 
 export function WhyPartnerSection() {
   const { whyChooseUs } = siteConfig;
+  const twelveAdvantages = whyChooseUs.modal.twelveAdvantages;
   const [expanded, setExpanded] = useState(false);
+  const [twelveAdvantagesOpen, setTwelveAdvantagesOpen] = useState(false);
   const [popup, setPopup] = useState<{
     subheading: string;
     subheadingSecondary?: string;
@@ -110,11 +113,15 @@ export function WhyPartnerSection() {
   };
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Escape closes the popup first, then the expanded panel
+  // Escape closes the deepest open level first
   useEffect(() => {
-    if (!expanded && !popup) return;
+    if (!expanded && !popup && !twelveAdvantagesOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
+      if (twelveAdvantagesOpen) {
+        setTwelveAdvantagesOpen(false);
+        return;
+      }
       if (popup) {
         setPopup(null);
         return;
@@ -123,7 +130,7 @@ export function WhyPartnerSection() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [expanded, popup]);
+  }, [expanded, popup, twelveAdvantagesOpen]);
 
   const toggle = () => {
     const willExpand = !expanded;
@@ -282,6 +289,16 @@ export function WhyPartnerSection() {
                     </li>
                   ))}
                 </ul>
+
+                <div className="mt-8 flex w-full justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setTwelveAdvantagesOpen(true)}
+                    className="inline-flex h-[36px] w-full max-w-[920px] cursor-pointer items-center justify-center bg-primary px-4 font-body text-[11px] font-bold tracking-[0.06em] text-white uppercase transition-colors hover:bg-[#06253f] focus:outline-none focus:ring-2 focus:ring-ring sm:h-[38px] sm:text-[12px] sm:tracking-[0.08em]"
+                  >
+                    {twelveAdvantages.buttonLabel}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -298,6 +315,12 @@ export function WhyPartnerSection() {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
+
+      <TwelveAdvantagesDialog
+        open={twelveAdvantagesOpen}
+        onOpenChange={setTwelveAdvantagesOpen}
+        hideTrigger
+      />
     </section>
   );
 }

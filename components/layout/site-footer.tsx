@@ -11,6 +11,7 @@ import { TestimonialsDialog } from "@/components/layout/testimonials-dialog";
 import { RemoteWorkDialog } from "@/components/layout/remote-work-dialog";
 import { SalesKpiGuideDialog } from "@/components/layout/sales-kpi-guide-dialog";
 import { AiSalesIntegrationDialog } from "@/components/layout/ai-sales-integration-dialog";
+import { TwelveAdvantagesDialog } from "@/components/layout/twelve-advantages-dialog";
 import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
 import { ContactDialog } from "@/components/layout/contact-dialog";
 
@@ -192,6 +193,9 @@ export function SiteFooter() {
                 ) : null}
                 <li>
                   <AiSalesIntegrationDialog />
+                </li>
+                <li>
+                  <TwelveAdvantagesDialog />
                 </li>
               </ul>
             </div>

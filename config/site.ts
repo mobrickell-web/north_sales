@@ -1589,7 +1589,7 @@ export const siteConfig = {
               text: "NORTH POINT SALES GROUP is not designed to simply deliver a report, make recommendations, and leave leadership to figure out the rest.",
               bold: true,
             },
-            "We can work alongside the company as a fractional sales executive to help put the agreed-upon improvements into practice.",
+            "Depending on the scope and complexity of the engagement, we can provide a Sales Performance Implementation Specialist, a Fractional VP of Sales, or both, to work alongside your leadership team and help put agreed-upon improvements into practice.",
             "That may include working directly with selected salespeople, improving presentations and messaging, strengthening prospecting and follow-up, addressing pipeline issues, improving accountability, coordinating outside vendors when needed, and helping leadership track results.",
             "The engagement can be narrowly focused on two or three salespeople or expanded to support the broader sales organization.",
             "The level of involvement depends on what the company actually needs.",
@@ -1764,6 +1764,252 @@ export const siteConfig = {
           },
         },
       ],
+      twelveAdvantages: {
+        linkLabel: "12 ADVANTAGES OF WORKING WITH US",
+        buttonLabel:
+          "12 ADVANTAGES OF OUR APPROACH TO SALES PERFORMANCE IMPROVEMENT",
+        title: "12 ADVANTAGES OF OUR APPROACH TO SALES PERFORMANCE IMPROVEMENT",
+        intro: [
+          "Before investing more money in additional salespeople, new technology, or another training program, consider how much additional revenue your existing sales organization may be capable of producing.",
+          "At NORTH POINT SALES GROUP, we help established companies identify opportunities for improvement, strengthen sales execution, improve management systems, and increase productivity through practical, measurable improvements.",
+          "Our approach is built around three priorities: financial discipline, practical implementation, and sustainable organizational performance.",
+        ],
+        pillars: [
+          {
+            title: "I. FINANCIAL ADVANTAGES",
+            advantages: [
+              {
+                number: 1,
+                title: "OPTIMIZE YOUR EXISTING SALES FORCE FIRST",
+                paragraphs: [
+                  "Before recommending additional hiring, technology, or other major expenditures, we examine opportunities to improve performance using the salespeople, leadership, and resources you already have.",
+                ],
+                bullets: [
+                  "Identify untapped revenue opportunities within your existing sales organization.",
+                  "Improve the productivity of current sales representatives.",
+                  "Address performance weaknesses before expanding payroll.",
+                  "Help generate greater value from resources already in place.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Potentially increase revenue and productivity without proportionately increasing operating expenses.",
+              },
+              {
+                number: 2,
+                title: "START WITH AN AFFORDABLE, FOCUSED ENGAGEMENT",
+                paragraphs: [
+                  "Our focused engagements start at $7,500, allowing companies to address specific sales-performance needs without immediately committing to a comprehensive organizational implementation.",
+                ],
+                bullets: [
+                  "Begin with a clearly defined scope of work.",
+                  "Concentrate on selected sales representatives or priority performance issues.",
+                  "Evaluate our approach before considering broader implementation.",
+                  "Expand the engagement only when additional work is justified.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: A lower initial financial commitment with the flexibility to pursue additional improvements when appropriate.",
+              },
+              {
+                number: 3,
+                title: "CLEAR, TRANSPARENT INVESTMENT OPTIONS",
+                paragraphs: [
+                  "We publish our investment structure so prospective clients can understand the general financial commitment before entering detailed discussions.",
+                ],
+                bullets: [
+                  "Focused engagement options of $7,500 and $9,500.",
+                  "Comprehensive executive implementations ranging from $50,000 to $150,000.",
+                  "Clearly defined deliverables appropriate to the selected engagement.",
+                  "Investment recommendations based on organizational needs, scope, and complexity.",
+                  "Executive review and approval of implementation plans where applicable.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Greater financial transparency and control over the scope and cost of the engagement.",
+              },
+              {
+                number: 4,
+                title: "SHORT, DEFINED ENGAGEMENT PERIODS",
+                paragraphs: [
+                  "Our engagements generally range from 30 to 90 days, depending on the scope of work. We emphasize timely assessment, practical implementation, and measurable progress rather than unnecessarily extended consulting arrangements.",
+                ],
+                bullets: [
+                  "Clearly established engagement objectives.",
+                  "Defined implementation schedules.",
+                  "Prioritized improvement opportunities.",
+                  "Regular progress reviews.",
+                  "No automatic requirement for ongoing consulting services.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Concentrated improvement efforts with defined timelines and limited long-term financial exposure.",
+              },
+            ],
+          },
+          {
+            title: "II. PRACTICAL IMPLEMENTATION ADVANTAGES",
+            advantages: [
+              {
+                number: 5,
+                title:
+                  "FOCUS ON WHAT NEEDS IMPROVEMENT — NOT WHAT ALREADY WORKS",
+                paragraphs: [
+                  "Not every sales organization needs a complete transformation. Many companies already have effective salespeople, processes, and leadership practices that should remain in place. Targeted improvements can often provide greater value than unnecessary organizational changes.",
+                ],
+                bullets: [
+                  "Identify specific weaknesses affecting productivity and revenue.",
+                  "Preserve existing practices that consistently produce results.",
+                  "Avoid unnecessary restructuring or system replacements.",
+                  "Prioritize improvements according to their potential business impact.",
+                  "Recommend only services and changes that address identified needs.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Targeted improvements without the cost and disruption of unnecessary organizational changes.",
+              },
+              {
+                number: 6,
+                title: "IMPLEMENTATION, NOT JUST RECOMMENDATIONS",
+                paragraphs: [
+                  "Identifying problems is only the beginning. We work directly with your salespeople and leadership to help put practical solutions into operation.",
+                ],
+                bullets: [
+                  "Evaluate sales execution and identify performance gaps.",
+                  "Improve prospecting, presentations, closing, and follow-up practices.",
+                  "Strengthen sales processes and management procedures.",
+                  "Establish performance expectations and accountability.",
+                  "Help implement improvements rather than simply recommending them.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Direct assistance in turning identified opportunities into operational improvements.",
+              },
+              {
+                number: 7,
+                title: "INDIVIDUAL SALES REPRESENTATIVE DEVELOPMENT",
+                paragraphs: [
+                  "Sales organizations often have significant differences in productivity among representatives. We work directly with selected salespeople to identify individual performance gaps and strengthen the skills and behaviors affecting their results.",
+                ],
+                bullets: [
+                  "Evaluate individual sales conversations, presentations, and follow-up practices.",
+                  "Identify weaknesses in prospecting, qualification, objection handling, and closing.",
+                  "Provide individualized coaching and practical sales guidance.",
+                  "Use recorded conversations, role-playing, and remote coaching sessions where appropriate.",
+                  "Measure individual progress against established performance baselines.",
+                  "Extend successful improvements to additional sales representatives when appropriate.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Improve individual productivity while developing practices that can benefit the entire sales organization.",
+              },
+              {
+                number: 8,
+                title: "PRACTICAL TECHNOLOGY AND AI INTEGRATION",
+                paragraphs: [
+                  "Technology should make your sales organization more productive, not introduce unnecessary costs or complexity. We examine how existing systems can be improved and where AI may provide practical value.",
+                ],
+                bullets: [
+                  "Lead Generation: Identify prospective companies and organize them according to established business criteria.",
+                  "Lead Qualification: Research, filter, score, and prioritize potential sales opportunities.",
+                  "CRM Efficiency: Reduce repetitive data entry, improve information accuracy, and streamline sales workflows.",
+                  "Sales Follow-Up: Support scheduling, reminders, and personalized communications to reduce missed opportunities.",
+                  "Sales Forecasting: Analyze pipeline information and identify patterns that may improve forecasting accuracy.",
+                  "Performance Monitoring: Identify potential sales and operational problems through KPI analysis, CRM activity reviews, and automated alerts.",
+                ],
+                closing:
+                  "We evaluate technology and AI opportunities according to their practicality, implementation requirements, and potential financial benefit.",
+                advantage:
+                  "THE ADVANTAGE: Improve operational efficiency and sales productivity while avoiding unnecessary technology investments.",
+              },
+            ],
+          },
+          {
+            title: "III. SUSTAINABLE ORGANIZATIONAL IMPROVEMENTS",
+            advantages: [
+              {
+                number: 9,
+                title: "MEASURABLE PERFORMANCE IMPROVEMENT",
+                paragraphs: [
+                  "Improvement must be measured to determine whether it is working. We help establish clear performance baselines, relevant KPIs, and practical reporting procedures.",
+                ],
+                bullets: [
+                  "Establish starting performance measurements.",
+                  "Track prospecting activity, conversion rates, closing performance, and other relevant KPIs.",
+                  "Compare individual and organizational results against established baselines.",
+                  "Identify performance trends and problems requiring management attention.",
+                  "Develop reporting procedures that provide leadership with meaningful performance visibility.",
+                  "Adjust improvement initiatives based on measurable findings.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Greater visibility into sales performance and a practical way to evaluate progress, accountability, and results.",
+              },
+              {
+                number: 10,
+                title: "STRENGTHEN EXISTING SALES LEADERSHIP",
+                paragraphs: [
+                  "Sustainable sales performance depends on effective leadership, consistent coaching, clear expectations, and accountability. We work collaboratively with existing sales managers to strengthen these capabilities.",
+                ],
+                bullets: [
+                  "Clarify leadership roles, responsibilities, and expectations.",
+                  "Improve individual sales coaching and performance management.",
+                  "Establish consistent accountability and follow-through.",
+                  "Strengthen sales meetings and communication practices.",
+                  "Help managers identify and address performance problems earlier.",
+                  "Develop procedures that support continuous improvement after our engagement.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Stronger internal leadership and management practices that help sustain performance improvements without ongoing outside supervision.",
+              },
+              {
+                number: 11,
+                title: "MINIMAL DISRUPTION AND NO REQUIRED ONGOING CONTRACTS",
+                paragraphs: [
+                  "Our approach is designed to work within your existing organization, minimizing unnecessary disruption to daily sales operations.",
+                  "Much of our work can be conducted remotely through video meetings, recorded sales conversations, CRM reviews, and direct interaction with salespeople and management.",
+                ],
+                bullets: [
+                  "Conduct assessments and coaching remotely when practical.",
+                  "Reduce unnecessary travel expenses and scheduling complications.",
+                  "Work around existing sales responsibilities and operational priorities.",
+                  "Introduce improvements without unnecessarily interrupting productive activities.",
+                  "Establish processes your organization can continue managing independently.",
+                  "Make additional advisory or implementation assistance optional after completion.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: Practical implementation with limited operational disruption and no required long-term consulting dependency.",
+              },
+              {
+                number: 12,
+                title: "FINANCIALLY DISCIPLINED, LONG-TERM VALUE",
+                paragraphs: [
+                  "Our objective is not to create an ongoing need for our services. It is to help your company improve its ability to generate revenue, manage performance, and sustain results using its own people and resources.",
+                ],
+                bullets: [
+                  "Increase productivity and improve sales execution.",
+                  "Strengthen existing management systems and accountability.",
+                  "Improve conversion rates and reduce avoidable lost opportunities.",
+                  "Identify opportunities to improve profitability and operating efficiency.",
+                  "Establish repeatable processes that support consistent performance.",
+                  "Create a stronger foundation for sustainable revenue growth.",
+                  "Provide additional assistance only when your organization determines it is needed.",
+                ],
+                advantage:
+                  "THE ADVANTAGE: An investment in organizational capabilities intended to continue delivering value long after our engagement is completed.",
+              },
+            ],
+          },
+        ],
+        bottomLine: {
+          title: "THE BOTTOM LINE",
+          headline:
+            "BEFORE YOU INVEST MORE MONEY GROWING YOUR SALES FORCE, DETERMINE HOW MUCH MORE YOUR EXISTING SALES ORGANIZATION COULD PRODUCE.",
+          paragraphs: [
+            "At NORTH POINT SALES GROUP, we know that meaningful sales-performance improvement requires practical implementation, measurable results, financial discipline, and a clear understanding of what each organization actually needs.",
+            "We also know that improving sales performance does not necessarily require hiring more salespeople, purchasing additional technology, replacing existing systems, or committing to lengthy consulting contracts.",
+            "We focus on identifying what needs attention, implementing meaningful improvements, establishing measurable performance standards, and equipping your organization to sustain stronger results.",
+            "Our objective is straightforward: Help your existing sales organization perform better, produce more, and become more profitable — without spending more than necessary.",
+          ],
+        },
+        cta: {
+          title: "LET'S DISCUSS YOUR SALES ORGANIZATION.",
+          paragraphs: [
+            "There is no cost for an initial conversation. Let's determine where improvement could make the greatest difference in your business.",
+          ],
+        },
+      },
     },
   },
   //steps section
@@ -2284,6 +2530,10 @@ export const siteConfig = {
                 "Build a sales environment in which people understand their roles, expectations, objectives, and responsibilities—and have the leadership, systems, and support necessary to perform at a high level. The objective is to create a team that performs consistently rather than relying on a few individual stars.",
               ],
             },
+          },
+          {
+            label: "Sales Leadership & Implementation Support",
+            sharedDialog: "salesLeadershipImplementationSupport",
           },
         ],
       },
@@ -3245,6 +3495,166 @@ export const siteConfig = {
           "The objective is targeted development that improves execution—not training for the sake of training.",
       },
     ],
+
+    salesLeadershipImplementationSupport: {
+      title: "SALES LEADERSHIP & IMPLEMENTATION SUPPORT",
+      headline:
+        "FLEXIBLE RESPONSIBILITIES. DEFINED ENGAGEMENTS. PRACTICAL RESULTS.",
+      intro: [
+        "NORTH POINT SALES GROUP tailors its professional support to each client's needs.",
+        "Depending on the engagement:",
+      ],
+      engagementOptions: [
+        {
+          title: "Sales Performance Implementation Specialists",
+          description:
+            "Work with existing management to implement focused sales performance improvements.",
+        },
+        {
+          title: "Fractional VPs of Sales",
+          description:
+            "Provide executive leadership, oversee organizational improvements, or combine leadership with hands-on implementation.",
+        },
+        {
+          title: "Combined Support",
+          description:
+            "Both professionals may work together when additional expertise and resources are needed.",
+        },
+      ],
+      closing: [
+        "Responsibilities, objectives, duration, and fees are established according to the engagement's scope.",
+        "Our objective is to provide the right expertise, implement practical improvements, and help sustain stronger sales performance without unnecessary costs or permanent overhead.",
+      ],
+      roles: [
+        {
+          title: "SALES PERFORMANCE IMPLEMENTATION SPECIALIST",
+          headline: "Focused, Hands-On Sales Performance Improvement",
+          intro: [
+            "Our Sales Performance Implementation Specialists work directly with existing sales leadership and salespeople to identify performance gaps and implement practical operational improvements.",
+            "These professionals are particularly appropriate when an organization has existing management in place but needs additional expertise and direct assistance improving sales execution, systems, productivity, and accountability.",
+            "Areas of responsibility may include:",
+          ],
+          responsibilities: [
+            {
+              title: "Individual Salesperson Coaching",
+              description:
+                "Work directly with selected salespeople to strengthen sales presentations, objection handling, closing techniques, and overall sales effectiveness.",
+            },
+            {
+              title: "Sales Process Improvement",
+              description:
+                "Evaluate and improve prospecting, lead qualification, presentations, follow-up, and closing procedures.",
+            },
+            {
+              title: "CRM Optimization",
+              description:
+                "Improve CRM utilization, data accuracy, activity tracking, reporting practices, and management visibility.",
+            },
+            {
+              title: "Pipeline Management",
+              description:
+                "Help salespeople and management improve opportunity tracking, pipeline progression, and follow-up consistency.",
+            },
+            {
+              title: "KPI Development and Monitoring",
+              description:
+                "Establish meaningful performance measurements and assist management in reviewing activity, productivity, and results.",
+            },
+            {
+              title: "Performance Accountability",
+              description:
+                "Help establish clear expectations, responsibilities, management reporting, and consistent follow-through.",
+            },
+            {
+              title: "Sales Management Support",
+              description:
+                "Assist existing managers with coaching practices, performance reviews, and implementation of agreed-upon improvements.",
+            },
+            {
+              title: "Sales Systems Implementation",
+              description:
+                "Help establish and improve practical sales processes, reporting systems, dashboards, and management procedures.",
+            },
+            {
+              title: "Sales Team Productivity",
+              description:
+                "Identify operational inefficiencies and opportunities to improve salesperson productivity and effectiveness.",
+            },
+            {
+              title: "Implementation Follow-Through",
+              description:
+                "Work alongside management to help ensure that agreed-upon improvements are implemented and incorporated into ongoing operations.",
+            },
+          ],
+          objective:
+            "The objective is to strengthen the performance of your existing sales organization without requiring additional executive management when it is not necessary.",
+        },
+        {
+          title: "FRACTIONAL VP OF SALES",
+          headline:
+            "Executive-Level Sales Leadership Without the Commitment of a Permanent Full-Time Executive",
+          intro: [
+            "For organizations requiring more extensive leadership involvement, NORTH POINT SALES GROUP can provide Fractional VP of Sales services tailored to specific organizational responsibilities and objectives.",
+            "A Fractional VP of Sales may assume selected executive-level sales management responsibilities for an agreed-upon period, direct organizational performance improvements, or provide a combination of leadership and hands-on implementation.",
+            "Areas of responsibility may include:",
+          ],
+          responsibilities: [
+            {
+              title: "Executive Sales Leadership",
+              description:
+                "Assume specific sales leadership responsibilities and provide direction to the sales organization.",
+            },
+            {
+              title: "Sales Strategy Development",
+              description:
+                "Work with executive management to establish sales priorities, growth strategies, performance objectives, and execution plans.",
+            },
+            {
+              title: "Sales Management Oversight",
+              description:
+                "Help direct existing sales managers, strengthen management practices, and improve overall leadership effectiveness.",
+            },
+            {
+              title: "Sales Organization Evaluation",
+              description:
+                "Examine sales operations, management responsibilities, organizational structure, and performance obstacles.",
+            },
+            {
+              title: "Sales Team Performance Management",
+              description:
+                "Establish clear performance expectations, monitor progress, and strengthen organizational accountability.",
+            },
+            {
+              title: "Sales Process and Operational Improvements",
+              description:
+                "Direct improvements to sales processes, pipeline management, CRM utilization, and reporting systems.",
+            },
+            {
+              title: "Leadership Development",
+              description:
+                "Coach and guide existing sales managers to improve their management, communication, coaching, and accountability capabilities.",
+            },
+            {
+              title: "Sales Performance Implementation",
+              description:
+                "Personally direct or participate in implementing significant sales performance and operational improvements.",
+            },
+            {
+              title: "Implementation Specialist Oversight",
+              description:
+                "Supervise Sales Performance Implementation Specialists and coordinate their activities with executive management when appropriate.",
+            },
+            {
+              title: "Temporary Executive Leadership",
+              description:
+                "Provide defined executive sales leadership support during periods of growth, management transition, restructuring, or operational improvement.",
+            },
+          ],
+          objective:
+            "The objective is to provide experienced executive-level sales leadership where it can make a meaningful difference, without requiring the organization to create an unnecessary permanent executive position.",
+        },
+      ],
+    },
   },
 
   challenges: {
