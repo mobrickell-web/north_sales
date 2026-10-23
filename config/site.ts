@@ -51,6 +51,7 @@ const salesTeamPerformancePopout = {
         "Clarify expectations for sales activity, pipeline management, and results.",
         "Address management practices affecting sales execution.",
         "Help leadership reinforce coaching and follow through on agreed improvements.",
+        "Identify whether the owner or executive needs additional sales management support and recommend next steps for establishing ongoing leadership.",
       ],
     },
     {
@@ -158,6 +159,7 @@ const focusedSalesPerformancePopout = {
         "Recommend leadership and sales-team responsibilities.",
         "Identify where outside specialists may be appropriate.",
         "Evaluate potential AI applications where they could provide a practical, measurable advantage.",
+        "Determine whether the organization needs a dedicated sales manager, development of an existing employee, or temporary fractional sales leadership. Include recommended responsibilities, hiring or development priorities, and transition steps in the implementation roadmap.",
       ],
     },
     {
@@ -284,6 +286,21 @@ const fullSalesPerformancePopout = {
         "Establish structured sales meetings and accountability procedures.",
         "Improve compensation, recruiting, onboarding, training, or customer development practices where required.",
         "Coordinate implementation across affected areas.",
+      ],
+      subsections: [
+        {
+          title: "Establishing or Transitioning Sales Leadership",
+          intro: "Depending on the agreed scope, we may:",
+          items: [
+            "Define the sales leadership role, responsibilities, and performance expectations.",
+            "Help recruit, interview, and select a sales manager, or develop a qualified internal candidate.",
+            "Onboard and coach the manager in the company’s sales process, CRM, KPIs, coaching practices, and accountability procedures.",
+            "Help the owner or executive transfer day-to-day sales management responsibilities to the selected leader.",
+            "Provide temporary fractional sales leadership during the transition.",
+          ],
+          outro:
+            "Sales leadership recruiting, onboarding, development, and transition support are included only as specified in the engagement agreement. If hiring or onboarding extends beyond the engagement period, additional support can be arranged separately.",
+        },
       ],
     },
     {
@@ -1010,9 +1027,6 @@ export function getSalesComponentKpis(
   return salesComponentKpis[componentNum as keyof typeof salesComponentKpis];
 }
 
-export const pillarKpisIntro =
-  "Below are examples of KPIs we may employ for only item. We select KPIs based on the company's priorities, available information, and areas needing improvement. Some KPIs may support more than one area." as const;
-
 export const pillarKpisFootnote =
   "For implementation: Each selected KPI should have a clear definition, calculation, information source, target, review schedule, and person responsible for monitoring it." as const;
 
@@ -1035,7 +1049,7 @@ export const pillarThemeKpis = {
           "Number of opportunities each salesperson develops that meet agreed qualification requirements.",
       },
       {
-        title: "Sales per salesperson",
+        title: "Number of closed sales per salesperson",
         detail:
           "Number of sales each salesperson closes during a defined period.",
       },
@@ -1362,6 +1376,44 @@ export function getPillarThemeKpis(
   return pillar[themeLabel as keyof typeof pillar];
 }
 
+type PillarThemeLabel = {
+  [P in PillarId]: keyof (typeof pillarThemeKpis)[P];
+}[PillarId];
+
+const pillarThemeKpiMeasurePhrases = {
+  "Increase Productivity": "productivity",
+  "Improve Consistency": "consistency",
+  "Shorten Sales Cycles": "sales cycle efficiency",
+  "Improve Forecasting": "forecasting",
+  "Increase Profitability": "profitability",
+  "Create Sustainable Growth": "sustainable growth",
+  "AI Sales Integration": "AI-assisted sales performance",
+  "Sales Process": "sales process performance",
+  "CRM Optimization": "CRM utilization",
+  "Pipeline Management": "pipeline management",
+  Forecasting: "forecasting",
+  "Performance Dashboards": "performance visibility",
+  "Sales Meetings": "sales meeting effectiveness",
+  "Accountability Systems": "accountability",
+  "Develop Stronger Sales Leaders": "sales leadership effectiveness",
+  "Improve Accountability": "accountability",
+  "Improve Coaching": "coaching effectiveness",
+  "Create High-Performing Teams": "team performance",
+} as const satisfies Record<PillarThemeLabel, string>;
+
+export const pillarKpisIntroSelectionNote =
+  "We select KPIs based on the company's priorities, available information, and areas needing improvement. Some KPIs may support more than one area." as const;
+
+export function getPillarThemeKpisOpeningLine(themeLabel: string): string {
+  const measure =
+    themeLabel in pillarThemeKpiMeasurePhrases
+      ? pillarThemeKpiMeasurePhrases[
+          themeLabel as keyof typeof pillarThemeKpiMeasurePhrases
+        ]
+      : themeLabel.toLowerCase();
+  return `Below are examples of KPIs we may use to measure ${measure}.`;
+}
+
 export const siteConfig = {
   name: "NORTH POINT SALES GROUP",
   shortName: "NORTH POINT SALES GROUP",
@@ -1460,10 +1512,57 @@ export const siteConfig = {
   aboutUs: {
     title: "ABOUT US",
     heading: "EXPERIENCE BEHIND NORTH POINT SALES GROUP",
-    paragraphs: [
-      "The founder and team of NORTH POINT SALES GROUP bring decades of experience working with sales teams across small and mid-sized businesses, including organizations generating more than $250 million in annual sales.",
-      "That experience forms the foundation of NORTH POINT SALES GROUP and gives us a practical understanding of what drives sales performance across an organization.",
-      "Our work is focused on identifying opportunities that may help established sales organizations increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
+    tagline: "40+ YEARS OF SALES EXPERIENCE. BUILT INTO OUR DNA.",
+    experienceParagraphs: [
+      "The foundation of NORTH POINT SALES GROUP is our founder’s more than 40 years of direct sales, training, and business ownership experience. That background includes selling as a top-producing representative, training and managing salespeople, and working with businesses ranging from small operations to organizations generating more than $250 million in annual sales.",
+      "Working across that spectrum revealed a profound truth: The core mechanics of an underperforming sales team are fundamentally the same at a $250 million company as they are at a $1 million company. The scale changes, but the fundamental design flaws do not.",
+      "Unclear expectations, inconsistent prospecting, weak presentations, missed follow-up, ineffective coaching, and poor accountability can limit performance at either size. Larger organizations may have more people and more complex systems, but those resources do not automatically resolve the underlying problems.",
+      "That experience—and the ability to recognize recurring sales performance patterns—is built into the DNA of NORTH POINT SALES GROUP. It shapes how we assess sales organizations, identify underlying problems, and implement practical improvements.",
+      "We listen, observe, and analyze how your sales organization actually operates. By reviewing sales presentations, listening to calls, examining follow-up, and evaluating pipeline activity, we identify the behaviors, processes, and leadership gaps that may be holding your salespeople back.",
+      "Our work focuses on opportunities with the potential to increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
+    ] as const,
+    sections: [
+      {
+        heading: "OUR APPROACH",
+        tagline:
+          "PRACTICAL IMPROVEMENTS. HANDS-ON IMPLEMENTATION. CLEAR ACCOUNTABILITY.",
+        paragraphs: [
+          "NORTH POINT SALES GROUP helps established businesses improve the performance of the sales organization they already have.",
+          "We begin by understanding your objectives and examining how your salespeople, systems, and leadership work together. We identify where revenue may be left on the table, determine what needs attention, and establish clear priorities.",
+          "Our approach is straightforward—without the fluff. We don’t simply hand you a 100-page instruction manual and leave your team to figure it out. We work directly with your salespeople and leadership to implement practical changes, strengthen execution, and turn the sales force you already have into a high-performance revenue engine running on all cylinders.",
+          "We establish clear responsibilities, relevant KPIs, and a practical management cadence to measure progress and help sustain improvements after the engagement ends.",
+        ],
+      },
+      {
+        heading: "A PRACTICAL STARTING POINT",
+        paragraphs: [
+          "You don’t have to begin with a comprehensive implementation engagement. For companies that prefer a focused starting point, we offer two 30-day options:",
+        ],
+        options: [
+          {
+            title: "30-Day Sales Team Performance — $7,500",
+            description:
+              "Direct work with up to three sales or account representatives, including assessment, coaching, process review, baseline KPIs, weekly updates, and a final summary.",
+          },
+          {
+            title: "30-Day Focused Sales Performance — $9,500",
+            description:
+              "Executive discovery, a broader sales operation review, and a prioritized improvement plan with a recommended 30-day action sequence.",
+          },
+        ],
+        closingParagraphs: [
+          "These engagements provide substantive work with defined objectives and deliverables. They also allow you to experience how we work before deciding whether broader implementation makes sense.",
+          "If you proceed to a full implementation, your initial engagement fee is credited toward that investment.",
+          "For organizations ready for comprehensive implementation, we can begin with the broader engagement. We recommend the starting point that fits your needs, priorities, and readiness to move forward.",
+        ],
+      },
+      {
+        heading: "CLEAR SCOPE. STRAIGHTFORWARD COSTS.",
+        paragraphs: [
+          "Responsibilities, deliverables, duration, and fees are established before work begins. Any third-party costs are identified separately. We don’t pad engagements with unnecessary services or extend the work simply to prolong a contract.",
+          "Our objective is to leave your sales organization better equipped to perform—and keep performing.",
+        ],
+      },
     ] as const,
     founder: {
       buttonLabel: "Meet the Founder",
@@ -1765,7 +1864,7 @@ export const siteConfig = {
         },
       ],
       twelveAdvantages: {
-        linkLabel: "12 ADVANTAGES OF WORKING WITH US",
+        linkLabel: "12 Advantages of Working With Us",
         buttonLabel:
           "12 ADVANTAGES OF OUR APPROACH TO SALES PERFORMANCE IMPROVEMENT",
         title: "12 ADVANTAGES OF OUR APPROACH TO SALES PERFORMANCE IMPROVEMENT",
@@ -1815,7 +1914,7 @@ export const siteConfig = {
                   "We publish our investment structure so prospective clients can understand the general financial commitment before entering detailed discussions.",
                 ],
                 bullets: [
-                  "Focused engagement options of $7,500 and $9,500.",
+                  "Focused engagements beginning at $7,500 and $9,500.",
                   "Comprehensive executive implementations ranging from $50,000 to $150,000.",
                   "Clearly defined deliverables appropriate to the selected engagement.",
                   "Investment recommendations based on organizational needs, scope, and complexity.",
@@ -1875,6 +1974,13 @@ export const siteConfig = {
                   "Establish performance expectations and accountability.",
                   "Help implement improvements rather than simply recommending them.",
                 ],
+                afterBulletsLink: {
+                  before:
+                    "The level of implementation support depends on the selected ",
+                  href: "#investment",
+                  label: "engagement",
+                  after: ".",
+                },
                 advantage:
                   "THE ADVANTAGE: Direct assistance in turning identified opportunities into operational improvements.",
               },
@@ -3654,6 +3760,24 @@ export const siteConfig = {
             "The objective is to provide experienced executive-level sales leadership where it can make a meaningful difference, without requiring the organization to create an unnecessary permanent executive position.",
         },
       ],
+      establishingSalesLeadership: {
+        title: "ESTABLISHING SALES LEADERSHIP",
+        intro:
+          "When an owner or executive is managing the sales team alongside other responsibilities, we help determine what ongoing sales leadership the organization needs.",
+        scopeIntro: "Depending on the agreed scope, we may:",
+        items: [
+          "Define the sales manager’s role, responsibilities, and performance expectations.",
+          "Assess whether an existing employee can be developed for the position.",
+          "Help recruit, interview, and select a new sales manager when needed.",
+          "Onboard and coach the selected manager in the company’s sales process, CRM, KPIs, coaching practices, and accountability procedures.",
+          "Establish a transition plan so the owner can transfer day-to-day sales management responsibilities.",
+          "Provide temporary fractional sales leadership during the transition when appropriate.",
+        ],
+        objective:
+          "Our objective is to leave the organization with clear sales leadership responsibilities and someone equipped to carry them out.",
+        scopeNote:
+          "Scope note: Recruiting, manager development, and transition support are defined in the engagement agreement. Additional support can be arranged if hiring or onboarding extends beyond the initial engagement period.",
+      },
     },
   },
 
@@ -4709,11 +4833,11 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
             title: "Quick Actions",
             links: [
               { label: "Home", href: "/#top" },
-              { label: "About us", href: "/#about-us" },
-              { label: "Why us", href: "/#why-choose-us" },
+              { label: "About Us", href: "/#about-us" },
+              { label: "Why Us", href: "/#why-choose-us" },
               { label: "Results", href: "/#results" },
 
-              { label: "How we work", href: "/#how-we-work" },
+              { label: "How We Work", href: "/#how-we-work" },
               { label: "30-90 DAY Focus", href: "/#30-90-focus" },
               { label: "Challenges", href: "/#challenges" },
               { label: "Investment", href: "/#investment" },

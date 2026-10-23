@@ -10,8 +10,9 @@ import {
   getSalesComponentKpis,
   type SalesComponentKpi,
   getPillarThemeKpis,
+  getPillarThemeKpisOpeningLine,
   pillarKpisFootnote,
-  pillarKpisIntro,
+  pillarKpisIntroSelectionNote,
 } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { AiSalesIntegrationDialog } from "@/components/layout/ai-sales-integration-dialog";
@@ -72,6 +73,7 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
     }[];
     /** Theme KPIs available for this bullet — shown after expanding Example KPIs */
     themeKpis?: readonly { title: string; detail: string }[];
+    themeKpiThemeLabel?: string;
     themeKpisFootnote?: string;
     themeKpisExpanded?: boolean;
     kpis?: readonly { title: string; detail: string }[];
@@ -405,6 +407,9 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                                       title: bullet.popout.title,
                                       paragraphs: bullet.popout.paragraphs,
                                       themeKpis,
+                                      themeKpiThemeLabel: themeKpis?.length
+                                        ? bullet.label
+                                        : undefined,
                                       themeKpisFootnote: themeKpis?.length
                                         ? pillarKpisFootnote
                                         : undefined,
@@ -795,7 +800,16 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                               <p className="font-body text-[13px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[14px]">
                                 Example KPIs
                               </p>
-                              <p>{pillarKpisIntro}</p>
+                              {popup.themeKpiThemeLabel ? (
+                                <>
+                                  <p>
+                                    {getPillarThemeKpisOpeningLine(
+                                      popup.themeKpiThemeLabel,
+                                    )}
+                                  </p>
+                                  <p>{pillarKpisIntroSelectionNote}</p>
+                                </>
+                              ) : null}
                               <ul className="flex flex-col gap-2">
                                 {popup.themeKpis.map((kpi) => (
                                   <li key={kpi.title}>
@@ -952,6 +966,39 @@ export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
                   </p>
                 </section>
               ))}
+
+              <section className="mt-6 border-t border-[#E8E4DC] pt-5">
+                <h3 className="font-body text-[14px] font-extrabold tracking-wide text-[#001528] uppercase">
+                  {leadershipSupport.establishingSalesLeadership.title}
+                </h3>
+                <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                  {leadershipSupport.establishingSalesLeadership.intro}
+                </p>
+                <p className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                  {leadershipSupport.establishingSalesLeadership.scopeIntro}
+                </p>
+                <ul className="mt-3 flex flex-col gap-3">
+                  {leadershipSupport.establishingSalesLeadership.items.map(
+                    (item) => (
+                      <li key={item} className="flex gap-3">
+                        <span
+                          aria-hidden
+                          className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
+                        />
+                        <p className="font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                          {item}
+                        </p>
+                      </li>
+                    ),
+                  )}
+                </ul>
+                <p className="mt-4 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                  {leadershipSupport.establishingSalesLeadership.objective}
+                </p>
+                <p className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                  {leadershipSupport.establishingSalesLeadership.scopeNote}
+                </p>
+              </section>
 
               <div className="mt-6">
                 <button

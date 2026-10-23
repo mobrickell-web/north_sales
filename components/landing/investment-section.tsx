@@ -10,12 +10,49 @@ interface InvestmentSectionProps {
   sectionNumber?: number | string;
 }
 
-type InvestmentGroup = {
+type InvestmentSubsection = {
   title: string;
   intro?: string;
   items?: readonly string[];
   outro?: string;
 };
+
+type InvestmentGroup = {
+  title: string;
+  intro?: string;
+  items?: readonly string[];
+  subsections?: readonly InvestmentSubsection[];
+  outro?: string;
+};
+
+function renderInvestmentSubsections(
+  subsections: readonly InvestmentSubsection[],
+) {
+  return (
+    <div className="mt-3 flex flex-col gap-3 border-t border-[#E8E4DC] pt-3">
+      {subsections.map((subsection) => (
+        <div key={subsection.title} className="flex flex-col gap-2">
+          <h6 className="font-body text-[13px] font-extrabold text-[#001528] sm:text-[14px]">
+            {subsection.title}
+          </h6>
+          {subsection.intro ? (
+            <p className="whitespace-pre-wrap">{subsection.intro}</p>
+          ) : null}
+          {subsection.items && subsection.items.length > 0 ? (
+            <ul className="list-disc space-y-1.5 pl-5">
+              {subsection.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : null}
+          {subsection.outro ? (
+            <p className="whitespace-pre-wrap">{subsection.outro}</p>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 type InvestmentComparison = {
   intro: string;
@@ -93,6 +130,9 @@ function IncludedServiceGroup({
               ))}
             </ul>
           )}
+          {group.subsections && group.subsections.length > 0
+            ? renderInvestmentSubsections(group.subsections)
+            : null}
           {group.outro && <p className="whitespace-pre-wrap">{group.outro}</p>}
         </div>
       ) : null}
@@ -146,6 +186,9 @@ function renderGroups(groups: readonly InvestmentGroup[]) {
           ))}
         </ul>
       )}
+      {group.subsections && group.subsections.length > 0
+        ? renderInvestmentSubsections(group.subsections)
+        : null}
       {group.outro && (
         <div className="flex flex-col gap-3 mt-1">
           {group.outro.split("\n\n").map((p, i) => (

@@ -115,6 +115,19 @@ export function TwelveAdvantagesDialog({
                           );
                         })}
                       </ul>
+                      {"afterBulletsLink" in item && item.afterBulletsLink ? (
+                        <p className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
+                          {item.afterBulletsLink.before}
+                          <a
+                            href={item.afterBulletsLink.href}
+                            onClick={() => setOpen(false)}
+                            className="font-bold text-[#b17411] underline-offset-2 hover:underline"
+                          >
+                            {item.afterBulletsLink.label}
+                          </a>
+                          {item.afterBulletsLink.after}
+                        </p>
+                      ) : null}
                       {"closing" in item && item.closing ? (
                         <p className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
                           {item.closing}
