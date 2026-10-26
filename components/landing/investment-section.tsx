@@ -23,6 +23,7 @@ type InvestmentGroup = {
   items?: readonly string[];
   subsections?: readonly InvestmentSubsection[];
   outro?: string;
+  numbered?: boolean;
 };
 
 function renderInvestmentSubsections(
@@ -167,9 +168,11 @@ function ExpandableIncludedGroups({
 function renderGroups(groups: readonly InvestmentGroup[]) {
   return groups.map((group) => (
     <div key={group.title} className="flex flex-col gap-2">
-      <h5 className="font-body text-[14px] font-extrabold text-[#001528] sm:text-[15px]">
-        {group.title}
-      </h5>
+      {group.title ? (
+        <h5 className="font-body text-[14px] font-extrabold text-[#001528] sm:text-[15px]">
+          {group.title}
+        </h5>
+      ) : null}
       {group.intro && (
         <div className="flex flex-col gap-3">
           {group.intro.split("\n\n").map((p, i) => (
@@ -179,13 +182,21 @@ function renderGroups(groups: readonly InvestmentGroup[]) {
           ))}
         </div>
       )}
-      {group.items && group.items.length > 0 && (
-        <ul className="list-disc space-y-1.5 pl-5">
-          {group.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      )}
+      {group.items && group.items.length > 0 ? (
+        group.numbered ? (
+          <ol className="list-decimal space-y-1.5 pl-5">
+            {group.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ol>
+        ) : (
+          <ul className="list-disc space-y-1.5 pl-5">
+            {group.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        )
+      ) : null}
       {group.subsections && group.subsections.length > 0
         ? renderInvestmentSubsections(group.subsections)
         : null}
@@ -431,7 +442,11 @@ export function InvestmentSection({
 
           <ol className="mt-8 flex w-full max-w-[1100px] list-none flex-col gap-4 p-0">
             {investment.tiers.map((tier, index) => (
-              <li key={tier.title}>
+              <li
+                key={tier.title}
+                id={`investment-option-${index + 1}`}
+                className="scroll-mt-28"
+              >
                 <button
                   type="button"
                   onClick={() => openPopup({ ...tier.popout })}
@@ -444,7 +459,7 @@ export function InvestmentSection({
                     <p className="font-body text-[14px] font-extrabold leading-snug text-[#001528] sm:text-[15px]">
                       {tier.title}
                     </p>
-                    <p className="font-body text-[13px] leading-relaxed text-[#5C5F66]">
+                    <p className="font-body text-[13px] leading-relaxed whitespace-pre-wrap text-[#5C5F66]">
                       {tier.description}
                     </p>
                   </div>

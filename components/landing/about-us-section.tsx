@@ -1,5 +1,124 @@
+import Link from "next/link";
+
 import { siteConfig } from "@/config/site";
 import { MeetTheFounderDialog } from "@/components/landing/meet-the-founder-dialog";
+
+type AboutParagraph =
+  | string
+  | {
+      linkLine: {
+        before: string;
+        href: string;
+        label: string;
+        after: string;
+      };
+    };
+
+type AboutUsOption = {
+  title: string;
+  description: string;
+  href?: string;
+};
+
+type AboutExpandableSection = {
+  heading: string;
+  paragraphs?: readonly AboutParagraph[];
+  options?: readonly AboutUsOption[];
+  closingParagraphs?: readonly AboutParagraph[];
+};
+
+function AboutParagraphText({ paragraph }: { paragraph: AboutParagraph }) {
+  if (typeof paragraph === "string") {
+    return <>{paragraph}</>;
+  }
+
+  const { before, href, label, after } = paragraph.linkLine;
+  return (
+    <>
+      {before}
+      <Link
+        href={href}
+        className="font-semibold text-[#b17411] underline-offset-2 hover:underline"
+      >
+        {label}
+      </Link>
+      {after}
+    </>
+  );
+}
+
+function paragraphKey(paragraph: AboutParagraph) {
+  return typeof paragraph === "string"
+    ? paragraph
+    : `${paragraph.linkLine.before}${paragraph.linkLine.label}`;
+}
+
+function AboutOptionsList({ options }: { options: readonly AboutUsOption[] }) {
+  return (
+    <ul className="flex flex-col gap-4 pl-0">
+      {options.map((option) => (
+        <li
+          key={option.title}
+          className="flex gap-3 font-body text-[15px] leading-[1.4] text-[#5C5F66]"
+        >
+          <span
+            aria-hidden
+            className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
+          />
+          <p>
+            {option.href ? (
+              <Link
+                href={option.href}
+                className="font-bold text-[#b17411] underline-offset-2 hover:underline"
+              >
+                {option.title}
+              </Link>
+            ) : (
+              <span className="font-bold text-[#001528]">{option.title}</span>
+            )}{" "}
+            {option.description}
+          </p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function AboutExpandable({ section }: { section: AboutExpandableSection }) {
+  return (
+    <details className="group w-full max-w-[1320px] overflow-hidden rounded-xl border border-[#E8E4DC] bg-[#FAF9F5]">
+      <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-body text-[14px] font-extrabold tracking-[0.04em] text-primary uppercase marker:hidden focus-visible:ring-2 focus-visible:ring-[#b17411]/40 focus-visible:ring-inset focus-visible:outline-none sm:px-6 sm:text-[15px]">
+        <span>{section.heading}</span>
+        <span
+          aria-hidden
+          className="flex size-6 shrink-0 items-center justify-center text-[#b17411]"
+        >
+          <span className="text-[24px] leading-none font-normal group-open:hidden">
+            +
+          </span>
+          <span className="hidden text-[24px] leading-none font-normal group-open:inline">
+            −
+          </span>
+        </span>
+      </summary>
+      <div className="flex flex-col gap-4 border-t border-[#E8E4DC] bg-white px-5 py-5 font-body text-[15px] leading-[1.4] text-[#5C5F66] sm:px-6">
+        {section.paragraphs?.map((paragraph) => (
+          <p key={paragraphKey(paragraph)}>
+            <AboutParagraphText paragraph={paragraph} />
+          </p>
+        ))}
+        {section.options && section.options.length > 0 ? (
+          <AboutOptionsList options={section.options} />
+        ) : null}
+        {section.closingParagraphs?.map((paragraph) => (
+          <p key={paragraphKey(paragraph)}>
+            <AboutParagraphText paragraph={paragraph} />
+          </p>
+        ))}
+      </div>
+    </details>
+  );
+}
 
 interface AboutUsSectionProps {
   sectionNumber?: number | string;
@@ -31,6 +150,17 @@ export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
           {aboutUs.heading}
         </h2>
 
+        <div className="flex w-full max-w-[1320px] flex-col gap-5">
+          {aboutUs.openingParagraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
         <p className="max-w-[900px] font-body text-[14px] font-extrabold tracking-[0.06em] text-[#061525] uppercase sm:text-[15px]">
           {aboutUs.tagline}
         </p>
@@ -45,6 +175,8 @@ export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
             </p>
           ))}
         </div>
+
+        <AboutExpandable section={aboutUs.experienceExpandable} />
 
         {aboutUs.sections.map((section) => (
           <div
@@ -63,50 +195,33 @@ export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
 
             {section.paragraphs.map((paragraph) => (
               <p
-                key={paragraph}
+                key={paragraphKey(paragraph)}
                 className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]"
               >
-                {paragraph}
+                <AboutParagraphText paragraph={paragraph} />
               </p>
             ))}
 
-            {"options" in section && section.options ? (
-              <ul className="flex flex-col gap-4 pl-0">
-                {section.options.map((option) => (
-                  <li
-                    key={option.title}
-                    className="flex gap-3 font-body text-[15px] leading-[1.4] text-[#5C5F66]"
-                  >
-                    <span
-                      aria-hidden
-                      className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
-                    />
-                    <p>
-                      <span className="font-bold text-[#001528]">
-                        {option.title}
-                      </span>{" "}
-                      {option.description}
-                    </p>
-                  </li>
+            {"expandableSections" in section && section.expandableSections ? (
+              <div className="flex flex-col gap-3">
+                {section.expandableSections.map((expandable) => (
+                  <AboutExpandable
+                    key={expandable.heading}
+                    section={expandable}
+                  />
                 ))}
-              </ul>
+              </div>
             ) : null}
-
-            {"closingParagraphs" in section && section.closingParagraphs
-              ? section.closingParagraphs.map((paragraph) => (
-                  <p
-                    key={paragraph}
-                    className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]"
-                  >
-                    {paragraph}
-                  </p>
-                ))
-              : null}
           </div>
         ))}
 
-        <div className="border-t border-black/8 pt-6">
-          <MeetTheFounderDialog />
+        <div className="flex w-full max-w-[1320px] flex-col gap-5 border-t border-black/8 pt-8">
+          <p className="max-w-[900px] font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]">
+            {aboutUs.closingStatement}
+          </p>
+          <div>
+            <MeetTheFounderDialog />
+          </div>
         </div>
       </div>
     </section>

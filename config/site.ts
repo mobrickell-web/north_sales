@@ -91,87 +91,26 @@ const salesTeamPerformancePopout = {
 
 const focusedSalesPerformancePopout = {
   title: "30-DAY FOCUSED SALES PERFORMANCE ENGAGEMENT",
-  fee: "Professional Fee: Beginning at $9,500\nEngagement Period: 30 Days",
+  fee: "Investment: $9,500\nEngagement Period: 30 Days",
   intro:
-    "This engagement provides a broader assessment of your existing sales operation, identifies the most significant opportunities for improvement, and establishes a practical implementation roadmap.\n\nIt is designed for companies that want to understand what needs attention before committing to broader implementation.",
-  includedHeading: "WHAT IS INCLUDED",
-  expandableIncluded: true,
+    "This engagement includes everything provided in our $7,500 Sales Team Performance Engagement, together with a broader examination of the organization's sales operations, leadership, systems, and opportunities for improvement.",
+  includedHeading: "WHAT THE ENGAGEMENT INCLUDES",
+  expandableIncluded: false,
   groups: [
     {
-      title: "1. Executive Discovery",
+      title: "",
+      numbered: true,
       items: [
-        "Discuss current sales objectives, challenges, and expectations with company leadership.",
-        "Review the existing sales organization and operating environment.",
-        "Identify management concerns and areas where performance may be falling short.",
-        "Clarify current priorities and constraints.",
-        "Establish the areas requiring examination.",
-      ],
-    },
-    {
-      title: "2. Sales Operation Review",
-      intro:
-        "Examine relevant areas of the sales operation, which may include:",
-      items: [
-        "Sales Leadership: Leadership responsibilities, communication of expectations, coaching, and accountability.",
-        "Systems & Processes: How the sales process supports consistent execution from prospecting through closing and account development.",
-        "Team Performance: Individual and team productivity, skills, consistency, and results.",
-        "Prospecting & Lead Development: How opportunities are identified, qualified, developed, and moved forward.",
-        "Sales Presentations: How salespeople communicate value, handle objections, and guide buying decisions.",
-        "Pipeline Management: Opportunity stages, follow-up, stalled deals, pipeline accuracy, and forecasting.",
-        "CRM Utilization: Recordkeeping, usage consistency, workflows, and management visibility.",
-        "Performance Measurement: Existing KPIs, available baselines, reporting, and how measurements guide decisions.",
-        "Compensation & Incentives: How compensation supports desired activities and results.",
-        "Recruiting & Onboarding: How salespeople are selected, prepared, and brought to productivity.",
-        "Customer Retention & Development: How existing relationships are maintained and account-growth opportunities are pursued.",
-        "Training & Development: How skill gaps are identified and addressed.",
-      ],
-      outro:
-        "The depth of review depends on the organization's needs and the opportunities identified.",
-    },
-    {
-      title: "3. Lead Generation and Conversion Review",
-      intro: "Where applicable:",
-      items: [
-        "Review opportunities generated through website activity, paid advertising, social media, referrals, outbound prospecting, and other sources.",
-        "Examine how incoming leads are assigned and contacted.",
-        "Review lead qualification and follow-up practices.",
-        "Evaluate how opportunities move from initial inquiry through presentation, proposal, and closed sale.",
-        "Identify where leads are being lost or sales opportunities are stalling.",
-        "Determine whether lead generation and sales execution are working together effectively.",
-      ],
-    },
-    {
-      title: "4. Findings and Priorities",
-      items: [
-        "Identify what is working and should be maintained.",
-        "Identify where sales opportunities are being lost.",
-        "Determine which issues appear to have the greatest effect on performance.",
-        "Establish what should be addressed first.",
-        "Identify issues that do not warrant immediate attention.",
-      ],
-    },
-    {
-      title: "5. Executive Recommendations",
-      items: [
-        "Present recommended actions and areas of focus.",
-        "Explain the performance issues each recommendation addresses.",
-        "Identify internal resources and capabilities required.",
-        "Recommend leadership and sales-team responsibilities.",
-        "Identify where outside specialists may be appropriate.",
-        "Evaluate potential AI applications where they could provide a practical, measurable advantage.",
-        "Determine whether the organization needs a dedicated sales manager, development of an existing employee, or temporary fractional sales leadership. Include recommended responsibilities, hiring or development priorities, and transition steps in the implementation roadmap.",
-      ],
-    },
-    {
-      title: "6. Implementation Roadmap",
-      items: [
-        "Establish recommended actions in priority order.",
-        "Define the proposed implementation sequence.",
-        "Identify who should be responsible for each action.",
-        "Identify required internal resources.",
-        "Identify activities that may require outside specialists.",
-        "Recommend KPIs and available starting baselines.",
-        "Establish how leadership can evaluate whether implemented changes are producing improvement.",
+        "Executive discovery and identification of organizational priorities.",
+        "Individual assessment and coaching of up to three sales or account representatives.",
+        "Evaluation of sales presentations, objection handling, follow-up practices, and closing techniques.",
+        "Sales manager participation, coaching, and reinforcement of representative improvements.",
+        "Broader review of sales processes, CRM utilization, and pipeline management.",
+        "Evaluation of lead generation, qualification, and conversion practices.",
+        "Review of selected sales performance measurements and KPIs.",
+        "Identification of sales leadership and accountability improvements.",
+        "Prioritized recommendations and an implementation roadmap.",
+        "Final management review of findings, recommended actions, and next steps.",
       ],
     },
   ],
@@ -189,12 +128,13 @@ const focusedSalesPerformancePopout = {
   parametersHeading: "ENGAGEMENT PARAMETERS",
   parametersParagraphs: [
     "The starting fee covers a focused 30-day assessment, analysis, executive recommendations, and implementation roadmap. A substantially broader scope or deeper analysis may require an adjusted fee, agreed upon in advance.",
-    "This engagement does not include full implementation of the recommendations or the one-on-one coaching provided in the Sales Team Performance Engagement.",
+    "The engagement is designed to be completed within 30 days, subject to timely client participation and access to necessary information.",
+    "Broader organizational implementation beyond the agreed engagement scope is not included.",
     "Third-party expenses—including software, advertising, website development, and specialized technical services—are separate and require client approval.",
   ],
   differencesHeading: "HOW THIS DIFFERS FROM THE $7,500 ENGAGEMENT",
   differencesParagraphs: [
-    "The $7,500 engagement focuses on direct improvement of selected salespeople's execution. This engagement examines the broader sales operation and establishes the priorities and roadmap for implementation.",
+    "The $7,500 engagement focuses on direct improvement of selected salespeople's execution. This engagement includes that work and examines the broader sales operation, leadership, systems, and opportunities for improvement, then establishes the priorities and roadmap for implementation.",
   ],
   upgradeHeading: "UPGRADE CREDIT",
   upgradeParagraphs: [
@@ -287,24 +227,16 @@ const fullSalesPerformancePopout = {
         "Improve compensation, recruiting, onboarding, training, or customer development practices where required.",
         "Coordinate implementation across affected areas.",
       ],
-      subsections: [
-        {
-          title: "Establishing or Transitioning Sales Leadership",
-          intro: "Depending on the agreed scope, we may:",
-          items: [
-            "Define the sales leadership role, responsibilities, and performance expectations.",
-            "Help recruit, interview, and select a sales manager, or develop a qualified internal candidate.",
-            "Onboard and coach the manager in the company’s sales process, CRM, KPIs, coaching practices, and accountability procedures.",
-            "Help the owner or executive transfer day-to-day sales management responsibilities to the selected leader.",
-            "Provide temporary fractional sales leadership during the transition.",
-          ],
-          outro:
-            "Sales leadership recruiting, onboarding, development, and transition support are included only as specified in the engagement agreement. If hiring or onboarding extends beyond the engagement period, additional support can be arranged separately.",
-        },
-      ],
     },
     {
-      title: "7. AI Sales Integration",
+      title: "7. Establishing or Transitioning Sales Leadership",
+      intro:
+        "When needed, we help define the sales leadership role, recruit and evaluate candidates, and onboard and train a new sales manager. We can also help transition day-to-day sales leadership responsibilities from the owner or an existing manager to the designated sales leader.",
+      outro:
+        "These services are included when specified in the agreed engagement scope.",
+    },
+    {
+      title: "8. AI Sales Integration",
       intro: "Where appropriate:",
       items: [
         "Evaluate whether AI could improve productivity, reduce administrative work, or create additional sales opportunities.",
@@ -319,7 +251,7 @@ const fullSalesPerformancePopout = {
         "Third-party software and technical implementation expenses are separately identified and require client approval. Work outside the agreed engagement scope is quoted separately.",
     },
     {
-      title: "8. KPI Measurement and Accountability",
+      title: "9. KPI Measurement and Accountability",
       items: [
         "Establish KPIs relevant to the agreed improvement priorities.",
         "Document available starting baselines.",
@@ -331,7 +263,7 @@ const fullSalesPerformancePopout = {
       ],
     },
     {
-      title: "9. Implementation Support and Reinforcement",
+      title: "10. Implementation Support and Reinforcement",
       items: [
         "Work with leadership and sales personnel throughout the implementation period.",
         "Address obstacles affecting progress.",
@@ -1512,71 +1444,92 @@ export const siteConfig = {
   aboutUs: {
     title: "ABOUT US",
     heading: "EXPERIENCE BEHIND NORTH POINT SALES GROUP",
+    openingParagraphs: [
+      "NORTH POINT SALES GROUP is an executive-level sales performance consulting and implementation firm. We help established businesses strengthen their existing sales organizations through practical improvements in sales performance, sales systems, and sales leadership.",
+      "We work directly with owners and executive teams to identify where revenue may be left on the table, implement needed improvements, and establish accountability for measurable progress.",
+    ],
     tagline: "40+ YEARS OF SALES EXPERIENCE. BUILT INTO OUR DNA.",
     experienceParagraphs: [
-      "The foundation of NORTH POINT SALES GROUP is our founder’s more than 40 years of direct sales, training, and business ownership experience. That background includes selling as a top-producing representative, training and managing salespeople, and working with businesses ranging from small operations to organizations generating more than $250 million in annual sales.",
-      "Working across that spectrum revealed a profound truth: The core mechanics of an underperforming sales team are fundamentally the same at a $250 million company as they are at a $1 million company. The scale changes, but the fundamental design flaws do not.",
-      "Unclear expectations, inconsistent prospecting, weak presentations, missed follow-up, ineffective coaching, and poor accountability can limit performance at either size. Larger organizations may have more people and more complex systems, but those resources do not automatically resolve the underlying problems.",
-      "That experience—and the ability to recognize recurring sales performance patterns—is built into the DNA of NORTH POINT SALES GROUP. It shapes how we assess sales organizations, identify underlying problems, and implement practical improvements.",
-      "We listen, observe, and analyze how your sales organization actually operates. By reviewing sales presentations, listening to calls, examining follow-up, and evaluating pipeline activity, we identify the behaviors, processes, and leadership gaps that may be holding your salespeople back.",
-      "Our work focuses on opportunities with the potential to increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
-    ] as const,
+      "The foundation of NORTH POINT SALES GROUP is our founder’s more than 40 years of direct sales, training, management, and business ownership experience. That background includes selling as a top-producing representative, training and managing salespeople, and working with businesses ranging from small operations to organizations generating more than $250 million in annual sales.",
+    ],
+    experienceExpandable: {
+      heading: "MORE ABOUT OUR EXPERIENCE",
+      paragraphs: [
+        "Working across that spectrum revealed recurring problems: unclear expectations, inconsistent prospecting, weak presentations, missed follow-up, ineffective coaching, and poor accountability. Larger organizations may have more people and more complex systems, but those resources do not automatically resolve the underlying problems.",
+        "That experience shapes how we assess sales organizations, recognize performance patterns, and implement practical improvements.",
+        "We listen, observe, and analyze how your sales organization actually operates. By reviewing sales presentations, listening to calls, examining follow-up, and evaluating pipeline activity, we identify the behaviors, processes, and leadership gaps that may be restricting results.",
+        "Our work focuses on opportunities with the potential to increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
+      ],
+    },
     sections: [
       {
-        heading: "OUR APPROACH",
+        heading: "OUR APPROACH AT A GLANCE",
         tagline:
           "PRACTICAL IMPROVEMENTS. HANDS-ON IMPLEMENTATION. CLEAR ACCOUNTABILITY.",
         paragraphs: [
-          "NORTH POINT SALES GROUP helps established businesses improve the performance of the sales organization they already have.",
-          "We begin by understanding your objectives and examining how your salespeople, systems, and leadership work together. We identify where revenue may be left on the table, determine what needs attention, and establish clear priorities.",
-          "Our approach is straightforward—without the fluff. We don’t simply hand you a 100-page instruction manual and leave your team to figure it out. We work directly with your salespeople and leadership to implement practical changes, strengthen execution, and turn the sales force you already have into a high-performance revenue engine running on all cylinders.",
-          "We establish clear responsibilities, relevant KPIs, and a practical management cadence to measure progress and help sustain improvements after the engagement ends.",
+          "We assess how your salespeople, systems, and leadership work together, identify where performance can improve, and work alongside your team to implement practical changes. Clear responsibilities, relevant KPIs, and regular progress reviews help sustain improvements.",
+          "We are best suited for established businesses with an existing sales force, where stronger sales performance can create meaningful financial value and leadership is committed to putting improvements into practice.",
         ],
-      },
-      {
-        heading: "A PRACTICAL STARTING POINT",
-        paragraphs: [
-          "You don’t have to begin with a comprehensive implementation engagement. For companies that prefer a focused starting point, we offer two 30-day options:",
-        ],
-        options: [
+        expandableSections: [
           {
-            title: "30-Day Sales Team Performance — $7,500",
-            description:
-              "Direct work with up to three sales or account representatives, including assessment, coaching, process review, baseline KPIs, weekly updates, and a final summary.",
+            heading: "SALES LEADERSHIP SUPPORT",
+            paragraphs: [
+              "When additional sales leadership is needed, we can provide fractional leadership support or help recruit, onboard, and develop a sales manager.",
+              "This may include supporting an owner who currently manages the sales force, strengthening existing management, or helping establish dedicated sales leadership. Responsibilities are determined by the engagement’s scope.",
+            ],
           },
           {
-            title: "30-Day Focused Sales Performance — $9,500",
-            description:
-              "Executive discovery, a broader sales operation review, and a prioritized improvement plan with a recommended 30-day action sequence.",
+            heading: "A PRACTICAL STARTING POINT",
+            paragraphs: [
+              "For companies that prefer a focused starting point, we offer two 30-day options:",
+            ],
+            options: [
+              {
+                title: "Sales Team Performance Engagement — $7,500",
+                href: "#investment-option-1",
+                description:
+                  "Direct work with up to three selected sales or account representatives, including assessment, coaching, process review, baseline KPIs, weekly updates, and a final summary. Companies with larger teams may begin with selected representatives and expand the scope when needed.",
+              },
+              {
+                title: "30-Day Focused Sales Performance — $9,500",
+                href: "#investment-option-2",
+                description:
+                  "Includes everything in our $7,500 Sales Team Performance Engagement, plus executive discovery, a broader sales organization assessment, leadership and systems review, and a prioritized implementation roadmap.",
+              },
+            ],
+            closingParagraphs: [
+              "These engagements provide substantive work with defined objectives and deliverables. They also allow you to experience how we work before deciding whether broader implementation makes sense.",
+              "If you proceed to full implementation, your initial engagement fee is credited toward that investment.",
+              "Organizations ready for comprehensive implementation can begin with the broader engagement. We recommend the starting point that fits your needs, priorities, and readiness to move forward.",
+            ],
+          },
+          {
+            heading: "CLEAR SCOPE. STRAIGHTFORWARD COSTS.",
+            paragraphs: [
+              "Responsibilities, deliverables, duration, and fees are established before work begins. Any third-party costs are identified separately. We focus the engagement on work that serves your objectives.",
+            ],
           },
         ],
-        closingParagraphs: [
-          "These engagements provide substantive work with defined objectives and deliverables. They also allow you to experience how we work before deciding whether broader implementation makes sense.",
-          "If you proceed to a full implementation, your initial engagement fee is credited toward that investment.",
-          "For organizations ready for comprehensive implementation, we can begin with the broader engagement. We recommend the starting point that fits your needs, priorities, and readiness to move forward.",
-        ],
       },
-      {
-        heading: "CLEAR SCOPE. STRAIGHTFORWARD COSTS.",
-        paragraphs: [
-          "Responsibilities, deliverables, duration, and fees are established before work begins. Any third-party costs are identified separately. We don’t pad engagements with unnecessary services or extend the work simply to prolong a contract.",
-          "Our objective is to leave your sales organization better equipped to perform—and keep performing.",
-        ],
-      },
-    ] as const,
+    ],
+    closingStatement:
+      "Our objective is to leave your sales organization better equipped to perform—and keep performing.",
     founder: {
       buttonLabel: "Meet the Founder",
       name: "Michael O. Brickell",
       role: "Founder | NORTH POINT SALES GROUP",
       paragraphs: [
-        "Michael O. Brickell brings more than 40 years of experience in sales, sales management, marketing, business development, and entrepreneurship, with a strong record of sales performance and leadership.",
-        "Throughout his career, Michael has worked directly within the sales organizations of companies generating between $1 million and $250 million in annual revenue. Beginning as a frontline sales representative in the 1970s, he gained firsthand experience in selling, customer relationships, sales execution, and the factors that influence individual and organizational performance.",
-        "In the early 1990s, Michael owned and operated a lead-generation business serving the mortgage industry, managing 15 sales representatives. He also established and operated an advertising agency, gaining extensive experience across multiple advertising and media channels and how they support lead generation and sales performance.",
-        "Recognizing the emerging opportunities in digital publishing, Michael subsequently shifted his focus to developing online businesses. Working with professional website development teams, he directed the creation of two online publishing and educational directory platforms, combining website strategy, search engine optimization, and online and offline marketing to establish strong competitive positions.",
-        "Under his leadership, both platforms ranked among the top five online school directories in the United States in organic search results. He ultimately sold both businesses, demonstrating his ability to recognize market opportunities, develop commercial ventures, build business value, and achieve successful exits.",
+        "Michael O. Brickell brings decades of experience in sales, sales management, marketing, business development, and entrepreneurship, with a strong record of sales performance and leadership.",
+        "Throughout his career, Michael has worked directly within the sales organizations of companies generating between $1 million and $250 million in annual revenue. His experience began in frontline sales, where he developed a firsthand understanding of selling, customer relationships, sales execution, and the factors that influence individual and organizational performance.",
+        "Michael subsequently owned and operated a lead-generation business serving the mortgage industry, gaining extensive experience in sales team management, lead generation, and performance oversight. He also established and operated an advertising agency, developing expertise across multiple advertising and media channels and their roles in supporting lead generation and sales performance.",
+        "Expanding into digital publishing, Michael directed the development of two successful online publishing and educational directory platforms. Working with professional website development teams, he combined website strategy, search engine optimization, and online and offline marketing to establish strong competitive positions.",
+        "Under his leadership, both platforms ranked among the top five online school directories in the United States in organic search results. He ultimately sold both businesses, demonstrating his ability to recognize market opportunities, develop successful commercial ventures, build business value, and achieve successful exits.",
         "His experience across multiple business disciplines provides a broad understanding of how sales, marketing, technology, operational systems, and leadership work together to influence organizational performance. This perspective enables him to look beyond individual problems, recognize connections between business functions, and identify practical opportunities for improvement that might otherwise be overlooked.",
         "Michael founded NORTH POINT SALES GROUP to bring this combination of frontline sales experience, sales leadership, business ownership, and multidisciplinary expertise to established organizations seeking stronger sales performance and sustainable revenue growth.",
-        "His philosophy is straightforward: Identify what's working, correct what's not, and avoid unnecessary changes or expenses.",
+        {
+          text: "His philosophy is straightforward: Identify what's working, correct what's not, and avoid unnecessary changes or expenses.",
+          bold: true,
+        },
       ],
     },
   },
@@ -1702,7 +1655,7 @@ export const siteConfig = {
     ],
     // Modal content for the "MORE" CTA
     modal: {
-      title: "OUR APPROACH",
+      title: "OUR APPROACH IN DETAIL",
       pillars: [
         {
           id: "diagnose-before-prescribe",
@@ -4089,7 +4042,7 @@ export const siteConfig = {
           title:
             "30-Day Focused Sales Performance Engagement — Beginning at $9,500",
           description:
-            "Broader assessment of the sales operation, executive findings, priorities, and implementation roadmap.",
+            "Includes direct assessment and coaching of up to three sales or account representatives, plus a broader review of sales leadership, systems, processes, and organizational performance, with executive findings and a prioritized implementation roadmap.",
           popout: {
             ...focusedSalesPerformancePopout,
             sequenceInNestedPopup: true,
@@ -4204,7 +4157,7 @@ export const siteConfig = {
         {
           title: "Full Sales Performance Implementation — $50,000–$150,000",
           description:
-            "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.",
+            "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.\n\nProfessional implementation fees are based on the agreed scope of work. Any additional third-party services or expenses require prior written client approval and are separately invoiced, with payment required before those services begin.",
           popout: {
             ...fullSalesPerformancePopout,
             sequenceInNestedPopup: true,
@@ -4513,6 +4466,7 @@ export const siteConfig = {
         answer: [
           "Yes. NORTH POINT SALES GROUP can work directly with a limited number of Sales or Account Representatives when the company wants to address specific individual or team performance issues without undertaking a broader sales-performance implementation.",
           "Our $7,500 Sales Team Performance Engagement is a 30-day engagement that can apply to a sales team of any size and includes direct one-on-one work with up to three selected representatives.",
+          "Our $9,500 Focused Sales Performance Engagement includes the same direct assessment and coaching of up to three representatives, along with a broader evaluation of the sales organization and a prioritized improvement plan.",
           "If the company wants direct one-on-one work with more than three representatives, the engagement scope and investment are expanded accordingly. The additional investment is based on the number of representatives requiring individual attention, the areas being addressed, and the level of NPSG involvement required.",
           "This allows a company to begin with a focused engagement involving up to three representatives and expand the work when additional individual performance support is warranted.",
           {
@@ -4543,7 +4497,7 @@ export const siteConfig = {
           "Our role is not simply to provide recommendations, but to help implement them.",
           "Our implementation philosophy is best described as:",
           "Done With You. Done For You.",
-          "We collaborate with your leadership team to strengthen sales leadership, improve accountability, implement better systems, and improve overall sales performance.",
+          "We collaborate with your leadership team to strengthen sales leadership, improve accountability, implement better systems, strengthen team morale, and improve overall sales performance.",
         ],
       },
       {
@@ -4630,6 +4584,7 @@ export const siteConfig = {
               "For a 90-day engagement, one-third is due at the beginning, one-third at approximately Day 30, and the final one-third at approximately Day 60.",
             ],
           },
+          "Professional engagement fees and additional third-party expenses are invoiced separately. All additional third-party services or expenses must be approved by the client in writing before billing. Payment for these expenses is required before the additional services begin.",
           // "These are quick but vital. Please see if they can change them now. I appreciate it.",
         ],
       },
@@ -4654,66 +4609,131 @@ export const siteConfig = {
   },
   results: {
     badge: "Results",
-    title: "SALES PERFORMANCE IMPROVEMENT ACROSS THE ORGANIZATION",
-    intro: "We help organizations grow revenue through:",
+    title: "SALES PERFORMANCE IMPROVEMENTS THAT MATTER",
+    intro:
+      "We help established organizations improve sales execution and pursue measurable business results, including:",
     checkmark: "/icons/checkmark.svg",
     bullets: [
       {
-        id: "sales-strategy-planning",
-        label: "Sales strategy and planning",
+        id: "sales-team-productivity",
+        label: "Greater productivity from the existing sales team.",
         popout: {
-          title: "Sales Strategy and Planning",
-          description:
-            "We help leadership clarify sales priorities, identify the strongest opportunities for growth, and create a practical plan for improving performance. This may include market focus, sales objectives, resource allocation, prospecting priorities, and the activities most likely to produce measurable results.",
+          title: "GREATER SALES TEAM PRODUCTIVITY",
+          paragraphs: [
+            "Help salespeople spend more time on activities that advance qualified opportunities and develop customer relationships.",
+            "We examine how time is spent, identify unnecessary administrative work, and address gaps in preparation, prioritization, and execution.",
+          ],
+          measuresHeading: "Possible measures include:",
+          measures: [
+            "Time spent on selling activities.",
+            "Qualified appointments or presentations completed.",
+            "Sales revenue per representative.",
+            "Progress against each representative’s starting baseline.",
+          ],
         },
       },
       {
-        id: "sales-organization-design",
-        label: "Sales organization design",
+        id: "prospecting-follow-up",
+        label: "More consistent prospecting and follow-up.",
         popout: {
-          title: "Sales Organization Design",
-          description:
-            "We evaluate whether the current sales structure supports the company's goals. This can include roles and responsibilities, management structure, territories, account assignments, appointment-setting support, communication, and how effectively the team works together.",
+          title: "MORE CONSISTENT PROSPECTING AND FOLLOW-UP",
+          paragraphs: [
+            "Establish practical routines for identifying prospects, initiating conversations, and completing agreed next steps.",
+            "We help clarify who is responsible, when follow-up should occur, and how activity should be recorded so opportunities receive consistent attention.",
+          ],
+          measuresHeading: "Possible measures include:",
+          measures: [
+            "New qualified opportunities generated.",
+            "Response time to incoming leads.",
+            "Follow-ups completed on schedule.",
+            "Opportunities with a documented next step and date.",
+          ],
         },
       },
       {
-        id: "go-to-market-optimization",
-        label: "Go-to-market optimization",
+        id: "sales-conversion",
+        label: "Improved conversion of qualified opportunities into customers.",
         popout: {
-          title: "Go-to-Market Optimization",
-          description:
-            "We examine how the organization identifies, reaches, and converts prospective customers. This may include target markets, lead generation, prospecting methods, sales messaging, value propositions, presentations, follow-up, and the overall path from initial contact to completed sale.",
+          title: "IMPROVED SALES CONVERSION",
+          paragraphs: [
+            "Help salespeople move qualified opportunities toward informed buying decisions through better preparation, presentations, objection handling, and follow-through.",
+            "We examine where opportunities stall or are lost and provide focused coaching and process improvements.",
+          ],
+          measuresHeading: "Possible measures include:",
+          measures: [
+            "Percentage of qualified opportunities won.",
+            "Conversion rates between sales stages.",
+            "Proposal-to-sale conversion rate.",
+            "Average time from qualification to a buying decision.",
+          ],
         },
       },
       {
-        id: "sales-talent-assessment",
-        label: "Sales talent assessment and development",
+        id: "pipeline-forecasting",
+        label: "More accurate pipeline information and sales forecasting.",
         popout: {
-          title: "Sales Talent Assessment and Development",
-          description:
-            "We help identify individual strengths, performance gaps, and opportunities for improvement across the sales team. Development may include coaching, training, prospecting, presentations, objection handling, follow-up, closing, time management, and other skills directly connected to sales productivity.",
+          title: "MORE RELIABLE PIPELINE AND FORECASTING",
+          paragraphs: [
+            "Give leadership a clearer picture of active opportunities, expected sales, and areas requiring attention.",
+            "We help establish clear sales stages, improve CRM information, and review whether opportunity values, expected closing dates, and next steps reflect actual circumstances.",
+          ],
+          measuresHeading: "Possible measures include:",
+          measures: [
+            "Difference between forecasted and actual sales.",
+            "Percentage of opportunities with current, complete information.",
+            "Opportunities remaining in a stage beyond established expectations.",
+            "Frequency of expected closing dates being postponed.",
+          ],
         },
       },
       {
-        id: "sales-performance-management",
-        label: "Sales performance management",
+        id: "sales-management",
+        label: "Stronger coaching, accountability, and management visibility.",
         popout: {
-          title: "Sales Performance Management",
-          description:
-            "We help leadership establish clear expectations, meaningful performance measures, and consistent accountability. This may include sales activity, pipeline movement, conversion rates, CRM utilization, follow-up, forecasting, individual performance, and the results being produced.",
+          title: "STRONGER SALES MANAGEMENT",
+          paragraphs: [
+            "Help sales managers identify performance gaps, provide useful coaching, and follow through on clear expectations.",
+            "We strengthen performance reviews, sales meetings, and reporting so managers can see where support or corrective action is needed.",
+          ],
+          measuresHeading: "Possible measures include:",
+          measures: [
+            "Completion of scheduled coaching sessions.",
+            "Follow-through on agreed actions.",
+            "Improvement in the skills or behaviors being coached.",
+            "Individual and team progress against established performance standards.",
+          ],
         },
       },
       {
-        id: "leadership-coaching",
-        label: "Leadership coaching and enablement",
+        id: "revenue-contribution-profit",
+        label: "Increased revenue and contribution profit.",
         popout: {
-          title: "Leadership Coaching and Enablement",
-          description:
-            "Strong sales performance requires effective leadership. We work with sales leaders to strengthen communication, accountability, coaching, decision-making, performance management, and their ability to help salespeople consistently perform at a higher level.",
+          title: "INCREASED REVENUE AND CONTRIBUTION PROFIT",
+          paragraphs: [
+            "Focus improvements on opportunities that can generate additional sales while accounting for the costs required to produce them.",
+            "We examine whether stronger execution, improved conversion, account development, and appropriate pricing are translating into financial value.",
+            "Contribution profit is the revenue remaining after subtracting the variable costs associated with those sales. We agree with the client on which costs are included so comparisons remain consistent.",
+          ],
+          measuresHeading: "Possible measures include:",
+          measures: [
+            "Sales revenue compared with the starting baseline.",
+            "Revenue from existing customer growth.",
+            "Contribution profit in dollars and as a percentage of revenue.",
+            "Discount levels and their effect on contribution profit.",
+          ],
         },
       },
     ],
-    tagline: "Building High-Performing Sales Organizations That Win",
+    measuring: {
+      title: "MEASURING THE IMPROVEMENT",
+      paragraphs: [
+        "We establish relevant baseline KPIs, agree on improvement priorities, and track progress throughout the engagement. This helps leadership see what is changing, where progress is occurring, and what still requires attention.",
+        "Specific results depend on the organization’s starting point, engagement scope, and implementation of agreed improvements.",
+      ],
+    },
+    popoutNote:
+      "Measures are selected according to the engagement’s scope and available data. Specific financial results are not guaranteed.",
+    tagline: "WHY SALES PERFORMANCE DESERVES ATTENTION",
     stats: [
       {
         value: "79%",
@@ -4875,57 +4895,80 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
 
     remoteWork: {
       linkLabel: "Remote Services",
-      title: "Examples of What We Can Implement Remotely",
+      title: "Remote Sales Performance Services",
+      subtitle:
+        "Practical Implementation. Nationwide Delivery. Measurable Improvements.",
       intro: [
-        "NORTH POINT SALES GROUP can evaluate, improve, and implement changes across multiple areas of a company's sales organization without requiring an on-site presence.",
-        "Depending on the needs of the organization, our remote implementation services may include:",
+        "NORTH POINT SALES GROUP provides remote sales performance implementation services for organizations with inside sales teams, outside sales representatives, or a combination of both.",
+        "Whether your salespeople work by telephone, conduct virtual presentations, or travel to meet customers in person, much of the coaching, management support, systems improvement, and performance development can be accomplished remotely.",
+        "Our approach allows us to work directly with sales representatives and leadership throughout the United States while minimizing travel expenses, disruption, and unnecessary overhead.",
       ],
+      examplesHeading: "Examples of What We Can Implement Remotely",
       items: [
         {
-          title: "Individual Sales Coaching",
+          title: "Individual Sales Coaching & Development",
           description:
-            "Work directly with sales representatives to improve presentations, prospecting, objection handling, follow-up, and closing effectiveness.",
+            "Work directly with inside and outside sales representatives to improve selling skills, presentations, objection handling, negotiations, follow-up, and closing effectiveness.",
         },
         {
-          title: "Sales Leadership Development",
+          title: "Sales Leadership & Management Support",
           description:
-            "Coach existing managers, strengthen leadership practices, and assist with recruiting and onboarding new sales leaders when necessary.",
+            "Help owners, executives, and sales managers strengthen leadership, coaching, performance management, and accountability practices.",
         },
         {
-          title: "KPI Measurement and Accountability",
+          title: "Outside Sales & Territory Performance",
           description:
-            "Establish performance baselines, track key performance indicators, and implement accountability procedures.",
+            "Help field sales representatives improve account planning, customer visit preparation, territory management, opportunity development, and post-visit follow-up without interrupting their normal travel schedules.",
         },
         {
-          title: "Sales Responsibilities and Workflow",
+          title: "Sales Systems & CRM Optimization",
           description:
-            "Evaluate and adjust responsibilities, assignments, and procedures to improve efficiency and productivity.",
+            "Improve sales processes, CRM utilization, pipeline visibility, forecasting, and workflows to help salespeople and management operate more effectively.",
         },
         {
-          title: "CRM Optimization",
+          title: "KPI Development & Accountability",
           description:
-            "Improve CRM procedures, establish consistent usage expectations, and strengthen pipeline visibility.",
+            "Establish practical performance measurements, review individual and team results, identify performance gaps, and implement corrective improvements.",
         },
         {
-          title: "Sales Team Meetings",
+          title: "Sales Presentations & Customer Communications",
           description:
-            "Establish structured meetings to review performance, address obstacles, and coordinate improvement initiatives.",
+            "Review recorded sales conversations when available, conduct virtual role-playing, strengthen sales presentations, and help representatives prepare for important customer meetings and negotiations.",
         },
         {
-          title: "Sales Organization Assessment",
+          title: "Sales Meetings & Team Coordination",
           description:
-            "Evaluate sales representatives, leadership, productivity, and existing sales processes to identify opportunities for improvement.",
+            "Improve the structure and effectiveness of sales meetings, management reviews, coaching sessions, and communication between geographically dispersed salespeople.",
         },
         {
-          title: "Ongoing Performance Monitoring",
+          title: "Sales Organization Assessment & Improvement",
           description:
-            "Implement reporting dashboards, regular performance reviews, and accountability systems to help ensure improvements are maintained.",
+            "Evaluate salespeople, leadership, processes, systems, and operating practices to identify opportunities and implement improvements throughout the sales organization.",
+        },
+        {
+          title: "Ongoing Performance Monitoring & Refinement",
+          description:
+            "Review performance results, track implementation progress, provide feedback, and refine improvements to help establish sustainable sales practices.",
         },
       ],
-      tagline:
-        "Remote Implementation. Measurable Accountability. Practical Improvements.",
-      closing:
-        "Our objective is not simply to recommend improvements. It is to work directly with your people to implement appropriate changes, measure their effectiveness, and establish procedures that support sustainable sales performance.",
+      outsideSales: {
+        heading: "How We Work With Outside Sales Representatives",
+        paragraphs: [
+          "Outside sales representatives can continue visiting customers, developing accounts, and conducting face-to-face sales meetings while receiving remote coaching and implementation support.",
+          "For example, we can help representatives prepare for important customer visits, review the results afterward, strengthen follow-up strategies, address sales challenges, and improve territory productivity.",
+          "When direct observation or on-site involvement would provide additional value, arrangements can be discussed according to the engagement's needs.",
+        ],
+      },
+      bottomLine: {
+        heading: "The Bottom Line",
+        emphasis: "Remote Implementation Does Not Mean Limited Involvement.",
+        paragraphs: [
+          "Our objective is to help improve sales performance through direct, practical involvement with your salespeople and leadership—regardless of whether your representatives work inside an office, remotely, or in the field.",
+          "We focus on the improvements your organization actually needs, establish measurable expectations, and help implement changes designed to produce lasting results.",
+        ],
+        tagline:
+          "Remote Implementation. Clear Accountability. Practical Results.",
+      },
     },
 
     salesKpiGuide: {

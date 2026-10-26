@@ -20,6 +20,9 @@ export function ProvenResultsSection({
   const [popup, setPopup] = useState<{
     title: string;
     paragraphs: readonly string[];
+    measuresHeading?: string;
+    measures?: readonly string[];
+    note?: string;
     statValue?: string;
     statDescription?: string;
   } | null>(null);
@@ -62,10 +65,14 @@ export function ProvenResultsSection({
                 <li key={item.id}>
                   <button
                     type="button"
+                    aria-haspopup="dialog"
                     onClick={() =>
                       setPopup({
                         title: item.popout.title,
-                        paragraphs: [item.popout.description],
+                        paragraphs: item.popout.paragraphs,
+                        measuresHeading: item.popout.measuresHeading,
+                        measures: item.popout.measures,
+                        note: results.popoutNote,
                       })
                     }
                     className="group flex cursor-pointer items-start gap-2.5 text-left font-body text-[14px] leading-snug font-semibold text-primary transition-colors hover:text-[#b17411] focus:outline-none"
@@ -83,6 +90,20 @@ export function ProvenResultsSection({
                 </li>
               ))}
             </ul>
+
+            <div className="flex flex-col gap-2 border-t border-black/10 pt-5">
+              <p className="font-body text-[13px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[14px]">
+                {results.measuring.title}
+              </p>
+              {results.measuring.paragraphs.map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="font-body text-[13px] leading-[1.5] font-normal text-[#5C5F66] sm:text-[14px]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
 
             <p className="font-body text-[16px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[20px]">
               {results.tagline}
@@ -189,6 +210,23 @@ export function ProvenResultsSection({
                     {popup.paragraphs.map((paragraph, index) => (
                       <p key={index}>{paragraph}</p>
                     ))}
+                    {popup.measuresHeading && popup.measures && (
+                      <div>
+                        <p className="font-semibold text-[#001528]">
+                          {popup.measuresHeading}
+                        </p>
+                        <ul className="mt-1.5 list-disc space-y-1.5 pl-5">
+                          {popup.measures.map((measure) => (
+                            <li key={measure}>{measure}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {popup.note && (
+                      <p className="mt-2 border-t border-gray-100 pt-4 text-[13px] leading-relaxed text-[#5C5F66]">
+                        {popup.note}
+                      </p>
+                    )}
                   </div>
                 </Dialog.Description>
               </div>

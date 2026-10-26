@@ -5,6 +5,18 @@ import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+
+type FounderParagraph =
+  string | { readonly text: string; readonly bold?: boolean };
+
+function founderParagraphText(paragraph: FounderParagraph) {
+  return typeof paragraph === "string" ? paragraph : paragraph.text;
+}
+
+function founderParagraphBold(paragraph: FounderParagraph) {
+  return typeof paragraph === "object" && Boolean(paragraph.bold);
+}
 
 export function MeetTheFounderDialog() {
   const [open, setOpen] = useState(false);
@@ -40,9 +52,22 @@ export function MeetTheFounderDialog() {
 
           <div className="flex-1 overflow-y-auto px-6 py-5 sm:px-8">
             <div className="flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-              {paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+              {paragraphs.map((paragraph, index) => {
+                const text = founderParagraphText(
+                  paragraph as FounderParagraph,
+                );
+                return (
+                  <p
+                    key={`${text}-${index}`}
+                    className={cn(
+                      founderParagraphBold(paragraph as FounderParagraph) &&
+                        "font-bold text-[#001528]",
+                    )}
+                  >
+                    {text}
+                  </p>
+                );
+              })}
             </div>
 
             <div className="mt-7 border-t border-black/8 pt-5">

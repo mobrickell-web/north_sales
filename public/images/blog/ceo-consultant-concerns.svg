@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Six questions a CEO should resolve before bringing in an outside sales consultant: disruption, sales manager concerns, confidentiality, unnecessary spending, dependence, and clear answers.">
+  <defs>
+    <linearGradient id="ceo-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="ceo-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#ceo-bg)" />
+  <rect width="1200" height="750" fill="url(#ceo-grid)" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="82" text-anchor="middle" fill="#efb862" font-size="14" font-weight="700" letter-spacing="0.16em">OUTSIDE SALES CONSULTING</text>
+    <text x="600" y="130" text-anchor="middle" fill="#ffffff" fill-opacity="0.95" font-size="30" font-weight="700" letter-spacing="0.07em">SIX QUESTIONS BEFORE YOU SAY YES</text>
+    <text x="600" y="166" text-anchor="middle" fill="#ffffff" fill-opacity="0.60" font-size="15">Concerns a CEO should resolve before work begins</text>
+
+    <g>
+      <rect x="80" y="210" width="320" height="180" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.4" />
+      <circle cx="118" cy="252" r="20" fill="#b17411" />
+      <text x="118" y="258" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">1</text>
+      <text x="152" y="258" fill="#ffffff" fill-opacity="0.92" font-size="14" font-weight="700" letter-spacing="0.08em">DISRUPTION</text>
+      <text x="118" y="310" fill="#ffffff" fill-opacity="0.66" font-size="13.5">Will sales or customer</text>
+      <text x="118" y="334" fill="#ffffff" fill-opacity="0.66" font-size="13.5">relationships be disrupted?</text>
+    </g>
+
+    <g>
+      <rect x="440" y="210" width="320" height="180" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.4" />
+      <circle cx="478" cy="252" r="20" fill="#b17411" />
+      <text x="478" y="258" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">2</text>
+      <text x="512" y="258" fill="#ffffff" fill-opacity="0.92" font-size="14" font-weight="700" letter-spacing="0.08em">SALES MANAGER</text>
+      <text x="478" y="310" fill="#ffffff" fill-opacity="0.66" font-size="13.5">Will the sales manager</text>
+      <text x="478" y="334" fill="#ffffff" fill-opacity="0.66" font-size="13.5">feel threatened?</text>
+    </g>
+
+    <g>
+      <rect x="800" y="210" width="320" height="180" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.4" />
+      <circle cx="838" cy="252" r="20" fill="#b17411" />
+      <text x="838" y="258" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">3</text>
+      <text x="872" y="258" fill="#ffffff" fill-opacity="0.92" font-size="14" font-weight="700" letter-spacing="0.08em">CONFIDENTIALITY</text>
+      <text x="838" y="310" fill="#ffffff" fill-opacity="0.66" font-size="13.5">Will confidential</text>
+      <text x="838" y="334" fill="#ffffff" fill-opacity="0.66" font-size="13.5">information be protected?</text>
+    </g>
+
+    <g>
+      <rect x="80" y="430" width="320" height="180" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.4" />
+      <circle cx="118" cy="472" r="20" fill="#b17411" />
+      <text x="118" y="478" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">4</text>
+      <text x="152" y="478" fill="#ffffff" fill-opacity="0.92" font-size="14" font-weight="700" letter-spacing="0.08em">NEW SPENDING</text>
+      <text x="118" y="530" fill="#ffffff" fill-opacity="0.66" font-size="13.5">Will this lead to</text>
+      <text x="118" y="554" fill="#ffffff" fill-opacity="0.66" font-size="13.5">unnecessary changes?</text>
+    </g>
+
+    <g>
+      <rect x="440" y="430" width="320" height="180" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.4" />
+      <circle cx="478" cy="472" r="20" fill="#b17411" />
+      <text x="478" y="478" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">5</text>
+      <text x="512" y="478" fill="#ffffff" fill-opacity="0.92" font-size="14" font-weight="700" letter-spacing="0.08em">DEPENDENCE</text>
+      <text x="478" y="530" fill="#ffffff" fill-opacity="0.66" font-size="13.5">Will we become</text>
+      <text x="478" y="554" fill="#ffffff" fill-opacity="0.66" font-size="13.5">dependent on the consultant?</text>
+    </g>
+
+    <g>
+      <rect x="800" y="430" width="320" height="180" rx="18" fill="#b17411" fill-opacity="0.22" stroke="#b17411" stroke-opacity="0.85" />
+      <circle cx="838" cy="472" r="20" fill="#efb862" />
+      <text x="838" y="478" text-anchor="middle" fill="#001528" font-size="16" font-weight="700">6</text>
+      <text x="872" y="478" fill="#efb862" font-size="14" font-weight="700" letter-spacing="0.08em">CLEAR ANSWERS</text>
+      <text x="838" y="530" fill="#ffffff" fill-opacity="0.72" font-size="13.5">Scope, responsibilities,</text>
+      <text x="838" y="554" fill="#ffffff" fill-opacity="0.72" font-size="13.5">and a clean handoff.</text>
+    </g>
+
+    <g>
+      <rect x="80" y="660" width="1040" height="2" fill="#ffffff" fill-opacity="0.12" />
+      <circle cx="108" cy="702" r="5" fill="#b17411" />
+      <text x="128" y="707" fill="#ffffff" fill-opacity="0.55" font-size="14">Ask direct questions. Expect clear answers.</text>
+    </g>
+  </g>
+</svg>

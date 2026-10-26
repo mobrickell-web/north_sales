@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Five B2B sales pipeline stages—qualify, present, follow up, propose, and decision—showing where momentum breaks and the evidence needed to keep qualified opportunities moving.">
+  <defs>
+    <linearGradient id="b2b-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="b2b-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+    <marker id="b2b-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#efb862" fill-opacity="0.85" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#b2b-bg)" />
+  <rect width="1200" height="750" fill="url(#b2b-grid)" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="72" text-anchor="middle" fill="#efb862" font-size="13" font-weight="700" letter-spacing="0.18em">B2B SALES PIPELINE</text>
+    <text x="600" y="116" text-anchor="middle" fill="#ffffff" fill-opacity="0.95" font-size="30" font-weight="700" letter-spacing="0.04em">WHERE OPPORTUNITIES LOSE MOMENTUM</text>
+    <text x="600" y="150" text-anchor="middle" fill="#ffffff" fill-opacity="0.60" font-size="15">Qualified opportunities stall between stages—not at the finish line.</text>
+
+    <path d="M60 398H1140" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+
+    <g>
+      <rect x="60" y="210" width="180" height="160" rx="16" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.35" />
+      <circle cx="92" cy="248" r="17" fill="#b17411" />
+      <text x="92" y="254" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">1</text>
+      <text x="120" y="254" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.08em">QUALIFY</text>
+      <text x="84" y="298" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Evidence of need</text>
+      <text x="84" y="322" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Decision roles</text>
+      <text x="84" y="346" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Reason to proceed</text>
+    </g>
+
+    <line x1="244" y1="290" x2="280" y2="290" stroke="#efb862" stroke-opacity="0.7" stroke-width="2.5" marker-end="url(#b2b-arrow)" />
+
+    <g>
+      <rect x="285" y="210" width="180" height="160" rx="16" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.35" />
+      <circle cx="317" cy="248" r="17" fill="#b17411" />
+      <text x="317" y="254" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">2</text>
+      <text x="345" y="254" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.08em">PRESENT</text>
+      <text x="309" y="298" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Buyer priorities</text>
+      <text x="309" y="322" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Relevant value</text>
+      <text x="309" y="346" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Objections surfaced</text>
+    </g>
+
+    <line x1="469" y1="290" x2="505" y2="290" stroke="#efb862" stroke-opacity="0.7" stroke-width="2.5" marker-end="url(#b2b-arrow)" />
+
+    <g>
+      <rect x="510" y="210" width="180" height="160" rx="16" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.35" />
+      <circle cx="542" cy="248" r="17" fill="#b17411" />
+      <text x="542" y="254" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">3</text>
+      <text x="570" y="254" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.08em">FOLLOW-UP</text>
+      <text x="534" y="298" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Agreed next action</text>
+      <text x="534" y="322" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Named owner</text>
+      <text x="534" y="346" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Defined timeframe</text>
+    </g>
+
+    <line x1="694" y1="290" x2="730" y2="290" stroke="#efb862" stroke-opacity="0.7" stroke-width="2.5" marker-end="url(#b2b-arrow)" />
+
+    <g>
+      <rect x="735" y="210" width="180" height="160" rx="16" fill="#ffffff" fill-opacity="0.05" stroke="#efb862" stroke-opacity="0.35" />
+      <circle cx="767" cy="248" r="17" fill="#b17411" />
+      <text x="767" y="254" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">4</text>
+      <text x="795" y="254" fill="#ffffff" fill-opacity="0.92" font-size="15" font-weight="700" letter-spacing="0.08em">PROPOSAL</text>
+      <text x="759" y="298" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Decision criteria</text>
+      <text x="759" y="322" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Approval path</text>
+      <text x="759" y="346" fill="#ffffff" fill-opacity="0.66" font-size="12.5">Reason for delay</text>
+    </g>
+
+    <line x1="919" y1="290" x2="955" y2="290" stroke="#efb862" stroke-opacity="0.7" stroke-width="2.5" marker-end="url(#b2b-arrow)" />
+
+    <g>
+      <rect x="960" y="210" width="180" height="160" rx="16" fill="#b17411" fill-opacity="0.20" stroke="#b17411" stroke-opacity="0.85" />
+      <circle cx="992" cy="248" r="17" fill="#efb862" />
+      <text x="992" y="254" text-anchor="middle" fill="#001528" font-size="14" font-weight="700">5</text>
+      <text x="1020" y="254" fill="#efb862" font-size="15" font-weight="700" letter-spacing="0.08em">DECISION</text>
+      <text x="984" y="298" fill="#ffffff" fill-opacity="0.72" font-size="12.5">Confirmed commitment</text>
+      <text x="984" y="322" fill="#ffffff" fill-opacity="0.72" font-size="12.5">Credible close date</text>
+      <text x="984" y="346" fill="#ffffff" fill-opacity="0.72" font-size="12.5">Clear next step</text>
+    </g>
+
+    <text x="60" y="436" fill="#efb862" font-size="12" font-weight="700" letter-spacing="0.16em">MOMENTUM BREAKS WHEN</text>
+
+    <g>
+      <rect x="60" y="450" width="250" height="110" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#efb862" stroke-opacity="0.22" />
+      <text x="84" y="482" fill="#ffffff" fill-opacity="0.88" font-size="12.5" font-weight="700" letter-spacing="0.06em">NO AGREED NEXT STEP</text>
+      <text x="84" y="510" fill="#ffffff" fill-opacity="0.60" font-size="12.5">The conversation ends without</text>
+      <text x="84" y="532" fill="#ffffff" fill-opacity="0.60" font-size="12.5">purpose, owner, or date.</text>
+    </g>
+
+    <g>
+      <rect x="330" y="450" width="250" height="110" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#efb862" stroke-opacity="0.22" />
+      <text x="354" y="482" fill="#ffffff" fill-opacity="0.88" font-size="12.5" font-weight="700" letter-spacing="0.06em">NO DECISION PATH</text>
+      <text x="354" y="510" fill="#ffffff" fill-opacity="0.60" font-size="12.5">Buyer priorities, approvers,</text>
+      <text x="354" y="532" fill="#ffffff" fill-opacity="0.60" font-size="12.5">and criteria stay unclear.</text>
+    </g>
+
+    <g>
+      <rect x="600" y="450" width="250" height="110" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#efb862" stroke-opacity="0.22" />
+      <text x="624" y="482" fill="#ffffff" fill-opacity="0.88" font-size="12.5" font-weight="700" letter-spacing="0.06em">PROPOSAL WITHOUT PURPOSE</text>
+      <text x="624" y="510" fill="#ffffff" fill-opacity="0.60" font-size="12.5">The document is sent before</text>
+      <text x="624" y="532" fill="#ffffff" fill-opacity="0.60" font-size="12.5">the decision process is known.</text>
+    </g>
+
+    <g>
+      <rect x="870" y="450" width="250" height="110" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#efb862" stroke-opacity="0.22" />
+      <text x="894" y="482" fill="#ffffff" fill-opacity="0.88" font-size="12.5" font-weight="700" letter-spacing="0.06em">DATES WITHOUT EVIDENCE</text>
+      <text x="894" y="510" fill="#ffffff" fill-opacity="0.60" font-size="12.5">Close dates move while the</text>
+      <text x="894" y="532" fill="#ffffff" fill-opacity="0.60" font-size="12.5">underlying situation does not.</text>
+    </g>
+
+    <g>
+      <rect x="60" y="600" width="1080" height="90" rx="14" fill="#b17411" fill-opacity="0.12" stroke="#b17411" stroke-opacity="0.45" />
+      <text x="88" y="634" fill="#efb862" font-size="12" font-weight="700" letter-spacing="0.16em">KEEP IT MOVING</text>
+      <text x="88" y="662" fill="#ffffff" fill-opacity="0.78" font-size="14.5">Confirm what changed. Agree the next action. Record the evidence.</text>
+    </g>
+  </g>
+</svg>
