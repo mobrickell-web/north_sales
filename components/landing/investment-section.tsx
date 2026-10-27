@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, Compass, X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
@@ -398,6 +398,36 @@ export function InvestmentSection({
     setSequencePopupOpen(false);
     setPopup(next);
   };
+
+  useEffect(() => {
+    const handleOpenPopup = (event: Event) => {
+      if (!(event instanceof CustomEvent)) return;
+      const { popupId } = event.detail ?? {};
+      const nextPopup =
+        popupId === "salesTeamPerformance"
+          ? investment.tiers[0]?.popout
+          : popupId === "focusedSalesPerformance"
+            ? investment.tiers[1]?.popout
+            : popupId === "fullSalesPerformance"
+              ? investment.tiers[2]?.popout
+              : null;
+      if (!nextPopup) return;
+
+      document.getElementById("investment")?.scrollIntoView();
+      setSequencePopupOpen(false);
+      setPopup({ ...nextPopup });
+    };
+
+    window.addEventListener(
+      "north-point:open-investment-popup",
+      handleOpenPopup,
+    );
+    return () =>
+      window.removeEventListener(
+        "north-point:open-investment-popup",
+        handleOpenPopup,
+      );
+  }, [investment.tiers]);
 
   const showSequenceInline =
     popup?.sequenceHeading &&

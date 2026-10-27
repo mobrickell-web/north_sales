@@ -1,5 +1,231 @@
 export const blogPosts = [
   {
+    slug: "why-sales-consulting-improvements-fail-to-last",
+    title:
+      "YOUR COMPANY INVESTED IN SALES CONSULTING. WHY ARE THE SAME PROBLEMS STILL THERE?",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Why sales performance improvements sometimes fail to last—and what business owners can do about it.",
+      },
+      {
+        type: "paragraph",
+        text: "For many established businesses, bringing in an outside sales consulting firm seems like a logical decision.",
+      },
+      {
+        type: "paragraph",
+        text: "The company has an established sales force. Revenue is coming in. But management recognizes that productivity, consistency, accountability, or overall sales performance could be stronger.",
+      },
+      {
+        type: "paragraph",
+        text: "A consulting firm is engaged. Assessments are conducted. Recommendations are presented. Salespeople may receive additional training. New processes or performance measurements may be introduced.",
+      },
+      {
+        type: "paragraph",
+        text: "For a while, things appear to improve.",
+      },
+      {
+        type: "paragraph",
+        text: "Then, several months later, many of the same problems begin to resurface.",
+      },
+      {
+        type: "paragraph",
+        text: "Salespeople return to familiar habits. CRM information becomes unreliable. Follow-up activity declines. Sales managers become occupied with other responsibilities. Accountability weakens.",
+      },
+      {
+        type: "paragraph",
+        text: "The company has invested time and money, but the improvements have not become permanent parts of the organization.",
+      },
+      {
+        type: "heading",
+        text: "THE PROBLEM ISN'T ALWAYS THE CONSULTING. IT'S WHAT HAPPENS AFTERWARD.",
+      },
+      {
+        type: "paragraph",
+        text: "Not every unsuccessful consulting engagement represents poor advice or inadequate expertise.",
+      },
+      {
+        type: "paragraph",
+        text: "Sometimes the recommendations were sound. The training was appropriate. The proposed improvements made sense.",
+      },
+      {
+        type: "paragraph",
+        text: "What was missing was effective implementation, management accountability, and a system for maintaining the improvements after the consultants departed.",
+      },
+      {
+        type: "paragraph",
+        text: "There is a substantial difference between identifying what needs to change and making certain those changes become part of the organization's normal operations.",
+      },
+      {
+        type: "image",
+        src: "/images/blog/sustaining-sales-improvements.svg",
+        alt: "Illustration showing sales recommendations moving through implementation, management accountability, and an ongoing operating rhythm to sustain improvements.",
+        caption:
+          "Recommendations create lasting value when implementation, management accountability, and consistent reinforcement become part of daily operations.",
+      },
+      {
+        type: "heading",
+        text: "FIVE REASONS SALES IMPROVEMENTS FAIL TO LAST",
+      },
+      {
+        type: "heading",
+        text: "1. Recommendations Were Made, but Not Fully Implemented",
+      },
+      {
+        type: "paragraph",
+        text: "A consulting firm may identify problems and present a comprehensive improvement plan. However, responsibility for carrying out those recommendations often remains with an already overextended management team.",
+      },
+      {
+        type: "paragraph",
+        text: "As a result, some changes are implemented, others are postponed, and several never happen.",
+      },
+      {
+        type: "heading",
+        text: "2. Salespeople Return to Their Previous Habits",
+      },
+      {
+        type: "paragraph",
+        text: "Training may improve knowledge and introduce better selling techniques. But without continued coaching, observation, and accountability, salespeople can gradually return to familiar behaviors.",
+      },
+      {
+        type: "heading",
+        text: "3. Sales Leadership Doesn't Sustain the Improvements",
+      },
+      {
+        type: "paragraph",
+        text: "A sales manager may understand the recommended changes but lack the time, experience, or management systems necessary to reinforce them consistently.",
+      },
+      {
+        type: "paragraph",
+        text: "In other organizations, the owner is also managing the sales force, leaving limited time for ongoing performance supervision.",
+      },
+      {
+        type: "heading",
+        text: "4. Performance Measurements Are Not Consistently Used",
+      },
+      {
+        type: "paragraph",
+        text: "The organization may have introduced new KPIs, CRM procedures, or reporting requirements.",
+      },
+      {
+        type: "paragraph",
+        text: "But if managers don't consistently monitor the information, identify problems, and require corrective action, those systems provide limited long-term value.",
+      },
+      {
+        type: "heading",
+        text: "5. The Engagement Ends Before the Improvements Become Established",
+      },
+      {
+        type: "paragraph",
+        text: "A project may be completed according to its original agreement, yet important changes may not be sufficiently integrated into daily operations.",
+      },
+      {
+        type: "paragraph",
+        text: "The result is an organization that has received professional advice but still lacks the management structure and accountability necessary to maintain stronger performance.",
+      },
+      {
+        type: "heading",
+        text: "BEFORE STARTING OVER, DETERMINE WHAT ALREADY WORKS.",
+      },
+      {
+        type: "paragraph",
+        text: "When earlier improvement efforts have produced disappointing results, the solution isn't necessarily to replace everything or begin another expensive consulting initiative.",
+      },
+      {
+        type: "paragraph",
+        text: "Some of the previous recommendations may have been correct. Some systems may already be effective. Certain salespeople or departments may be performing well.",
+      },
+      {
+        type: "paragraph",
+        text: "The first priority should be determining:",
+      },
+      {
+        type: "list",
+        items: [
+          "What improvements were previously recommended?",
+          "Which changes were actually implemented?",
+          "Which improvements produced measurable results?",
+          "Why did certain changes fail to continue?",
+          "What existing processes, systems, and personnel can be strengthened rather than replaced?",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "This approach can help a company avoid repeating work it has already paid for.",
+      },
+      {
+        type: "heading",
+        text: "HOW NORTH POINT SALES GROUP APPROACHES THE PROBLEM",
+      },
+      {
+        type: "paragraph",
+        text: "NORTH POINT SALES GROUP works with established businesses to evaluate and improve the sales organizations they already have.",
+      },
+      {
+        type: "paragraph",
+        text: "Our approach addresses three interconnected areas:",
+      },
+      {
+        type: "paragraph",
+        text: "SALES PERFORMANCE: Improving individual and team productivity, consistency, selling effectiveness, and measurable results.",
+      },
+      {
+        type: "paragraph",
+        text: "SALES SYSTEMS: Strengthening sales processes, CRM utilization, pipeline management, performance measurement, and accountability systems.",
+      },
+      {
+        type: "paragraph",
+        text: "SALES LEADERSHIP: Improving management effectiveness, coaching, performance supervision, and leadership responsibilities.",
+      },
+      {
+        type: "paragraph",
+        text: "We don't automatically recommend replacing existing systems, restructuring departments, or expanding the sales force.",
+      },
+      {
+        type: "paragraph",
+        text: "We first examine what is already in place, determine what is working, identify weaknesses, and establish practical priorities for improvement.",
+      },
+      {
+        type: "paragraph",
+        text: "Where appropriate, we work directly with sales representatives, existing managers, and executive leadership to implement improvements.",
+      },
+      {
+        type: "paragraph",
+        text: "When a company lacks dedicated sales leadership, we can also help establish the appropriate management structure, including recruiting and developing a sales manager when necessary.",
+      },
+      {
+        type: "paragraph",
+        text: "Our objective is not simply to recommend changes. It is to help implement improvements that the organization can continue using long after our engagement is completed.",
+      },
+      {
+        type: "heading",
+        text: "THE BOTTOM LINE",
+      },
+      {
+        type: "paragraph",
+        text: "IF YOUR COMPANY HAS ALREADY INVESTED IN IMPROVING ITS SALES ORGANIZATION, YOU SHOULDN'T AUTOMATICALLY HAVE TO START OVER.",
+      },
+      {
+        type: "paragraph",
+        text: "Before investing in another major initiative, determine why previous improvements failed to produce lasting results.",
+      },
+      {
+        type: "paragraph",
+        text: "The opportunity may not require more salespeople, another CRM, or another round of training.",
+      },
+      {
+        type: "paragraph",
+        text: "It may simply require a more disciplined approach to implementation, performance management, and accountability.",
+      },
+    ],
+    conclusion: "",
+    cta: "Discuss how to sustain sales performance improvements in your organization.",
+    ctaLink: {
+      href: "/#investment",
+      label: "EXPLORE OUR SALES PERFORMANCE ENGAGEMENTS",
+    },
+  },
+  {
     slug: "where-b2b-sales-opportunities-lose-momentum",
     title:
       "Where B2B Sales Opportunities Lose Momentum—and How to Keep Them Moving",
@@ -2672,15 +2898,15 @@ export function getPostExcerpt(post: BlogPost): string {
 }
 
 export const blog = {
-  title: "Blog",
-  badge: "Blog",
+  title: "EXECUTIVE INSIGHTS",
+  badge: "EXECUTIVE INSIGHTS",
   hero: {
     image: {
       src: "/images/hero-image.svg",
-      alt: "NORTH POINT SALES GROUP — Blog",
+      alt: "NORTH POINT SALES GROUP — Executive Insights",
     },
     subtitle:
-      "Sales-performance insights for owners and executives who want to understand what is really limiting growth.",
+      "Practical perspectives on sales performance, leadership, systems, and sustainable revenue growth.",
   },
   posts: blogPosts,
 } as const;

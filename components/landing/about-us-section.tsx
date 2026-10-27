@@ -1,5 +1,9 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { X } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { MeetTheFounderDialog } from "@/components/landing/meet-the-founder-dialog";
 
@@ -20,16 +24,51 @@ type AboutUsOption = {
   href?: string;
 };
 
+function handleInvestmentPopupLink(
+  event: React.MouseEvent<HTMLAnchorElement>,
+  href: string,
+) {
+  const popupIdByHref: Record<string, string> = {
+    "#investment-option-1": "salesTeamPerformance",
+    "#investment-option-2": "focusedSalesPerformance",
+    "#investment-option-3": "fullSalesPerformance",
+  };
+  const popupId = popupIdByHref[href];
+  if (!popupId) return;
+
+  event.preventDefault();
+  window.dispatchEvent(
+    new CustomEvent("north-point:open-investment-popup", {
+      detail: { popupId },
+    }),
+  );
+}
+
 type AboutExpandableSection = {
   heading: string;
   paragraphs?: readonly AboutParagraph[];
   options?: readonly AboutUsOption[];
   closingParagraphs?: readonly AboutParagraph[];
+  challenges?: readonly {
+    label: string;
+    title: string;
+    intro: string;
+    commonProblems: readonly string[];
+    howWeAddress: string;
+  }[];
 };
 
 function AboutParagraphText({ paragraph }: { paragraph: AboutParagraph }) {
   if (typeof paragraph === "string") {
-    return <>{paragraph}</>;
+    return (
+      <>
+        {paragraph.split("\n").map((line, index) => (
+          <span key={`${line}-${index}`} className="block">
+            {line}
+          </span>
+        ))}
+      </>
+    );
   }
 
   const { before, href, label, after } = paragraph.linkLine;
@@ -38,6 +77,7 @@ function AboutParagraphText({ paragraph }: { paragraph: AboutParagraph }) {
       {before}
       <Link
         href={href}
+        onClick={(event) => handleInvestmentPopupLink(event, href)}
         className="font-semibold text-[#b17411] underline-offset-2 hover:underline"
       >
         {label}
@@ -69,6 +109,9 @@ function AboutOptionsList({ options }: { options: readonly AboutUsOption[] }) {
             {option.href ? (
               <Link
                 href={option.href}
+                onClick={(event) =>
+                  handleInvestmentPopupLink(event, option.href ?? "")
+                }
                 className="font-bold text-[#b17411] underline-offset-2 hover:underline"
               >
                 {option.title}
@@ -85,38 +128,108 @@ function AboutOptionsList({ options }: { options: readonly AboutUsOption[] }) {
 }
 
 function AboutExpandable({ section }: { section: AboutExpandableSection }) {
+  type Challenge = NonNullable<AboutExpandableSection["challenges"]>[number];
+  const [activeChallenge, setActiveChallenge] = useState<Challenge | null>(
+    null,
+  );
+
   return (
-    <details className="group w-full max-w-[1320px] overflow-hidden rounded-xl border border-[#E8E4DC] bg-[#FAF9F5]">
-      <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-body text-[14px] font-extrabold tracking-[0.04em] text-primary uppercase marker:hidden focus-visible:ring-2 focus-visible:ring-[#b17411]/40 focus-visible:ring-inset focus-visible:outline-none sm:px-6 sm:text-[15px]">
-        <span>{section.heading}</span>
-        <span
-          aria-hidden
-          className="flex size-6 shrink-0 items-center justify-center text-[#b17411]"
-        >
-          <span className="text-[24px] leading-none font-normal group-open:hidden">
-            +
+    <Dialog.Root
+      open={activeChallenge !== null}
+      onOpenChange={(open) => !open && setActiveChallenge(null)}
+    >
+      <details className="group w-full max-w-[1320px] overflow-hidden rounded-xl border border-[#E8E4DC] bg-[#FAF9F5]">
+        <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-body text-[14px] font-extrabold tracking-[0.04em] text-primary uppercase marker:hidden focus-visible:ring-2 focus-visible:ring-[#b17411]/40 focus-visible:ring-inset focus-visible:outline-none sm:px-6 sm:text-[15px]">
+          <span>{section.heading}</span>
+          <span
+            aria-hidden
+            className="flex size-6 shrink-0 items-center justify-center text-[#b17411]"
+          >
+            <span className="text-[24px] leading-none font-normal group-open:hidden">
+              +
+            </span>
+            <span className="hidden text-[24px] leading-none font-normal group-open:inline">
+              −
+            </span>
           </span>
-          <span className="hidden text-[24px] leading-none font-normal group-open:inline">
-            −
-          </span>
-        </span>
-      </summary>
-      <div className="flex flex-col gap-4 border-t border-[#E8E4DC] bg-white px-5 py-5 font-body text-[15px] leading-[1.4] text-[#5C5F66] sm:px-6">
-        {section.paragraphs?.map((paragraph) => (
-          <p key={paragraphKey(paragraph)}>
-            <AboutParagraphText paragraph={paragraph} />
-          </p>
-        ))}
-        {section.options && section.options.length > 0 ? (
-          <AboutOptionsList options={section.options} />
-        ) : null}
-        {section.closingParagraphs?.map((paragraph) => (
-          <p key={paragraphKey(paragraph)}>
-            <AboutParagraphText paragraph={paragraph} />
-          </p>
-        ))}
-      </div>
-    </details>
+        </summary>
+        <div className="flex flex-col gap-4 border-t border-[#E8E4DC] bg-white px-5 py-5 font-body text-[15px] leading-[1.4] text-[#5C5F66] sm:px-6">
+          {section.paragraphs?.map((paragraph, index) => (
+            <Fragment key={paragraphKey(paragraph)}>
+              <p>
+                <AboutParagraphText paragraph={paragraph} />
+              </p>
+              {section.challenges && index === 1 ? (
+                <ul className="mt-[-8px] flex flex-col gap-0 pl-0">
+                  {section.challenges.map((challenge) => (
+                    <li key={challenge.title} className="list-none">
+                      <button
+                        type="button"
+                        aria-haspopup="dialog"
+                        onClick={() => setActiveChallenge(challenge)}
+                        className="group/challenge flex min-h-9 cursor-pointer items-start gap-3 text-left font-body text-[15px] leading-[1.4] text-[#5C5F66] hover:text-[#b17411] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b17411]"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
+                        />
+                        <span className="group-hover/challenge:underline">
+                          {challenge.label}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </Fragment>
+          ))}
+          {section.options && section.options.length > 0 ? (
+            <AboutOptionsList options={section.options} />
+          ) : null}
+          {section.closingParagraphs?.map((paragraph) => (
+            <p key={paragraphKey(paragraph)}>
+              <AboutParagraphText paragraph={paragraph} />
+            </p>
+          ))}
+        </div>
+      </details>
+
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[95vw] max-w-[620px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+          <Dialog.Close className="absolute right-4 top-4 flex size-11 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b17411]">
+            <X className="size-5" />
+            <span className="sr-only">Close</span>
+          </Dialog.Close>
+          {activeChallenge ? (
+            <div className="flex flex-col gap-4 pr-8 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
+              <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                {activeChallenge.title}
+              </Dialog.Title>
+              <Dialog.Description className="text-[#5C5F66]">
+                {activeChallenge.intro}
+              </Dialog.Description>
+              <div>
+                <h3 className="font-semibold text-[#001528]">
+                  Common Problems Include:
+                </h3>
+                <ul className="mt-2 list-disc space-y-2 pl-5">
+                  {activeChallenge.commonProblems.map((problem) => (
+                    <li key={problem}>{problem}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-extrabold tracking-wide text-[#061525] uppercase">
+                  HOW WE ADDRESS IT
+                </h3>
+                <p className="mt-2">{activeChallenge.howWeAddress}</p>
+              </div>
+            </div>
+          ) : null}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
 
@@ -173,6 +286,22 @@ export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
             >
               {paragraph}
             </p>
+          ))}
+        </div>
+
+        <div className="grid w-full max-w-[1320px] grid-cols-1 gap-3 sm:grid-cols-3">
+          {aboutUs.experienceHighlights.map((highlight) => (
+            <div
+              key={highlight.value}
+              className="flex flex-col gap-2 rounded-xl border border-[#E8E4DC] bg-[#FAF9F5] px-5 py-5"
+            >
+              <p className="font-heading text-[28px] leading-none font-bold tracking-tight text-[#b17411] sm:text-[32px]">
+                {highlight.value}
+              </p>
+              <p className="font-body text-[13px] leading-[1.45] text-[#5C5F66] sm:text-[14px]">
+                {highlight.description}
+              </p>
+            </div>
           ))}
         </div>
 

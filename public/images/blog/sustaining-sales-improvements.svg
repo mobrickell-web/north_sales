@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Sales improvements become lasting when recommendations are implemented, managers reinforce them, and the organization follows a consistent operating rhythm.">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#fff" stroke-opacity=".05" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="750" fill="url(#background)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="82" text-anchor="middle" fill="#efb862" font-size="14" font-weight="700" letter-spacing="3">FROM RECOMMENDATION TO LASTING RESULTS</text>
+    <text x="600" y="132" text-anchor="middle" fill="#fff" font-size="29" font-weight="700" letter-spacing="1.5">IMPROVEMENT MUST BECOME THE WAY WORK GETS DONE</text>
+    <text x="600" y="169" text-anchor="middle" fill="#fff" fill-opacity=".62" font-size="16">Advice starts the work. Consistent implementation sustains it.</text>
+
+    <g>
+      <rect x="74" y="225" width="310" height="245" rx="18" fill="#fff" fill-opacity=".045" stroke="#fff" stroke-opacity=".18" />
+      <circle cx="229" cy="280" r="28" fill="#b17411" fill-opacity=".26" stroke="#efb862" stroke-width="2" />
+      <path d="M216 280l9 9 18-21" fill="none" stroke="#efb862" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="229" y="343" text-anchor="middle" fill="#efb862" font-size="14" font-weight="700" letter-spacing="2">1 · CLARIFY</text>
+      <text x="229" y="379" text-anchor="middle" fill="#fff" font-size="18" font-weight="600">Sound recommendations</text>
+      <text x="229" y="408" text-anchor="middle" fill="#fff" fill-opacity=".64" font-size="14">Identify practical priorities</text>
+      <text x="229" y="431" text-anchor="middle" fill="#fff" fill-opacity=".64" font-size="14">and define what must change.</text>
+    </g>
+
+    <path d="M401 347h50m-12-12 12 12-12 12" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <g>
+      <rect x="445" y="225" width="310" height="245" rx="18" fill="#fff" fill-opacity=".045" stroke="#efb862" stroke-opacity=".65" />
+      <circle cx="600" cy="280" r="28" fill="#b17411" fill-opacity=".26" stroke="#efb862" stroke-width="2" />
+      <path d="M588 281h24M600 269v24" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" />
+      <text x="600" y="343" text-anchor="middle" fill="#efb862" font-size="14" font-weight="700" letter-spacing="2">2 · IMPLEMENT</text>
+      <text x="600" y="379" text-anchor="middle" fill="#fff" font-size="18" font-weight="600">Clear ownership</text>
+      <text x="600" y="408" text-anchor="middle" fill="#fff" fill-opacity=".64" font-size="14">Assign responsibility, take</text>
+      <text x="600" y="431" text-anchor="middle" fill="#fff" fill-opacity=".64" font-size="14">action, and track progress.</text>
+    </g>
+
+    <path d="M772 347h50m-12-12 12 12-12 12" fill="none" stroke="#efb862" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <g>
+      <rect x="816" y="225" width="310" height="245" rx="18" fill="#b17411" fill-opacity=".14" stroke="#efb862" stroke-width="2" />
+      <circle cx="971" cy="280" r="28" fill="#b17411" fill-opacity=".30" stroke="#efb862" stroke-width="2" />
+      <path d="M958 284a14 14 0 0 0 24 6M984 276a14 14 0 0 0-24-6M982 290l1-8 7 3M960 270l-1 8-7-3" fill="none" stroke="#efb862" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="971" y="343" text-anchor="middle" fill="#efb862" font-size="14" font-weight="700" letter-spacing="2">3 · REINFORCE</text>
+      <text x="971" y="379" text-anchor="middle" fill="#fff" font-size="18" font-weight="600">An operating rhythm</text>
+      <text x="971" y="408" text-anchor="middle" fill="#fff" fill-opacity=".72" font-size="14">Coach, measure, review,</text>
+      <text x="971" y="431" text-anchor="middle" fill="#fff" fill-opacity=".72" font-size="14">and hold the team accountable.</text>
+    </g>
+
+    <rect x="74" y="520" width="1052" height="2" fill="#fff" fill-opacity=".14" />
+    <rect x="74" y="560" width="1052" height="116" rx="16" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".12" />
+    <text x="110" y="605" fill="#fff" fill-opacity=".60" font-size="13" font-weight="700" letter-spacing="2">THE OUTCOME</text>
+    <text x="110" y="642" fill="#fff" font-size="19" font-weight="600">Improvements integrated into everyday sales operations</text>
+    <path d="M815 636l16 16 31-37" fill="none" stroke="#efb862" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="886" y="642" fill="#efb862" font-size="14" font-weight="700" letter-spacing="1">SUSTAINED PROGRESS</text>
+  </g>
+</svg>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
@@ -16,6 +16,19 @@ function founderParagraphText(paragraph: FounderParagraph) {
 
 function founderParagraphBold(paragraph: FounderParagraph) {
   return typeof paragraph === "object" && Boolean(paragraph.bold);
+}
+
+// Renders **double-asterisk** segments as <strong>.
+function renderRichText(text: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
+      <strong key={i} className="font-bold text-[#001528]">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
 }
 
 export function MeetTheFounderDialog() {
@@ -64,7 +77,7 @@ export function MeetTheFounderDialog() {
                         "font-bold text-[#001528]",
                     )}
                   >
-                    {text}
+                    {renderRichText(text)}
                   </p>
                 );
               })}

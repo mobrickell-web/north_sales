@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { BlogsIndexPage } from "@/components/legal/blogs-index-page";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "EXECUTIVE INSIGHTS",
   description:
-    "Sales-performance insights from NORTH POINT SALES GROUP on diagnosing the real constraints on growth, adding sales capacity, sales training, and outside consulting engagements.",
+    "Practical perspectives on sales performance, leadership, systems, and sustainable revenue growth.",
   alternates: {
     canonical: "/blogs",
   },

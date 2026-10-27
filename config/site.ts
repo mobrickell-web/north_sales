@@ -147,7 +147,7 @@ const focusedSalesPerformancePopout = {
 
 const fullSalesPerformancePopout = {
   title: "FULL SALES PERFORMANCE IMPLEMENTATION",
-  fee: "Professional Fee: $50,000–$150,000\nImplementation Period: 30–90 Days",
+  fee: "Professional Fee: $50,000–$150,000+\nImplementation Period: 30–90 Days",
   intro:
     "This engagement combines assessment with hands-on implementation across the areas of your sales organization requiring improvement.\n\nWe work directly with leadership and sales personnel to identify opportunities, implement agreed-upon changes, establish KPIs and accountability, and refine the approach as results become available.",
   includedHeading: "WHAT IS INCLUDED",
@@ -291,7 +291,7 @@ const fullSalesPerformancePopout = {
   ],
   parametersHeading: "HOW THE PROFESSIONAL FEE IS DETERMINED",
   parametersParagraphs: [
-    "The $50,000–$150,000 fee reflects:",
+    "The $50,000–$150,000+ fee reflects:",
     "Number of salespeople and managers involved.\nNumber of locations, divisions, markets, or sales channels.\nNumber and depth of performance areas requiring improvement.\nComplexity of existing processes and systems.\nAmount of individual coaching and implementation required.\nMeasurement and reporting requirements.\nEngagement duration and NORTH POINT SALES GROUP resources needed.",
     "A higher fee does not automatically require a longer engagement. Scope, professional fee, and implementation period are established before work begins.",
   ],
@@ -299,7 +299,7 @@ const fullSalesPerformancePopout = {
   differencesParagraphs: [
     "Sales Team Performance — Beginning at $7,500: Direct improvement of selected salespeople's execution within a focused 30-day engagement.",
     "30-Day Focused Sales Performance — Beginning at $9,500: Broader assessment, executive recommendations, and an implementation roadmap.",
-    "Full Sales Performance Implementation — $50,000–$150,000: Assessment and hands-on implementation across the agreed areas, with coaching, KPI measurement, accountability, and refinement.",
+    "Full Sales Performance Implementation — $50,000–$150,000+: Assessment and hands-on implementation across the agreed areas, with coaching, KPI measurement, accountability, and refinement.",
   ],
   upgradeHeading: "UPGRADE CREDIT",
   upgradeParagraphs: [
@@ -1420,7 +1420,7 @@ export const siteConfig = {
     label: "MORE",
     links: [
       { label: "Careers", href: "/careers" },
-      { label: "Blog", href: "/blogs" },
+      { label: "EXECUTIVE INSIGHTS", href: "/blogs" },
     ],
   },
   hero: {
@@ -1448,17 +1448,135 @@ export const siteConfig = {
       "NORTH POINT SALES GROUP is an executive-level sales performance consulting and implementation firm. We help established businesses strengthen their existing sales organizations through practical improvements in sales performance, sales systems, and sales leadership.",
       "We work directly with owners and executive teams to identify where revenue may be left on the table, implement needed improvements, and establish accountability for measurable progress.",
     ],
-    tagline: "40+ YEARS OF SALES EXPERIENCE. BUILT INTO OUR DNA.",
+    tagline:
+      "EXPERIENCE THAT SPANS FRONTLINE SALES THROUGH EXECUTIVE LEADERSHIP.",
     experienceParagraphs: [
       "The foundation of NORTH POINT SALES GROUP is our founder’s more than 40 years of direct sales, training, management, and business ownership experience. That background includes selling as a top-producing representative, training and managing salespeople, and working with businesses ranging from small operations to organizations generating more than $250 million in annual sales.",
+    ],
+    experienceHighlights: [
+      {
+        value: "40+ YEARS",
+        description:
+          "Of direct sales, training, management, and business ownership experience.",
+      },
+      {
+        value: "$250M+",
+        description:
+          "Experience with organizations generating more than $250 million in annual sales.",
+      },
+      {
+        value: "5%–25%+",
+        description:
+          "Potential annual sales revenue improvement, depending on the organization and opportunities identified.",
+      },
     ],
     experienceExpandable: {
       heading: "MORE ABOUT OUR EXPERIENCE",
       paragraphs: [
-        "Working across that spectrum revealed recurring problems: unclear expectations, inconsistent prospecting, weak presentations, missed follow-up, ineffective coaching, and poor accountability. Larger organizations may have more people and more complex systems, but those resources do not automatically resolve the underlying problems.",
-        "That experience shapes how we assess sales organizations, recognize performance patterns, and implement practical improvements.",
-        "We listen, observe, and analyze how your sales organization actually operates. By reviewing sales presentations, listening to calls, examining follow-up, and evaluating pipeline activity, we identify the behaviors, processes, and leadership gaps that may be restricting results.",
-        "Our work focuses on opportunities with the potential to increase annual sales revenue by 5% to 25% or more, depending on the organization, its current performance, and the opportunities identified.",
+        "Our experience includes frontline sales performance, sales training, sales management, business ownership, and direct involvement with sales organizations across a wide range of industries and company sizes.",
+        "It's a fact that across organizations of different sizes, recurring challenges often emerge:",
+        "Recognizing these patterns helps us identify underlying problems and determine where practical improvements can produce meaningful results.",
+        "We examine how your sales organization actually operates, including sales presentations, customer interactions, follow-up practices, pipeline activity, and leadership effectiveness.",
+        "Our objective is to identify what may be restricting performance, implement needed improvements, and establish accountability for measurable progress.",
+      ],
+      challenges: [
+        {
+          label: "Unclear sales expectations",
+          title: "UNCLEAR SALES EXPECTATIONS",
+          intro:
+            "Salespeople cannot consistently meet performance expectations that have not been clearly established, communicated, and measured.",
+          commonProblems: [
+            "Unclear individual sales targets and responsibilities.",
+            "Inconsistent expectations for prospecting and follow-up.",
+            "Salespeople unsure which activities deserve priority.",
+            "Different performance standards across the sales team.",
+            "Limited understanding of how individual activities contribute to company revenue.",
+            "Expectations communicated without consistent follow-through.",
+          ],
+          howWeAddress:
+            "We examine how sales expectations are established, communicated, measured, and reinforced. Where needed, we help implement clearer performance standards, measurable objectives, and practical accountability procedures.",
+        },
+        {
+          label: "Inconsistent prospecting",
+          title: "INCONSISTENT PROSPECTING",
+          intro:
+            "Even capable salespeople can struggle to produce consistent results when prospecting activities are irregular, poorly targeted, or inadequately managed.",
+          commonProblems: [
+            "Insufficient outreach to qualified prospects.",
+            "Spending excessive time pursuing unlikely buyers.",
+            "Inconsistent prospecting schedules and activity levels.",
+            "Failure to identify appropriate decision-makers.",
+            "Weak initial conversations that fail to generate interest.",
+            "Overdependence on referrals or incoming leads.",
+          ],
+          howWeAddress:
+            "We evaluate prospecting methods, lead quality, activity levels, and conversion effectiveness. We identify opportunities to improve targeting, prospect engagement, and the consistency of qualified opportunities entering the sales pipeline.",
+        },
+        {
+          label: "Ineffective sales presentations",
+          title: "INEFFECTIVE SALES PRESENTATIONS",
+          intro:
+            "A salesperson may understand the product or service yet struggle to communicate its value, create urgency, overcome objections, or recognize when a prospect is ready to make a decision.",
+          commonProblems: [
+            "Focusing on product features rather than customer benefits and financial value.",
+            "Failing to uncover the prospect's actual needs and priorities.",
+            "Talking too much and listening too little.",
+            "Weak responses to objections about price, timing, or competition.",
+            "Not recognizing buying signals or knowing when to ask for the sale.",
+            "Continuing to present after the prospect is ready to make a decision.",
+            "Failing to establish a clear next step when an immediate decision is not appropriate.",
+          ],
+          howWeAddress:
+            "We evaluate actual sales conversations, presentations, objection handling, and closing techniques. Through direct observation, individual coaching, and practical adjustments, we help salespeople communicate value more effectively and move qualified opportunities toward decisions.",
+        },
+        {
+          label: "Missed follow-up opportunities",
+          title: "MISSED FOLLOW-UP OPPORTUNITIES",
+          intro:
+            "Revenue opportunities are frequently lost not because a prospect lacks interest, but because follow-up is delayed, inconsistent, poorly executed, or abandoned prematurely.",
+          commonProblems: [
+            "Delayed responses to prospect inquiries.",
+            "Failure to follow up after presentations or proposals.",
+            "No clearly scheduled next step in the sales process.",
+            "Repeated follow-up without providing additional value.",
+            "Prospects disappearing from the pipeline without explanation.",
+            "Failure to reconnect with previously interested prospects.",
+          ],
+          howWeAddress:
+            "We examine follow-up practices, response times, pipeline activity, and CRM records. We help establish structured follow-up procedures, clear responsibilities, and measurable standards that reduce overlooked opportunities.",
+        },
+        {
+          label: "Inadequate sales coaching",
+          title: "INADEQUATE SALES COACHING",
+          intro:
+            "Sales meetings and occasional training sessions do not necessarily address the individual weaknesses preventing salespeople from reaching their potential.",
+          commonProblems: [
+            "Coaching focused on sales numbers rather than the behaviors producing those numbers.",
+            "Applying identical training to salespeople with different performance needs.",
+            "Limited observation of actual sales conversations.",
+            "Managers telling salespeople what to improve without demonstrating how.",
+            "Failure to practice presentations, objection handling, and closing.",
+            "Little follow-through to determine whether coaching produces improvement.",
+          ],
+          howWeAddress:
+            "We evaluate individual performance, identify specific development needs, and provide practical coaching based on actual selling situations. We also help sales leaders establish coaching practices that support measurable and sustained improvement.",
+        },
+        {
+          label: "Weak accountability",
+          title: "WEAK ACCOUNTABILITY",
+          intro:
+            "Even well-designed sales processes and performance standards lose effectiveness when expectations are not consistently monitored, reinforced, and followed through.",
+          commonProblems: [
+            "Sales activity and results not reviewed consistently.",
+            "CRM information that is incomplete or outdated.",
+            "Missed commitments without appropriate follow-up.",
+            "Performance problems identified too late for corrective action.",
+            "Sales meetings that produce discussions but few completed actions.",
+            "Improvements introduced but gradually abandoned.",
+          ],
+          howWeAddress:
+            "We examine performance measurement, management practices, reporting procedures, and follow-through. We help establish clear responsibilities, meaningful KPIs, regular performance reviews, and accountability practices that keep improvements in place.",
+        },
       ],
     },
     sections: [
@@ -1500,7 +1618,15 @@ export const siteConfig = {
             closingParagraphs: [
               "These engagements provide substantive work with defined objectives and deliverables. They also allow you to experience how we work before deciding whether broader implementation makes sense.",
               "If you proceed to full implementation, your initial engagement fee is credited toward that investment.",
-              "Organizations ready for comprehensive implementation can begin with the broader engagement. We recommend the starting point that fits your needs, priorities, and readiness to move forward.",
+              {
+                linkLine: {
+                  before: "Organizations ready for ",
+                  href: "#investment-option-3",
+                  label: "comprehensive implementation",
+                  after:
+                    " can begin with the broader engagement. We recommend the starting point that fits your needs, priorities, and readiness to move forward.",
+                },
+              },
             ],
           },
           {
@@ -1515,21 +1641,15 @@ export const siteConfig = {
     closingStatement:
       "Our objective is to leave your sales organization better equipped to perform—and keep performing.",
     founder: {
-      buttonLabel: "Meet the Founder",
+      buttonLabel: "MEET THE FOUNDER & CEO",
       name: "Michael O. Brickell",
-      role: "Founder | NORTH POINT SALES GROUP",
+      role: "Founder & CEO | NORTH POINT SALES GROUP",
       paragraphs: [
-        "Michael O. Brickell brings decades of experience in sales, sales management, marketing, business development, and entrepreneurship, with a strong record of sales performance and leadership.",
-        "Throughout his career, Michael has worked directly within the sales organizations of companies generating between $1 million and $250 million in annual revenue. His experience began in frontline sales, where he developed a firsthand understanding of selling, customer relationships, sales execution, and the factors that influence individual and organizational performance.",
-        "Michael subsequently owned and operated a lead-generation business serving the mortgage industry, gaining extensive experience in sales team management, lead generation, and performance oversight. He also established and operated an advertising agency, developing expertise across multiple advertising and media channels and their roles in supporting lead generation and sales performance.",
-        "Expanding into digital publishing, Michael directed the development of two successful online publishing and educational directory platforms. Working with professional website development teams, he combined website strategy, search engine optimization, and online and offline marketing to establish strong competitive positions.",
-        "Under his leadership, both platforms ranked among the top five online school directories in the United States in organic search results. He ultimately sold both businesses, demonstrating his ability to recognize market opportunities, develop successful commercial ventures, build business value, and achieve successful exits.",
-        "His experience across multiple business disciplines provides a broad understanding of how sales, marketing, technology, operational systems, and leadership work together to influence organizational performance. This perspective enables him to look beyond individual problems, recognize connections between business functions, and identify practical opportunities for improvement that might otherwise be overlooked.",
-        "Michael founded NORTH POINT SALES GROUP to bring this combination of frontline sales experience, sales leadership, business ownership, and multidisciplinary expertise to established organizations seeking stronger sales performance and sustainable revenue growth.",
-        {
-          text: "His philosophy is straightforward: Identify what's working, correct what's not, and avoid unnecessary changes or expenses.",
-          bold: true,
-        },
+        "Michael O. Brickell brings a distinctive combination of frontline sales success, executive leadership, and entrepreneurial experience developed through decades of work in sales, management, and business ownership. His background includes working directly with companies generating between **$1 million and $250 million in annual revenue**.",
+        "Beginning his career in frontline sales, Michael consistently ranked among the top-performing representatives in the organizations he served. He expanded into sales training and corporate management before establishing and operating businesses in lead generation and advertising.",
+        "He later built two online educational directory businesses from the ground up, directing their development, search engine optimization, digital lead generation, and marketing. He **negotiated the sale of both businesses** to established corporations, including a publicly traded company.",
+        "Having worked as a frontline salesperson, sales manager, executive, and founder, Michael understands how sales execution, operational systems, and profitability connect. His experience provides the judgment to understand why a sales organization performs as it does, determine what needs improvement, and know how to implement those changes.",
+        "Michael founded NORTH POINT SALES GROUP to apply that experience through practical consulting and hands-on implementation. His experience and practical understanding of sales mechanics form the DNA of NORTH POINT SALES GROUP—shaping its methodology, implementation standards, and approach to improving **sales performance, systems, and leadership**.",
       ],
     },
   },
@@ -1868,7 +1988,7 @@ export const siteConfig = {
                 ],
                 bullets: [
                   "Focused engagements beginning at $7,500 and $9,500.",
-                  "Comprehensive executive implementations ranging from $50,000 to $150,000.",
+                  "Comprehensive executive implementations ranging from $50,000 to $150,000+.",
                   "Clearly defined deliverables appropriate to the selected engagement.",
                   "Investment recommendations based on organizational needs, scope, and complexity.",
                   "Executive review and approval of implementation plans where applicable.",
@@ -4155,7 +4275,7 @@ export const siteConfig = {
           },
         },
         {
-          title: "Full Sales Performance Implementation — $50,000–$150,000",
+          title: "Full Sales Performance Implementation — $50,000–$150,000+",
           description:
             "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.\n\nProfessional implementation fees are based on the agreed scope of work. Any additional third-party services or expenses require prior written client approval and are separately invoiced, with payment required before those services begin.",
           popout: {
@@ -4445,7 +4565,7 @@ export const siteConfig = {
         question: "What is your typical engagement and investment?",
         answer: [
           "Our engagements are customized based on the scope of the sales-performance issues, the areas requiring attention, the size and complexity of the sales organization, and the level of implementation support required.",
-          "NORTH POINT SALES GROUP offers engagements ranging from focused 30-day sales-performance engagements beginning at $7,500 and $9,500 to comprehensive Full Sales Performance Implementation engagements ranging from $50,000 to $150,000.",
+          "NORTH POINT SALES GROUP offers engagements ranging from focused 30-day sales-performance engagements beginning at $7,500 and $9,500 to comprehensive Full Sales Performance Implementation engagements ranging from $50,000 to $150,000+.",
           "Full Sales Performance Implementation engagements typically run 30 to 90 days, depending on the size and complexity of the sales organization, the scope of work, and the depth of implementation required.",
           "For comprehensive implementations, the investment is determined by the actual scope of work—not simply the size of the company. The greater the number of performance areas involved, organizational complexity, level of hands-on implementation, and duration of NPSG involvement, the greater the investment.",
           {
@@ -4866,7 +4986,7 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
               { label: "FAQs", href: "/#faqs" },
 
               { label: "Careers", href: "/careers" },
-              { label: "Blog", href: "/blogs" },
+              { label: "EXECUTIVE INSIGHTS", href: "/blogs" },
               {
                 label: "Sales Alignment Assessment",
                 href: "/sales-alignment-assessment",

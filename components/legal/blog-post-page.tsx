@@ -45,12 +45,14 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
           ))}
         </div>
 
-        <div className="blog-page__conclusion">
-          <p className="legal-page__text">{post.conclusion}</p>
-        </div>
+        {post.conclusion ? (
+          <div className="blog-page__conclusion">
+            <p className="legal-page__text">{post.conclusion}</p>
+          </div>
+        ) : null}
 
         <div className="blog-page__cta">
-          <BlogPostCta text={post.cta} />
+          <BlogPostCta />
         </div>
 
         <p className="blog-page__back">
