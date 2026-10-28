@@ -186,9 +186,21 @@ function AboutExpandable({ section }: { section: AboutExpandableSection }) {
           {section.options && section.options.length > 0 ? (
             <AboutOptionsList options={section.options} />
           ) : null}
-          {section.closingParagraphs?.map((paragraph) => (
+          {section.closingParagraphs?.map((paragraph, index, paragraphs) => (
             <p key={paragraphKey(paragraph)}>
               <AboutParagraphText paragraph={paragraph} />
+              {section.heading === "A PRACTICAL STARTING POINT" &&
+              index === paragraphs.length - 1 ? (
+                <>
+                  {" "}
+                  <Link
+                    href="#investment"
+                    className="inline-flex min-h-8 items-center justify-center bg-[#b17411] px-3 font-body text-[12px] font-bold tracking-[0.04em] text-white transition-colors hover:bg-[#8f5d0e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b17411]"
+                  >
+                    (See Investments)
+                  </Link>
+                </>
+              ) : null}
             </p>
           ))}
         </div>

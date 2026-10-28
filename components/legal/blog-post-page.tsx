@@ -36,13 +36,22 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
 
       <div className="legal-page__inner">
         <div className="legal-page__blocks">
-          {post.blocks.map((block, index) => (
-            <ContentBlockContent
-              key={`${post.slug}-${block.type}-${index}`}
-              block={block}
-              headingTag="h2"
-            />
-          ))}
+          {post.blocks.map((block, index) =>
+            index === 0 && block.type === "paragraph" ? (
+              <h2
+                key={`${post.slug}-${block.type}-${index}`}
+                className="blog-page__lead-heading"
+              >
+                {block.text}
+              </h2>
+            ) : (
+              <ContentBlockContent
+                key={`${post.slug}-${block.type}-${index}`}
+                block={block}
+                headingTag="h2"
+              />
+            ),
+          )}
         </div>
 
         {post.conclusion ? (

@@ -105,71 +105,77 @@ export function ProvenResultsSection({
               ))}
             </div>
 
-            <p className="font-body text-[16px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[20px]">
+            <p className="font-body text-[16px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[20px] lg:hidden">
               {results.tagline}
             </p>
           </div>
 
           {/* Right — stats panel */}
-          <div className="relative w-full overflow-hidden bg-[#001528] lg:min-h-[325px] lg:min-w-0 lg:flex-1">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-25"
-              style={{
-                backgroundImage:
-                  "radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%)",
-              }}
-            />
+          <div className="relative w-full lg:flex lg:min-w-0 lg:flex-1 lg:flex-col lg:gap-3">
+            <p className="hidden font-body text-[16px] leading-none font-extrabold tracking-[0.05em] text-bronze uppercase sm:text-[20px] lg:block">
+              {results.tagline}
+            </p>
 
-            <div className="relative flex h-full min-h-[253px] w-full flex-col sm:flex-row sm:items-stretch lg:px-2 lg:py-9">
-              {results.stats.map((stat, index) => (
-                <div
-                  key={stat.value}
-                  className={cn(
-                    "flex w-full flex-col gap-2 px-6 py-6 text-left sm:min-w-0 sm:flex-1 sm:px-6 sm:py-0",
-                    index > 0 &&
-                      "border-t border-[#E89B2D] sm:border-t-0 sm:border-l",
-                  )}
-                >
-                  <button
-                    type="button"
-                    onClick={() =>
-                      stat.popout &&
-                      setPopup({
-                        statValue: stat.value,
-                        statDescription: stat.description,
-                        title: stat.popout.title,
-                        paragraphs: [stat.popout.description],
-                      })
-                    }
-                    className="group flex cursor-pointer flex-col items-start gap-3 text-left transition-opacity hover:opacity-90 focus:outline-none"
+            <div className="relative w-full overflow-hidden bg-[#001528] lg:flex lg:min-h-[325px] lg:flex-col">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-25"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.18), transparent 55%), linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%)",
+                }}
+              />
+
+              <div className="relative flex h-full min-h-[253px] w-full flex-col sm:flex-row sm:items-stretch lg:px-2 lg:py-9">
+                {results.stats.map((stat, index) => (
+                  <div
+                    key={stat.value}
+                    className={cn(
+                      "flex w-full flex-col gap-2 px-6 py-6 text-left sm:min-w-0 sm:flex-1 sm:px-6 sm:py-0",
+                      index > 0 &&
+                        "border-t border-[#E89B2D] sm:border-t-0 sm:border-l",
+                    )}
                   >
-                    <p className="font-heading text-[44px] leading-none font-bold tracking-tight text-[#E89B2D] sm:text-[48px]">
-                      {stat.value}
-                    </p>
-                    <p className="font-body text-[15px] leading-[1.4] font-normal text-white">
-                      {stat.description}
-                    </p>
-                  </button>
-                  <div className="mt-auto flex flex-col items-start gap-1">
-                    <p className="font-body text-[16px] leading-none font-semibold tracking-[0.05em] text-[#94A3B8] uppercase">
-                      Source:
-                    </p>
                     <button
                       type="button"
                       onClick={() =>
+                        stat.popout &&
                         setPopup({
-                          title: stat.sourceInfo.title,
-                          paragraphs: stat.sourceInfo.description,
+                          statValue: stat.value,
+                          statDescription: stat.description,
+                          title: stat.popout.title,
+                          paragraphs: [stat.popout.description],
                         })
                       }
-                      className="cursor-pointer text-left font-body text-[15px] leading-[1.4] font-normal text-white underline decoration-[#E89B2D]/60 underline-offset-2 transition hover:text-[#E89B2D] focus:outline-none"
+                      className="group flex cursor-pointer flex-col items-start gap-3 text-left transition-opacity hover:opacity-90 focus:outline-none"
                     >
-                      {stat.source}
+                      <p className="font-heading text-[44px] leading-none font-bold tracking-tight text-[#E89B2D] sm:text-[48px]">
+                        {stat.value}
+                      </p>
+                      <p className="font-body text-[15px] leading-[1.4] font-normal text-white">
+                        {stat.description}
+                      </p>
                     </button>
+                    <div className="mt-auto flex flex-col items-start gap-1">
+                      <p className="font-body text-[16px] leading-none font-semibold tracking-[0.05em] text-[#94A3B8] uppercase">
+                        Source:
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setPopup({
+                            title: stat.sourceInfo.title,
+                            paragraphs: stat.sourceInfo.description,
+                          })
+                        }
+                        className="cursor-pointer text-left font-body text-[15px] leading-[1.4] font-normal text-white underline decoration-[#E89B2D]/60 underline-offset-2 transition hover:text-[#E89B2D] focus:outline-none"
+                      >
+                        {stat.source}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

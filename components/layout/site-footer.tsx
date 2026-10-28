@@ -164,7 +164,9 @@ export function SiteFooter() {
                         aria-hidden
                         className="size-1 shrink-0 rounded-full bg-[#d48c27]/70"
                       />
-                      {link.label}
+                      {link.href === "/blogs"
+                        ? "Executive Insights"
+                        : link.label}
                     </Link>
                   </li>
                 ))}

@@ -413,7 +413,6 @@ export function InvestmentSection({
               : null;
       if (!nextPopup) return;
 
-      document.getElementById("investment")?.scrollIntoView();
       setSequencePopupOpen(false);
       setPopup({ ...nextPopup });
     };

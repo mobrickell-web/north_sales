@@ -638,6 +638,15 @@
   line-height: 1.2;
 }
 
+.blog-page__lead-heading {
+  margin: 0;
+  font-family: var(--font-body), var(--font-inter), sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.4;
+  color: #000000;
+}
+
 /* Keep the article hero in normal flow so it never covers the opening content. */
 .legal-page__hero.blog-page__post-hero {
   position: relative;
