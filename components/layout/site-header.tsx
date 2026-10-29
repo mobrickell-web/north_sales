@@ -55,7 +55,6 @@ export function SiteHeader() {
   const [activeHash, setActiveHash] = useState<string>("#top");
   const pathname = usePathname();
   const router = useRouter();
-  const isBlogPage = pathname === "/blogs" || pathname.startsWith("/blogs/");
   const { openSchedule } = useScheduleAppointment();
   const openContact = () => {
     setIsMoreOpen(false);
@@ -165,12 +164,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header
-        className={cn(
-          "z-50 w-full bg-primary shadow-md",
-          isBlogPage ? "fixed top-0" : "relative",
-        )}
-      >
+      <header className="sticky top-0 z-50 w-full bg-primary shadow-md">
         <div
           data-site-header-bar
           className="mx-auto flex min-h-[80px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8 xl:h-[110px] xl:min-h-0 xl:grid xl:grid-cols-[270px_minmax(0,1fr)_auto] xl:gap-x-0 xl:px-[24px]"
@@ -370,9 +364,6 @@ export function SiteHeader() {
 
         <ContactDialog open={isContactOpen} onOpenChange={setIsContactOpen} />
       </header>
-      {isBlogPage && (
-        <div className="h-[80px] shrink-0 xl:h-[110px]" aria-hidden="true" />
-      )}
     </>
   );
 }

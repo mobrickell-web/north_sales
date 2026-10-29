@@ -382,7 +382,7 @@ function renderSectionBlock(
 }
 
 export function InvestmentSection({
-  sectionNumber = 7,
+  sectionNumber = 8,
 }: InvestmentSectionProps) {
   const { challenges } = siteConfig;
   const { investment } = challenges;

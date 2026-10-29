@@ -249,7 +249,7 @@ interface AboutUsSectionProps {
   sectionNumber?: number | string;
 }
 
-export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
+export function AboutUsSection({ sectionNumber = 2 }: AboutUsSectionProps) {
   const { aboutUs } = siteConfig;
 
   return (
@@ -276,14 +276,34 @@ export function AboutUsSection({ sectionNumber = 1 }: AboutUsSectionProps) {
         </h2>
 
         <div className="flex w-full max-w-[1320px] flex-col gap-5">
-          {aboutUs.openingParagraphs.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]"
-            >
-              {paragraph}
+          <ul className="flex list-none flex-col gap-2 p-0">
+            {aboutUs.openingPoints.map((point) => (
+              <li
+                key={point}
+                className="flex gap-2 font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]"
+              >
+                <span aria-hidden="true" className="font-bold text-[#b17411]">
+                  ✓
+                </span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div>
+            <p className="font-body text-[15px] leading-[1.4] font-semibold text-[#5C5F66]">
+              Practical Improvements In:
             </p>
-          ))}
+            <ol className="mt-1 list-decimal pl-6 font-body text-[15px] leading-[1.6] font-normal text-[#5C5F66]">
+              {aboutUs.practicalImprovements.map((improvement) => (
+                <li key={improvement}>{improvement}</li>
+              ))}
+            </ol>
+          </div>
+
+          <p className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]">
+            {aboutUs.openingClosingParagraph}
+          </p>
         </div>
 
         <p className="max-w-[900px] font-body text-[14px] font-extrabold tracking-[0.06em] text-[#061525] uppercase sm:text-[15px]">

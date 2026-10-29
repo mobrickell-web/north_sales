@@ -48,7 +48,7 @@ function withKpisCasing(text: string) {
   );
 }
 
-export function HowItWorks({ sectionNumber = 4 }: HowItWorksProps) {
+export function HowItWorks({ sectionNumber = 5 }: HowItWorksProps) {
   const { howItWorks } = siteConfig;
   const leadershipSupport = howItWorks.salesLeadershipImplementationSupport;
 

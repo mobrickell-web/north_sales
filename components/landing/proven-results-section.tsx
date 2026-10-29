@@ -14,7 +14,7 @@ interface ProvenResultsSectionProps {
 }
 
 export function ProvenResultsSection({
-  sectionNumber = 3,
+  sectionNumber = 4,
 }: ProvenResultsSectionProps) {
   const { results } = siteConfig;
   const [popup, setPopup] = useState<{
@@ -33,7 +33,7 @@ export function ProvenResultsSection({
       aria-labelledby="results-heading"
       className="relative w-full overflow-hidden bg-white"
     >
-      {/* Top Left Corner Indicator Number ("2") */}
+      {/* Top Left Corner Indicator Number ("4") */}
       <div className="absolute left-4 top-3 select-none font-secondary text-[36px] font-bold leading-none text-[#b17411] opacity-60 sm:left-8 sm:top-6 sm:text-[64px]">
         {sectionNumber}
       </div>

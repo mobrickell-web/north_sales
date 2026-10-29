@@ -647,9 +647,19 @@
   color: #000000;
 }
 
-/* Keep the article hero in normal flow so it never covers the opening content. */
+.blog-page > .legal-page__hero {
+  position: sticky;
+  top: 80px;
+  z-index: 40;
+}
+
+@media (min-width: 1280px) {
+  .blog-page > .legal-page__hero {
+    top: 110px;
+  }
+}
+
 .legal-page__hero.blog-page__post-hero {
-  position: relative;
   min-height: 0;
   box-shadow: 0 6px 18px rgb(2 11 30 / 25%);
 }

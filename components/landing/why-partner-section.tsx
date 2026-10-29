@@ -147,9 +147,9 @@ export function WhyPartnerSection() {
       aria-labelledby="why-partner-heading"
       className="relative w-full overflow-hidden bg-[#F2F2F3] py-10 lg:py-14"
     >
-      {/* Top Left Indicator ("2") */}
+      {/* Top Left Indicator ("3") */}
       <div className="absolute left-4 top-4 select-none font-secondary text-[48px] font-bold leading-none text-[#b17411] opacity-60 sm:left-8 sm:top-6 sm:text-[64px]">
-        2
+        3
       </div>
 
       <Dialog.Root

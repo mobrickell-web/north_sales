@@ -1444,10 +1444,17 @@ export const siteConfig = {
   aboutUs: {
     title: "ABOUT US",
     heading: "EXPERIENCE BEHIND NORTH POINT SALES GROUP",
-    openingParagraphs: [
-      "NORTH POINT SALES GROUP is an executive-level sales performance consulting and implementation firm. We help established businesses strengthen their existing sales organizations through practical improvements in sales performance, sales systems, and sales leadership.",
-      "We work directly with owners and executive teams to identify where revenue may be left on the table, implement needed improvements, and establish accountability for measurable progress.",
+    openingPoints: [
+      "Executive-level sales performance consulting and implementation firm",
+      "We help established businesses strengthen their existing sales organizations",
     ],
+    practicalImprovements: [
+      "Sales Performance",
+      "Sales Systems",
+      "Sales Leadership",
+    ],
+    openingClosingParagraph:
+      "We work directly with owners and executive teams to identify where revenue may be left on the table, implement needed improvements, and establish accountability for measurable progress.",
     tagline:
       "EXPERIENCE THAT SPANS FRONTLINE SALES THROUGH EXECUTIVE LEADERSHIP.",
     experienceParagraphs: [

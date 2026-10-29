@@ -7,7 +7,7 @@ interface FaqSectionProps {
   sectionNumber?: number | string;
 }
 
-export function FaqSection({ sectionNumber = 8 }: FaqSectionProps) {
+export function FaqSection({ sectionNumber = 9 }: FaqSectionProps) {
   const { faq } = siteConfig;
 
   return (
@@ -16,7 +16,7 @@ export function FaqSection({ sectionNumber = 8 }: FaqSectionProps) {
       aria-labelledby="faq-heading"
       className="relative w-full bg-white overflow-hidden"
     >
-      {/* Top Left Corner Indicator Number ("7") */}
+      {/* Top Left Corner Indicator Number ("9") */}
       <div className="absolute left-4 top-4 select-none font-secondary text-[48px] font-bold leading-none text-[#b17411] opacity-60 sm:left-8 sm:top-6 sm:text-[64px]">
         {sectionNumber}
       </div>
