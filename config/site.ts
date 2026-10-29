@@ -1448,10 +1448,28 @@ export const siteConfig = {
       "Executive-level sales performance consulting and implementation firm",
       "We help established businesses strengthen their existing sales organizations",
     ],
-    practicalImprovements: [
-      "Sales Performance",
-      "Sales Systems",
-      "Sales Leadership",
+    practicalImprovementPopups: [
+      {
+        title: "SALES PERFORMANCE",
+        intro:
+          "Improve how effectively your existing sales team turns opportunities into business.",
+        description:
+          "We work directly with salespeople to strengthen prospecting, presentations, follow-up, closing, and account development. We establish baseline measurements and track progress to help improve productivity, consistency, revenue, and contribution profit.",
+      },
+      {
+        title: "SALES SYSTEMS",
+        intro:
+          "Strengthen the processes and tools that support consistent sales execution.",
+        description:
+          "We improve sales processes, CRM practices, pipeline management, forecasting, and performance reporting. Clear standards and practical systems help prevent missed opportunities, reduce wasted effort, and give leadership better visibility into results.",
+      },
+      {
+        title: "SALES LEADERSHIP",
+        intro:
+          "Strengthen the direction, coaching, and accountability your sales team needs to perform.",
+        description:
+          "We help leaders establish clear expectations, conduct productive sales meetings, coach effectively, and address performance issues. When dedicated sales leadership is needed, we can provide fractional support or help recruit, onboard, and develop a sales manager.",
+      },
     ],
     openingClosingParagraph:
       "We work directly with owners and executive teams to identify where revenue may be left on the table, implement needed improvements, and establish accountability for measurable progress.",

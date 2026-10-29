@@ -251,6 +251,9 @@ interface AboutUsSectionProps {
 
 export function AboutUsSection({ sectionNumber = 2 }: AboutUsSectionProps) {
   const { aboutUs } = siteConfig;
+  const [activePracticalImprovement, setActivePracticalImprovement] = useState<
+    (typeof aboutUs.practicalImprovementPopups)[number] | null
+  >(null);
 
   return (
     <section
@@ -294,11 +297,47 @@ export function AboutUsSection({ sectionNumber = 2 }: AboutUsSectionProps) {
             <p className="font-body text-[15px] leading-[1.4] font-semibold text-[#5C5F66]">
               Practical Improvements In:
             </p>
-            <ol className="mt-1 list-decimal pl-6 font-body text-[15px] leading-[1.6] font-normal text-[#5C5F66]">
-              {aboutUs.practicalImprovements.map((improvement) => (
-                <li key={improvement}>{improvement}</li>
-              ))}
-            </ol>
+            <Dialog.Root
+              open={activePracticalImprovement !== null}
+              onOpenChange={(open) =>
+                !open && setActivePracticalImprovement(null)
+              }
+            >
+              <ul className="mt-1 list-disc pl-6 font-body text-[15px] leading-[1.6] font-normal text-[#5C5F66] marker:text-[#b17411]">
+                {aboutUs.practicalImprovementPopups.map((improvement) => (
+                  <li key={improvement.title}>
+                    <button
+                      type="button"
+                      aria-haspopup="dialog"
+                      onClick={() => setActivePracticalImprovement(improvement)}
+                      className="cursor-pointer text-left text-[#b17411] capitalize underline-offset-2 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b17411]"
+                    >
+                      {improvement.title.toLowerCase()}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+                <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[95vw] max-w-[620px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
+                  <Dialog.Close className="absolute right-4 top-4 flex size-11 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b17411]">
+                    <X className="size-5" />
+                    <span className="sr-only">Close</span>
+                  </Dialog.Close>
+                  {activePracticalImprovement ? (
+                    <div className="flex flex-col gap-4 pr-8 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
+                      <Dialog.Title className="font-body text-[16px] font-extrabold tracking-wide text-[#061525] uppercase sm:text-[18px]">
+                        {activePracticalImprovement.title}
+                      </Dialog.Title>
+                      <Dialog.Description className="font-semibold text-[#001528]">
+                        {activePracticalImprovement.intro}
+                      </Dialog.Description>
+                      <p>{activePracticalImprovement.description}</p>
+                    </div>
+                  ) : null}
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
           </div>
 
           <p className="font-body text-[15px] leading-[1.4] font-normal text-[#5C5F66]">
