@@ -1413,7 +1413,7 @@ export const siteConfig = {
     { label: "CHALLENGES", href: "#challenges" },
     { label: "INVESTMENT", href: "#investment" },
 
-    // { href: "#solutions", label: "Solutions" },
+    // { href: "#solutions", label: "Solutions" }
     { href: "#faqs", label: "FAQs" },
   ],
   navMore: {
@@ -2472,7 +2472,7 @@ export const siteConfig = {
       {
         id: "design-align",
         stepNumber: "2.",
-        title: "DESIGN & ALIGN",
+        title: "DEFINE & ALIGN",
         icon: "target",
         bullets: [
           {
