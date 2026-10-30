@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+    <linearGradient id="gold" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b17411" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#efb862" stop-opacity="0.98" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#efb862" stop-opacity="0.14" />
+      <stop offset="1" stop-color="#efb862" stop-opacity="0" />
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#efb862" fill-opacity="0.75" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+  <ellipse cx="600" cy="250" rx="460" ry="230" fill="url(#glow)" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="74" text-anchor="middle" fill="#ffffff" fill-opacity="0.92" font-size="17" font-weight="700" letter-spacing="0.12em">THE HIDDEN COST OF LOW MORALE</text>
+    <text x="600" y="104" text-anchor="middle" fill="#ffffff" fill-opacity="0.5" font-size="13">When sales slow down, the cause is not always activity, pipeline, or closing</text>
+
+    <!-- Cost 1 -->
+    <g>
+      <rect x="60" y="150" width="240" height="228" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="180" cy="150" r="16" fill="url(#gold)" />
+      <text x="180" y="155" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">1</text>
+      <text x="180" y="204" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.03em">REDUCED ACTIVITY</text>
+      <text x="180" y="240" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Less prospecting, more</text>
+      <text x="180" y="260" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">avoidance of difficult</text>
+      <text x="180" y="280" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">conversations</text>
+    </g>
+
+    <!-- Cost 2 -->
+    <g>
+      <rect x="340" y="150" width="240" height="228" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="460" cy="150" r="16" fill="url(#gold)" />
+      <text x="460" y="155" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">2</text>
+      <text x="460" y="204" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.03em">DELAYED FOLLOW-UP</text>
+      <text x="460" y="240" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Stalled opportunities,</text>
+      <text x="460" y="260" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">unclear next steps,</text>
+      <text x="460" y="280" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">lost momentum</text>
+    </g>
+
+    <!-- Cost 3 -->
+    <g>
+      <rect x="620" y="150" width="240" height="228" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="740" cy="150" r="16" fill="url(#gold)" />
+      <text x="740" y="155" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">3</text>
+      <text x="740" y="204" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.03em">WEAKER CONVERSATIONS</text>
+      <text x="740" y="240" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Rushed presentations,</text>
+      <text x="740" y="260" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">overlooked concerns,</text>
+      <text x="740" y="280" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">inconsistent attention</text>
+    </g>
+
+    <!-- Cost 4 -->
+    <g>
+      <rect x="900" y="150" width="240" height="228" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="1020" cy="150" r="16" fill="url(#gold)" />
+      <text x="1020" y="155" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">4</text>
+      <text x="1020" y="204" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.03em">HIGHER TURNOVER</text>
+      <text x="1020" y="240" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Recruiting, onboarding,</text>
+      <text x="1020" y="260" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">customer transitions,</text>
+      <text x="1020" y="280" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">lost productivity</text>
+    </g>
+
+    <!-- Arrows into the outcome -->
+    <g fill="none" stroke="#efb862" stroke-width="1.8" stroke-opacity="0.55" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M180 380C190 410 270 420 320 440" />
+      <path d="M460 380C470 410 530 420 530 440" />
+      <path d="M740 380C730 410 670 420 670 440" />
+      <path d="M1020 380C1010 410 930 420 880 440" />
+    </g>
+
+    <!-- Outcome -->
+    <g>
+      <rect x="250" y="446" width="700" height="94" rx="14" fill="url(#gold)" />
+      <text x="600" y="481" text-anchor="middle" fill="#001528" fill-opacity="0.82" font-size="12" font-weight="700" letter-spacing="0.10em">THE COST SHOWS UP IN THE BUSINESS</text>
+      <text x="600" y="510" text-anchor="middle" fill="#001528" font-size="17" font-weight="700" letter-spacing="0.02em">MISSED OPPORTUNITIES · WEAKER RELATIONSHIPS · HIGHER COSTS</text>
+    </g>
+
+    <text x="600" y="586" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="14">Investigate the conditions behind the behavior: clear expectations, useful tools, fair pay, effective coaching.</text>
+    <text x="600" y="614" text-anchor="middle" fill="#ffffff" fill-opacity="0.45" font-size="13">Support and accountability work together.</text>
+  </g>
+
+  <g>
+    <rect x="70" y="696" width="1060" height="2" fill="#ffffff" fill-opacity="0.12" />
+    <circle cx="98" cy="726" r="5" fill="#b17411" />
+    <text x="118" y="731" fill="#ffffff" fill-opacity="0.72" font-family="Inter, Arial, sans-serif" font-size="15">Low morale is rarely visible in a report, but its costs appear in activity, follow-up, conversations, and turnover.</text>
+  </g>
+</svg>

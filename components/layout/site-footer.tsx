@@ -14,6 +14,7 @@ import { AiSalesIntegrationDialog } from "@/components/layout/ai-sales-integrati
 import { TwelveAdvantagesDialog } from "@/components/layout/twelve-advantages-dialog";
 import { SocialMediaDialog } from "@/components/layout/social-media-dialog";
 import { ContactDialog } from "@/components/layout/contact-dialog";
+import { CancellationRefundDialog } from "@/components/layout/cancellation-refund-dialog";
 
 const HEADER_OFFSET = 110;
 
@@ -198,6 +199,9 @@ export function SiteFooter() {
                 </li>
                 <li>
                   <TwelveAdvantagesDialog />
+                </li>
+                <li>
+                  <CancellationRefundDialog />
                 </li>
               </ul>
             </div>

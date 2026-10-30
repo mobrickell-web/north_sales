@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#03132B" />
+      <stop offset="1" stop-color="#001528" />
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+    <linearGradient id="gold" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b17411" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#efb862" stop-opacity="0.98" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#efb862" stop-opacity="0.16" />
+      <stop offset="1" stop-color="#efb862" stop-opacity="0" />
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#efb862" fill-opacity="0.75" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+  <ellipse cx="600" cy="230" rx="430" ry="230" fill="url(#glow)" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="74" text-anchor="middle" fill="#ffffff" fill-opacity="0.92" font-size="17" font-weight="700" letter-spacing="0.12em">GREAT TEAMS ARE DEVELOPED, NOT HIRED</text>
+    <text x="600" y="104" text-anchor="middle" fill="#ffffff" fill-opacity="0.5" font-size="13">Effective sales leadership shapes confidence, motivation, and job satisfaction</text>
+
+    <!-- Leadership centre -->
+    <g>
+      <rect x="430" y="132" width="340" height="84" rx="14" fill="#ffffff" fill-opacity="0.06" stroke="#efb862" stroke-opacity="0.55" stroke-width="2" />
+      <text x="600" y="166" text-anchor="middle" fill="#efb862" font-size="13" font-weight="700" letter-spacing="0.10em">SALES LEADERSHIP</text>
+      <text x="600" y="192" text-anchor="middle" fill="#ffffff" fill-opacity="0.72" font-size="12.5">Builds the environment, not just the numbers</text>
+    </g>
+
+    <!-- Connectors from leadership to pillars -->
+    <g fill="none" stroke="#efb862" stroke-width="1.8" stroke-opacity="0.45" stroke-linecap="round">
+      <path d="M600 216C600 252 156 250 156 286" />
+      <path d="M600 216C600 252 378 250 378 286" />
+      <path d="M600 216V286" />
+      <path d="M600 216C600 252 822 250 822 286" />
+      <path d="M600 216C600 252 1044 250 1044 286" />
+    </g>
+
+    <!-- Pillar 1 -->
+    <g>
+      <rect x="61" y="286" width="190" height="158" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="156" cy="286" r="16" fill="url(#gold)" />
+      <text x="156" y="291" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">1</text>
+      <text x="156" y="336" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.04em">JOB SATISFACTION</text>
+      <text x="156" y="366" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Respected, supported,</text>
+      <text x="156" y="386" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">and appreciated</text>
+    </g>
+
+    <!-- Pillar 2 -->
+    <g>
+      <rect x="283" y="286" width="190" height="158" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="378" cy="286" r="16" fill="url(#gold)" />
+      <text x="378" y="291" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">2</text>
+      <text x="378" y="336" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.04em">BELIEF IN THE OFFERING</text>
+      <text x="378" y="366" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Know the value,</text>
+      <text x="378" y="386" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">believe the message</text>
+    </g>
+
+    <!-- Pillar 3 -->
+    <g>
+      <rect x="505" y="286" width="190" height="158" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="600" cy="286" r="16" fill="url(#gold)" />
+      <text x="600" y="291" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">3</text>
+      <text x="600" y="336" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.04em">CONFIDENCE TO CLOSE</text>
+      <text x="600" y="366" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Practice, feedback,</text>
+      <text x="600" y="386" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">and sound judgment</text>
+    </g>
+
+    <!-- Pillar 4 -->
+    <g>
+      <rect x="727" y="286" width="190" height="158" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="822" cy="286" r="16" fill="url(#gold)" />
+      <text x="822" y="291" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">4</text>
+      <text x="822" y="336" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.04em">INDIVIDUAL MOTIVATION</text>
+      <text x="822" y="366" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Recognition, growth,</text>
+      <text x="822" y="386" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">and clear goals</text>
+    </g>
+
+    <!-- Pillar 5 -->
+    <g>
+      <rect x="949" y="286" width="190" height="158" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" />
+      <circle cx="1044" cy="286" r="16" fill="url(#gold)" />
+      <text x="1044" y="291" text-anchor="middle" fill="#001528" font-size="13" font-weight="700">5</text>
+      <text x="1044" y="336" text-anchor="middle" fill="#ffffff" fill-opacity="0.85" font-size="12" font-weight="700" letter-spacing="0.04em">LEADERSHIP TONE</text>
+      <text x="1044" y="366" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">Consistent standards,</text>
+      <text x="1044" y="386" text-anchor="middle" fill="#ffffff" fill-opacity="0.6" font-size="12">fair treatment</text>
+    </g>
+
+    <!-- Arrows into the outcome -->
+    <g fill="none" stroke="#efb862" stroke-width="1.8" stroke-opacity="0.6" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M156 446C170 466 250 476 300 494" />
+      <path d="M378 446C400 466 470 478 470 494" />
+      <path d="M600 446V494" />
+      <path d="M822 446C800 466 730 478 730 494" />
+      <path d="M1044 446C1030 466 950 476 900 494" />
+    </g>
+
+    <!-- Outcome -->
+    <g>
+      <rect x="250" y="500" width="700" height="86" rx="14" fill="url(#gold)" />
+      <text x="600" y="532" text-anchor="middle" fill="#001528" fill-opacity="0.82" font-size="12" font-weight="700" letter-spacing="0.12em">CONFIDENCE &#183; MOTIVATION &#183; JOB SATISFACTION</text>
+      <text x="600" y="562" text-anchor="middle" fill="#001528" font-size="19" font-weight="700" letter-spacing="0.02em">A TEAM THAT WANTS TO SUCCEED</text>
+    </g>
+
+    <text x="600" y="628" text-anchor="middle" fill="#ffffff" fill-opacity="0.62" font-size="14">Great sales teams are not simply hired. They are developed, supported, motivated, and led.</text>
+  </g>
+
+  <g>
+    <rect x="70" y="696" width="1060" height="2" fill="#ffffff" fill-opacity="0.12" />
+    <circle cx="98" cy="726" r="5" fill="#b17411" />
+    <text x="118" y="731" fill="#ffffff" fill-opacity="0.72" font-family="Inter, Arial, sans-serif" font-size="15">Sustainable sales performance depends on the quality of sales leadership and the environment it creates.</text>
+  </g>
+</svg>

@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Loader2, LogOut } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import { AdminAppointmentsPanel } from "@/components/admin/admin-appointments";
+import { AdminOverviewContent } from "@/components/admin/admin-overview";
+import { AdminSidebar } from "@/components/shared/admin-sidebar";
+import { AdminTopbar } from "@/components/shared/admin-topbar";
 import {
   type AdminProfile,
   adminLogout,
@@ -18,12 +20,17 @@ import {
 
 const LOGIN_PATH = "/admin/login";
 
-export function AdminDashboardShell() {
+export function AdminDashboardShell({
+  page = "overview",
+}: {
+  page?: "overview" | "appointments";
+}) {
   const router = useRouter();
 
   const [admin, setAdmin] = useState<AdminProfile | null>(null);
   const [checking, setChecking] = useState(true);
   const [signingOut, setSigningOut] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!hasSession()) {
@@ -54,7 +61,9 @@ export function AdminDashboardShell() {
     if (accessToken && refreshToken) {
       try {
         await adminLogout(accessToken, refreshToken);
-      } catch {}
+      } catch {
+        // Clear local credentials even if the server is unavailable.
+      }
     }
 
     clearSession();
@@ -63,8 +72,8 @@ export function AdminDashboardShell() {
 
   if (checking) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#FAF9F5]">
-        <p className="flex items-center gap-2 font-body text-[14px] text-[#5C5F66]">
+      <main className="flex min-h-screen items-center justify-center bg-admin-canvas">
+        <p className="flex items-center gap-2 font-sans text-[14px] text-admin-muted">
           <Loader2 className="size-4 animate-spin" />
           Checking your session…
         </p>
@@ -73,60 +82,30 @@ export function AdminDashboardShell() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5]">
-      <header className="border-b border-[#E8E4DC] bg-white">
-        <div className="mx-auto flex max-w-[1180px] flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span className="inline-flex w-fit rounded-lg bg-[#020B1E] px-3 py-2">
-            <Image
-              src="/logo/Group%20151.svg"
-              alt="NORTH POINT SALES GROUP"
-              width={345}
-              height={116}
-              className="h-auto w-[200px]"
-              priority
-            />
-          </span>
-
-          <div className="flex items-center justify-between gap-4 sm:justify-end">
-            {admin ? (
-              <div className="text-right">
-                <p className="font-body text-[14px] font-bold text-[#001528]">
-                  {admin.name}
-                </p>
-                <p className="font-body text-[12px] text-[#8A8F98]">
-                  {admin.email} · {admin.role}
-                </p>
-              </div>
-            ) : null}
-
-            <button
-              type="button"
-              onClick={handleSignOut}
-              disabled={signingOut}
-              className="inline-flex h-[40px] items-center justify-center rounded-full border border-[#E8E4DC] bg-white px-4 font-secondary text-[12px] font-bold tracking-[0.08em] text-[#001528] uppercase transition-colors hover:border-[#b17411] hover:text-[#b17411] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <LogOut className="mr-2 size-4" />
-              Sign out
-            </button>
+    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)] overflow-x-clip bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
+      <AdminSidebar
+        onLogout={handleSignOut}
+        signingOut={signingOut}
+        mobileOpen={mobileSidebarOpen}
+        onClose={() => setMobileSidebarOpen(false)}
+      />
+      {page === "appointments" ? (
+        <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
+          <AdminTopbar
+            adminName={admin?.name}
+            title="Appointments"
+            onMenuClick={() => setMobileSidebarOpen(true)}
+          />
+          <div className="mx-auto mt-6 w-full min-w-0 max-w-[1500px]">
+            <AdminAppointmentsPanel />
           </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 sm:py-10">
-        <div className="flex flex-col gap-6">
-          <div>
-            <h1 className="font-body text-[24px] font-extrabold tracking-[0.03em] text-[#001528] uppercase sm:text-[28px]">
-              Admin Dashboard
-            </h1>
-            <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-              Welcome{admin ? `, ${admin.name}` : ""}. Manage your sales
-              appointments here.
-            </p>
-          </div>
-
-          <AdminAppointmentsPanel />
-        </div>
-      </main>
+        </main>
+      ) : (
+        <AdminOverviewContent
+          adminName={admin?.name}
+          onMenuClick={() => setMobileSidebarOpen(true)}
+        />
+      )}
     </div>
   );
 }

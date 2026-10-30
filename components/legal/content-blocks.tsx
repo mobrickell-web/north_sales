@@ -1,6 +1,6 @@
 export type ContentBlock =
   | { type: "heading"; text: string }
-  | { type: "paragraph"; text: string }
+  | { type: "paragraph"; text: string; bold?: boolean }
   | { type: "list"; items: readonly string[] }
   | {
       type: "image";
@@ -28,7 +28,11 @@ export function ContentBlockContent({
         </HeadingTag>
       );
     case "paragraph":
-      return <p className="legal-page__text">{block.text}</p>;
+      return (
+        <p className="legal-page__text">
+          {block.bold ? <strong>{block.text}</strong> : block.text}
+        </p>
+      );
     case "list":
       return (
         <ul className="legal-page__list">

@@ -5,6 +5,7 @@ import {
   fontBody,
   fontHeading,
   fontMono,
+  fontPlusJakarta,
   fontSans,
   fontSecondary,
 } from "@/lib/fonts";
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontSans.variable} ${fontMono.variable} ${fontSecondary.variable} ${fontHeading.variable} ${fontBody.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontMono.variable} ${fontSecondary.variable} ${fontHeading.variable} ${fontBody.variable} ${fontPlusJakarta.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a

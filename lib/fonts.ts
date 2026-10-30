@@ -1,4 +1,11 @@
-import { Arimo, Geist, Geist_Mono, Inter, Lora } from "next/font/google";
+import {
+  Arimo,
+  Geist,
+  Geist_Mono,
+  Inter,
+  Lora,
+  Plus_Jakarta_Sans,
+} from "next/font/google";
 
 export const fontSans = Geist({
   variable: "--font-geist-sans",
@@ -26,4 +33,10 @@ export const fontBody = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+});
+
+export const fontPlusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });

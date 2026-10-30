@@ -1413,7 +1413,7 @@ export const siteConfig = {
     { label: "CHALLENGES", href: "#challenges" },
     { label: "INVESTMENT", href: "#investment" },
 
-    // { href: "#solutions", label: "Solutions" }
+    // { href: "#solutions", label: "Solutions" },
     { href: "#faqs", label: "FAQs" },
   ],
   navMore: {
@@ -5689,6 +5689,79 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms of Use", href: "/terms-of-use" },
     ],
+
+    cancellationRefund: {
+      linkLabel: "Cancellation & Refund Policy",
+      title: "Cancellation & Refund Policy",
+      subtitle: "Payment, Cancellation, and Refund Terms",
+      intro: [
+        "NORTH POINT SALES GROUP provides professional sales consulting and implementation services under written client engagement agreements.",
+      ],
+      sections: [
+        {
+          heading: "Payment & Initial Review",
+          paragraphs: [
+            "Clients select an engagement option, sign an agreement, and make the required initial payment before any professional work begins.",
+            "Every engagement includes an initial seven-calendar-day review, which may involve:",
+          ],
+          bullets: [
+            "Meetings with company leadership.",
+            "Reviewing available sales information, operations, and performance.",
+            "Preparing written observations and a preliminary summary of findings and recommended next steps.",
+          ],
+          closing: [
+            "This is paid professional work included in the engagement fee, not a complimentary assessment or proposal.",
+          ],
+        },
+        {
+          heading: "Cancellation Within the First Seven Days",
+          paragraphs: [
+            "Clients may cancel by providing written notice within seven calendar days of the agreement's Effective Date.",
+            "If canceled, NORTH POINT SALES GROUP retains $300 per hour for actual initial review work performed, up to four hours unless additional time was approved in writing.",
+            "These charges are deducted from payments already received, not added to the engagement fee. Any remaining balance is refunded, less approved, nonrecoverable third-party expenses.",
+          ],
+        },
+        {
+          heading: "Refund Processing",
+          paragraphs: [
+            "Any refund due will be initiated within 24 hours of receiving written cancellation notice, excluding weekends and federal holidays.",
+            "Refund requests received on Friday, Saturday, or Sunday will be processed by the following Monday, unless Monday is a federal holiday, in which case processing will begin the next business day.",
+            "The time required for funds to appear in the client's account depends on the financial institution or payment processor.",
+          ],
+        },
+        {
+          heading: "Cancellation After the Initial Review",
+          paragraphs: [
+            "Broader assessments, coaching, and implementation may begin after the initial seven-day period.",
+            "Once implementation begins, engagement fees are nonrefundable except as otherwise agreed in writing or required by law.",
+          ],
+        },
+        {
+          heading: "Third-Party Expenses",
+          paragraphs: [
+            "Additional third-party expenses require prior written client approval, are invoiced separately, and are refundable only if recoverable.",
+          ],
+        },
+        {
+          heading: "Engagement Agreement",
+          paragraphs: [
+            "The signed engagement agreement governs all services and takes precedence over this general policy, subject to applicable law.",
+          ],
+        },
+        {
+          heading: "Questions?",
+          paragraphs: [],
+          contact: {
+            lead: "Call ",
+            phoneLabel: "1-800-696-6971",
+            phoneHref: "tel:18006966971",
+            middle: " or email ",
+            emailLabel: "contact@northpointsalesgroup.com",
+            emailHref: "mailto:contact@northpointsalesgroup.com",
+          },
+        },
+      ],
+    },
   },
 
   careers: {

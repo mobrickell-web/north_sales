@@ -27,6 +27,55 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
+  --color-admin-canvas: var(--admin-canvas);
+  --color-admin-surface: var(--admin-surface);
+  --color-admin-soft: var(--admin-soft);
+  --color-admin-border: var(--admin-border);
+  --color-admin-border-strong: var(--admin-border-strong);
+  --color-admin-border-subtle: var(--admin-border-subtle);
+  --color-admin-border-chart: var(--admin-border-chart);
+  --color-admin-grid: var(--admin-grid);
+  --color-admin-text: var(--admin-text);
+  --color-admin-text-strong: var(--admin-text-strong);
+  --color-admin-muted: var(--admin-muted);
+  --color-admin-subtle: var(--admin-subtle);
+  --color-admin-navy: var(--admin-navy);
+  --color-admin-navy-hover: var(--admin-navy-hover);
+  --color-admin-avatar: var(--admin-avatar);
+  --color-admin-warning-border: var(--admin-warning-border);
+  --color-admin-warning-bg: var(--admin-warning-bg);
+  --color-admin-warning-text: var(--admin-warning-text);
+  --color-admin-success: var(--admin-success);
+  --color-admin-success-border: var(--admin-success-border);
+  --color-admin-info: var(--admin-info);
+  --color-admin-progress: var(--admin-progress);
+  --color-admin-danger: var(--admin-danger);
+  --color-admin-chart: var(--admin-chart);
+  --color-admin-chart-bar: var(--admin-chart-bar);
+  --color-admin-chart-pale: var(--admin-chart-pale);
+  --color-admin-chart-completed: var(--admin-chart-completed);
+  --color-admin-step: var(--admin-step);
+  --color-admin-sidebar: var(--admin-sidebar);
+  --color-admin-sidebar-text: var(--admin-sidebar-text);
+  --color-admin-sidebar-hover: var(--admin-sidebar-hover);
+  --color-admin-sidebar-divider: var(--admin-sidebar-divider);
+  --color-admin-gold: var(--admin-gold);
+  --color-admin-gold-deep: var(--admin-gold-deep);
+  --color-admin-soon-bg: var(--admin-soon-bg);
+  --color-admin-soon: var(--admin-soon);
+  --color-admin-logout: var(--admin-logout);
+  --color-admin-status-published-bg: var(--admin-status-published-bg);
+  --color-admin-status-published: var(--admin-status-published);
+  --color-admin-status-draft-bg: var(--admin-status-draft-bg);
+  --color-admin-status-draft: var(--admin-status-draft);
+  --color-admin-status-archived-bg: var(--admin-status-archived-bg);
+  --color-admin-status-archived: var(--admin-status-archived);
+  --color-admin-filter-active: var(--admin-filter-active);
+  --color-admin-filter-active-text: var(--admin-filter-active-text);
+  --color-admin-assessment-gold: var(--admin-assessment-gold);
+  --color-admin-assessment-gold-hover: var(--admin-assessment-gold-hover);
+  --color-admin-assessment-text: var(--admin-assessment-text);
+  --shadow-admin-card: 0 1px 2px var(--admin-card-shadow);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -87,6 +136,55 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --admin-canvas: #f8fafc;
+  --admin-surface: #ffffff;
+  --admin-soft: #f3f5f8;
+  --admin-border: #e9edf2;
+  --admin-border-strong: #e2e8f0;
+  --admin-border-subtle: #e8ecf1;
+  --admin-border-chart: #e3e8ef;
+  --admin-grid: #cbd5e1;
+  --admin-text: #475569;
+  --admin-text-strong: #334155;
+  --admin-muted: #64748b;
+  --admin-subtle: #94a3b8;
+  --admin-navy: #1e293b;
+  --admin-navy-hover: #334155;
+  --admin-avatar: #e8edf5;
+  --admin-warning-border: #f4dea7;
+  --admin-warning-bg: #fff9e8;
+  --admin-warning-text: #8a6d27;
+  --admin-success: #34a853;
+  --admin-success-border: #cdebd5;
+  --admin-info: #3978d4;
+  --admin-progress: #c17a2c;
+  --admin-danger: #d94141;
+  --admin-chart: #54c98a;
+  --admin-chart-bar: #f0b85a;
+  --admin-chart-pale: #fce5d2;
+  --admin-chart-completed: #e4e6ea;
+  --admin-step: #eef2f7;
+  --admin-sidebar: #061525;
+  --admin-sidebar-text: #e2e8f0;
+  --admin-sidebar-hover: rgb(255 255 255 / 8%);
+  --admin-sidebar-divider: rgb(255 255 255 / 10%);
+  --admin-gold: #efb862;
+  --admin-gold-deep: #b87517;
+  --admin-soon-bg: rgb(213 254 223 / 24%);
+  --admin-soon: #34c759;
+  --admin-logout: #ff453a;
+  --admin-status-published-bg: #e3f4e9;
+  --admin-status-published: #287648;
+  --admin-status-draft-bg: #fff0d9;
+  --admin-status-draft: #9a5c14;
+  --admin-status-archived-bg: #edf0f4;
+  --admin-status-archived: #5d6674;
+  --admin-filter-active: #17191d;
+  --admin-filter-active-text: #ffffff;
+  --admin-assessment-gold: #bb8911;
+  --admin-assessment-gold-hover: #a9790d;
+  --admin-assessment-text: #14161a;
+  --admin-card-shadow: rgb(15 23 42 / 4%);
 }
 
 :is(
@@ -682,4 +780,32 @@
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
+}
+
+.admin-table-scroll-region {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scrollbar-width: none;
+}
+
+.admin-table-scroll-region::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-table-scroll-region > table {
+  width: max-content;
+  min-width: 100%;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
 }

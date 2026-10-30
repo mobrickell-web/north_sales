@@ -310,11 +310,11 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
     return (
       <main className="mx-auto max-w-[900px] px-4 py-10 sm:px-6">
         <Link
-          href="/admin/dashboard"
+          href="/admin/appointments"
           className="mb-6 inline-flex items-center font-secondary text-[12px] font-bold tracking-[0.08em] text-[#b17411] uppercase hover:text-[#8f5d0e]"
         >
           <ArrowLeft className="mr-2 size-4" />
-          Back to dashboard
+          Back to appointments
         </Link>
         <AdminAlert>{error}</AdminAlert>
       </main>
@@ -342,11 +342,11 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
       <div className="mx-auto flex max-w-[900px] flex-col gap-6">
         <div>
           <Link
-            href="/admin/dashboard"
+            href="/admin/appointments"
             className="inline-flex items-center font-secondary text-[12px] font-bold tracking-[0.08em] text-[#b17411] uppercase hover:text-[#8f5d0e]"
           >
             <ArrowLeft className="mr-2 size-4" />
-            Back to dashboard
+            Back to appointments
           </Link>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
