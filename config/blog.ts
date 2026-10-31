@@ -1249,13 +1249,14 @@ export const blogPosts = [
     title:
       "Helping Executive Leaders and Sales Managers Build a Stronger Sales Organization",
     blocks: [
-      {
-        type: "paragraph",
-        text: "NORTH POINT SALES GROUP | SALES MANAGEMENT INSIGHTS",
-      },
+      // {
+      //   type: "paragraph",
+      //   text: "NORTH POINT SALES GROUP | SALES MANAGEMENT INSIGHTS",
+      // },
       {
         type: "paragraph",
         text: "Improving sales performance should strengthen the people responsible for leading it. Executive leaders need clear information, dependable execution, and confidence in their sales organization. Sales managers need practical tools, effective systems, and support to help their teams deliver.",
+        className: "font-bold text-blue-600",
       },
       {
         type: "paragraph",
@@ -1412,13 +1413,14 @@ export const blogPosts = [
     slug: "the-myth-of-specialization-in-sales-consulting",
     title: "The Myth of Specialization in Sales Consulting",
     blocks: [
-      {
-        type: "paragraph",
-        text: "NORTH POINT SALES GROUP | SALES MANAGEMENT INSIGHTS",
-      },
+      // {
+      //   type: "paragraph",
+      //   text: "NORTH POINT SALES GROUP | SALES MANAGEMENT INSIGHTS",
+      // },
       {
         type: "paragraph",
         text: "Sales consulting offers specialists in nearly every function: prospecting, pipeline management, sales coaching, closing techniques, and CRM optimization.",
+        className: "font-bold text-blue-600",
       },
       {
         type: "paragraph",
