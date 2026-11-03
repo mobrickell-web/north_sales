@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -52,6 +52,11 @@ export function SiteHeader() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const moreMenuRef = useRef<HTMLDivElement>(null);
+  const desktopNavRef = useRef<HTMLElement>(null);
+  const navLinkRefs = useRef(new Map<string, HTMLAnchorElement>());
+  const isProgrammaticScroll = useRef(false);
+  const programmaticScrollTimer = useRef<number | null>(null);
+  const [activeIndicator, setActiveIndicator] = useState({ left: 0, width: 0 });
   const [activeHash, setActiveHash] = useState<string>("#top");
   const pathname = usePathname();
   const router = useRouter();
@@ -61,6 +66,36 @@ export function SiteHeader() {
     setIsMenuOpen(false);
     setIsContactOpen(true);
   };
+
+  useLayoutEffect(() => {
+    const nav = desktopNavRef.current;
+    const activeLink = navLinkRefs.current.get(activeHash);
+
+    if (pathname !== "/" || !nav || !activeLink) {
+      setActiveIndicator((current) =>
+        current.width === 0 ? current : { left: current.left, width: 0 },
+      );
+      return;
+    }
+
+    const updateIndicator = () => {
+      setActiveIndicator({
+        left: activeLink.offsetLeft,
+        width: activeLink.offsetWidth,
+      });
+    };
+
+    updateIndicator();
+    const observer = new ResizeObserver(updateIndicator);
+    observer.observe(nav);
+    observer.observe(activeLink);
+    window.addEventListener("resize", updateIndicator);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateIndicator);
+    };
+  }, [activeHash, pathname]);
 
   useEffect(() => {
     const syncHash = () => setActiveHash(window.location.hash || "#top");
@@ -115,6 +150,18 @@ export function SiteHeader() {
       .filter((id): id is string => Boolean(id));
 
     const updateActive = () => {
+      if (isProgrammaticScroll.current) {
+        if (programmaticScrollTimer.current !== null) {
+          window.clearTimeout(programmaticScrollTimer.current);
+        }
+        programmaticScrollTimer.current = window.setTimeout(() => {
+          isProgrammaticScroll.current = false;
+          programmaticScrollTimer.current = null;
+          updateActive();
+        }, 180);
+        return;
+      }
+
       const marker = getHeaderOffset() + 24;
       let current = "#top";
 
@@ -129,8 +176,26 @@ export function SiteHeader() {
       setActiveHash((prev) => (prev === current ? prev : current));
     };
 
+    const finishProgrammaticScroll = () => {
+      if (!isProgrammaticScroll.current) return;
+      isProgrammaticScroll.current = false;
+      if (programmaticScrollTimer.current !== null) {
+        window.clearTimeout(programmaticScrollTimer.current);
+        programmaticScrollTimer.current = null;
+      }
+      updateActive();
+    };
+
     window.addEventListener("scroll", updateActive, { passive: true });
-    return () => window.removeEventListener("scroll", updateActive);
+    window.addEventListener("scrollend", finishProgrammaticScroll);
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("scrollend", finishProgrammaticScroll);
+      if (programmaticScrollTimer.current !== null) {
+        window.clearTimeout(programmaticScrollTimer.current);
+        programmaticScrollTimer.current = null;
+      }
+    };
   }, [pathname]);
 
   const handleNavClick = (
@@ -144,7 +209,6 @@ export function SiteHeader() {
     }
 
     e.preventDefault();
-    setActiveHash(hash);
     setIsMenuOpen(false);
 
     const goToSection = () => {
@@ -153,6 +217,15 @@ export function SiteHeader() {
         return;
       }
 
+      isProgrammaticScroll.current = true;
+      setActiveHash(hash);
+      if (programmaticScrollTimer.current !== null) {
+        window.clearTimeout(programmaticScrollTimer.current);
+      }
+      programmaticScrollTimer.current = window.setTimeout(() => {
+        isProgrammaticScroll.current = false;
+        programmaticScrollTimer.current = null;
+      }, 2000);
       scrollToHash(hash);
     };
 
@@ -185,8 +258,9 @@ export function SiteHeader() {
           </Link>
 
           <nav
+            ref={desktopNavRef}
             aria-label="Primary"
-            className="hidden h-[89px] items-center justify-center gap-[10px] xl:flex 2xl:gap-[18px]"
+            className="relative hidden h-[89px] items-center justify-center gap-[10px] xl:flex 2xl:gap-[18px]"
           >
             {siteConfig.nav.map((item) => {
               const itemHash = toHash(item.href);
@@ -196,18 +270,31 @@ export function SiteHeader() {
                 <Link
                   key={`${item.href}-${item.label}`}
                   href={toRoute(item.href)}
+                  ref={(element) => {
+                    if (!itemHash) return;
+                    if (element) navLinkRefs.current.set(itemHash, element);
+                    else navLinkRefs.current.delete(itemHash);
+                  }}
                   aria-current={isCurrent ? "page" : undefined}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={cn(
-                    "relative flex h-full shrink-0 items-center justify-center whitespace-nowrap font-secondary text-[10px] font-bold uppercase leading-none tracking-[0.05em] text-white transition-colors hover:text-gold 2xl:text-[13px]",
-                    isCurrent &&
-                      "text-gold after:absolute after:bottom-6 after:left-0 after:right-0 after:h-0.5 after:bg-gold",
+                    "relative flex h-full shrink-0 items-center justify-center whitespace-nowrap font-secondary text-[10px] font-bold uppercase leading-none tracking-[0.05em] text-white transition-colors duration-300 ease-in-out hover:text-gold 2xl:text-[13px]",
+                    isCurrent && "text-gold",
                   )}
                 >
                   {item.label}
                 </Link>
               );
             })}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute bottom-6 left-0 h-0.5 bg-gold transition-[transform,width] duration-300"
+              style={{
+                width: activeIndicator.width,
+                transform: `translateX(${activeIndicator.left}px)`,
+                transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            />
             <div ref={moreMenuRef} className="relative flex h-full shrink-0">
               <button
                 type="button"
@@ -217,7 +304,7 @@ export function SiteHeader() {
                 aria-controls="site-nav-more-menu"
                 onClick={() => setIsMoreOpen((open) => !open)}
                 className={cn(
-                  "relative flex h-full shrink-0 items-center justify-center gap-1 whitespace-nowrap font-secondary text-[10px] font-bold uppercase leading-none tracking-[0.05em] text-white transition-colors hover:text-gold 2xl:text-[13px]",
+                  "relative flex h-full shrink-0 items-center justify-center gap-1 whitespace-nowrap font-secondary text-[10px] font-bold uppercase leading-none tracking-[0.05em] text-white transition-colors duration-300 ease-in-out hover:text-gold 2xl:text-[13px]",
                   isMoreOpen && "text-gold",
                 )}
               >
@@ -316,7 +403,7 @@ export function SiteHeader() {
                     key={`mobile-${item.href}-${item.label}`}
                     href={toRoute(item.href)}
                     className={cn(
-                      "border-b border-white/10 py-4 font-secondary text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:text-gold",
+                      "border-b border-white/10 py-4 font-secondary text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors duration-300 ease-in-out hover:text-gold",
                       isCurrent && "text-gold",
                     )}
                     onClick={(e) => handleNavClick(e, item.href)}

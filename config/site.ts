@@ -1427,7 +1427,7 @@ export const siteConfig = {
     titleLine1: "Stronger Sales Organization",
     titleLine2: "Better Bottom-Line Results.",
     eyebrow: "Driving Revenue Growth Through Sales Organization Excellence",
-    body: "We transform underperforming B2B sales organizations into high-performing revenue engines—unlocking untapped sales capacity with the potential to generate millions of dollars in additional revenue.",
+    body: "Transform your underperforming B2B sales organization into a high-performing revenue engine—unlocking untapped sales capacity with the potential to generate millions of dollars in additional revenue.",
     primaryCta: {
       label: "Schedule a Consultation",
       href: "#cta",
@@ -1443,7 +1443,7 @@ export const siteConfig = {
   },
   aboutUs: {
     title: "ABOUT US",
-    heading: "EXPERIENCE BEHIND NORTH POINT SALES GROUP",
+    heading: "WHO WE ARE AND WHAT WE DO",
     openingPoints: [
       "Executive-level sales performance consulting and implementation firm",
       "We help established businesses strengthen their existing sales organizations",

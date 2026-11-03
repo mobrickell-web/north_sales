@@ -80,10 +80,7 @@ export function ContactDialog({ open, onOpenChange }: ContactDialogProps) {
           </Dialog.Description>
 
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <a
-              href={`tel:+1${phone.replace(/\D/g, "")}`}
-              className="flex items-center gap-3 rounded-xl border border-black/10 px-4 py-3 font-body text-[14px] font-bold text-[#001528] transition-colors hover:border-[#b17411] hover:text-[#b17411]"
-            >
+            <div className="flex items-center gap-3 rounded-xl border border-black/10 px-4 py-3 font-body text-[14px] font-bold text-[#001528]">
               <Phone className="size-4 shrink-0 text-[#b17411]" aria-hidden />
               <span>
                 <span className="block text-[11px] font-semibold tracking-[0.08em] text-[#5C5F66] uppercase">
@@ -91,7 +88,7 @@ export function ContactDialog({ open, onOpenChange }: ContactDialogProps) {
                 </span>
                 <span className="text-[#6D9EEB]">{phone}</span>
               </span>
-            </a>
+            </div>
             <div className="flex items-center gap-3 rounded-xl border border-black/10 px-4 py-3 font-body text-[14px] font-bold text-[#001528]">
               <Mail className="size-4 shrink-0 text-[#b17411]" aria-hidden />
               <span className="min-w-0">

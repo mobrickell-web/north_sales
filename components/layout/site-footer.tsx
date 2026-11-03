@@ -212,10 +212,7 @@ export function SiteFooter() {
               </h3>
               <ul className="flex flex-col gap-3 font-body text-[13px] text-white/80">
                 <li>
-                  <a
-                    href={`tel:${footer.contact.phone.replace(/\D/g, "")}`}
-                    className="flex items-center gap-3 rounded-lg border border-white/8 bg-white/[0.03] px-3.5 py-3 transition-colors hover:border-[#d48c27]/40 hover:bg-white/[0.05] hover:text-white"
-                  >
+                  <div className="flex items-center gap-3 rounded-lg border border-white/8 bg-white/[0.03] px-3.5 py-3">
                     <Image
                       src="/icons/call.svg"
                       alt=""
@@ -225,7 +222,7 @@ export function SiteFooter() {
                       unoptimized
                     />
                     <span>{footer.contact.phone}</span>
-                  </a>
+                  </div>
                 </li>
                 <li>
                   <button
