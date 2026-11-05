@@ -9,17 +9,19 @@ import { AdminAlert } from "@/components/admin/admin-ui";
 import { authConfig } from "@/config/auth";
 import {
   isRateLimited,
-  isSuperAdmin,
   adminLogin,
-  clearSession,
+  getRoleHomePath,
   storeSession,
-} from "@/lib/admin-auth";
+  type LoginCategory,
+} from "@/lib/auth-api";
 
 type FormError = { tone: "error" | "info"; message: string };
 
-export function AdminLoginForm({
+export function LoginForm({
+  category = "MASTER_ADMIN",
   forgotPasswordControl,
 }: {
+  category?: LoginCategory;
   forgotPasswordControl?: ReactNode;
 } = {}) {
   const router = useRouter();
@@ -33,6 +35,10 @@ export function AdminLoginForm({
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (category === "OTHER") {
+      router.replace("/");
+      return;
+    }
     if (!email || !password) {
       setError({
         tone: "error",
@@ -45,19 +51,9 @@ export function AdminLoginForm({
     setError(null);
 
     try {
-      const session = await adminLogin(email, password);
-
-      if (!isSuperAdmin(session.admin)) {
-        clearSession();
-        setError({
-          tone: "error",
-          message: login.unauthorizedMessage,
-        });
-        return;
-      }
-
+      const session = await adminLogin(email, password, category);
       storeSession(session);
-      router.replace("/admin/dashboard");
+      router.replace(getRoleHomePath(session.admin.role));
     } catch (err) {
       setError({
         tone: isRateLimited(err) ? "info" : "error",

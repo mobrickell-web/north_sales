@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AdminAssessmentEditor } from "@/components/admin/admin-assessment-editor";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Assessment editor · North Point Sales Group",
@@ -12,5 +12,5 @@ export default async function AdminAssessmentEditorPage({
   params: Promise<{ assessmentId: string }>;
 }) {
   const { assessmentId } = await params;
-  return <AdminAssessmentEditor assessmentId={assessmentId} />;
+  redirect(`/assessments/${encodeURIComponent(assessmentId)}`);
 }

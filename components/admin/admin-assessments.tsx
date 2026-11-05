@@ -18,13 +18,12 @@ import {
   adminLogout,
   adminProfile,
   clearSession,
-  getStoredTokens,
   hasSession,
   isSuperAdmin,
-} from "@/lib/admin-auth";
+} from "@/lib/auth-api";
 import { cn } from "@/lib/utils";
 
-const LOGIN_PATH = "/admin/login";
+const LOGIN_PATH = "/login";
 
 function statusStyle(status: string) {
   switch (status) {
@@ -58,7 +57,7 @@ export function AdminAssessmentsScreen() {
       return;
     }
 
-    adminProfile(getStoredTokens().accessToken ?? "")
+    adminProfile()
       .then((profile) => {
         if (!isSuperAdmin(profile)) {
           clearSession();
@@ -88,13 +87,10 @@ export function AdminAssessmentsScreen() {
 
   const handleLogout = async () => {
     setSigningOut(true);
-    const { accessToken, refreshToken } = getStoredTokens();
-    if (accessToken && refreshToken) {
-      try {
-        await adminLogout(accessToken, refreshToken);
-      } catch {
-        // Clear local credentials even if the server is unavailable.
-      }
+    try {
+      await adminLogout();
+    } catch {
+      // Clear local credentials even if the server is unavailable.
     }
     clearSession();
     router.replace(LOGIN_PATH);
@@ -102,7 +98,7 @@ export function AdminAssessmentsScreen() {
 
   const createAssessment = () => {
     const id = createAdminAssessment();
-    router.push(`/admin/assessments/${id}`);
+    router.push(`/assessments/${id}`);
   };
 
   if (checking) {
@@ -244,7 +240,7 @@ export function AdminAssessmentsScreen() {
                         >
                           <td className="px-2 py-3.5 font-medium text-admin-assessment-text sm:px-4">
                             <Link
-                              href={`/admin/assessments/${assessment.id}`}
+                              href={`/assessments/${assessment.id}`}
                               className="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-admin-info"
                             >
                               {assessment.title}
@@ -272,7 +268,7 @@ export function AdminAssessmentsScreen() {
                           </td>
                           <td className="w-[64px] px-2 py-3.5 text-right sm:w-[76px] sm:px-4">
                             <Link
-                              href={`/admin/assessments/${assessment.id}`}
+                              href={`/assessments/${assessment.id}`}
                               className="inline-flex h-9 items-center rounded-lg border border-admin-border-strong bg-admin-surface px-3 text-[11px] font-medium text-admin-assessment-text hover:bg-admin-soft"
                             >
                               {adminAssessmentsConfig.editLabel}

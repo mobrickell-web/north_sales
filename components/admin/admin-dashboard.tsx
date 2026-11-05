@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 import { AdminAppointmentsPanel } from "@/components/admin/admin-appointments";
+import { AdminAccessManagement } from "@/components/admin/admin-access-management";
 import { AdminOverviewContent } from "@/components/admin/admin-overview";
 import { AdminSidebar } from "@/components/shared/admin-sidebar";
 import { AdminTopbar } from "@/components/shared/admin-topbar";
@@ -13,17 +14,16 @@ import {
   adminLogout,
   adminProfile,
   clearSession,
-  getStoredTokens,
   hasSession,
   isSuperAdmin,
-} from "@/lib/admin-auth";
+} from "@/lib/auth-api";
 
-const LOGIN_PATH = "/admin/login";
+const LOGIN_PATH = "/login";
 
 export function AdminDashboardShell({
   page = "overview",
 }: {
-  page?: "overview" | "appointments";
+  page?: "overview" | "appointments" | "access";
 }) {
   const router = useRouter();
 
@@ -38,7 +38,7 @@ export function AdminDashboardShell({
       return;
     }
 
-    adminProfile(getStoredTokens().accessToken ?? "")
+    adminProfile()
       .then((profile) => {
         if (!isSuperAdmin(profile)) {
           clearSession();
@@ -56,14 +56,10 @@ export function AdminDashboardShell({
 
   const handleSignOut = async () => {
     setSigningOut(true);
-    const { accessToken, refreshToken } = getStoredTokens();
-
-    if (accessToken && refreshToken) {
-      try {
-        await adminLogout(accessToken, refreshToken);
-      } catch {
-        // Clear local credentials even if the server is unavailable.
-      }
+    try {
+      await adminLogout();
+    } catch {
+      // Clear local credentials even if the server is unavailable.
     }
 
     clearSession();
@@ -89,7 +85,16 @@ export function AdminDashboardShell({
         mobileOpen={mobileSidebarOpen}
         onClose={() => setMobileSidebarOpen(false)}
       />
-      {page === "appointments" ? (
+      {page === "access" ? (
+        <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
+          <AdminTopbar
+            adminName={admin?.name}
+            title="Access Management"
+            onMenuClick={() => setMobileSidebarOpen(true)}
+          />
+          <AdminAccessManagement />
+        </main>
+      ) : page === "appointments" ? (
         <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
           <AdminTopbar
             adminName={admin?.name}

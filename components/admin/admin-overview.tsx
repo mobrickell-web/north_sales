@@ -786,7 +786,7 @@ export function AdminOverviewContent({
 
         <div className="mt-6 flex justify-end">
           <Link
-            href="/admin/appointments"
+            href="/appointments"
             className="inline-flex h-10 items-center justify-center rounded-lg bg-admin-navy px-4 text-[13px] font-semibold text-white transition-colors hover:bg-admin-navy-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-info"
           >
             View all appointments

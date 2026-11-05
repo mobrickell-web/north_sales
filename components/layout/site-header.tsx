@@ -18,7 +18,8 @@ function toHash(href: string) {
 
 function toRoute(href: string) {
   const hash = toHash(href);
-  if (!hash || hash === "#top") return "/";
+  if (!hash) return href;
+  if (hash === "#top") return "/";
   return `/${hash}`;
 }
 
@@ -253,7 +254,7 @@ export function SiteHeader() {
               width={345}
               height={116}
               priority
-              className="h-auto w-[220px] lg:w-[270px]"
+              className="h-auto w-[170px] sm:w-[210px] lg:w-[270px]"
             />
           </Link>
 

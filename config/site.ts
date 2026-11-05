@@ -1402,6 +1402,37 @@ export const siteConfig = {
       "Samoa Time (SST) — American Samoa",
     ],
   },
+  //public-cover-page-content
+
+  publicCover: {
+    title: "Private Website Access",
+    tagline: "Strengthening Sales Performance. Improving Business Results.",
+    introduction:
+      "NORTH POINT SALES GROUP helps established businesses improve sales performance, strengthen sales systems, and develop more effective sales leadership within their existing sales organizations.",
+    privacyTitle: "Why Our Website Access Is Private",
+    privacyParagraphs: [
+      "Our complete website contains extensive proprietary information about our sales performance methods, processes, implementation approach, and services developed through years of experience.",
+      "To protect this information, we provide access through private Zoom presentations with authorized NORTH POINT SALES GROUP representatives.",
+      "Prospective clients can review our complete website, ask questions, and understand our services and investment options before making any financial commitment.",
+      "We believe in complete transparency with prospective clients while protecting our proprietary business information.",
+    ],
+    phone: {
+      label: "1-800-696-6971",
+      href: "tel:1-800-696-6971",
+    },
+    email: {
+      label: "Email: contact@northpointsalesgroup.com",
+      href: "mailto:contact@northpointsalesgroup.com",
+    },
+    representativeLogin: {
+      label: "Authorized Representative Login",
+      href: "/login",
+    },
+    clientLogin: {
+      label: "Client Login",
+      href: "/login",
+    },
+  },
   nav: [
     { href: "#top", label: "Home" },
     { href: "#about-us", label: "About Us" },
@@ -1492,7 +1523,7 @@ export const siteConfig = {
       {
         value: "5%–25%+",
         description:
-          "Potential annual sales revenue improvement, depending on the organization and opportunities identified.",
+          "Potential increase in annual gross sales through improvements in existing sales force performance, systems, and leadership. Actual results depend on the opportunities identified and improvements successfully implemented.",
       },
     ],
     experienceExpandable: {
@@ -2592,9 +2623,9 @@ export const siteConfig = {
             },
           },
           {
-            label: "Improve Forecasting",
+            label: "Improve Sales Conversion Rates",
             popout: {
-              title: "Improve Forecasting",
+              title: "Improve Sales Conversion Rates",
               paragraphs: [
                 "Establish a clearer, more reliable view of what is actually happening in the sales pipeline. We examine opportunity quality, pipeline stages, sales activity, conversion patterns, and forecasting practices so leadership can make decisions based on meaningful sales information.",
               ],
@@ -2619,7 +2650,7 @@ export const siteConfig = {
             },
           },
           {
-            label: "AI Sales Integration",
+            label: "AI-Assisted Sales Productivity",
             sharedDialog: "aiSalesIntegration",
           },
         ],
@@ -5003,7 +5034,10 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
               { label: "Results", href: "/#results" },
 
               { label: "How We Work", href: "/#how-we-work" },
-              { label: "30-90 DAY Focus", href: "/#30-90-focus" },
+              {
+                label: "30-90 DAY Focus",
+                href: "/#30-90-focus",
+              },
               { label: "Challenges", href: "/#challenges" },
               { label: "Investment", href: "/#investment" },
 
@@ -5604,8 +5638,8 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
     },
 
     aiSalesIntegration: {
-      linkLabel: "AI Sales Integration",
-      title: "AI Sales Opportunities",
+      linkLabel: "AI-Assisted Sales Productivity",
+      title: "AI-Assisted Sales Productivity",
       headline:
         "Could Artificial Intelligence Help Your Existing Sales Organization Produce More?",
       intro: [

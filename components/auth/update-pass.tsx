@@ -3,10 +3,16 @@
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useState, useSyncExternalStore, type FormEvent } from "react";
 
 import { AuthScreenLayout } from "@/components/shared/auth-screen-layout";
 import { authConfig } from "@/config/auth";
+import {
+  AdminApiError,
+  clearPasswordResetToken,
+  getPasswordResetToken,
+  submitPasswordReset,
+} from "@/lib/auth-api";
 
 export function UpdatePasswordScreen() {
   const searchParams = useSearchParams();
@@ -15,9 +21,25 @@ export function UpdatePasswordScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [notice, setNotice] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [updated, setUpdated] = useState(false);
+  const tokenReady = useSyncExternalStore(
+    subscribeToPasswordResetToken,
+    getPasswordResetTokenReady,
+    getServerPasswordResetTokenReady,
+  );
+  const resetToken = useSyncExternalStore(
+    subscribeToPasswordResetToken,
+    getPasswordResetToken,
+    getServerPasswordResetToken,
+  );
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!resetToken) {
+      setNotice("Your password reset session is missing. Request a new code.");
+      return;
+    }
     const formData = new FormData(event.currentTarget);
     const password = String(formData.get("password") ?? "");
     const confirmPassword = String(formData.get("confirmPassword") ?? "");
@@ -27,7 +49,25 @@ export function UpdatePasswordScreen() {
       return;
     }
 
-    setNotice(updatePassword.unavailableMessage);
+    setSubmitting(true);
+    setNotice("");
+    try {
+      await submitPasswordReset(resetToken, password);
+      clearPasswordResetToken();
+      setUpdated(true);
+      setNotice("Your password has been updated. You can now sign in.");
+    } catch (error) {
+      if (error instanceof AdminApiError && error.status === 401) {
+        clearPasswordResetToken();
+      }
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : "Could not update your password. Request a new reset code.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -39,23 +79,14 @@ export function UpdatePasswordScreen() {
         <p className="mt-2 font-[family-name:var(--font-plus-jakarta)] text-[14px] leading-[1.5] text-muted-foreground sm:text-[16px]">
           {updatePassword.description}
         </p>
+        {email ? (
+          <p className="mt-2 break-all font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-foreground">
+            {email}
+          </p>
+        ) : null}
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <label className="sr-only" htmlFor="update-password-email">
-          {updatePassword.email.label}
-        </label>
-        <input
-          id="update-password-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          placeholder={updatePassword.email.placeholder}
-          defaultValue={email}
-          required
-          className="h-12 w-full rounded-xl border border-input px-3 font-[family-name:var(--font-plus-jakarta)] text-[13px] text-foreground placeholder:text-muted-foreground focus:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze/15"
-        />
-
         <div className="relative">
           <label className="sr-only" htmlFor="update-password">
             {updatePassword.password.label}
@@ -122,7 +153,7 @@ export function UpdatePasswordScreen() {
 
         {notice ? (
           <p
-            role="status"
+            role={updated ? "status" : "alert"}
             className="font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground"
           >
             {notice}
@@ -131,11 +162,27 @@ export function UpdatePasswordScreen() {
 
         <button
           type="submit"
-          className="mt-1 flex h-12 w-full cursor-pointer items-center justify-center rounded-xl bg-bronze font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-white transition-colors hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
+          disabled={!tokenReady || !resetToken || submitting || updated}
+          className="mt-1 flex h-12 w-full cursor-pointer items-center justify-center rounded-xl bg-bronze font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-white transition-colors hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {updatePassword.continueButtonLabel}
+          {submitting
+            ? "Updating…"
+            : updated
+              ? "Password updated"
+              : updatePassword.continueButtonLabel}
         </button>
       </form>
+
+      {(!tokenReady || !resetToken) && (
+        <div className="mt-4 text-center">
+          <Link
+            href="/forgot-password"
+            className="cursor-pointer font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-bronze underline underline-offset-2 hover:brightness-90"
+          >
+            Request another reset code
+          </Link>
+        </div>
+      )}
 
       <p className="mt-6 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground">
         {updatePassword.loginPrompt}{" "}
@@ -148,4 +195,20 @@ export function UpdatePasswordScreen() {
       </p>
     </AuthScreenLayout>
   );
+}
+
+function subscribeToPasswordResetToken() {
+  return () => {};
+}
+
+function getPasswordResetTokenReady() {
+  return true;
+}
+
+function getServerPasswordResetTokenReady() {
+  return false;
+}
+
+function getServerPasswordResetToken() {
+  return null;
 }

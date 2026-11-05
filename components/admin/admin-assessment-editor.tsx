@@ -35,13 +35,12 @@ import {
   adminLogout,
   adminProfile,
   clearSession,
-  getStoredTokens,
   hasSession,
   isSuperAdmin,
-} from "@/lib/admin-auth";
+} from "@/lib/auth-api";
 import { cn } from "@/lib/utils";
 
-const LOGIN_PATH = "/admin/login";
+const LOGIN_PATH = "/login";
 const tabs = ["Questions", "Sections", "Results text", "Settings"] as const;
 type EditorTab = (typeof tabs)[number];
 type QuestionType = AdminAssessmentQuestion["type"];
@@ -112,7 +111,7 @@ export function AdminAssessmentEditor({
       return;
     }
 
-    adminProfile(getStoredTokens().accessToken ?? "")
+    adminProfile()
       .then((profile) => {
         if (!isSuperAdmin(profile)) {
           clearSession();
@@ -151,13 +150,10 @@ export function AdminAssessmentEditor({
 
   const handleLogout = async () => {
     setSigningOut(true);
-    const { accessToken, refreshToken } = getStoredTokens();
-    if (accessToken && refreshToken) {
-      try {
-        await adminLogout(accessToken, refreshToken);
-      } catch {
-        // Clear local credentials even if the server is unavailable.
-      }
+    try {
+      await adminLogout();
+    } catch {
+      // Clear local credentials even if the server is unavailable.
     }
     clearSession();
     router.replace(LOGIN_PATH);
@@ -310,7 +306,7 @@ export function AdminAssessmentEditor({
       <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-admin-canvas text-admin-text">
         <p>This assessment could not be found.</p>
         <Link
-          href="/admin/assessments"
+          href="/assessments"
           className="text-[13px] font-medium text-admin-info hover:underline"
         >
           Return to assessments
@@ -339,7 +335,7 @@ export function AdminAssessmentEditor({
         <div className="mx-auto w-full max-w-[1500px]">
           <div className="pt-7">
             <Link
-              href="/admin/assessments"
+              href="/assessments"
               className="inline-flex items-center gap-1.5 text-[12px] font-medium text-admin-info hover:underline"
             >
               <ArrowLeft className="size-3.5" />
@@ -399,7 +395,7 @@ export function AdminAssessmentEditor({
                       type="button"
                       onClick={() => {
                         deleteAdminAssessment(document.id);
-                        router.push("/admin/assessments");
+                        router.push("/assessments");
                       }}
                       className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-logout transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none"
                     >

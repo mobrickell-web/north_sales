@@ -2,24 +2,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import { AuthScreenLayout } from "@/components/shared/auth-screen-layout";
+import {
+  GoogleSignInScript,
+  useGoogleSignIn,
+} from "@/components/auth/google-sign-in";
 import { authConfig } from "@/config/auth";
+import { requestClientSignup } from "@/lib/auth-api";
 
 export function SignupScreen() {
+  const router = useRouter();
+  const google = useGoogleSignIn();
   const [showPassword, setShowPassword] = useState(false);
   const [notice, setNotice] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { signup } = authConfig;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setNotice(signup.accountUnavailableMessage);
+    const formData = new FormData(event.currentTarget);
+    setSubmitting(true);
+    setNotice("");
+    try {
+      await requestClientSignup({
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        password: String(formData.get("password") ?? ""),
+      });
+      router.push(
+        `/verification-code?purpose=SIGNUP&email=${encodeURIComponent(String(formData.get("email") ?? ""))}`,
+      );
+    } catch (error) {
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : "Could not submit your request.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <AuthScreenLayout>
+      <GoogleSignInScript
+        onReady={google.initialize}
+        onError={google.handleScriptError}
+      />
       <div className="mb-8 text-center">
         <h1 className="font-[family-name:var(--font-plus-jakarta)] text-[30px] leading-[1.15] font-bold tracking-[-0.04em] text-primary sm:text-[36px]">
           {signup.title}
@@ -31,7 +64,9 @@ export function SignupScreen() {
 
       <button
         type="button"
-        onClick={() => setNotice(signup.googleUnavailableMessage)}
+        onClick={google.handleClick}
+        disabled={google.isSubmitting}
+        aria-busy={google.isSubmitting}
         className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-input px-4 font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
       >
         <Image
@@ -45,6 +80,18 @@ export function SignupScreen() {
         />
         {signup.googleButtonLabel}
       </button>
+      {google.error ? (
+        <p
+          role={
+            google.error.toLowerCase().includes("pending super admin approval")
+              ? "status"
+              : "alert"
+          }
+          className="mt-2 text-center text-sm text-muted-foreground"
+        >
+          {google.error}
+        </p>
+      ) : null}
 
       <div className="my-4 border-t border-border" aria-hidden="true" />
 
@@ -118,9 +165,12 @@ export function SignupScreen() {
 
         <button
           type="submit"
+          disabled={submitting}
           className="mt-1 flex h-12 w-full cursor-pointer items-center justify-center rounded-xl bg-bronze font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-white transition-colors hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
         >
-          {signup.continueButtonLabel}
+          {submitting
+            ? "Sending verification code…"
+            : signup.continueButtonLabel}
         </button>
       </form>
 

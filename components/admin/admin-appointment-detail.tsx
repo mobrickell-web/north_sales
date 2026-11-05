@@ -25,7 +25,7 @@ import {
   humanizeEnum,
   updateAdminAppointmentStatus,
 } from "@/lib/admin-appointments";
-import { AdminApiError, hasSession } from "@/lib/admin-auth";
+import { AdminApiError, hasSession } from "@/lib/auth-api";
 import { buildCalendarLinks } from "@/lib/calendar-links";
 import { cn } from "@/lib/utils";
 import { AdminAlert } from "@/components/admin/admin-ui";
@@ -263,7 +263,7 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
 
   const load = useCallback(() => {
     if (!hasSession()) {
-      router.replace("/admin/login");
+      router.replace("/login");
       return;
     }
 
@@ -274,7 +274,7 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
       })
       .catch((err: Error) => {
         if (!hasSession()) {
-          router.replace("/admin/login");
+          router.replace("/login");
           return;
         }
         setError(err.message);
@@ -310,7 +310,7 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
     return (
       <main className="mx-auto max-w-[900px] px-4 py-10 sm:px-6">
         <Link
-          href="/admin/appointments"
+          href="/appointments"
           className="mb-6 inline-flex items-center font-secondary text-[12px] font-bold tracking-[0.08em] text-[#b17411] uppercase hover:text-[#8f5d0e]"
         >
           <ArrowLeft className="mr-2 size-4" />
@@ -342,7 +342,7 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
       <div className="mx-auto flex max-w-[900px] flex-col gap-6">
         <div>
           <Link
-            href="/admin/appointments"
+            href="/appointments"
             className="inline-flex items-center font-secondary text-[12px] font-bold tracking-[0.08em] text-[#b17411] uppercase hover:text-[#8f5d0e]"
           >
             <ArrowLeft className="mr-2 size-4" />

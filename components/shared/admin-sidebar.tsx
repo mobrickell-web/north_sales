@@ -37,14 +37,16 @@ export function AdminSidebar({
   onClose?: () => void;
 }) {
   const pathname = usePathname();
-  const isOverview = pathname === "/admin/dashboard";
-  const isAssessmentList = pathname.startsWith("/admin/assessments");
-  const isAppointments = pathname.startsWith("/admin/appointments");
+  const isOverview =
+    pathname === "/dashboard" || pathname === "/admin/dashboard";
+  const isAssessmentList = pathname.startsWith("/assessments");
+  const isAppointments = pathname.startsWith("/appointments");
+  const isAccessManagement = pathname.startsWith("/access");
   const sidebar = (
     <aside className="flex min-h-[1024px] w-[280px] shrink-0 flex-col rounded-2xl bg-admin-sidebar px-4 pt-6 pb-6 font-sans text-admin-sidebar-text">
       <div className="mb-6 flex items-start justify-between">
         <Link
-          href="/admin/dashboard"
+          href="/dashboard"
           aria-label="North Point Sales Group overview"
           className="block rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-admin-gold"
           onClick={onClose}
@@ -70,7 +72,7 @@ export function AdminSidebar({
 
       <nav aria-label="Admin navigation" className="flex flex-col gap-2">
         <Link
-          href="/admin/dashboard"
+          href="/dashboard"
           onClick={onClose}
           className={cn(
             "flex h-10 w-full items-center gap-3 rounded-xl px-3 text-[14px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-surface",
@@ -84,7 +86,7 @@ export function AdminSidebar({
         </Link>
 
         <Link
-          href="/admin/assessments"
+          href="/assessments"
           onClick={onClose}
           aria-current={isAssessmentList ? "page" : undefined}
           className={cn(
@@ -98,7 +100,7 @@ export function AdminSidebar({
           <span>Sales Alignment Assessment</span>
         </Link>
         <Link
-          href="/admin/appointments"
+          href="/appointments"
           onClick={onClose}
           aria-current={isAppointments ? "page" : undefined}
           className={cn(
@@ -110,6 +112,20 @@ export function AdminSidebar({
         >
           <CalendarDays className="size-[14px]" />
           <span>Appointments</span>
+        </Link>
+        <Link
+          href="/access"
+          onClick={onClose}
+          aria-current={isAccessManagement ? "page" : undefined}
+          className={cn(
+            "flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[14px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold",
+            isAccessManagement
+              ? "bg-gradient-to-r from-admin-gold to-admin-gold-deep text-admin-sidebar shadow-sm"
+              : "text-admin-sidebar-text hover:bg-admin-sidebar-hover",
+          )}
+        >
+          <Users className="size-[14px]" />
+          <span>Access Management</span>
         </Link>
       </nav>
 

@@ -23,7 +23,7 @@ import {
   humanizeEnum,
   listAdminAppointments,
 } from "@/lib/admin-appointments";
-import { hasSession } from "@/lib/admin-auth";
+import { hasSession } from "@/lib/auth-api";
 import { cn } from "@/lib/utils";
 import {
   AdminAlert,
@@ -141,7 +141,7 @@ export function AdminAppointmentsPanel() {
 
   useEffect(() => {
     if (!hasSession()) {
-      router.replace("/admin/login");
+      router.replace("/login");
       return;
     }
 
@@ -156,7 +156,7 @@ export function AdminAppointmentsPanel() {
       .catch((err: Error) => {
         if (current !== requestId.current) return;
         if (!hasSession()) {
-          router.replace("/admin/login");
+          router.replace("/login");
           return;
         }
         setFailure({ key: queryKey, message: err.message });
@@ -312,7 +312,7 @@ export function AdminAppointmentsPanel() {
             {items.map((appointment) => (
               <li key={appointment.id}>
                 <Link
-                  href={`/admin/appointments/${appointment.id}`}
+                  href={`/appointments/${appointment.id}`}
                   className="flex flex-col gap-3 py-4 transition-opacity hover:opacity-80 lg:flex-row lg:items-start lg:justify-between"
                 >
                   <div className="min-w-0">

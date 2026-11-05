@@ -47,9 +47,8 @@ the `data` property.
 5. On success, the backend updates `lastLoginAt`, creates a cryptographically
    random opaque refresh token, stores only its SHA-256 hash, and returns a
    signed JWT access token plus the refresh token and admin profile.
-6. Frontend verifies the returned role is `SUPER_ADMIN`, stores the access
-   token, refresh token, and profile in browser `sessionStorage`, and navigates
-   to `/admin/dashboard`.
+6. Frontend verifies the returned role is `SUPER_ADMIN`, stores the profile
+   in browser `sessionStorage`, and navigates to `/dashboard`.
 
 The current UI's **Continue with Google** button is separate; it only displays
 that Google sign-in is unavailable and does not submit a request.
@@ -269,7 +268,7 @@ admin automatically:
    `SUPER_ADMIN` account based only on Google sign-in.
 6. For a known admin, backend returns the same session shape as password login:
    short-lived JWT access token and hashed-at-rest rotating opaque refresh
-   token. Frontend stores the session and opens `/admin/dashboard`.
+   token. Frontend stores the session and opens `/dashboard`.
 7. Logout and refresh continue through the existing endpoints.
 
 Implementation choices include a backend-managed OAuth callback or a trusted

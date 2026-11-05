@@ -1,4 +1,4 @@
-import { adminFetch } from "@/lib/admin-auth";
+import { adminFetch } from "@/lib/auth-api";
 
 export const ADMIN_TABS = ["upcoming", "completed", "cancelled"] as const;
 export type AdminTab = (typeof ADMIN_TABS)[number];

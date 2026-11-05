@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AdminAssessmentsScreen } from "@/components/admin/admin-assessments";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Assessments · North Point Sales Group",
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminAssessmentsPage() {
-  return <AdminAssessmentsScreen />;
+  redirect("/assessments");
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-
-import { AdminDashboardShell } from "@/components/admin/admin-dashboard";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Overview · North Point Sales Group",
@@ -8,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminDashboardPage() {
-  return <AdminDashboardShell />;
+  redirect("/dashboard");
 }

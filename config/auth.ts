@@ -5,11 +5,10 @@ export const authConfig = {
   },
   //auth-signup
   signup: {
-    title: "Create your account",
+    title: "Request Client Access",
     description:
-      "Set up your account to manage your bakery operations with ease",
-    googleButtonLabel: "Continue with Google",
-    googleUnavailableMessage: "Google sign-up is not connected yet.",
+      "Create a client account request. Website access requires Super Admin approval.",
+    googleButtonLabel: "Request access with Google",
     accountUnavailableMessage: "Account creation is not connected yet.",
     fields: {
       name: {
@@ -29,22 +28,21 @@ export const authConfig = {
       show: "Show password",
       hide: "Hide password",
     },
-    continueButtonLabel: "Continue",
+    continueButtonLabel: "Submit access request",
     loginPrompt: "I have an account?",
     loginLinkLabel: "Log in",
-    loginHref: "/admin/login",
+    loginHref: "/login",
   },
   //auth-login
   login: {
     title: "Welcome Back",
     description: "Log in to manage orders, products, customers, and more",
     googleButtonLabel: "Continue with Google",
-    googleUnavailableMessage: "Google sign-in is not connected yet.",
     forgotPasswordLabel: "Forgot password?",
-    forgotPasswordHref: "/admin/forgot-password",
-    signupPrompt: "Not have account?",
-    signupLinkLabel: "Sign Up",
-    signupHref: "/admin/signup",
+    forgotPasswordHref: "/forgot-password",
+    signupPrompt: "Need client access?",
+    signupLinkLabel: "Request access",
+    signupHref: "/signup",
     email: {
       label: "Email",
       placeholder: "Email",
@@ -62,18 +60,17 @@ export const authConfig = {
   forgotPassword: {
     title: "Forgot Password",
     description:
-      "Enter your email and we’ll send you a link to reset your password.",
+      "Enter your email and we’ll send you a verification code to reset your password.",
     email: {
       label: "Email",
       placeholder: "Email",
     },
     sendCodeButtonLabel: "Send Code",
-    unavailableMessage: "Password recovery is not connected yet.",
     backLabel: "Back",
     loginPrompt: "I have an account?",
     loginLinkLabel: "Log in",
-    loginHref: "/admin/login",
-    verificationHref: "/admin/verification-code",
+    loginHref: "/login",
+    verificationHref: "/verification-code",
   },
   //auth-verification-code
   verificationCode: {
@@ -87,17 +84,13 @@ export const authConfig = {
     resendUnavailableMessage: "Code resend is not connected yet.",
     unavailableMessage: "Code verification is not connected yet.",
     backToLoginLabel: "Back to login",
-    loginHref: "/admin/login",
-    updatePasswordHref: "/admin/update-password",
+    loginHref: "/login",
+    updatePasswordHref: "/update-password",
   },
   //auth-update-password
   updatePassword: {
     title: "Update Password",
-    description: "Log in to manage orders, products, customers, and more",
-    email: {
-      label: "Email",
-      placeholder: "Email",
-    },
+    description: "Enter your new password to complete the reset.",
     password: {
       label: "New password",
       placeholder: "New password",
@@ -112,9 +105,8 @@ export const authConfig = {
     },
     continueButtonLabel: "Continue",
     passwordMismatchMessage: "Passwords do not match.",
-    unavailableMessage: "Password updates are not connected yet.",
     loginPrompt: "I have an account?",
     loginLinkLabel: "Log in",
-    loginHref: "/admin/login",
+    loginHref: "/login",
   },
 } as const;

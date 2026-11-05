@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-
-import { AdminAppointmentDetailView } from "@/components/admin/admin-appointment-detail";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Appointment · North Point Sales Group",
@@ -13,5 +12,5 @@ export default async function AdminAppointmentPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return <AdminAppointmentDetailView id={id} />;
+  redirect(`/appointments/${encodeURIComponent(id)}`);
 }

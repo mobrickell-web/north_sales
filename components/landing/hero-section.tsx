@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { CirclePlay, X } from "lucide-react";
+import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 
-export function HeroSection() {
+export function HeroSection({
+  hideSecondaryCta = false,
+}: {
+  hideSecondaryCta?: boolean;
+}) {
   const { hero } = siteConfig;
   const { openSchedule } = useScheduleAppointment();
-  const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [isVideoDialogOpen, setIsVideoDialogOpen] = useState(false);
 
   return (
     <section
@@ -44,34 +48,17 @@ export function HeroSection() {
             >
               {hero.primaryCta.label}
             </button>
-            <button
-              type="button"
-              onClick={() => setComingSoonOpen(true)}
-              className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center gap-2 border-2 border-bronze px-5 text-center font-secondary text-[11px] font-bold tracking-[0.04em] whitespace-normal text-bronze uppercase sm:w-auto sm:whitespace-nowrap"
-            >
-              <CirclePlay className="size-4 shrink-0" aria-hidden />
-              {hero.secondaryCta.label}
-            </button>
+            {!hideSecondaryCta && (
+              <button
+                type="button"
+                onClick={() => setIsVideoDialogOpen(true)}
+                className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center border border-gold px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-gold uppercase transition-colors hover:bg-gold hover:text-[#001528] sm:w-auto sm:whitespace-nowrap"
+              >
+                {hero.secondaryCta.label}
+              </button>
+            )}
           </div>
         </div>
-
-        <Dialog.Root open={comingSoonOpen} onOpenChange={setComingSoonOpen}>
-          <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
-            <Dialog.Content className="fixed left-[50%] top-[50%] z-50 w-[95vw] max-w-[420px] translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white p-6 shadow-2xl transition-all animate-in fade-in-0 zoom-in-95 sm:p-8">
-              <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
-                <X className="size-5" />
-                <span className="sr-only">Close</span>
-              </Dialog.Close>
-              <Dialog.Title className="pr-8 font-body text-[18px] font-extrabold tracking-wide text-[#001528] uppercase sm:text-[20px]">
-                Video Coming Soon
-              </Dialog.Title>
-              <Dialog.Description className="sr-only">
-                Video Coming Soon
-              </Dialog.Description>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
 
         {/* Right image — in normal flow on mobile; absolute on lg so it can't spill into the footer */}
         <div className="relative isolate h-[260px] w-full shrink-0 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[55%]">
@@ -90,6 +77,26 @@ export function HeroSection() {
           />
         </div>
       </div>
+
+      <Dialog.Root open={isVideoDialogOpen} onOpenChange={setIsVideoDialogOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm" />
+          <Dialog.Content className="fixed top-1/2 left-1/2 z-[101] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border border-white/10 bg-[#020B1E] p-6 text-white shadow-2xl sm:p-8">
+            <Dialog.Close
+              aria-label="Close dialog"
+              className="absolute top-3 right-3 rounded-sm p-1 text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              <X className="size-5" />
+            </Dialog.Close>
+            <Dialog.Title className="font-heading text-xl font-bold text-white sm:text-2xl">
+              {hero.secondaryCta.label}
+            </Dialog.Title>
+            <Dialog.Description className="mt-3 font-secondary text-sm leading-6 text-white/80 sm:text-base">
+              Video coming soon.
+            </Dialog.Description>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </section>
   );
 }

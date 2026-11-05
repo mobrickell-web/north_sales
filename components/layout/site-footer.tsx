@@ -28,7 +28,8 @@ function toRoute(href: string) {
   if (!href.includes("#")) return href;
 
   const hash = toHash(href);
-  if (!hash || hash === "#top") return "/";
+  if (!hash) return href;
+  if (hash === "#top") return "/";
   return `/${hash}`;
 }
 
