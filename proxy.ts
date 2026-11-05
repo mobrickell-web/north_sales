@@ -95,5 +95,7 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/|favicon.ico|robots.txt|.*\\.[A-Za-z0-9]+$).*)"],
+  matcher: [
+    "/((?!_next/|api/v1/|favicon.ico|robots.txt|.*\\.[A-Za-z0-9]+$).*)",
+  ],
 };

@@ -1,4 +1,9 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+// In the browser, go through the same-origin /api/v1 rewrite (next.config.ts)
+// so the backend's auth cookies are stored on the frontend domain.
+const API_URL =
+  typeof window === "undefined"
+    ? (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001")
+    : "";
 
 const LEGACY_REFRESH_TOKEN_KEY = "north_admin_refresh_token";
 const LEGACY_ACCESS_TOKEN_KEY = "north_admin_access_token";
