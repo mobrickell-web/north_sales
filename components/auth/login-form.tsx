@@ -53,7 +53,9 @@ export function LoginForm({
     try {
       const session = await adminLogin(email, password, category);
       storeSession(session);
-      router.replace(getRoleHomePath(session.admin.role));
+      router.replace(
+        getRoleHomePath(session.admin.role, session.admin.position),
+      );
     } catch (err) {
       setError({
         tone: isRateLimited(err) ? "info" : "error",

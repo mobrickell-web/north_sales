@@ -46,8 +46,8 @@ export function AdminSidebar({
     <aside className="flex min-h-[1024px] w-[280px] shrink-0 flex-col rounded-2xl bg-admin-sidebar px-4 pt-6 pb-6 font-sans text-admin-sidebar-text">
       <div className="mb-6 flex items-start justify-between">
         <Link
-          href="/dashboard"
-          aria-label="North Point Sales Group overview"
+          href="/"
+          aria-label="Go to the North Point Sales Group website"
           className="block rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-admin-gold"
           onClick={onClose}
         >

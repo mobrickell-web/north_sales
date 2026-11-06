@@ -1428,10 +1428,6 @@ export const siteConfig = {
       label: "Authorized Representative Login",
       href: "/login",
     },
-    clientLogin: {
-      label: "Client Login",
-      href: "/login",
-    },
   },
   nav: [
     { href: "#top", label: "Home" },
@@ -1523,7 +1519,7 @@ export const siteConfig = {
       {
         value: "5%–25%+",
         description:
-          "Potential increase in annual gross sales through improvements in existing sales force performance, systems, and leadership. Actual results depend on the opportunities identified and improvements successfully implemented.",
+          "Potential annual gross sales increase through existing sales force, systems, and leadership improvements. Results depend on opportunities and successful implementation.",
       },
     ],
     experienceExpandable: {

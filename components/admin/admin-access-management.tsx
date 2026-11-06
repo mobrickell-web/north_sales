@@ -11,6 +11,8 @@ import {
   adminPrimaryButtonClass,
 } from "@/components/admin/admin-ui";
 import {
+  STAFF_POSITION_LABELS,
+  createClientAccount,
   createSalesRepresentative,
   deactivateClientAccess,
   decideClientAccessRequest,
@@ -21,7 +23,17 @@ import {
   restoreSalesRepresentative,
   type ClientAccessRequest,
   type SalesRepresentative,
+  type StaffPosition,
 } from "@/lib/auth-api";
+
+const staffPositionOptions = Object.entries(STAFF_POSITION_LABELS) as [
+  StaffPosition,
+  string,
+][];
+
+function isStaffPosition(value: string): value is StaffPosition {
+  return value in STAFF_POSITION_LABELS;
+}
 
 export function AdminAccessManagement() {
   const [requests, setRequests] = useState<ClientAccessRequest[]>([]);
@@ -30,6 +42,7 @@ export function AdminAccessManagement() {
   );
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [savingClient, setSavingClient] = useState(false);
   const [workingId, setWorkingId] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -123,10 +136,45 @@ export function AdminAccessManagement() {
     }
   };
 
+  const addClient = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    setSavingClient(true);
+    setError("");
+    setNotice("");
+    try {
+      const client = await createClientAccount({
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        password: String(formData.get("password") ?? ""),
+      });
+      form.reset();
+      setNotice(
+        `Client account created for ${client.name}. Share their login credentials with them directly.`,
+      );
+      await loadData();
+    } catch (cause) {
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : "Could not create the client account.",
+      );
+    } finally {
+      setSavingClient(false);
+    }
+  };
+
   const addRepresentative = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const position = String(formData.get("position") ?? "");
+    if (!isStaffPosition(position)) {
+      setNotice("");
+      setError("Select a position for the team member.");
+      return;
+    }
     setSaving(true);
     setError("");
     setNotice("");
@@ -135,15 +183,16 @@ export function AdminAccessManagement() {
         name: String(formData.get("name") ?? ""),
         email: String(formData.get("email") ?? ""),
         password: String(formData.get("password") ?? ""),
+        position,
       });
       form.reset();
-      setNotice("Sales representative account created.");
+      setNotice(`${STAFF_POSITION_LABELS[position]} account created.`);
       await loadData();
     } catch (cause) {
       setError(
         cause instanceof Error
           ? cause.message
-          : "Could not create the representative account.",
+          : "Could not create the team member account.",
       );
     } finally {
       setSaving(false);
@@ -169,7 +218,7 @@ export function AdminAccessManagement() {
       setError(
         cause instanceof Error
           ? cause.message
-          : "Could not remove the representative account.",
+          : "Could not remove the team member account.",
       );
     } finally {
       setWorkingId(null);
@@ -190,7 +239,7 @@ export function AdminAccessManagement() {
       setError(
         cause instanceof Error
           ? cause.message
-          : "Could not restore the representative's access.",
+          : "Could not restore the team member's access.",
       );
     } finally {
       setWorkingId(null);
@@ -204,8 +253,55 @@ export function AdminAccessManagement() {
 
       <AdminCard
         title="Clients"
-        description="Review all client requests and manage access. Removing access revokes the client's active sessions."
+        description="Create client accounts and share their login credentials with them, review access requests, and manage access. Removing access revokes the client's active sessions."
       >
+        <form
+          onSubmit={(event) => void addClient(event)}
+          className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto]"
+        >
+          <label>
+            <span className={adminLabelClass}>Client name</span>
+            <input
+              name="name"
+              required
+              maxLength={120}
+              className={adminInputClass}
+              autoComplete="off"
+            />
+          </label>
+          <label>
+            <span className={adminLabelClass}>Email</span>
+            <input
+              name="email"
+              type="email"
+              required
+              maxLength={255}
+              className={adminInputClass}
+              autoComplete="off"
+            />
+          </label>
+          <label>
+            <span className={adminLabelClass}>Initial password</span>
+            <input
+              name="password"
+              type="password"
+              required
+              minLength={8}
+              maxLength={72}
+              className={adminInputClass}
+              autoComplete="new-password"
+            />
+          </label>
+          <button
+            type="submit"
+            disabled={savingClient}
+            className={`${adminPrimaryButtonClass} self-end`}
+          >
+            <UserPlus className="mr-2 size-4" />
+            {savingClient ? "Creating…" : "Create client"}
+          </button>
+        </form>
+
         {loading ? (
           <p className="flex items-center gap-2 text-[14px] text-admin-muted">
             <Loader2 className="size-4 animate-spin" />
@@ -222,7 +318,7 @@ export function AdminAccessManagement() {
                 <tr className="border-b border-[#E8E4DC] font-secondary text-[11px] tracking-[0.08em] text-[#5C5F66] uppercase">
                   <th className="px-3 py-3">Client</th>
                   <th className="px-3 py-3">Email</th>
-                  <th className="px-3 py-3">Requested</th>
+                  <th className="px-3 py-3">Added</th>
                   <th className="px-3 py-3">Email status</th>
                   <th className="px-3 py-3">Access status</th>
                   <th className="px-3 py-3">Actions</th>
@@ -321,12 +417,12 @@ export function AdminAccessManagement() {
       </AdminCard>
 
       <AdminCard
-        title="Sales representatives"
-        description="Create representative accounts, remove access, or restore a deactivated account. Removing access revokes all active sessions."
+        title="Team members"
+        description="Create Account Executive, Implementation Specialist, Fractional VP, and Regional Sales Manager accounts, remove access, or restore a deactivated account. Removing access revokes all active sessions."
       >
         <form
           onSubmit={(event) => void addRepresentative(event)}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto]"
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1fr_auto]"
         >
           <label>
             <span className={adminLabelClass}>Name</span>
@@ -361,21 +457,40 @@ export function AdminAccessManagement() {
               autoComplete="new-password"
             />
           </label>
+          <label>
+            <span className={adminLabelClass}>Position</span>
+            <select
+              name="position"
+              required
+              defaultValue=""
+              className={adminInputClass}
+            >
+              <option value="" disabled>
+                Select position
+              </option>
+              {staffPositionOptions.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
           <button
             type="submit"
             disabled={saving}
             className={`${adminPrimaryButtonClass} self-end`}
           >
             <UserPlus className="mr-2 size-4" />
-            {saving ? "Creating…" : "Add representative"}
+            {saving ? "Creating…" : "Add team member"}
           </button>
         </form>
 
         <div className="mt-6 overflow-x-auto">
-          <table className="w-full min-w-[540px] border-collapse text-left">
+          <table className="w-full min-w-[680px] border-collapse text-left">
             <thead>
               <tr className="border-b border-[#E8E4DC] font-secondary text-[11px] tracking-[0.08em] text-[#5C5F66] uppercase">
-                <th className="px-3 py-3">Representative</th>
+                <th className="px-3 py-3">Team member</th>
+                <th className="px-3 py-3">Position</th>
                 <th className="px-3 py-3">Email</th>
                 <th className="px-3 py-3">Added</th>
                 <th className="px-3 py-3">Access</th>
@@ -389,6 +504,11 @@ export function AdminAccessManagement() {
                 >
                   <td className="px-3 py-4 font-semibold text-[#001528]">
                     {representative.name}
+                  </td>
+                  <td className="px-3 py-4 text-[13px] text-[#001528]">
+                    {representative.position
+                      ? STAFF_POSITION_LABELS[representative.position]
+                      : "—"}
                   </td>
                   <td className="px-3 py-4 text-[13px] text-[#5C5F66]">
                     {representative.email}
@@ -426,10 +546,10 @@ export function AdminAccessManagement() {
               {!loading && representatives.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={4}
+                    colSpan={5}
                     className="px-3 py-5 text-[14px] text-admin-muted"
                   >
-                    No sales representatives have been added.
+                    No team members have been added.
                   </td>
                 </tr>
               ) : null}

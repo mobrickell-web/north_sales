@@ -6,6 +6,13 @@ import { X } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { siteConfig } from "@/config/site";
 import { MeetTheFounderDialog } from "@/components/landing/meet-the-founder-dialog";
+import { SalesGrowthPotentialCard } from "@/components/landing/sales-growth-potential-dialog";
+
+// The 5%–25%+ highlight opens the "More sales. More profit potential." popup
+// (see sales-growth-potential-dialog.tsx).
+const SALES_GROWTH_HIGHLIGHT = "5%–25%+";
+const highlightCardClass =
+  "rounded-xl border border-[#E8E4DC] bg-[#FAF9F5] px-5 py-5";
 
 type AboutParagraph =
   | string
@@ -360,20 +367,30 @@ export function AboutUsSection({ sectionNumber = 2 }: AboutUsSectionProps) {
           ))}
         </div>
 
+        {/* Grid rows stretch, so all three cards share one height. */}
         <div className="grid w-full max-w-[1320px] grid-cols-1 gap-3 sm:grid-cols-3">
-          {aboutUs.experienceHighlights.map((highlight) => (
-            <div
-              key={highlight.value}
-              className="flex flex-col gap-2 rounded-xl border border-[#E8E4DC] bg-[#FAF9F5] px-5 py-5"
-            >
-              <p className="font-heading text-[28px] leading-none font-bold tracking-tight text-[#b17411] sm:text-[32px]">
-                {highlight.value}
-              </p>
-              <p className="font-body text-[13px] leading-[1.45] text-[#5C5F66] sm:text-[14px]">
-                {highlight.description}
-              </p>
-            </div>
-          ))}
+          {aboutUs.experienceHighlights.map((highlight) =>
+            highlight.value === SALES_GROWTH_HIGHLIGHT ? (
+              <SalesGrowthPotentialCard
+                key={highlight.value}
+                value={highlight.value}
+                description={highlight.description}
+                className={highlightCardClass}
+              />
+            ) : (
+              <div
+                key={highlight.value}
+                className={`flex h-full flex-col gap-2 ${highlightCardClass}`}
+              >
+                <p className="font-heading text-[28px] leading-none font-bold tracking-tight text-[#b17411] sm:text-[32px]">
+                  {highlight.value}
+                </p>
+                <p className="font-body text-[13px] leading-[1.45] text-[#5C5F66] sm:text-[14px]">
+                  {highlight.description}
+                </p>
+              </div>
+            ),
+          )}
         </div>
 
         <AboutExpandable section={aboutUs.experienceExpandable} />

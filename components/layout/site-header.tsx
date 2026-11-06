@@ -3,13 +3,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, X } from "lucide-react";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 import { ContactDialog } from "@/components/layout/contact-dialog";
+import {
+  adminLogout,
+  adminProfile,
+  clearSession,
+  getStoredAdmin,
+  isAccountExecutive,
+  type AdminProfile,
+} from "@/lib/auth-api";
 
 function toHash(href: string) {
   if (href.includes("#")) return `#${href.split("#")[1]}`;
@@ -66,6 +74,39 @@ export function SiteHeader() {
     setIsMoreOpen(false);
     setIsMenuOpen(false);
     setIsContactOpen(true);
+  };
+  const [account, setAccount] = useState<AdminProfile | null>(null);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+  const showLeadsDashboard = isAccountExecutive(account);
+
+  useEffect(() => {
+    let cancelled = false;
+    // Login stores the profile in sessionStorage; a new tab won't have it, so
+    // fall back to asking the API (the private site is only rendered for
+    // signed-in accounts).
+    const loadAccount = async () => {
+      const profile =
+        getStoredAdmin() ?? (await adminProfile().catch(() => null));
+      if (!cancelled) setAccount(profile);
+    };
+    void loadAccount();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    if (isSigningOut) return;
+    setIsSigningOut(true);
+    try {
+      await adminLogout();
+    } catch {
+      // Clear local credentials even if the server is unavailable.
+    }
+    clearSession();
+    // Full navigation so the server re-renders "/" as the public cover page.
+    // replace() also keeps the signed-in page out of the back history.
+    window.location.replace("/");
   };
 
   useLayoutEffect(() => {
@@ -353,6 +394,34 @@ export function SiteHeader() {
                     >
                       Contact
                     </button>
+                    {showLeadsDashboard ? (
+                      <Link
+                        href="/leads"
+                        role="menuitem"
+                        aria-current={
+                          pathname.startsWith("/leads") ? "page" : undefined
+                        }
+                        onClick={() => setIsMoreOpen(false)}
+                        className="block border-t border-white/15 px-4 py-2.5 font-secondary text-[11px] font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/10 hover:text-gold 2xl:text-[13px]"
+                      >
+                        Leads Dashboard
+                      </Link>
+                    ) : null}
+                    {account ? (
+                      <button
+                        type="button"
+                        role="menuitem"
+                        onClick={() => void handleLogout()}
+                        disabled={isSigningOut}
+                        className={cn(
+                          "flex w-full items-center gap-2 px-4 py-2.5 text-left font-secondary text-[11px] font-bold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/10 hover:text-gold disabled:cursor-wait disabled:opacity-60 2xl:text-[13px]",
+                          !showLeadsDashboard && "border-t border-white/15",
+                        )}
+                      >
+                        <LogOut className="size-3.5 shrink-0" aria-hidden />
+                        {isSigningOut ? "Logging out…" : "Log out"}
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               )}
@@ -436,6 +505,29 @@ export function SiteHeader() {
               >
                 Contact
               </button>
+              {showLeadsDashboard ? (
+                <Link
+                  href="/leads"
+                  className={cn(
+                    "border-b border-white/10 py-4 pl-3 font-secondary text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:text-gold",
+                    pathname.startsWith("/leads") && "text-gold",
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Leads Dashboard
+                </Link>
+              ) : null}
+              {account ? (
+                <button
+                  type="button"
+                  disabled={isSigningOut}
+                  className="flex w-full items-center gap-2 border-b border-white/10 py-4 pl-3 text-left font-secondary text-sm font-bold uppercase tracking-[0.1em] text-white transition-colors hover:text-gold disabled:cursor-wait disabled:opacity-60"
+                  onClick={() => void handleLogout()}
+                >
+                  <LogOut className="size-4 shrink-0" aria-hidden />
+                  {isSigningOut ? "Logging out…" : "Log out"}
+                </button>
+              ) : null}
               <button
                 type="button"
                 className="mt-5 flex min-h-[52px] w-full items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"

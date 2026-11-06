@@ -1,10 +1,18 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowUpRight, Loader2 } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
+import {
+  SALES_ALIGNMENT_ASSESSMENT,
+  type SalesAlignmentResultPayload,
+  type SalesAlignmentStatementResult,
+  submitAssessmentResult,
+} from "@/lib/assessment-results-api";
+import { adminProfile } from "@/lib/auth-api";
 
 const assessment = siteConfig.salesAlignmentAssessment;
 
@@ -19,9 +27,11 @@ function average(values: number[]) {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
-function formatScore(value: number) {
-  return value.toFixed(1);
+function roundScore(value: number) {
+  return Math.round(value * 10) / 10;
 }
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const questions = assessment.pillars.flatMap((pillar, pillarIndex) =>
   pillar.questions.map((question, questionIndex) => ({
@@ -35,6 +45,8 @@ const questions = assessment.pillars.flatMap((pillar, pillarIndex) =>
     pillar,
   })),
 );
+
+const maxStatementScore = Math.max(...assessment.scale);
 
 function sum(values: number[]) {
   return values.reduce((total, value) => total + value, 0);
@@ -68,12 +80,33 @@ function computeCloserReview(
 }
 
 export function SalesAlignmentAssessment() {
+  const router = useRouter();
   const [scores, setScores] = useState<Record<string, number>>({});
-  const [showResults, setShowResults] = useState(false);
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [detailsError, setDetailsError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  // Clients taking the assessment for themselves get their details prefilled;
+  // staff running it with a prospect type the prospect's details instead.
+  useEffect(() => {
+    let active = true;
+    adminProfile()
+      .then((profile) => {
+        if (!active || profile.role !== "USER") return;
+        setFirstName((current) =>
+          current ? current : (profile.name.trim().split(/\s+/)[0] ?? ""),
+        );
+        setEmail((current) => (current ? current : profile.email));
+      })
+      .catch(() => {
+        // Prefill is a convenience; the visitor can still type their details.
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const answered = Object.keys(scores).length;
   const complete = answered === questions.length;
@@ -93,21 +126,65 @@ export function SalesAlignmentAssessment() {
     }));
     const { allSame, review, lowestScore } = computeCloserReview(scored);
 
-    return {
-      overall,
-      pillars,
-      scored,
-      review,
-      allSame,
-      showRelativeNote: !allSame && review.length > 0 && lowestScore >= 9,
+    const toStatement = (
+      item: (typeof scored)[number],
+    ): SalesAlignmentStatementResult => ({
+      id: item.id,
+      number: item.number,
+      title: item.title,
+      prompt: item.prompt,
+      pillarNumber: item.pillar.number,
+      pillarTitle: item.pillar.title,
+      score: item.score,
+      maxScore: maxStatementScore,
+    });
+
+    // Everything the results dashboard renders, so stored results keep their
+    // wording even if this assessment's copy changes later.
+    const payload: SalesAlignmentResultPayload = {
+      version: 1,
+      title: assessment.title,
+      overall: {
+        score: overall,
+        maxScore: questions.length * maxStatementScore,
+      },
+      pillars: pillars.map((pillar) => ({
+        number: pillar.number,
+        title: pillar.title,
+        description: pillar.description,
+        score: roundScore(pillar.score),
+        maxScore: maxStatementScore,
+        statementIds: pillar.questions.map((question) => question.id),
+      })),
+      statements: scored.map(toStatement),
+      closerReview: {
+        allSame,
+        showRelativeNote: !allSame && review.length > 0 && lowestScore >= 9,
+        statements: review.map(toStatement),
+      },
+      copy: {
+        eyebrow: assessment.results.eyebrow,
+        overallScoreLabel: assessment.results.overallScoreLabel,
+        overallScoreSuffix: assessment.results.overallScoreSuffix,
+        pillarScoreSuffix: assessment.results.pillarScoreSuffix,
+        statementScoresTitle: assessment.results.statementScoresTitle,
+        areasTitle: assessment.results.areasTitle,
+        areasSameRating: assessment.results.areasSameRating,
+        relativeReviewNote: assessment.results.relativeReviewNote,
+        disclaimer: assessment.results.disclaimer,
+        scheduleLabel: assessment.results.scheduleLabel,
+      },
     };
+
+    return payload;
   }, [complete, scores]);
 
-  const viewResults = () => {
+  const viewResults = async () => {
+    if (submitting) return;
+
     if (!complete) {
       const missing = questions.find((question) => scores[question.id] == null);
       setHighlightedId(missing?.id ?? null);
-      setShowResults(false);
       setDetailsError(null);
       if (missing) {
         document.getElementById(missing.id)?.scrollIntoView({
@@ -118,9 +195,17 @@ export function SalesAlignmentAssessment() {
       return;
     }
 
-    if (!firstName.trim() || !email.trim()) {
-      setDetailsError(assessment.nextStep.missingDetails);
-      setShowResults(false);
+    const trimmedFirstName = firstName.trim();
+    const trimmedEmail = email.trim();
+    const detailsMessage =
+      !trimmedFirstName || !trimmedEmail
+        ? assessment.nextStep.missingDetails
+        : !EMAIL_PATTERN.test(trimmedEmail)
+          ? "Please enter a valid email address."
+          : null;
+
+    if (detailsMessage || !results) {
+      setDetailsError(detailsMessage);
       document.getElementById("assessment-lead-capture")?.scrollIntoView({
         behavior: "smooth",
         block: "center",
@@ -130,13 +215,29 @@ export function SalesAlignmentAssessment() {
 
     setDetailsError(null);
     setHighlightedId(null);
-    setShowResults(true);
-    requestAnimationFrame(() => {
-      document.getElementById("assessment-results")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+    setSubmitting(true);
+
+    try {
+      const { id } = await submitAssessmentResult({
+        assessment: SALES_ALIGNMENT_ASSESSMENT,
+        firstName: trimmedFirstName,
+        email: trimmedEmail,
+        overallScore: results.overall.score,
+        maxScore: results.overall.maxScore,
+        answers: Object.fromEntries(
+          questions.map((question) => [question.id, scores[question.id]]),
+        ),
+        result: results,
       });
-    });
+      router.push(`/dashboard/results/${encodeURIComponent(id)}`);
+    } catch (cause) {
+      setDetailsError(
+        cause instanceof Error && cause.message
+          ? cause.message
+          : "We could not save your results. Please try again.",
+      );
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -364,7 +465,10 @@ export function SalesAlignmentAssessment() {
             </p>
 
             {detailsError ? (
-              <p className="mt-3 font-body text-[13px] text-[#8f2d2d]">
+              <p
+                role="alert"
+                className="mt-3 font-body text-[13px] text-[#8f2d2d]"
+              >
                 {detailsError}
               </p>
             ) : null}
@@ -372,156 +476,28 @@ export function SalesAlignmentAssessment() {
             <div className="mt-5">
               <button
                 type="button"
-                onClick={viewResults}
-                className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center gap-2 bg-[#001528] px-6 font-body text-[13px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#020B1E] sm:w-auto"
+                onClick={() => void viewResults()}
+                disabled={submitting}
+                aria-busy={submitting}
+                className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center gap-2 bg-[#001528] px-6 font-body text-[13px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#020B1E] disabled:cursor-wait disabled:opacity-70 sm:w-auto"
               >
-                {assessment.nextStep.button}
-                <ArrowUpRight className="size-4" aria-hidden />
+                {submitting ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" aria-hidden />
+                    Saving your results…
+                  </>
+                ) : (
+                  <>
+                    {assessment.nextStep.button}
+                    <ArrowUpRight className="size-4" aria-hidden />
+                  </>
+                )}
               </button>
               <p className="mt-2 font-body text-[12px] text-[#8A8F98]">
                 {assessment.nextStep.note}
               </p>
             </div>
           </div>
-
-          {showResults && results ? (
-            <div
-              id="assessment-results"
-              className="mt-8 scroll-mt-32 border-t border-[#E8E4DC] pt-8"
-            >
-              <p className="font-body text-[11px] font-bold tracking-[0.16em] text-[#8A8F98] uppercase">
-                {assessment.results.eyebrow}
-              </p>
-              <div className="mt-4">
-                <p className="font-body text-[11px] font-bold tracking-[0.14em] text-[#5C5F66] uppercase">
-                  {assessment.results.overallScoreLabel}
-                </p>
-                <p className="mt-2 font-heading text-[64px] leading-none text-[#001528]">
-                  {results.overall}
-                  <span className="font-body text-[28px] font-bold text-[#5C5F66]">
-                    {assessment.results.overallScoreSuffix}
-                  </span>
-                </p>
-              </div>
-
-              <div className="mt-8 grid gap-4">
-                {results.pillars.map((pillar) => (
-                  <div key={pillar.number}>
-                    <div className="flex items-baseline justify-between gap-4">
-                      <p className="font-body text-[13px] font-extrabold tracking-[0.12em] text-[#001528] uppercase">
-                        {pillar.title}
-                      </p>
-                      <p className="font-body text-[14px] font-bold text-[#001528]">
-                        {formatScore(pillar.score)}
-                        {assessment.results.pillarScoreSuffix}
-                      </p>
-                    </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#E8E4DC]">
-                      <div
-                        className="h-full rounded-full bg-[#b17411]"
-                        style={{ width: `${(pillar.score / 10) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8">
-                <h3 className="font-body text-[13px] font-extrabold tracking-[0.14em] text-[#001528] uppercase">
-                  {assessment.results.statementScoresTitle}
-                </h3>
-                <ul className="mt-4 flex flex-col gap-3">
-                  {results.scored.map((item) => (
-                    <li
-                      key={item.id}
-                      className="flex items-start justify-between gap-4 border-b border-[#E8E4DC] pb-3"
-                    >
-                      <div>
-                        <p className="font-body text-[15px] font-bold text-[#001528]">
-                          {item.number}. {item.title}
-                        </p>
-                        <p className="mt-1 font-body text-[13px] text-[#5C5F66]">
-                          {item.pillar.title}
-                        </p>
-                      </div>
-                      <p className="shrink-0 font-body text-[15px] font-bold text-[#001528]">
-                        {item.score}
-                        {assessment.results.pillarScoreSuffix}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-8">
-                <h3 className="font-body text-[13px] font-extrabold tracking-[0.14em] text-[#001528] uppercase">
-                  {assessment.results.areasTitle}
-                </h3>
-                {results.allSame ? (
-                  <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                    {assessment.results.areasSameRating}
-                  </p>
-                ) : (
-                  <>
-                    {results.showRelativeNote ? (
-                      <p className="mt-2 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                        {assessment.results.relativeReviewNote}
-                      </p>
-                    ) : null}
-                    <ul className="mt-4 flex flex-col gap-3">
-                      {results.review.map((item) => (
-                        <li
-                          key={item.id}
-                          className="flex items-start justify-between gap-4 rounded-lg border border-[#b17411]/30 bg-[#b17411]/5 px-3 py-3"
-                        >
-                          <div>
-                            <p className="font-body text-[15px] font-bold text-[#001528]">
-                              {item.number}. {item.title}
-                            </p>
-                            <p className="mt-1 font-body text-[13px] text-[#5C5F66]">
-                              {item.pillar.title}
-                            </p>
-                          </div>
-                          <p className="shrink-0 font-body text-[15px] font-bold text-[#001528]">
-                            {item.score}
-                            {assessment.results.pillarScoreSuffix}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-              </div>
-
-              <p className="mt-8 max-w-[640px] font-body text-[13px] leading-relaxed text-[#8A8F98]">
-                {assessment.results.disclaimer}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link
-                  href={assessment.results.scheduleHref}
-                  className="inline-flex h-[46px] items-center justify-center bg-[#b17411] px-6 font-body text-[13px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#8f5d0e]"
-                >
-                  {assessment.results.scheduleLabel}
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setScores({});
-                    setShowResults(false);
-                    setHighlightedId(null);
-                    setFirstName("");
-                    setEmail("");
-                    setDetailsError(null);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className="inline-flex h-[46px] cursor-pointer items-center justify-center border border-[#E8E4DC] px-6 font-body text-[13px] font-bold tracking-[0.08em] text-[#001528] uppercase transition-colors hover:border-[#b17411]"
-                >
-                  {assessment.results.resetLabel}
-                </button>
-              </div>
-            </div>
-          ) : null}
         </section>
 
         <section className="mx-auto max-w-[720px] px-2 pt-20 text-center">

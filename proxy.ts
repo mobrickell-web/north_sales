@@ -18,9 +18,16 @@ const REPRESENTATIVE_PATHS = [
   "/privacy-policy",
   "/terms-of-use",
   "/sales-alignment-assessment",
+  // The leads page itself only admits Account Executives.
+  "/leads",
 ];
 
-type Account = { role: string };
+const CLIENT_PATHS = ["/dashboard", "/sales-alignment-assessment"];
+
+// Anyone who submits the assessment is sent to its results dashboard.
+const RESULTS_PATH = /^\/dashboard\/results\/[^/]+$/;
+
+type Account = { role: string; position: string | null };
 
 function matches(pathname: string, prefixes: string[]) {
   return prefixes.some(
@@ -64,7 +71,11 @@ async function getAccount(req: NextRequest): Promise<Account | null> {
     throw new Error("The authentication service returned an invalid profile.");
   }
 
-  return { role: (result as { role: string }).role };
+  const { role, position } = result as { role: string; position?: unknown };
+  return {
+    role,
+    position: typeof position === "string" ? position : null,
+  };
 }
 
 function toLogin(req: NextRequest) {
@@ -82,13 +93,22 @@ export async function proxy(req: NextRequest) {
   if (account.role === "SUPER_ADMIN") return NextResponse.next();
 
   if (account.role === "USER") {
-    if (pathname === "/dashboard") return NextResponse.next();
+    if (matches(pathname, CLIENT_PATHS)) return NextResponse.next();
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
   if (account.role === "SALES_REPRESENTATIVE") {
-    if (matches(pathname, REPRESENTATIVE_PATHS)) return NextResponse.next();
-    return NextResponse.redirect(new URL("/", req.url));
+    if (
+      matches(pathname, REPRESENTATIVE_PATHS) ||
+      RESULTS_PATH.test(pathname)
+    ) {
+      return NextResponse.next();
+    }
+    const home =
+      pathname === "/dashboard" && account.position === "ACCOUNT_EXECUTIVE"
+        ? "/leads"
+        : "/";
+    return NextResponse.redirect(new URL(home, req.url));
   }
 
   return toLogin(req);

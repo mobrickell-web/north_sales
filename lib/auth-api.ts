@@ -17,8 +17,23 @@ if (typeof window !== "undefined") {
 
 export const ADMIN_ROLE = "SUPER_ADMIN";
 
-export type LoginCategory =
-  "CLIENT" | "SALES_REPRESENTATIVE" | "MASTER_ADMIN" | "OTHER";
+export const STAFF_ROLE = "SALES_REPRESENTATIVE";
+
+// Staff accounts share role SALES_REPRESENTATIVE and are told apart by position.
+export type StaffPosition =
+  | "ACCOUNT_EXECUTIVE"
+  | "IMPLEMENTATION_SPECIALIST"
+  | "FRACTIONAL_VP"
+  | "REGIONAL_SALES_MANAGER";
+
+export const STAFF_POSITION_LABELS: Record<StaffPosition, string> = {
+  ACCOUNT_EXECUTIVE: "Account Executive",
+  IMPLEMENTATION_SPECIALIST: "Implementation Specialist",
+  FRACTIONAL_VP: "Fractional VP",
+  REGIONAL_SALES_MANAGER: "Regional Sales Manager",
+};
+
+export type LoginCategory = "CLIENT" | StaffPosition | "MASTER_ADMIN" | "OTHER";
 export type VerificationPurpose = "SIGNUP" | "PASSWORD_RESET";
 
 export type AdminProfile = {
@@ -26,6 +41,7 @@ export type AdminProfile = {
   name: string;
   email: string;
   role: string;
+  position?: StaffPosition | null;
 };
 
 export type AdminSession = {
@@ -56,16 +72,29 @@ export type SalesRepresentative = {
   isActive: boolean;
   createdAt: string;
   lastLoginAt?: string | null;
+  position: StaffPosition | null;
+};
+
+export type CreatedClientAccount = {
+  id: string;
+  name: string;
+  email: string;
+  isActive: boolean;
+  createdAt: string;
 };
 
 export function isSuperAdmin(admin: AdminProfile | null) {
   return admin?.role === ADMIN_ROLE;
 }
 
-export function getRoleHomePath(role: string) {
-  if (role === "SUPER_ADMIN") return "/dashboard";
-  if (role === "SALES_REPRESENTATIVE") return "/";
+export function isAccountExecutive(admin: AdminProfile | null) {
+  return admin?.role === STAFF_ROLE && admin.position === "ACCOUNT_EXECUTIVE";
+}
+
+export function getRoleHomePath(role: string, position?: StaffPosition | null) {
+  if (role === ADMIN_ROLE) return "/dashboard";
   if (role === "USER") return "/dashboard";
+  if (role === STAFF_ROLE && position === "ACCOUNT_EXECUTIVE") return "/leads";
   return "/";
 }
 
@@ -147,17 +176,6 @@ export function googleLogin(idToken: string, category: LoginCategory) {
   return request<AdminSession>("/api/v1/auth/google", {
     method: "POST",
     body: JSON.stringify({ idToken, category }),
-  });
-}
-
-export function requestClientSignup(input: {
-  name: string;
-  email: string;
-  password: string;
-}) {
-  return request<{ message: string }>("/api/v1/auth/signup", {
-    method: "POST",
-    body: JSON.stringify(input),
   });
 }
 
@@ -279,8 +297,20 @@ export function createSalesRepresentative(input: {
   name: string;
   email: string;
   password: string;
+  position: StaffPosition;
 }) {
   return adminFetch<SalesRepresentative>("/api/v1/auth/admin/representatives", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+export function createClientAccount(input: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  return adminFetch<CreatedClientAccount>("/api/v1/auth/admin/clients", {
     method: "POST",
     body: JSON.stringify(input),
   });

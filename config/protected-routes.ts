@@ -2,6 +2,7 @@
 // and the token-guarded appointment links are intentionally absent.
 export const protectedRoutes = [
   "/dashboard",
+  "/leads",
   "/access",
   "/admin",
   "/assessments",

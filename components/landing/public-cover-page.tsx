@@ -89,12 +89,6 @@ function PublicCoverContent() {
               >
                 {publicCover.representativeLogin.label}
               </Link>
-              <Link
-                href={publicCover.clientLogin.href}
-                className="inline-flex min-h-12 items-center justify-center bg-bronze px-5 text-center font-secondary text-xs font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-bronze/90"
-              >
-                {publicCover.clientLogin.label}
-              </Link>
             </div>
           </div>
         </section>

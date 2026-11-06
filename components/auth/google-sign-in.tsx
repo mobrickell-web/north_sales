@@ -98,7 +98,9 @@ export function useGoogleSignIn(category: LoginCategory = "CLIENT") {
           categoryRef.current,
         );
         storeSession(session);
-        router.replace(getRoleHomePath(session.admin.role));
+        router.replace(
+          getRoleHomePath(session.admin.role, session.admin.position),
+        );
       } catch (cause) {
         setError(
           cause instanceof Error

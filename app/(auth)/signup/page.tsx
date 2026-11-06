@@ -1,12 +1,7 @@
-import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
-import { SignupScreen } from "@/components/auth/signup";
-
-export const metadata: Metadata = {
-  title: "Create Your Account",
-  description: "Create your NORTH POINT SALES GROUP account.",
-};
-
+// Self sign-up is disabled: the Master Admin creates client accounts and
+// shares their login credentials.
 export default function SignupPage() {
-  return <SignupScreen />;
+  redirect("/login");
 }

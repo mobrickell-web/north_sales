@@ -27,13 +27,9 @@ export function LoginScreen({
   const google = useGoogleSignIn(category);
   const { login } = authConfig;
   // Sent with the login request; the API rejects it unless it matches the role
-  // stored on the account.
-  const loginCategories: { value: LoginCategory; label: string }[] = [
-    { value: "CLIENT", label: "Clients" },
-    { value: "SALES_REPRESENTATIVE", label: "Sales Representatives" },
-    { value: "MASTER_ADMIN", label: "Master Admin" },
-    { value: "OTHER", label: "Other (Guest)" },
-  ];
+  // (and, for staff, the position) stored on the account.
+  const loginCategories: readonly { value: LoginCategory; label: string }[] =
+    login.categories;
   const selectedCategoryIndex = loginCategories.findIndex(
     (option) => option.value === category,
   );
@@ -116,14 +112,14 @@ export function LoginScreen({
         htmlFor="login-category"
         className="mb-1 font-[family-name:var(--font-plus-jakarta)] text-[12px] font-semibold text-foreground"
       >
-        Sign in as
+        {login.categoryLabel}
       </label>
       <div ref={categoryDropdownRef} className="relative z-20 mb-3">
         <button
           id="login-category"
           type="button"
           role="combobox"
-          aria-label="Sign in as"
+          aria-label={login.categoryLabel}
           aria-haspopup="listbox"
           aria-expanded={categoryMenuOpen}
           aria-controls="login-category-options"
@@ -144,7 +140,7 @@ export function LoginScreen({
           <div
             id="login-category-options"
             role="listbox"
-            aria-label="Sign in as"
+            aria-label={login.categoryLabel}
             className="absolute top-[calc(100%+8px)] left-0 z-30 w-full rounded-xl border border-slate-200 bg-white p-1.5 shadow-[0_8px_24px_rgba(15,23,42,0.16)]"
           >
             {loginCategories.map((option, index) => {
@@ -211,16 +207,6 @@ export function LoginScreen({
           </div>
         }
       />
-
-      <p className="mt-6 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground">
-        {login.signupPrompt}{" "}
-        <Link
-          href={login.signupHref}
-          className="cursor-pointer font-semibold text-bronze underline underline-offset-2 hover:brightness-90"
-        >
-          {login.signupLinkLabel}
-        </Link>
-      </p>
     </AuthScreenLayout>
   );
 }
