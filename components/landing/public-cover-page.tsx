@@ -76,6 +76,8 @@ function PublicCoverContent() {
               </a>
               <a
                 href={publicCover.email.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-bronze underline decoration-bronze/40 underline-offset-4 transition-colors hover:text-primary"
               >
                 {publicCover.email.label}

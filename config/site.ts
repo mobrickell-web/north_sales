@@ -1422,10 +1422,12 @@ export const siteConfig = {
     },
     email: {
       label: "Email: contact@northpointsalesgroup.com",
-      href: "mailto:contact@northpointsalesgroup.com",
+      // Gmail's web compose opens in any browser, unlike mailto: which needs
+      // a default mail app on the visitor's computer.
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=contact@northpointsalesgroup.com",
     },
     representativeLogin: {
-      label: "Authorized Representative Login",
+      label: "Authorized User Login",
       href: "/login",
     },
   },
