@@ -388,6 +388,7 @@ export function InvestmentSection({
   const { investment } = challenges;
   const [popup, setPopup] = useState<InvestmentPopup | null>(null);
   const [sequencePopupOpen, setSequencePopupOpen] = useState(false);
+  const [approachPopupOpen, setApproachPopupOpen] = useState(false);
 
   const closePopup = () => {
     setSequencePopupOpen(false);
@@ -467,6 +468,38 @@ export function InvestmentSection({
             >
               {investment.subtitle}
             </h2>
+            <Dialog.Root
+              open={approachPopupOpen}
+              onOpenChange={setApproachPopupOpen}
+            >
+              <Dialog.Trigger asChild>
+                <button
+                  type="button"
+                  className="cursor-pointer font-body text-[13px] font-extrabold tracking-[0.04em] text-bronze underline decoration-bronze/40 underline-offset-4 transition-colors hover:text-[#8f5d0e] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze sm:text-[15px]"
+                >
+                  {investment.concentratedApproach.heading}
+                </button>
+              </Dialog.Trigger>
+              <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0" />
+                <Dialog.Content className="fixed left-1/2 top-1/2 z-[61] max-h-[90vh] w-[calc(100%-2rem)] max-w-[620px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl animate-in fade-in-0 zoom-in-95 sm:p-8">
+                  <Dialog.Close className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze">
+                    <X className="size-5" />
+                    <span className="sr-only">Close</span>
+                  </Dialog.Close>
+                  <Dialog.Title className="pr-8 font-body text-[15px] font-extrabold tracking-[0.04em] text-primary uppercase sm:text-[17px]">
+                    {investment.concentratedApproach.popupTitle}
+                  </Dialog.Title>
+                  <div className="mt-4 flex flex-col gap-3 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
+                    {investment.concentratedApproach.popupParagraphs.map(
+                      (paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ),
+                    )}
+                  </div>
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
           </div>
 
           <ol className="mt-8 flex w-full max-w-[1100px] list-none flex-col gap-4 p-0">
@@ -664,7 +697,12 @@ export function InvestmentSection({
                   </Dialog.Title>
                   <Dialog.Description asChild>
                     <div className="flex flex-col gap-5 font-body text-[14px] leading-relaxed text-[#5C5F66] sm:text-[15px]">
-                      {popup.sequenceIntro && <p>{popup.sequenceIntro}</p>}
+                      {popup.sequenceIntro &&
+                        popup.sequenceIntro
+                          .split("\n\n")
+                          .map((paragraph, index) => (
+                            <p key={`sequence-intro-${index}`}>{paragraph}</p>
+                          ))}
                       {popup.sequenceGroups && (
                         <div className="flex flex-col gap-4">
                           {renderGroups(popup.sequenceGroups)}

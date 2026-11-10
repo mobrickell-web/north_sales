@@ -7,9 +7,9 @@ const sharedSequenceHint =
 
 const salesTeamPerformancePopout = {
   title: "SALES TEAM PERFORMANCE ENGAGEMENT",
-  fee: "Professional Fee: Beginning at $7,500\nEngagement Period: 30 Days",
+  fee: "Professional Fee: $15,000\nEngagement Period: 30 Days",
   intro:
-    "This engagement focuses on improving the performance of your existing sales team. We work directly with sales leadership and selected salespeople to identify performance gaps, improve execution, and strengthen accountability.",
+    "This engagement focuses on improving the performance of up to five selected sales or account representatives on your existing sales team. We work directly with those representatives and your sales leadership to identify performance gaps, improve sales execution, and strengthen accountability.",
   includedHeading: "WHAT IS INCLUDED",
   expandableIncluded: true,
   groups: [
@@ -34,14 +34,8 @@ const salesTeamPerformancePopout = {
     },
     {
       title: "3. Individual Sales Performance Coaching",
-      items: [
-        "Provide direct one-on-one coaching with up to three selected salespeople.",
-        "Address the specific performance issues identified during assessment.",
-        "Work on prospecting, qualification, presentations, objection handling, follow-up, pipeline management, and closing, as applicable.",
-        "Review available recorded sales conversations or conduct practice calls where appropriate.",
-        "Provide practical direction and accountability throughout the engagement.",
-        "Evaluate progress against each salesperson's starting baseline and appropriate KPIs.",
-      ],
+      intro:
+        "We conduct structured group coaching sessions over Zoom and provide targeted individual coaching as needed. We help ensure that representatives understand the value of the products or services they sell and can explain how those offerings address what matters to each customer.",
     },
     {
       title: "4. Sales Leadership Sessions",
@@ -67,18 +61,19 @@ const salesTeamPerformancePopout = {
     },
   ],
   deliverableHeading: "ENGAGEMENT DELIVERABLES",
-  deliverableIntro: "At the conclusion of the engagement, leadership receives:",
+  deliverableIntro:
+    "At the conclusion of the engagement, leadership receives a final executive summary that includes:",
   deliverableItems: [
     "A summary of performance findings and work completed.",
-    "Individual recommendations for the salespeople directly coached.",
-    "Progress against established KPIs, where measurable.",
+    "Individual recommendations for the representatives directly coached.",
+    "Baseline KPIs and any measurable progress against them.",
     "A practical plan for continued sales-team improvement.",
     "Recommendations for maintaining coaching and accountability.",
   ],
   parametersHeading: "ENGAGEMENT PARAMETERS",
   parametersParagraphs: [
-    "The starting fee covers a focused 30-day engagement, including one-on-one work with up to three selected salespeople. Companies with larger sales teams may participate by selecting representatives for direct coaching.",
-    "Additional coaching, a broader scope, or work beyond the initial 30 days can be arranged separately. Any additional fees are agreed upon in advance.",
+    "The $15,000 fee covers a focused 30-day engagement for up to five selected sales or account representatives. Companies with larger sales teams may participate by selecting the representatives they want us to assess and coach.",
+    "If you need us to work with more than five sales or account representatives, including new hires, we’ll confirm the scope and price with you before any additional work begins. A broader scope or work beyond the initial 30 days can also be arranged separately.",
   ],
   upgradeHeading: "UPGRADE CREDIT",
   upgradeParagraphs: [
@@ -90,10 +85,10 @@ const salesTeamPerformancePopout = {
 } as const;
 
 const focusedSalesPerformancePopout = {
-  title: "30-DAY FOCUSED SALES PERFORMANCE ENGAGEMENT",
-  fee: "Investment: $9,500\nEngagement Period: 30 Days",
+  title: "45-DAY FOCUSED SALES PERFORMANCE ENGAGEMENT",
+  fee: "Investment: $25,000\nEngagement Period: 45 Days",
   intro:
-    "This engagement includes everything provided in our $7,500 Sales Team Performance Engagement, together with a broader examination of the organization's sales operations, leadership, systems, and opportunities for improvement.",
+    "This engagement includes the direct assessment and coaching provided in our $15,000 Sales Team Performance Engagement and expands the work to include a broader review of your sales leadership, systems, and processes. Over 45 days, NORTH POINT SALES GROUP works with your existing sales team and its leadership to implement agreed priorities within the engagement scope. Leadership also receives a roadmap for improvements that require further work.",
   includedHeading: "WHAT THE ENGAGEMENT INCLUDES",
   expandableIncluded: false,
   groups: [
@@ -101,16 +96,16 @@ const focusedSalesPerformancePopout = {
       title: "",
       numbered: true,
       items: [
-        "Executive discovery and identification of organizational priorities.",
-        "Individual assessment and coaching of up to three sales or account representatives.",
-        "Evaluation of sales presentations, objection handling, follow-up practices, and closing techniques.",
-        "Sales manager participation, coaching, and reinforcement of representative improvements.",
-        "Broader review of sales processes, CRM utilization, and pipeline management.",
+        "Executive discovery to identify organizational priorities and agree on the areas to review and improve.",
+        "Individual performance assessments for up to five selected sales or account representatives, structured group coaching over Zoom, and targeted individual coaching as needed.",
+        "Evaluation and coaching on sales presentations, objection handling, follow-up, and closing. We help ensure representatives understand the value of what they sell and can explain how it addresses what matters to each customer.",
+        "Sales manager participation in coaching, implementation, and reinforcement of agreed improvements.",
+        "A broader review of sales processes, CRM utilization, and pipeline management.",
         "Evaluation of lead generation, qualification, and conversion practices.",
-        "Review of selected sales performance measurements and KPIs.",
-        "Identification of sales leadership and accountability improvements.",
-        "Prioritized recommendations and an implementation roadmap.",
-        "Final management review of findings, recommended actions, and next steps.",
+        "Establishment of baseline KPIs and review of measurable progress where data is available.",
+        "Implementation of agreed priority improvements within scope, including changes to sales processes, management practices, or accountability where warranted.",
+        "Prioritized recommendations and an implementation roadmap for improvements that require further work.",
+        "Final management review of findings, changes implemented, measurable progress, and recommended next steps.",
       ],
     },
   ],
@@ -118,201 +113,78 @@ const focusedSalesPerformancePopout = {
   deliverableIntro:
     "Leadership receives an executive presentation and implementation roadmap covering:",
   deliverableItems: [
-    "Sales-performance findings.",
-    "The most significant improvement opportunities.",
-    "Recommended priorities and actions.",
-    "Proposed responsibilities and implementation sequence.",
-    "Required resources and potential outside support.",
-    "Recommended KPIs and available starting baselines.",
+    "Sales performance findings and the most significant improvement opportunities.",
+    "Coaching completed and individual recommendations for the representatives directly coached.",
+    "Priority improvements implemented during the engagement.",
+    "Baseline KPIs, any measurable progress, and recommended KPIs for tracking future improvements.",
+    "Recommended next actions in priority order, with proposed responsibilities and an implementation sequence.",
+    "Resources needed and any outside support to consider.",
   ],
   parametersHeading: "ENGAGEMENT PARAMETERS",
   parametersParagraphs: [
-    "The starting fee covers a focused 30-day assessment, analysis, executive recommendations, and implementation roadmap. A substantially broader scope or deeper analysis may require an adjusted fee, agreed upon in advance.",
-    "The engagement is designed to be completed within 30 days, subject to timely client participation and access to necessary information.",
-    "Broader organizational implementation beyond the agreed engagement scope is not included.",
-    "Third-party expenses—including software, advertising, website development, and specialized technical services—are separate and require client approval.",
+    "The $25,000 fee covers a focused 45-day engagement, including direct assessment and coaching for up to five selected sales or account representatives, a broader review of the sales operation, implementation of agreed priorities within scope, and a roadmap for further improvements.",
+    "The engagement is designed to be completed within 45 days, subject to timely client participation and access to necessary information.",
+    "If you need us to work with additional representatives, conduct a deeper review, or implement changes beyond the agreed scope, we’ll confirm the scope and price with you before any additional work begins.",
+    "Third-party expenses, including software, advertising, website development, and specialized technical services, require prior written client approval and are invoiced separately. Payment is required before those services begin.",
   ],
-  differencesHeading: "HOW THIS DIFFERS FROM THE $7,500 ENGAGEMENT",
+  differencesHeading: "HOW THIS DIFFERS FROM THE $15,000 ENGAGEMENT",
   differencesParagraphs: [
-    "The $7,500 engagement focuses on direct improvement of selected salespeople's execution. This engagement includes that work and examines the broader sales operation, leadership, systems, and opportunities for improvement, then establishes the priorities and roadmap for implementation.",
+    "The $15,000 engagement concentrates on improving how selected representatives sell and helping their sales manager reinforce those improvements. The $25,000 engagement includes that work, examines how leadership, systems, and processes affect the broader sales operation, and puts agreed priority improvements into practice over 45 days. Leadership receives a roadmap showing which improvements to address next, who should be responsible, and what resources may be needed.",
   ],
   upgradeHeading: "UPGRADE CREDIT",
   upgradeParagraphs: [
     "If you move directly into a Full Sales Performance Implementation, the professional fee paid for this engagement will be credited toward the implementation fee.",
   ],
   sequenceInNestedPopup: true,
-  sequenceHeading: "30-DAY WORK SEQUENCE",
+  sequenceHeading: "45-DAY WORK SEQUENCE",
   sequenceLinkHint: sharedSequenceHint,
 } as const;
 
 const fullSalesPerformancePopout = {
   title: "FULL SALES PERFORMANCE IMPLEMENTATION",
-  fee: "Professional Fee: $50,000–$150,000+\nImplementation Period: 30–90 Days",
+  fee: "Investment: $50,000–$150,000+\nEngagement Period: 60–90 Days",
   intro:
-    "This engagement combines assessment with hands-on implementation across the areas of your sales organization requiring improvement.\n\nWe work directly with leadership and sales personnel to identify opportunities, implement agreed-upon changes, establish KPIs and accountability, and refine the approach as results become available.",
-  includedHeading: "WHAT IS INCLUDED",
-  expandableIncluded: true,
+    "This engagement is designed for established companies that need broader improvements across their existing sales organization. NORTH POINT SALES GROUP works directly with executive leadership, sales management, and the sales teams included in the agreed scope to identify what is limiting performance, implement priority changes, and measure progress.",
+  includedHeading: "WHAT THE ENGAGEMENT INCLUDES",
+  expandableIncluded: false,
   groups: [
     {
-      title: "1. Executive Discovery and Leadership Assessment",
+      title: "",
+      numbered: true,
       items: [
-        "Discuss sales objectives, challenges, expectations, and current performance.",
-        "Review sales leadership responsibilities and management practices.",
-        "Identify leadership concerns and organizational constraints affecting results.",
-        "Review how expectations are communicated and commitments are followed through.",
-        "Establish the initial areas requiring examination.",
-      ],
-    },
-    {
-      title: "2. Sales Team and Individual Performance Assessment",
-      items: [
-        "Review sales-team structure, roles, responsibilities, and expectations.",
-        "Review available individual and team performance data.",
-        "Assess prospecting, qualification, presentations, follow-up, pipeline management, and closing practices.",
-        "Identify skill gaps, inconsistent execution, and barriers to productivity.",
-        "Identify effective practices that should be maintained or reinforced.",
-        "Establish available starting baselines for measuring progress.",
-      ],
-    },
-    {
-      title: "3. Sales Process and Operations Review",
-      items: [
-        "Review the sales process from prospecting or lead receipt through closed sale and account development.",
-        "Examine sales procedures, responsibilities, and handoffs.",
-        "Review CRM utilization, reporting, pipeline management, and forecasting.",
-        "Identify process breakdowns, inefficiencies, and missed opportunities.",
-        "Examine existing KPIs and accountability practices.",
-        "Review compensation, incentives, recruiting, onboarding, training, and customer retention where relevant.",
-      ],
-      outro:
-        "Areas presenting greater potential impact receive greater attention.",
-    },
-    {
-      title: "4. Lead Generation and Sales Conversion",
-      intro: "Where applicable:",
-      items: [
-        "Review leads generated through website activity, advertising, social media, referrals, outbound prospecting, and other sources.",
-        "Improve lead assignment, response, qualification, and follow-up procedures.",
-        "Address breakdowns between lead generation and sales execution.",
-        "Improve how opportunities move from inquiry to qualified opportunity and customer.",
-        "Establish appropriate KPIs for lead quality, response, conversion, and sales results.",
-        "Coordinate approved changes requiring outside marketing or technical specialists.",
-      ],
-    },
-    {
-      title: "5. Findings, Priorities, and Implementation Roadmap",
-      items: [
-        "Identify what is working and should be maintained.",
-        "Identify where opportunities are being lost.",
-        "Establish the performance issues requiring priority attention.",
-        "Agree with leadership on recommended changes.",
-        "Define the implementation sequence and responsibilities.",
-        "Identify required resources and outside specialists.",
-        "Establish appropriate KPIs and available starting baselines.",
-        "Clarify which activities fall within the agreed engagement scope.",
-      ],
-    },
-    {
-      title: "6. Sales Performance Implementation",
-      intro: "Depending on the agreed scope:",
-      items: [
-        "Improve prospecting and lead-development practices.",
-        "Strengthen qualification, sales presentations, objection handling, follow-up, and closing.",
-        "Provide direct coaching to selected salespeople.",
-        "Strengthen sales leadership, coaching, and performance management.",
-        "Improve sales processes, responsibilities, assignments, and workflows.",
-        "Strengthen pipeline management and forecasting.",
-        "Improve CRM procedures, usage expectations, and reporting.",
-        "Establish structured sales meetings and accountability procedures.",
-        "Improve compensation, recruiting, onboarding, training, or customer development practices where required.",
-        "Coordinate implementation across affected areas.",
-      ],
-    },
-    {
-      title: "7. Establishing or Transitioning Sales Leadership",
-      intro:
-        "When needed, we help define the sales leadership role, recruit and evaluate candidates, and onboard and train a new sales manager. We can also help transition day-to-day sales leadership responsibilities from the owner or an existing manager to the designated sales leader.",
-      outro:
-        "These services are included when specified in the agreed engagement scope.",
-    },
-    {
-      title: "8. AI Sales Integration",
-      intro: "Where appropriate:",
-      items: [
-        "Evaluate whether AI could improve productivity, reduce administrative work, or create additional sales opportunities.",
-        "Examine potential applications in lead generation, lead qualification, CRM efficiency, follow-up, forecasting, and performance monitoring.",
-        "Review compatibility with existing systems and available data.",
-        "Evaluate potential financial benefits against implementation and ongoing costs.",
-        "Help identify suitable technology providers and qualified specialists.",
-        "Coordinate and oversee approved implementation within the agreed scope.",
-        "Establish appropriate KPIs for evaluating effectiveness.",
-      ],
-      outro:
-        "Third-party software and technical implementation expenses are separately identified and require client approval. Work outside the agreed engagement scope is quoted separately.",
-    },
-    {
-      title: "9. KPI Measurement and Accountability",
-      items: [
-        "Establish KPIs relevant to the agreed improvement priorities.",
-        "Document available starting baselines.",
-        "Clarify performance expectations and responsibilities.",
-        "Establish reporting dashboards and review procedures as appropriate.",
-        "Compare results with baselines and agreed objectives.",
-        "Investigate performance gaps, inconsistent records, and missed commitments.",
-        "Adjust activities and priorities as evidence becomes available.",
-      ],
-    },
-    {
-      title: "10. Implementation Support and Reinforcement",
-      items: [
-        "Work with leadership and sales personnel throughout the implementation period.",
-        "Address obstacles affecting progress.",
-        "Review whether new procedures are being followed.",
-        "Reinforce coaching, expectations, and accountability.",
-        "Refine changes that are not producing the expected improvement.",
-        "Establish internal ownership of implemented practices.",
-        "Recommend next steps for maintaining progress after the engagement.",
+        "Executive discovery to confirm sales objectives, operating priorities, and the scope of implementation.",
+        "Comprehensive assessment using the 12 Sales Performance Components™ to identify where changes will have the greatest impact.",
+        "Direct work with sales managers and representatives, including group and targeted individual coaching as needed.",
+        "Implementation of agreed improvements to sales practices, processes, and systems. Depending on the findings, this may include lead qualification, presentations, follow-up, pipeline management, and CRM use.",
+        "Strengthening sales leadership practices, including coaching, performance reviews, and accountability for agreed changes.",
+        "Establishment of baseline KPIs, regular progress reviews, and adjustments based on what the team is applying and what the data shows.",
+        "Final executive review and handoff of responsibilities, reporting, and coaching practices to the people who will carry the work forward.",
       ],
     },
   ],
   deliverableHeading: "ENGAGEMENT DELIVERABLES",
-  deliverableIntro: "Leadership receives:",
+  deliverableIntro:
+    "Leadership receives a final executive summary and handoff plan covering:",
   deliverableItems: [
-    "Sales-performance findings and agreed improvement priorities.",
-    "An implementation roadmap with responsibilities and required resources.",
-    "Agreed-upon improvements put into operation.",
-    "KPI reporting showing progress against established baselines, where measurable.",
-    "A closing review of work completed, results observed, remaining priorities, and recommended next steps.",
+    "The most significant performance findings and the priorities addressed.",
+    "Changes implemented across the sales teams, processes, systems, and leadership practices included in the scope.",
+    "Baseline KPIs, progress against agreed targets where measurable, and any areas that need more time to evaluate.",
+    "Responsibilities, coaching routines, and reporting practices for sustaining the improvements.",
+    "Remaining priorities and recommended next steps.",
   ],
-  implementationPeriodHeading: "IMPLEMENTATION PERIOD",
-  implementationPeriodParagraphs: [
-    "Approximately 30 Days\nFocused changes that can be implemented within a concentrated period, with limited complexity and a defined number of priorities.",
-    "Approximately 60–90 Days\nBroader implementation involving multiple performance areas, teams, management levels, locations, or systems, with additional time for coaching, measurement, and refinement.\n\nSome revenue results may take longer to become evident, depending on the company's sales cycle.",
-  ],
-  parametersHeading: "HOW THE PROFESSIONAL FEE IS DETERMINED",
+  parametersHeading: "ENGAGEMENT PARAMETERS",
   parametersParagraphs: [
-    "The $50,000–$150,000+ fee reflects:",
-    "Number of salespeople and managers involved.\nNumber of locations, divisions, markets, or sales channels.\nNumber and depth of performance areas requiring improvement.\nComplexity of existing processes and systems.\nAmount of individual coaching and implementation required.\nMeasurement and reporting requirements.\nEngagement duration and NORTH POINT SALES GROUP resources needed.",
-    "A higher fee does not automatically require a longer engagement. Scope, professional fee, and implementation period are established before work begins.",
+    "The professional fee and duration are based on the agreed scope, including the teams or locations involved, the complexity of the changes, and the implementation support required. We confirm the scope, timeline, and investment with you before work begins.",
+    "If we expect implementation to take longer than 90 days, we’ll tell you before you commit and confirm the proposed timeline and investment. If the need for more time becomes clear during the engagement, we’ll let you know before the agreed end date and get your approval for any extension and additional fees before proceeding.",
+    "Third-party expenses, including software, advertising, website development, and specialized technical services, require prior written client approval and are invoiced separately. Payment is required before those services begin.",
   ],
-  differencesHeading: "HOW THIS DIFFERS FROM THE OTHER ENGAGEMENTS",
+  differencesHeading: "HOW THIS DIFFERS FROM THE $25,000 ENGAGEMENT",
   differencesParagraphs: [
-    "Sales Team Performance — Beginning at $7,500: Direct improvement of selected salespeople's execution within a focused 30-day engagement.",
-    "30-Day Focused Sales Performance — Beginning at $9,500: Broader assessment, executive recommendations, and an implementation roadmap.",
-    "Full Sales Performance Implementation — $50,000–$150,000+: Assessment and hands-on implementation across the agreed areas, with coaching, KPI measurement, accountability, and refinement.",
-  ],
-  upgradeHeading: "UPGRADE CREDIT",
-  upgradeParagraphs: [
-    "If you move directly from either introductory engagement into Full Sales Performance Implementation, the professional fee paid for that engagement will be credited toward the implementation fee.",
-  ],
-  thirdPartyHeading: "THIRD-PARTY COSTS AND ADDITIONAL SERVICES",
-  thirdPartyParagraphs: [
-    "Third-party expenses—including software, advertising, website development, and specialized technical services—are separate from our professional fee and require client approval.",
-    "Services beyond the agreed scope or implementation period can be arranged separately.",
+    "The $25,000 engagement provides 45 days of focused implementation, including direct assessment and coaching for up to five selected representatives. Full Sales Performance Implementation typically provides 60–90 days to put broader changes into practice across the teams, systems, and leadership functions included in the agreed scope. It also gives sales management time to reinforce the changes while we review adoption and measurable progress together.",
   ],
   sequenceInNestedPopup: true,
-  sequenceHeading: "30–90 DAY WORK SEQUENCE",
-  sequenceLinkHint: sharedSequenceHint,
+  sequenceHeading: "60–90-DAY WORK SEQUENCE",
+  sequenceLinkHint: "Click to view the general implementation work sequence.",
 } as const;
 
 export const componentKpisIntro = [
@@ -1340,8 +1212,8 @@ export function getPillarThemeKpisOpeningLine(themeLabel: string): string {
   const measure =
     themeLabel in pillarThemeKpiMeasurePhrases
       ? pillarThemeKpiMeasurePhrases[
-          themeLabel as keyof typeof pillarThemeKpiMeasurePhrases
-        ]
+      themeLabel as keyof typeof pillarThemeKpiMeasurePhrases
+      ]
       : themeLabel.toLowerCase();
   return `Below are examples of KPIs we may use to measure ${measure}.`;
 }
@@ -1653,32 +1525,36 @@ export const siteConfig = {
           {
             heading: "A PRACTICAL STARTING POINT",
             paragraphs: [
-              "For companies that prefer a focused starting point, we offer two 30-day options:",
+              "For companies that prefer a focused starting point, we offer two options:",
             ],
             options: [
               {
-                title: "Sales Team Performance Engagement — $7,500",
+                title:
+                  "OPTION 1 — Sales Team Performance Engagement | $15,000 | 30 Days",
                 href: "#investment-option-1",
                 description:
-                  "Direct work with up to three selected sales or account representatives, including assessment, coaching, process review, baseline KPIs, weekly updates, and a final summary. Companies with larger teams may begin with selected representatives and expand the scope when needed.",
+                  "Direct work with up to five selected sales or account representatives on your existing sales team. Includes individual assessments, structured group Zoom coaching, targeted individual coaching as needed, sales process improvements, baseline KPIs, weekly updates, and a final executive summary. Companies with larger teams can start with selected representatives and agree on the scope and price of any additional work in advance.",
               },
               {
-                title: "30-Day Focused Sales Performance — $9,500",
+                title:
+                  "OPTION 2 — Focused Sales Performance Engagement | $25,000 | 45 Days",
                 href: "#investment-option-2",
                 description:
-                  "Includes everything in our $7,500 Sales Team Performance Engagement, plus executive discovery, a broader sales organization assessment, leadership and systems review, and a prioritized implementation roadmap.",
+                  "Includes the direct assessment and coaching in Option 1, plus executive discovery and a broader review of sales leadership, systems, and processes. We implement agreed priority improvements during the engagement and provide leadership with a roadmap for the work that should follow.",
               },
             ],
             closingParagraphs: [
-              "These engagements provide substantive work with defined objectives and deliverables. They also allow you to experience how we work before deciding whether broader implementation makes sense.",
-              "If you proceed to full implementation, your initial engagement fee is credited toward that investment.",
+              "Both engagements have defined objectives and deliverables and give you an opportunity to see how we work before deciding whether broader implementation makes sense.",
+              "If you move directly from either option into Full Sales Performance Implementation, the professional fee you paid for that engagement is credited toward the implementation fee.",
               {
                 linkLine: {
-                  before: "Organizations ready for ",
+                  before:
+                    "Organizations ready for broader changes can begin with ",
                   href: "#investment-option-3",
-                  label: "comprehensive implementation",
+                  label:
+                    "OPTION 3 — Full Sales Performance Implementation | 60–90 Days",
                   after:
-                    " can begin with the broader engagement. We recommend the starting point that fits your needs, priorities, and readiness to move forward.",
+                    ". We recommend the starting point that fits your priorities and the work your sales organization needs.",
                 },
               },
             ],
@@ -1996,9 +1872,9 @@ export const siteConfig = {
           "12 ADVANTAGES OF OUR APPROACH TO SALES PERFORMANCE IMPROVEMENT",
         title: "12 ADVANTAGES OF OUR APPROACH TO SALES PERFORMANCE IMPROVEMENT",
         intro: [
-          "Before investing more money in additional salespeople, new technology, or another training program, consider how much additional revenue your existing sales organization may be capable of producing.",
-          "At NORTH POINT SALES GROUP, we help established companies identify opportunities for improvement, strengthen sales execution, improve management systems, and increase productivity through practical, measurable improvements.",
-          "Our approach is built around three priorities: financial discipline, practical implementation, and sustainable organizational performance.",
+          "Before investing in additional salespeople, new technology, or another training program, consider where your existing sales force has room to improve and how much additional annual gross sales it could generate.",
+          "NORTH POINT SALES GROUP helps established companies identify what’s limiting sales performance, put improvements into practice, and measure progress. We work directly with your salespeople and leadership to improve how your team sells, how managers coach, and how your sales systems support the work.",
+          "Select a category below to explore the 12 advantages of our approach.",
         ],
         pillars: [
           {
@@ -2008,63 +1884,62 @@ export const siteConfig = {
                 number: 1,
                 title: "OPTIMIZE YOUR EXISTING SALES FORCE FIRST",
                 paragraphs: [
-                  "Before recommending additional hiring, technology, or other major expenditures, we examine opportunities to improve performance using the salespeople, leadership, and resources you already have.",
+                  "Before recommending additional hiring, technology, or other major expenditures, we examine what your existing salespeople, leadership, and resources can do to improve sales performance.",
                 ],
                 bullets: [
-                  "Identify untapped revenue opportunities within your existing sales organization.",
-                  "Improve the productivity of current sales representatives.",
-                  "Address performance weaknesses before expanding payroll.",
-                  "Help generate greater value from resources already in place.",
+                  "Identify sales opportunities your existing team can pursue.",
+                  "Improve representative productivity, follow-up, and conversion.",
+                  "Address performance gaps before expanding payroll.",
+                  "Evaluate how much additional contribution profit could remain after the variable costs associated with additional sales.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Potentially increase revenue and productivity without proportionately increasing operating expenses.",
+                  "THE ADVANTAGE — The potential to increase annual gross sales and contribution profit using your existing sales force.",
               },
               {
                 number: 2,
-                title: "START WITH AN AFFORDABLE, FOCUSED ENGAGEMENT",
+                title: "START WITH A FOCUSED ENGAGEMENT",
                 paragraphs: [
-                  "Our focused engagements start at $7,500, allowing companies to address specific sales-performance needs without immediately committing to a comprehensive organizational implementation.",
+                  "Our $15,000 Sales Team Performance Engagement provides 30 days of direct assessment and coaching for up to five selected sales or account representatives, with sales management participation and targeted process improvements.",
                 ],
                 bullets: [
-                  "Begin with a clearly defined scope of work.",
-                  "Concentrate on selected sales representatives or priority performance issues.",
-                  "Evaluate our approach before considering broader implementation.",
-                  "Expand the engagement only when additional work is justified.",
+                  "Begin with a clearly defined scope, fee, and timeline.",
+                  "Focus on the selected representatives and the performance issues that need attention.",
+                  "Review the work completed, any measurable progress, and recommended next steps.",
+                  "Agree on the scope and price of any additional work before it begins.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: A lower initial financial commitment with the flexibility to pursue additional improvements when appropriate.",
+                  "THE ADVANTAGE — A defined initial investment with the flexibility to expand the work when it makes sense for your company.",
               },
               {
                 number: 3,
                 title: "CLEAR, TRANSPARENT INVESTMENT OPTIONS",
                 paragraphs: [
-                  "We publish our investment structure so prospective clients can understand the general financial commitment before entering detailed discussions.",
+                  "We publish our fees and engagement periods so you can compare the options before a detailed discussion.",
                 ],
                 bullets: [
-                  "Focused engagements beginning at $7,500 and $9,500.",
-                  "Comprehensive executive implementations ranging from $50,000 to $150,000+.",
-                  "Clearly defined deliverables appropriate to the selected engagement.",
-                  "Investment recommendations based on organizational needs, scope, and complexity.",
-                  "Executive review and approval of implementation plans where applicable.",
+                  "OPTION 1 — Sales Team Performance Engagement | $15,000 | 30 Days",
+                  "OPTION 2 — Focused Sales Performance Engagement | $25,000 | 45 Days",
+                  "OPTION 3 — Full Sales Performance Implementation | $50,000–$150,000+ | Typically 60–90 Days",
                 ],
+                closing:
+                  "Each option has defined deliverables. For Full Sales Performance Implementation, the fee and timeline reflect the agreed scope, the complexity of the changes, and the level of hands-on support required.",
                 advantage:
-                  "THE ADVANTAGE: Greater financial transparency and control over the scope and cost of the engagement.",
+                  "THE ADVANTAGE — You can review the work, timeline, and investment before you commit.",
               },
               {
                 number: 4,
                 title: "SHORT, DEFINED ENGAGEMENT PERIODS",
                 paragraphs: [
-                  "Our engagements generally range from 30 to 90 days, depending on the scope of work. We emphasize timely assessment, practical implementation, and measurable progress rather than unnecessarily extended consulting arrangements.",
+                  "Each engagement has an agreed timeline and focuses on the work needed to meet its objectives. If we expect Full Sales Performance Implementation to take longer than 90 days, we’ll tell you before you commit.",
                 ],
                 bullets: [
-                  "Clearly established engagement objectives.",
-                  "Defined implementation schedules.",
-                  "Prioritized improvement opportunities.",
-                  "Regular progress reviews.",
-                  "No automatic requirement for ongoing consulting services.",
+                  "Confirm the objectives, work sequence, and expected completion date.",
+                  "Implement agreed priorities and review measurable progress against baseline KPIs.",
+                  "Give sales leadership clear responsibilities for sustaining improvements.",
+                  "If more time is needed, discuss it before the agreed end date and get your approval for any extension and additional fees before proceeding.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Concentrated improvement efforts with defined timelines and limited long-term financial exposure.",
+                  "THE ADVANTAGE — A clear end date and control over any additional commitment.",
               },
             ],
           },
@@ -2073,79 +1948,70 @@ export const siteConfig = {
             advantages: [
               {
                 number: 5,
-                title:
-                  "FOCUS ON WHAT NEEDS IMPROVEMENT — NOT WHAT ALREADY WORKS",
+                title: "FOCUS ON THE CHANGES THAT MATTER MOST",
                 paragraphs: [
-                  "Not every sales organization needs a complete transformation. Many companies already have effective salespeople, processes, and leadership practices that should remain in place. Targeted improvements can often provide greater value than unnecessary organizational changes.",
+                  "Many established sales organizations already have effective people, processes, and management practices. We build on those strengths and focus on the specific issues limiting the performance of your existing sales force.",
                 ],
                 bullets: [
-                  "Identify specific weaknesses affecting productivity and revenue.",
-                  "Preserve existing practices that consistently produce results.",
-                  "Avoid unnecessary restructuring or system replacements.",
-                  "Prioritize improvements according to their potential business impact.",
-                  "Recommend only services and changes that address identified needs.",
+                  "Identify gaps affecting productivity, conversion, and annual gross sales.",
+                  "Build on sales and management practices that consistently produce results.",
+                  "Prioritize changes based on their potential impact and the effort required.",
+                  "Recommend services, process changes, or system upgrades when the findings justify them.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Targeted improvements without the cost and disruption of unnecessary organizational changes.",
+                  "THE ADVANTAGE — Focus your time and investment on changes that address identified performance issues.",
               },
               {
                 number: 6,
-                title: "IMPLEMENTATION, NOT JUST RECOMMENDATIONS",
+                title: "PUT AGREED IMPROVEMENTS INTO PRACTICE",
                 paragraphs: [
-                  "Identifying problems is only the beginning. We work directly with your salespeople and leadership to help put practical solutions into operation.",
+                  "We work directly with your salespeople and leadership to put agreed changes into daily use. The level of hands-on support depends on the engagement you select.",
                 ],
                 bullets: [
-                  "Evaluate sales execution and identify performance gaps.",
-                  "Improve prospecting, presentations, closing, and follow-up practices.",
-                  "Strengthen sales processes and management procedures.",
-                  "Establish performance expectations and accountability.",
-                  "Help implement improvements rather than simply recommending them.",
+                  "Assess how representatives sell and identify specific performance gaps.",
+                  "Coach representatives on prospecting, presentations, objection handling, closing, and follow-up.",
+                  "Implement agreed changes to sales processes, systems, or management practices within the engagement scope.",
+                  "Establish clear performance expectations and responsibilities.",
+                  "Review how consistently the team applies the changes and what progress can be measured.",
                 ],
-                afterBulletsLink: {
-                  before:
-                    "The level of implementation support depends on the selected ",
-                  href: "#investment",
-                  label: "engagement",
-                  after: ".",
-                },
                 advantage:
-                  "THE ADVANTAGE: Direct assistance in turning identified opportunities into operational improvements.",
+                  "THE ADVANTAGE — Your team gets direct help applying the changes and measuring progress.",
               },
               {
                 number: 7,
                 title: "INDIVIDUAL SALES REPRESENTATIVE DEVELOPMENT",
                 paragraphs: [
-                  "Sales organizations often have significant differences in productivity among representatives. We work directly with selected salespeople to identify individual performance gaps and strengthen the skills and behaviors affecting their results.",
+                  "We assess selected sales or account representatives individually and tailor coaching to the skills and practices that affect their performance.",
                 ],
                 bullets: [
-                  "Evaluate individual sales conversations, presentations, and follow-up practices.",
-                  "Identify weaknesses in prospecting, qualification, objection handling, and closing.",
-                  "Provide individualized coaching and practical sales guidance.",
-                  "Use recorded conversations, role-playing, and remote coaching sessions where appropriate.",
-                  "Measure individual progress against established performance baselines.",
-                  "Extend successful improvements to additional sales representatives when appropriate.",
+                  "Review sales conversations, presentations, and follow-up practices.",
+                  "Identify opportunities to improve prospecting, qualification, objection handling, and closing.",
+                  "Help representatives understand the value of the products or services they sell and explain how those offerings address what matters to each customer.",
+                  "Use recorded conversations, role-playing, structured group Zoom coaching, and targeted individual coaching as appropriate.",
+                  "Review individual progress against agreed performance baselines where measurable.",
+                  "Help sales managers reinforce effective practices and share them with other representatives where appropriate.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Improve individual productivity while developing practices that can benefit the entire sales organization.",
+                  "THE ADVANTAGE — Coaching addresses each representative’s needs and gives sales managers practical ways to reinforce what works.",
               },
               {
                 number: 8,
                 title: "PRACTICAL TECHNOLOGY AND AI INTEGRATION",
                 paragraphs: [
-                  "Technology should make your sales organization more productive, not introduce unnecessary costs or complexity. We examine how existing systems can be improved and where AI may provide practical value.",
+                  "We review how your team uses its existing sales tools and identify where better use of those tools or targeted AI applications could improve productivity.",
                 ],
                 bullets: [
-                  "Lead Generation: Identify prospective companies and organize them according to established business criteria.",
-                  "Lead Qualification: Research, filter, score, and prioritize potential sales opportunities.",
-                  "CRM Efficiency: Reduce repetitive data entry, improve information accuracy, and streamline sales workflows.",
-                  "Sales Follow-Up: Support scheduling, reminders, and personalized communications to reduce missed opportunities.",
-                  "Sales Forecasting: Analyze pipeline information and identify patterns that may improve forecasting accuracy.",
-                  "Performance Monitoring: Identify potential sales and operational problems through KPI analysis, CRM activity reviews, and automated alerts.",
+                  "Lead Generation — Identify prospective companies that match your business criteria.",
+                  "Lead Qualification — Research, filter, and prioritize opportunities using agreed criteria.",
+                  "CRM Efficiency — Reduce repetitive data entry and improve the accuracy of sales records.",
+                  "Sales Follow-Up — Use scheduling, reminders, and communication support to help representatives follow up consistently.",
+                  "Sales Forecasting — Review pipeline data and identify patterns that can inform forecasts.",
+                  "Performance Monitoring — Use KPI trends, CRM activity, and alerts to flag issues for management review.",
                 ],
                 closing:
-                  "We evaluate technology and AI opportunities according to their practicality, implementation requirements, and potential financial benefit.",
+                  "We evaluate each opportunity based on its fit with your sales process, the work required to implement it, and its potential financial benefit.",
                 advantage:
-                  "THE ADVANTAGE: Improve operational efficiency and sales productivity while avoiding unnecessary technology investments.",
+                  "THE ADVANTAGE — Invest in technology where it can save time, improve sales execution, or give leadership better information.",
               },
             ],
           },
@@ -2154,73 +2020,67 @@ export const siteConfig = {
             advantages: [
               {
                 number: 9,
-                title: "MEASURABLE PERFORMANCE IMPROVEMENT",
+                title: "MEASURE PROGRESS AGAINST A BASELINE",
                 paragraphs: [
-                  "Improvement must be measured to determine whether it is working. We help establish clear performance baselines, relevant KPIs, and practical reporting procedures.",
+                  "We establish a starting point and agree with leadership on the key performance indicators (KPIs) that will show whether the changes are working.",
                 ],
                 bullets: [
-                  "Establish starting performance measurements.",
-                  "Track prospecting activity, conversion rates, closing performance, and other relevant KPIs.",
-                  "Compare individual and organizational results against established baselines.",
-                  "Identify performance trends and problems requiring management attention.",
-                  "Develop reporting procedures that provide leadership with meaningful performance visibility.",
-                  "Adjust improvement initiatives based on measurable findings.",
+                  "Establish baselines using available performance data.",
+                  "Track relevant KPIs such as prospecting activity, follow-up, conversion rates, and closing performance.",
+                  "Compare individual and team results with their baselines where measurable.",
+                  "Use regular progress reviews to identify trends and issues that need management attention.",
+                  "Adjust coaching, processes, or expectations based on what the data and day-to-day work show.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Greater visibility into sales performance and a practical way to evaluate progress, accountability, and results.",
+                  "THE ADVANTAGE — Leadership can see what’s improving, where progress is slow, and what needs attention next.",
               },
               {
                 number: 10,
                 title: "STRENGTHEN EXISTING SALES LEADERSHIP",
                 paragraphs: [
-                  "Sustainable sales performance depends on effective leadership, consistent coaching, clear expectations, and accountability. We work collaboratively with existing sales managers to strengthen these capabilities.",
+                  "We work directly with your sales managers to strengthen the coaching, performance reviews, and follow-through that help improvements take hold.",
                 ],
                 bullets: [
-                  "Clarify leadership roles, responsibilities, and expectations.",
-                  "Improve individual sales coaching and performance management.",
-                  "Establish consistent accountability and follow-through.",
-                  "Strengthen sales meetings and communication practices.",
-                  "Help managers identify and address performance problems earlier.",
-                  "Develop procedures that support continuous improvement after our engagement.",
+                  "Clarify management roles, performance expectations, and who is responsible for each action.",
+                  "Help managers coach representatives on specific performance gaps.",
+                  "Make sales meetings and performance reviews more useful by focusing on agreed priorities and next actions.",
+                  "Help managers spot performance issues earlier and follow through on corrective actions.",
+                  "Establish coaching and reporting routines managers can continue after the engagement.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Stronger internal leadership and management practices that help sustain performance improvements without ongoing outside supervision.",
+                  "THE ADVANTAGE — Your sales managers have practical routines for coaching the team, addressing performance issues, and sustaining improvements.",
               },
               {
                 number: 11,
-                title: "MINIMAL DISRUPTION AND NO REQUIRED ONGOING CONTRACTS",
+                title: "WORK WITHIN YOUR DAILY OPERATIONS",
                 paragraphs: [
-                  "Our approach is designed to work within your existing organization, minimizing unnecessary disruption to daily sales operations.",
-                  "Much of our work can be conducted remotely through video meetings, recorded sales conversations, CRM reviews, and direct interaction with salespeople and management.",
+                  "We deliver our engagements remotely and coordinate assessments, coaching, and implementation with your team’s sales responsibilities and operating priorities.",
                 ],
                 bullets: [
-                  "Conduct assessments and coaching remotely when practical.",
-                  "Reduce unnecessary travel expenses and scheduling complications.",
-                  "Work around existing sales responsibilities and operational priorities.",
-                  "Introduce improvements without unnecessarily interrupting productive activities.",
-                  "Establish processes your organization can continue managing independently.",
-                  "Make additional advisory or implementation assistance optional after completion.",
+                  "Use Zoom sessions, recorded sales conversations, and CRM reviews as appropriate.",
+                  "Schedule coaching and working sessions around key sales activities.",
+                  "Introduce agreed changes in a sequence your team can put into practice.",
+                  "Hand off ongoing responsibilities to the people who will manage the work internally.",
+                  "Make additional advisory or implementation support available at your request.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: Practical implementation with limited operational disruption and no required long-term consulting dependency.",
+                  "THE ADVANTAGE — Remote delivery reduces travel and scheduling demands, and your team can manage the changes internally once the engagement ends.",
               },
               {
                 number: 12,
-                title: "FINANCIALLY DISCIPLINED, LONG-TERM VALUE",
+                title: "BUILD LONG-TERM VALUE WITH YOUR EXISTING SALES FORCE",
                 paragraphs: [
-                  "Our objective is not to create an ongoing need for our services. It is to help your company improve its ability to generate revenue, manage performance, and sustain results using its own people and resources.",
+                  "We focus on improvements your people can sustain and that can contribute to stronger sales performance over time.",
                 ],
                 bullets: [
-                  "Increase productivity and improve sales execution.",
-                  "Strengthen existing management systems and accountability.",
-                  "Improve conversion rates and reduce avoidable lost opportunities.",
-                  "Identify opportunities to improve profitability and operating efficiency.",
-                  "Establish repeatable processes that support consistent performance.",
-                  "Create a stronger foundation for sustainable revenue growth.",
-                  "Provide additional assistance only when your organization determines it is needed.",
+                  "Improve sales productivity, conversion, and follow-up.",
+                  "Reduce missed opportunities by making key sales practices repeatable.",
+                  "Strengthen management reporting and accountability so leadership can spot and address declines in performance.",
+                  "Evaluate how much additional contribution profit could remain after the variable costs associated with additional sales.",
+                  "Give leadership clear priorities for continued improvement after the engagement.",
                 ],
                 advantage:
-                  "THE ADVANTAGE: An investment in organizational capabilities intended to continue delivering value long after our engagement is completed.",
+                  "THE ADVANTAGE — Your existing sales force is better equipped to pursue additional annual gross sales, and leadership has a way to evaluate the financial value of those gains.",
               },
             ],
           },
@@ -2251,7 +2111,7 @@ export const siteConfig = {
     title: "OUR 30-90 DAY IMPLEMENTATION PROCESS",
     subtitle: [
       "30 days for focused implementation when the work can be completed efficiently within a concentrated timeframe.",
-      "60 days for broader implementation requiring additional coaching, measurement, refinement, or follow-through.",
+      "45-60 days for broader implementation requiring additional coaching, measurement, refinement, or follow-through.",
       "90 days for larger or more complex sales organizations requiring more extensive implementation across multiple areas.",
     ],
     steps: [
@@ -4096,11 +3956,21 @@ export const siteConfig = {
       badge: "INVESTMENT",
       title: "INVESTMENT",
       subtitle: "WHAT THE ENGAGEMENT INCLUDES",
+      concentratedApproach: {
+        heading: "A CONCENTRATED APPROACH TO SALES PERFORMANCE IMPROVEMENT",
+        popupTitle: "WHY OUR APPROACH IS CONCENTRATED",
+        popupParagraphs: [
+          "NORTH POINT SALES GROUP provides focused, hands-on sales performance assessment, coaching, and implementation designed to accomplish agreed objectives within a practical timeframe.",
+          "We don’t require clients to enter lengthy engagements when the necessary improvements can be identified and implemented in less time.",
+          "Our engagements are structured according to the actual work required—not an arbitrary long-term commitment.",
+          "The objective is meaningful improvement—not extending the engagement unnecessarily.",
+        ],
+      },
       tiers: [
         {
-          title: "Sales Team Performance Engagement — Beginning at $7,500",
+          title: "OPTION 1 — Sales Team Performance Engagement | $15,000",
           description:
-            "Focused specifically on improving the performance of the existing sales team.",
+            "A focused 30-day engagement to improve the performance of up to five selected sales or account representatives on your existing sales team.",
           popout: {
             ...salesTeamPerformancePopout,
             sequenceInNestedPopup: true,
@@ -4110,81 +3980,79 @@ export const siteConfig = {
               {
                 title: "INTRODUCTION",
                 intro:
-                  "The 30-Day Sales Team Performance Engagement is a focused, hands-on engagement designed to identify the factors affecting sales-team performance and begin making practical improvements within the existing sales organization.\n\nNORTH POINT SALES GROUP does not approach the 30 days as a predetermined checklist. We first determine where the greatest opportunities exist, then direct our time and effort toward those areas.\n\nThe engagement moves through four general phases: discovery and assessment, individual and team performance review, direct performance improvement, and results review with recommended next steps.\n\nThe client remains actively involved throughout the engagement by providing access to leadership, sales personnel, relevant sales information, and existing processes and systems. Management participation is important because improvements need to be understood, supported, and reinforced internally.",
+                  "The 30-Day Sales Team Performance Engagement is a focused, hands-on engagement for up to five selected sales or account representatives on your existing sales team. NORTH POINT SALES GROUP works directly with those representatives and your sales leadership to identify performance gaps, improve sales execution, and strengthen accountability.\n\nWe first determine where the greatest opportunities for improvement exist, then direct our time and effort toward those areas within the agreed scope.\n\nThe engagement moves through four general phases: discovery and initial assessment, individual and team performance review, direct performance improvement, and results review with recommended next steps.\n\nThe client remains actively involved throughout the engagement by providing access to leadership, selected representatives, relevant sales information, and existing processes and systems. Sales management participates so it can support and reinforce improvements during and after the engagement.",
               },
               {
                 title: "CLIENT PARTICIPATION",
                 intro: "The client is expected to:",
                 items: [
-                  "Provide access to appropriate sales leadership and selected sales representatives.",
-                  "Provide available sales-performance information, reports, metrics, and relevant sales materials.",
+                  "Provide access to appropriate sales leadership and selected sales or account representatives.",
+                  "Provide available sales performance information, reports, metrics, and relevant sales materials.",
                   "Explain current sales processes, expectations, management practices, and areas of concern.",
-                  "Make selected sales representatives available for scheduled one-on-one work.",
-                  "Participate in periodic discussions regarding findings and progress.",
-                  "Provide appropriate access to systems or information necessary to evaluate sales performance.",
-                  "Review and support recommended changes that fall within the company's responsibility.",
+                  "Make selected representatives available for scheduled individual assessments, group Zoom coaching, and targeted individual coaching as needed.",
+                  "Participate in discussions about findings, coaching priorities, and progress.",
+                  "Provide appropriate access to systems or information needed to evaluate sales performance.",
+                  "Review and support agreed changes that fall within the company's responsibility.",
                 ],
                 outro:
-                  "NORTH POINT SALES GROUP handles the assessment and performance-improvement work. The client provides the access, information, participation, and internal support necessary for that work to be effective.",
+                  "NORTH POINT SALES GROUP handles the assessment and performance improvement work. The client provides the access, information, participation, and internal support needed for that work to be effective.",
               },
               {
                 title: "DAYS 1–5 — DISCOVERY & INITIAL ASSESSMENT",
                 intro:
-                  "NORTH POINT SALES GROUP begins by understanding the sales team, its responsibilities, current expectations, and existing performance.\nWork may include:",
+                  "NORTH POINT SALES GROUP begins by understanding the existing sales team, its responsibilities, current expectations, and performance.\nWork may include:",
                 items: [
-                  "Meeting with sales leadership.",
+                  "Meeting with sales leadership to confirm priorities and engagement objectives.",
                   "Reviewing sales roles, responsibilities, and expectations.",
-                  "Reviewing available sales-performance information and individual metrics.",
+                  "Reviewing available sales performance information and individual metrics.",
+                  "Agreeing on the key performance indicators (KPIs) to track and establishing baselines using available data.",
                   "Examining the current sales process.",
                   "Identifying initial strengths, weaknesses, and performance concerns.",
-                  "Selecting up to three representatives for direct one-on-one work.",
+                  "Confirming with sales leadership which representatives will participate, up to five.",
                 ],
                 outro:
-                  "Objective: Establish where the most significant individual and team performance issues appear to exist.",
+                  "Objective: Establish a starting point for measuring progress and identify the performance issues that warrant closer review.",
               },
               {
                 title: "DAYS 6–12 — INDIVIDUAL & TEAM PERFORMANCE REVIEW",
                 intro:
-                  "NORTH POINT SALES GROUP works directly with the selected representatives and examines how they are actually performing within the sales process.\nWork may include:",
+                  "NORTH POINT SALES GROUP assesses each selected representative individually and examines how they work within the existing sales process.\nWork may include:",
                 items: [
-                  "Reviewing prospecting and lead-development activity.",
-                  "Examining qualification and opportunity development.",
-                  "Reviewing sales conversations and presentations.",
-                  "Examining follow-up and pipeline management.",
+                  "Reviewing prospecting, lead development, and qualification.",
+                  "Reviewing sales conversations and presentations, including how representatives explain the value of what they sell.",
+                  "Examining objection handling, closing, follow-up, and pipeline management.",
                   "Identifying individual performance gaps and missed opportunities.",
-                  "Working with sales leadership to understand management and accountability practices affecting performance.",
+                  "Working with sales leadership to understand management and accountability practices that affect performance.",
                 ],
                 outro:
-                  "Objective: Determine what is limiting individual and team performance and where practical improvement can be made.",
+                  "Objective: Determine what is limiting performance and identify where coaching or changes to the sales process can help.",
               },
               {
                 title: "DAYS 13–22 — DIRECT PERFORMANCE IMPROVEMENT",
                 intro:
-                  "The focus shifts from identifying issues to working directly on them.\nWork may include:",
+                  "The focus shifts to coaching the selected representatives and implementing agreed improvements.\nWork may include:",
                 items: [
-                  "One-on-one performance work with up to three selected representatives.",
-                  "Improving prospecting and lead-development practices.",
-                  "Strengthening sales conversations and presentations.",
-                  "Improving follow-up and opportunity management.",
-                  "Addressing specific individual performance issues.",
-                  "Reinforcing the company's sales process and expectations.",
-                  "Establishing practical performance standards and accountability where appropriate.",
-                  "Working with sales leadership on how improvements should be managed and reinforced.",
+                  "Conducting structured group coaching sessions over Zoom and providing targeted individual coaching as needed.",
+                  "Helping ensure representatives understand the value of the products or services they sell and can explain how those offerings address what matters to each customer.",
+                  "Improving prospecting, qualification, presentations, objection handling, closing, or follow-up where needed.",
+                  "Implementing agreed sales process improvements.",
+                  "Reinforcing the company's sales process and establishing practical performance standards where appropriate.",
+                  "Working with sales leadership on how to reinforce the changes and hold representatives accountable.",
                 ],
                 outro:
-                  "Objective: Begin implementing practical changes rather than simply providing recommendations.",
+                  "Objective: Put agreed improvements into practice and help sales leadership reinforce them.",
               },
               {
                 title: "DAYS 23–30 — RESULTS REVIEW & NEXT-STEP PLAN",
                 intro:
-                  "The final phase evaluates what has been learned and accomplished during the engagement and establishes the appropriate next level of action.\nWork may include:",
+                  "The final phase reviews the work completed, evaluates early progress, and establishes what sales leadership should focus on next.\nWork may include:",
                 items: [
-                  "Reviewing changes in individual and team performance.",
-                  "Identifying improvements achieved during the engagement.",
-                  "Identifying issues requiring additional attention.",
-                  "Reviewing performance expectations and accountability.",
-                  "Determining whether additional representatives or sales-performance areas should be addressed.",
-                  "Presenting leadership with a clear summary of findings, actions taken, and recommended next steps.",
+                  "Comparing available individual and team performance data with the baseline KPIs.",
+                  "Reviewing which changes have been put into practice and identifying any measurable progress.",
+                  "Identifying issues that require further attention.",
+                  "Confirming which coaching priorities, performance standards, and accountability practices sales leadership will continue to reinforce.",
+                  "Discussing whether additional representatives or sales performance areas should be addressed.",
+                  "Presenting leadership with the findings, actions taken, and recommended next steps.",
                 ],
               },
               {
@@ -4192,52 +4060,55 @@ export const siteConfig = {
                 intro:
                   "At the conclusion of the 30-day engagement, NORTH POINT SALES GROUP provides an Executive Sales Team Performance Summary documenting:",
                 items: [
-                  "What was examined.",
-                  "What was found.",
+                  "What was examined and what was found.",
                   "The primary performance issues identified.",
-                  "Work completed with the selected representatives.",
-                  "Improvements initiated during the engagement.",
-                  "Issues that remain unresolved or require additional attention.",
-                  "Recommended next steps.",
-                  "Whether additional individual representatives, sales-performance areas, or implementation support should be considered.",
+                  "The assessment and coaching completed with the selected representatives.",
+                  "Individual recommendations for the representatives directly coached.",
+                  "Sales process and performance improvements put into practice.",
+                  "Baseline KPIs and any measurable progress against them.",
+                  "Issues that require additional attention.",
+                  "A practical plan for continued sales team improvement, including recommendations for maintaining coaching and accountability.",
+                  "Whether additional representatives, sales performance areas, or implementation support should be considered.",
                 ],
                 outro:
-                  "The purpose of the final deliverable is to give leadership a clear, practical picture of where the team stands, what NORTH POINT SALES GROUP found, what was done about it, and what should happen next.",
+                  "The summary gives leadership a clear record of the work completed and a plan for continuing the improvements after the engagement.",
               },
               {
                 title: "IMPORTANT",
                 intro:
-                  "This is not a rigid day-by-day checklist. The engagement is deliberately structured to allow NORTH POINT SALES GROUP to allocate its time where it can have the greatest impact. If an issue requires greater attention, more time will be devoted to it. If an area is not contributing significantly to the performance problem, it will not receive unnecessary attention.\n\nThe $7,500 engagement includes direct one-on-one work with up to three selected representatives. If additional representatives require individual performance work, or if the scope expands beyond the original 30-day engagement, the engagement and investment will be adjusted accordingly.",
+                  "This is a general work sequence. NORTH POINT SALES GROUP may adapt the timing and emphasis of each phase to fit your team, the findings, and the work required within the agreed scope.\n\nThe $15,000 fee covers a 30-day engagement for up to five selected sales or account representatives. If you need us to work with more than five representatives, including new hires, broaden the scope, or continue beyond the initial 30 days, we’ll confirm the scope and price with you before any additional work begins.",
               },
             ],
           },
         },
         {
           title:
-            "30-Day Focused Sales Performance Engagement — Beginning at $9,500",
+            "OPTION 2 — 45-Day Focused Sales Performance Engagement | $25,000",
           description:
-            "Includes direct assessment and coaching of up to three sales or account representatives, plus a broader review of sales leadership, systems, processes, and organizational performance, with executive findings and a prioritized implementation roadmap.",
+            "A focused 45-day engagement that includes direct assessment and coaching for up to five selected sales or account representatives, a broader review of sales leadership, systems, and processes, implementation of agreed priority improvements, and a roadmap for further work.",
           popout: {
             ...focusedSalesPerformancePopout,
             sequenceInNestedPopup: true,
-            sequenceHeading: "30-DAY WORK SEQUENCE",
+            sequenceHeading: "45-DAY WORK SEQUENCE",
             sequenceIntro:
-              "The 30-day engagement follows a structured process designed to move from discovery to analysis, then to prioritized recommendations and an implementation roadmap. The sequence is not a rigid checklist. NORTH POINT SALES GROUP examines the relevant areas of the sales operation and allocates its attention based on what the evidence reveals. Areas with greater potential impact receive greater attention, while areas that do not appear to be significant performance constraints are not unnecessarily pursued.",
+              "The 45-Day Focused Sales Performance Engagement combines direct assessment and coaching for up to five selected sales or account representatives on your existing sales team with a broader review of your sales leadership, systems, and processes. NORTH POINT SALES GROUP works with your team to implement agreed priority improvements during the engagement and gives leadership a roadmap for the work that should follow.\n\nThis is a general work sequence. We adapt the timing and emphasis of each phase based on what we find and the work agreed upon.",
             sequenceGroups: [
               {
                 title: "DAYS 1–5 — EXECUTIVE DISCOVERY",
                 items: [
                   "Meet with company leadership to understand sales objectives, challenges, expectations, and concerns.",
-                  "Review the existing sales organization and operating environment.",
-                  "Gather relevant sales data, reports, processes, and supporting information.",
-                  "Establish the initial areas requiring examination.",
+                  "Review the existing sales organization, sales roles, and management practices.",
+                  "Gather relevant sales data, reports, process documentation, and sales materials.",
+                  "Confirm up to five sales or account representatives for direct assessment and coaching.",
+                  "Agree on the initial areas of focus and establish baseline KPIs using available data.",
                 ],
-                outro: "Output: Initial discovery findings and areas of focus.",
+                outro:
+                  "Output — Initial findings, areas of focus, and available KPI baselines.",
               },
               {
                 title: "DAYS 6–12 — SALES OPERATION REVIEW",
                 intro:
-                  "Examine the relevant components of the sales operation, including:",
+                  "We assess each selected representative individually and review the relevant areas of the sales operation using the 12 Sales Performance Components™.",
                 items: [
                   "Sales leadership",
                   "Systems and processes",
@@ -4253,233 +4124,208 @@ export const siteConfig = {
                   "Sales training",
                 ],
                 outro:
-                  "The depth of review in each area is determined by its relevance to the company's sales-performance opportunities. Output: Sales operation findings and identified performance issues.",
+                  "The depth of review in each area depends on how it affects the performance of the existing sales team and the priorities agreed upon with leadership.\n\nOutput — Individual assessment findings, sales operation findings, and initial coaching priorities.",
               },
               {
-                title: "DAYS 13–17 — LEAD GENERATION & CONVERSION REVIEW",
-                intro: "Where applicable, examine:",
+                title: "DAYS 13–19 — LEAD GENERATION & CONVERSION REVIEW",
                 items: [
-                  "Lead sources",
-                  "Prospecting activity",
-                  "Lead handling",
-                  "Sales calls and presentations",
-                  "Follow-up",
-                  "Pipeline movement",
-                  "Conversion points",
+                  "Review how leads are generated, handled, qualified, and advanced through the pipeline.",
+                  "Examine sales conversations, presentations, objection handling, follow-up, and closing.",
+                  "Conduct structured group coaching over Zoom and provide targeted individual coaching as needed.",
+                  "Help representatives understand the value of the products or services they sell and explain how those offerings address what matters to each customer.",
+                  "Agree with sales leadership on which priority improvements to implement during the engagement.",
                 ],
                 outro:
-                  "The objective is to determine whether opportunities are being effectively generated, handled, advanced, and converted into sales. Output: Lead-generation and sales-conversion findings.",
+                  "Output — Lead generation and conversion findings, initial coaching completed, and agreed implementation priorities.",
               },
               {
-                title: "DAYS 18–22 — ANALYSIS & PRIORITIZATION",
+                title: "DAYS 20–33 — FOCUSED IMPLEMENTATION",
                 items: [
-                  "Connect findings across the sales operation.",
-                  "Determine which issues appear to have the greatest impact on performance.",
-                  "Separate primary issues from secondary issues.",
-                  "Identify opportunities that should be addressed immediately.",
-                  "Identify areas that should not be prioritized at this stage.",
+                  "Put agreed priority improvements into practice within the engagement scope. These may involve sales processes, CRM use, pipeline management, follow-up, or management practices.",
+                  "Continue group coaching and provide targeted individual coaching as needed to help representatives apply the changes.",
+                  "Work with sales management to clarify performance expectations, responsibilities, and accountability.",
+                  "Check how consistently the team is applying the changes and make adjustments based on what we observe.",
                 ],
                 outro:
-                  "Output: Prioritized findings and performance opportunities.",
-              },
-              {
-                title: "DAYS 23–26 — EXECUTIVE RECOMMENDATIONS",
-                intro:
-                  "Develop recommendations based on the findings, including:",
-                items: [
-                  "What should be done.",
-                  "Why it should be done.",
-                  "Who should be responsible.",
-                  "What resources may be required.",
-                  "What should be addressed internally.",
-                  "Where outside expertise may be appropriate.",
-                  "How results should be measured.",
-                ],
-                outro: "Output: Executive recommendations.",
+                  "Output — Priority improvements put into practice, coaching completed, and management responsibilities clarified.",
               },
               {
                 title:
-                  "DAYS 27–30 — EXECUTIVE PRESENTATION & IMPLEMENTATION ROADMAP",
+                  "DAYS 34–40 — PROGRESS REVIEW & EXECUTIVE RECOMMENDATIONS",
                 items: [
-                  "Present the findings and priorities to company leadership.",
-                  "Review the recommended actions and sequence.",
-                  "Establish responsibilities and required resources.",
-                  "Define recommended performance measurements.",
-                  "Identify the capabilities and resources required for implementation.",
-                  "Present the recommended path forward.",
+                  "Verify which changes are in use and identify where further reinforcement is needed.",
+                  "Compare available performance data with the baseline KPIs and document any measurable progress.",
+                  "Prepare individual recommendations for the representatives directly coached.",
+                  "Identify remaining improvement opportunities and recommend what to address first, who should be responsible, and what resources may be needed.",
                 ],
                 outro:
-                  "Final Deliverable: Executive Findings, Recommendations & Implementation Roadmap.",
+                  "Output — Progress findings, individual recommendations, and priorities for continued improvement.",
+              },
+              {
+                title:
+                  "DAYS 41–45 — EXECUTIVE PRESENTATION & IMPLEMENTATION ROADMAP",
+                items: [
+                  "Present leadership with the findings, coaching completed, improvements implemented, and any measurable progress.",
+                  "Review what sales management should continue to reinforce after the engagement.",
+                  "Walk through the recommended next actions in priority order, with proposed responsibilities and an implementation sequence.",
+                  "Review resources needed, any outside support to consider, and the KPIs leadership can use to track progress.",
+                ],
+                outro:
+                  "Final Deliverable — Executive Findings, Recommendations & Implementation Roadmap.",
               },
               {
                 title: "THE RESULT",
                 intro:
-                  "At the end of the 30 days, company leadership has a clear understanding of:",
+                  "At the end of the 45 days, company leadership has a clear understanding of:",
                 items: [
-                  "Where sales-performance opportunities exist.",
-                  "What is contributing to those opportunities.",
-                  "Which issues should be addressed first.",
-                  "What actions are recommended.",
-                  "What resources may be required.",
-                  "How implementation should proceed.",
-                  "How future performance should be measured.",
+                  "What is affecting the performance of the existing sales team.",
+                  "What coaching was completed and which priority improvements were implemented.",
+                  "What progress can be measured against the baseline KPIs.",
+                  "Which practices sales management should continue to reinforce.",
+                  "Which improvements to address next, who should be responsible, and how progress should be measured.",
                 ],
               },
             ],
           },
         },
         {
-          title: "Full Sales Performance Implementation — $50,000–$150,000+",
+          title:
+            "OPTION 3 — Full Sales Performance Implementation | $50,000–$150,000+",
           description:
-            "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.\n\nProfessional implementation fees are based on the agreed scope of work. Any additional third-party services or expenses require prior written client approval and are separately invoiced, with payment required before those services begin.",
+            "Comprehensive diagnosis and implementation across the areas of the sales operation that require attention.\n\nProfessional implementation fees are based on the agreed scope of work. Any additional third-party services or expenses require prior written client approval and are invoiced separately. Payment is required before those services begin.",
           popout: {
             ...fullSalesPerformancePopout,
             sequenceInNestedPopup: true,
-            sequenceHeading: "30–90 DAY WORK SEQUENCE",
+            sequenceHeading: "60–90-DAY WORK SEQUENCE",
             sequenceIntro:
-              "The Full Sales Performance Implementation follows a structured process that moves from discovery and diagnosis to implementation, measurement, adjustment, and performance stabilization.\n\nThe sequence is not a rigid checklist. The amount of time devoted to each phase depends on what NORTH POINT SALES GROUP finds and the depth of implementation required. A focused implementation may be completed in approximately 30-60 days, while broader or more complex implementations may continue through 60-90 days.",
+              "The Full Sales Performance Implementation moves from discovery and diagnosis to implementation, measurement, refinement, and handoff. NORTH POINT SALES GROUP works with executive leadership, sales management, and the teams included in the agreed scope to improve the performance of your existing sales organization.\n\nThis is a general work sequence for a 60–90-day engagement. We adapt the timing and emphasis of each phase based on what we find, the scope of the changes, and how the team is putting them into practice.",
             sequenceGroups: [
               {
                 title: "DAYS 1–5 — EXECUTIVE DISCOVERY & INITIAL ASSESSMENT",
                 intro:
-                  "NORTH POINT SALES GROUP begins by establishing an understanding of the company's sales organization, objectives, current performance, and areas of concern.\nWork may include:",
+                  "NORTH POINT SALES GROUP begins by understanding the company’s sales organization, objectives, current performance, and areas of concern.\nWork may include:",
                 items: [
-                  "Executive discussions with company leadership.",
-                  "Review of sales objectives and current performance.",
-                  "Review of sales organization, roles, and responsibilities.",
-                  "Review of available sales data and performance information.",
-                  "Initial review of sales processes, systems, and management practices.",
-                  "Identification of areas requiring deeper examination.",
+                  "Meeting with company leadership to confirm sales objectives, priorities, and expectations.",
+                  "Reviewing the sales organization, including the roles, teams, and locations within scope.",
+                  "Reviewing available sales data, performance reports, and relevant sales materials.",
+                  "Examining existing sales processes, systems, and management practices.",
+                  "Agreeing on the initial KPIs to track and establishing baselines using available data.",
+                  "Identifying areas that require deeper examination.",
                 ],
                 outro:
-                  "Objective: Establish where the most significant sales-performance opportunities appear to exist.",
+                  "Objective — Establish a starting point for measuring progress and identify the areas with the greatest potential for improvement.",
               },
               {
                 title: "DAYS 6–12 — SALES PERFORMANCE DIAGNOSIS",
                 intro:
-                  "NORTH POINT SALES GROUP conducts a deeper examination of the areas identified during discovery.\nWork may include:",
+                  "NORTH POINT SALES GROUP uses the 12 Sales Performance Components™ to examine the areas identified during discovery. The depth of review in each area depends on the evidence and its relevance to the agreed objectives.\nWork may include:",
                 items: [
-                  "Sales leadership and management.",
-                  "Sales-team and individual performance.",
-                  "Prospecting and lead development.",
-                  "Sales presentations and conversations.",
-                  "Pipeline management and follow-up.",
-                  "CRM utilization and reporting.",
-                  "Performance measurement and accountability.",
-                  "Lead generation and sales conversion.",
-                  "Other relevant sales-performance components.",
+                  "Reviewing sales leadership, management practices, and accountability.",
+                  "Assessing team and individual sales performance.",
+                  "Examining prospecting, lead generation, qualification, and conversion.",
+                  "Reviewing sales conversations, presentations, objection handling, and closing.",
+                  "Examining pipeline management and follow-up practices.",
+                  "Evaluating CRM use, reporting, and performance measurement.",
+                  "Reviewing other relevant components where the findings warrant further examination.",
                 ],
                 outro:
-                  "The review is evidence-driven rather than a checklist. Areas with greater potential impact receive greater attention.\n\nObjective: Determine what is affecting sales performance, where opportunities are being lost, and which issues should be addressed first.",
+                  "Objective — Determine what is limiting sales performance, where opportunities are being lost, and which issues warrant action first.",
               },
               {
                 title:
                   "DAYS 13–17 — FINDINGS, PRIORITIES & IMPLEMENTATION PLAN",
                 intro:
-                  "NORTH POINT SALES GROUP connects the findings and establishes the implementation priorities.\nWork may include:",
+                  "NORTH POINT SALES GROUP reviews the findings with leadership and agrees on the priorities for implementation.\nWork may include:",
                 items: [
-                  "Identifying the highest-impact issues.",
-                  "Separating primary issues from secondary issues.",
-                  "Determining what should be addressed first.",
-                  "Establishing recommended changes.",
-                  "Identifying who is responsible for each action.",
-                  "Determining internal resources and outside capabilities required.",
-                  "Establishing appropriate performance measures.",
-                  "Developing the implementation sequence.",
+                  "Identifying the issues with the greatest effect on sales performance.",
+                  "Agreeing on what to change and in what order.",
+                  "Assigning responsibility for each action and confirming when it is due.",
+                  "Identifying internal resources and any outside support that may be needed.",
+                  "Confirming baseline KPIs, performance targets where appropriate, and how progress will be reviewed.",
+                  "Establishing the implementation sequence for the teams or locations within scope.",
                 ],
                 outro:
-                  "Objective: Establish a practical plan for moving from diagnosis into implementation.",
+                  "Objective — Agree on what will be implemented, who is responsible, and how progress will be measured.",
               },
               {
                 title: "DAYS 18–30 — INITIAL IMPLEMENTATION",
                 intro:
-                  "NORTH POINT SALES GROUP begins putting the highest-priority recommendations into operation.\nWork may include:",
+                  "NORTH POINT SALES GROUP begins putting the agreed priority changes into practice with sales leadership, managers, and representatives.\nWork may include:",
                 items: [
-                  "Implementing changes to sales processes and procedures.",
-                  "Improving prospecting and lead-development practices.",
-                  "Strengthening sales presentations and conversations.",
-                  "Improving pipeline management and follow-up.",
-                  "Improving CRM utilization and reporting.",
-                  "Establishing or strengthening performance standards.",
-                  "Addressing individual and team performance issues.",
-                  "Strengthening sales management and accountability.",
-                  "Working directly with leadership and sales personnel.",
+                  "Implementing agreed changes to sales processes and procedures.",
+                  "Improving prospecting, lead qualification, pipeline management, and follow-up where needed.",
+                  "Conducting group coaching and targeted individual coaching as needed.",
+                  "Helping representatives understand the value of what they sell and explain how it addresses what matters to each customer.",
+                  "Improving CRM use and reporting.",
+                  "Establishing or strengthening performance standards, management coaching, and accountability.",
                 ],
                 outro:
-                  "Objective: Begin producing measurable improvement rather than stopping at recommendations.",
+                  "Objective — Put the first priority changes into practice and establish how managers will reinforce them.",
               },
               {
                 title:
-                  "DAYS 31–45 — EXTENDED IMPLEMENTATION & PERFORMANCE ADJUSTMENT",
+                  "DAYS 31–45 — CONTINUED IMPLEMENTATION & PERFORMANCE ADJUSTMENT",
                 intro:
-                  "Used when the depth or complexity of the implementation warrants additional time.\nNORTH POINT SALES GROUP continues implementation and begins evaluating how the changes are working in actual operation.\nWork may include:",
+                  "NORTH POINT SALES GROUP continues implementing agreed changes and reviews how they are working in day-to-day sales operations.\nWork may include:",
                 items: [
-                  "Completing additional recommended changes.",
-                  "Working with additional salespeople, managers, or operating groups.",
-                  "Monitoring adoption of new processes and practices.",
-                  "Reviewing early performance results.",
-                  "Identifying resistance, gaps, or unintended problems.",
-                  "Making necessary adjustments.",
-                  "Reinforcing new expectations and accountability.",
-                  "Addressing additional issues uncovered during implementation.",
+                  "Implementing additional priorities across the teams or locations within scope.",
+                  "Working directly with sales managers and representatives to reinforce agreed practices.",
+                  "Checking how consistently the team is applying changes to processes, systems, and sales practices.",
+                  "Reviewing early performance data against baseline KPIs where measurable.",
+                  "Identifying barriers to adoption and adjusting the implementation based on what we observe.",
+                  "Confirming management responsibilities for follow-through and accountability.",
                 ],
                 outro:
-                  "Objective: Ensure that implemented changes are functioning effectively in the real sales environment.",
+                  "Objective — Verify which changes are in use, resolve barriers to adoption, and refine the work based on early results.",
               },
               {
                 title:
-                  "DAYS 46–90 — MEASUREMENT, REFINEMENT & PERFORMANCE STABILIZATION",
+                  "DAY 46 THROUGH ENGAGEMENT CLOSE — MEASUREMENT, REFINEMENT & PERFORMANCE STABILIZATION",
                 intro:
-                  "For engagements extending beyond 45 days, this final phase focuses on measuring results, refining the implementation, and establishing a sustainable operating approach.\nWork may include:",
+                  "Through the agreed close, typically between Days 60 and 90, NORTH POINT SALES GROUP completes the remaining in-scope work, reviews measurable progress, and prepares sales leadership to sustain the changes.\nWork may include:",
                 items: [
-                  "Reviewing performance against established measures.",
-                  "Determining what improvements are occurring.",
-                  "Identifying areas that are not producing the expected results.",
-                  "Making final adjustments to processes, practices, or accountability.",
-                  "Reinforcing management and sales-team expectations.",
-                  "Establishing procedures for continued internal monitoring.",
-                  "Identifying remaining opportunities requiring future attention.",
-                  "Reviewing results and next steps with executive leadership.",
+                  "Completing agreed implementation priorities and verifying which changes are in use.",
+                  "Reviewing available performance data against baseline KPIs and agreed targets.",
+                  "Identifying where results need more time to evaluate or where further adjustments are warranted.",
+                  "Reinforcing coaching routines, performance standards, and accountability practices.",
+                  "Confirming who will own ongoing reporting, coaching, and performance reviews.",
+                  "Identifying remaining opportunities and reviewing recommended next steps with executive leadership.",
                 ],
                 outro:
-                  "Objective: Move the organization from implementation toward a sustainable system for maintaining and continuing sales-performance improvement.",
+                  "Objective — Leave sales leadership with clear responsibilities and routines for sustaining the changes and measuring continued progress.",
               },
               {
-                title: "CLIENT PARTICIPATION THROUGHOUT THE 30–90 DAYS",
+                title: "CLIENT PARTICIPATION THROUGHOUT THE 60–90 DAYS",
                 intro:
-                  "The client remains an active participant throughout the engagement.\nLeadership and designated personnel are expected to provide:",
+                  "The client remains an active participant throughout the engagement. Leadership and designated personnel are expected to provide:",
                 items: [
-                  "Access to appropriate people and information.",
+                  "Access to the appropriate leaders, managers, and sales representatives.",
                   "Timely access to sales data, systems, and relevant materials.",
-                  "Availability for scheduled meetings and working sessions.",
-                  "Participation in decisions requiring company approval.",
-                  "Internal resources necessary to implement agreed-upon changes.",
-                  "Support for new processes, standards, and accountability measures.",
+                  "Availability for scheduled meetings, coaching, and working sessions.",
+                  "Timely decisions on changes requiring company approval.",
+                  "Internal resources needed to implement agreed changes.",
+                  "Management support for new processes, standards, and accountability practices.",
                 ],
                 outro:
-                  "NORTH POINT SALES GROUP provides the outside expertise, assessment, implementation support, and performance-management process. The client's role is to provide the access, information, decisions, and internal support necessary to put the changes into operation.",
+                  "NORTH POINT SALES GROUP leads the assessment, works directly with your team to implement agreed improvements, and reviews progress with leadership. The client provides the access, decisions, resources, and internal support needed to put those changes into practice.",
               },
               {
                 title: "FINAL DELIVERABLE",
                 intro:
-                  "At the conclusion of the engagement, NORTH POINT SALES GROUP provides an Executive Sales Performance Implementation Summary documenting:",
+                  "At the conclusion of the engagement, NORTH POINT SALES GROUP provides an Executive Sales Performance Implementation Summary and handoff plan documenting:",
                 items: [
-                  "What was examined.",
-                  "What was found.",
-                  "The highest-priority performance issues identified.",
-                  "Changes implemented.",
-                  "Performance improvements identified during the engagement.",
-                  "Remaining issues or opportunities.",
-                  "Performance measures established.",
-                  "Recommended actions for continued internal management and improvement.",
+                  "What was examined and what was found.",
+                  "The highest-priority performance issues identified and addressed.",
+                  "Changes implemented across the teams, processes, systems, and leadership practices within scope.",
+                  "Baseline KPIs, progress against agreed targets where measurable, and areas that need more time to evaluate.",
+                  "Responsibilities, coaching routines, and reporting practices for sustaining the improvements.",
+                  "Remaining priorities and recommended next steps.",
                 ],
-                outro:
-                  "The final deliverable gives executive leadership a clear record of where the organization started, what NORTH POINT SALES GROUP found, what was changed, what results were observed, and what should happen next.",
               },
               {
                 title: "IMPORTANT",
                 intro:
-                  "The scope, professional fee, and implementation period are determined by the size and complexity of the sales organization and the number, complexity, and depth of the changes required. Professional fees are based on the scope and depth of the work, while the implementation period reflects the time reasonably required to complete that work. A higher professional fee does not necessarily require a longer implementation period.",
+                  "The professional fee reflects the agreed scope and depth of the work. The implementation period reflects the time needed to put the changes into practice, review progress, and hand off ongoing responsibilities. We confirm the scope, timeline, and investment before work begins.\n\nIf we expect implementation to take longer than 90 days, we’ll tell you before you commit and confirm the proposed timeline and investment. If the need for more time becomes clear during the engagement, we’ll let you know before the agreed end date and get your approval for any extension and additional fees before proceeding.",
               },
             ],
           },
@@ -4519,7 +4365,7 @@ export const siteConfig = {
         "Are ready to implement appropriate changes when opportunities are identified",
       ],
       industryNeutralNotice:
-        "We are industry-neutral. We specialize in improving established sales organizations—across every industry.",
+        "We specialize in improving established sales organizations across industries.",
       whyUsTitle: "WHY NORTH POINT SALES GROUP?",
       whyUs: [
         "We look at the entire sales organization, not just individuals.",
@@ -4618,37 +4464,34 @@ export const siteConfig = {
       {
         question: "What is your typical engagement and investment?",
         answer: [
-          "Our engagements are customized based on the scope of the sales-performance issues, the areas requiring attention, the size and complexity of the sales organization, and the level of implementation support required.",
-          "NORTH POINT SALES GROUP offers engagements ranging from focused 30-day sales-performance engagements beginning at $7,500 and $9,500 to comprehensive Full Sales Performance Implementation engagements ranging from $50,000 to $150,000+.",
-          "Full Sales Performance Implementation engagements typically run 30 to 90 days, depending on the size and complexity of the sales organization, the scope of work, and the depth of implementation required.",
-          "For comprehensive implementations, the investment is determined by the actual scope of work—not simply the size of the company. The greater the number of performance areas involved, organizational complexity, level of hands-on implementation, and duration of NPSG involvement, the greater the investment.",
+          "NORTH POINT SALES GROUP offers three engagement options to improve the performance of your existing sales organization.",
+          "Option 1 — Sales Team Performance Engagement | $15,000 | 30 Days. Direct assessment and coaching for up to five selected sales or account representatives, with sales management participation and targeted process improvements.",
+          "Option 2 — Focused Sales Performance Engagement | $25,000 | 45 Days. Direct assessment and coaching for up to five selected representatives, a broader review of sales leadership, systems, and processes, and implementation of agreed priority improvements.",
+          "Option 3 — Full Sales Performance Implementation | $50,000–$150,000+ | Typically 60–90 Days. Comprehensive assessment and hands-on implementation across the sales teams, systems, processes, and leadership practices included in the agreed scope.",
+          "For Full Sales Performance Implementation, the fee reflects the work required, including the areas involved, the complexity of the changes, and the level of hands-on support needed. We confirm the scope, timeline, and investment before you commit and tell you upfront if we expect the work to take longer than 90 days.",
           {
             linkLine: {
-              before:
-                "For details on each engagement and investment level, see ",
+              before: "For details on each option, see ",
               href: "#investment",
-              label: "Section 6 — Investment",
+              label: "Section 8 — Investment",
               after: ".",
             },
           },
-          "The objective is to identify and implement the changes with the greatest potential to improve sales performance and create measurable business value that justifies the investment.",
         ],
       },
       {
         question:
           "Can NORTH POINT SALES GROUP work with just a few of our Sales or Account Representatives?",
         answer: [
-          "Yes. NORTH POINT SALES GROUP can work directly with a limited number of Sales or Account Representatives when the company wants to address specific individual or team performance issues without undertaking a broader sales-performance implementation.",
-          "Our $7,500 Sales Team Performance Engagement is a 30-day engagement that can apply to a sales team of any size and includes direct one-on-one work with up to three selected representatives.",
-          "Our $9,500 Focused Sales Performance Engagement includes the same direct assessment and coaching of up to three representatives, along with a broader evaluation of the sales organization and a prioritized improvement plan.",
-          "If the company wants direct one-on-one work with more than three representatives, the engagement scope and investment are expanded accordingly. The additional investment is based on the number of representatives requiring individual attention, the areas being addressed, and the level of NPSG involvement required.",
-          "This allows a company to begin with a focused engagement involving up to three representatives and expand the work when additional individual performance support is warranted.",
+          "Yes. You can select up to five sales or account representatives from your existing sales team for direct assessment and coaching. This works for smaller teams as well as larger teams that want to start with a few people.",
+          "Option 1 — Sales Team Performance Engagement | $15,000 | 30 Days. We assess the selected representatives individually, provide structured group coaching over Zoom and targeted individual coaching as needed, and work with your sales manager to reinforce improvements.",
+          "Option 2 — Focused Sales Performance Engagement | $25,000 | 45 Days. We provide the same direct assessment and coaching for up to five selected representatives, review the broader sales leadership, systems, and processes, and implement agreed priority improvements.",
+          "If you’d like us to work with more than five representatives, including new hires, we’ll confirm the scope and price with you before any additional work begins.",
           {
             linkLine: {
-              before:
-                "For details on the available engagement and investment levels, see ",
+              before: "For details on each option, see ",
               href: "#investment",
-              label: "Section 6 — Investment",
+              label: "Section 8 — Investment",
               after: ".",
             },
           },
@@ -4657,11 +4500,10 @@ export const siteConfig = {
       {
         question: "How long does a typical engagement last?",
         answer: [
-          "Our 30–90 Day Implementation Process",
-          "Most Full Sales Performance Implementation engagements are completed within 30–90 days.",
-          "The appropriate duration depends on the size and complexity of the sales organization, the areas being addressed, and the depth of implementation required.",
-          "Duration and professional fees are determined independently. A larger investment does not necessarily require a longer engagement.",
-          // "For example, a substantial $100,000 implementation may sometimes be effectively completed within 30 days, while another engagement may require 45–60 days because of the implementation and follow-through involved.",
+          "Option 1 — Sales Team Performance Engagement: 30 days.",
+          "Option 2 — Focused Sales Performance Engagement: 45 days.",
+          "Option 3 — Full Sales Performance Implementation: Typically 60–90 days.",
+          "For Option 3, the timeline depends on the teams involved, the complexity of the changes, and the time needed to put those changes into practice. The professional fee reflects the scope and depth of the work. We confirm both the timeline and fee before you commit and tell you upfront if we expect implementation to take longer than 90 days.",
         ],
       },
       {

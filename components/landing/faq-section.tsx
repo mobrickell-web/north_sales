@@ -1,6 +1,6 @@
 // components/FaqSection.tsx
 
-import Link from "next/link";
+import { HashLink } from "@/components/shared/hash-link";
 import { siteConfig } from "@/config/site";
 
 interface FaqSectionProps {
@@ -74,12 +74,12 @@ export function FaqSection({ sectionNumber = 9 }: FaqSectionProps) {
                         className="font-body text-[14px] leading-[1.5] text-[#3A3A3A]"
                       >
                         {before}
-                        <Link
+                        <HashLink
                           href={href}
                           className="font-semibold text-[#b17411] underline decoration-[#b17411]/40 underline-offset-2 hover:text-[#8f5d0e]"
                         >
                           {label}
-                        </Link>
+                        </HashLink>
                         {after}
                       </p>
                     );

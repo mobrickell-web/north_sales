@@ -204,7 +204,7 @@ function AboutExpandable({ section }: { section: AboutExpandableSection }) {
                     href="#investment"
                     className="inline-flex min-h-8 items-center justify-center bg-[#b17411] px-3 font-body text-[12px] font-bold tracking-[0.04em] text-white transition-colors hover:bg-[#8f5d0e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b17411]"
                   >
-                    (See Investments)
+                    See Investments
                   </Link>
                 </>
               ) : null}

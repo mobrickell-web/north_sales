@@ -92,11 +92,9 @@ export function TwelveAdvantagesDialog({
                         </div>
                         <ul className="mt-3 flex flex-col gap-2">
                           {item.bullets.map((bullet) => {
-                            const colonIndex = bullet.indexOf(": ");
-                            const hasLabel =
-                              colonIndex > 0 &&
-                              colonIndex < 40 &&
-                              !bullet.slice(0, colonIndex).includes(".");
+                            const labelMatch = bullet.match(
+                              /^([^.:]{1,39}?)(: | — )(.*)$/,
+                            );
                             return (
                               <li key={bullet} className="flex gap-3">
                                 <span
@@ -104,12 +102,13 @@ export function TwelveAdvantagesDialog({
                                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[#b17411]"
                                 />
                                 <p className="font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                                  {hasLabel ? (
+                                  {labelMatch ? (
                                     <>
                                       <span className="font-extrabold text-[#001528]">
-                                        {bullet.slice(0, colonIndex)}:
-                                      </span>{" "}
-                                      {bullet.slice(colonIndex + 2)}
+                                        {labelMatch[1]}
+                                      </span>
+                                      {labelMatch[2]}
+                                      {labelMatch[3]}
                                     </>
                                   ) : (
                                     bullet
@@ -119,19 +118,6 @@ export function TwelveAdvantagesDialog({
                             );
                           })}
                         </ul>
-                        {"afterBulletsLink" in item && item.afterBulletsLink ? (
-                          <p className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
-                            {item.afterBulletsLink.before}
-                            <a
-                              href={item.afterBulletsLink.href}
-                              onClick={() => setOpen(false)}
-                              className="font-bold text-[#b17411] underline-offset-2 hover:underline"
-                            >
-                              {item.afterBulletsLink.label}
-                            </a>
-                            {item.afterBulletsLink.after}
-                          </p>
-                        ) : null}
                         {"closing" in item && item.closing ? (
                           <p className="mt-3 font-body text-[14px] leading-relaxed text-[#5C5F66]">
                             {item.closing}
