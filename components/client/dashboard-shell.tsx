@@ -35,7 +35,8 @@ type NavItem = {
   icon: LucideIcon;
 };
 
-const ASSESSMENT_PATH = "/sales-alignment-assessment";
+const CLIENT_ASSESSMENT_PATH = "/dashboard/assessment";
+const STAFF_ASSESSMENT_PATH = "/sales-alignment-assessment";
 
 function navItemsFor(viewer: DashboardViewer): NavItem[] {
   if (viewer.role === "USER") {
@@ -55,7 +56,7 @@ function navItemsFor(viewer: DashboardViewer): NavItem[] {
       {
         key: "assessment",
         label: "Take Assessment",
-        href: ASSESSMENT_PATH,
+        href: CLIENT_ASSESSMENT_PATH,
         icon: ClipboardList,
       },
     ];
@@ -78,7 +79,7 @@ function navItemsFor(viewer: DashboardViewer): NavItem[] {
     {
       key: "assessment",
       label: "Take Assessment",
-      href: ASSESSMENT_PATH,
+      href: STAFF_ASSESSMENT_PATH,
       icon: ClipboardList,
     },
   );

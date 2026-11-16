@@ -2,9 +2,15 @@
 
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import { useState, useSyncExternalStore, type FormEvent } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  type FormEvent,
+} from "react";
 
+import { AuthRedirectOverlay } from "@/components/shared/app-toast";
 import { AuthScreenLayout } from "@/components/shared/auth-screen-layout";
 import { authConfig } from "@/config/auth";
 import {
@@ -13,14 +19,17 @@ import {
   getPasswordResetToken,
   submitPasswordReset,
 } from "@/lib/auth-api";
+import { toast } from "@/lib/toast";
+
+const LOGIN_REDIRECT_DELAY_MS = 1200;
 
 export function UpdatePasswordScreen() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") ?? "";
   const { updatePassword } = authConfig;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [notice, setNotice] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [updated, setUpdated] = useState(false);
   const tokenReady = useSyncExternalStore(
@@ -34,10 +43,25 @@ export function UpdatePasswordScreen() {
     getServerPasswordResetToken,
   );
 
+  useEffect(() => {
+    if (!updated) return;
+
+    const loginHref = email
+      ? `${updatePassword.loginHref}?email=${encodeURIComponent(email)}`
+      : updatePassword.loginHref;
+    const timer = window.setTimeout(() => {
+      router.replace(loginHref);
+    }, LOGIN_REDIRECT_DELAY_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [email, router, updatePassword.loginHref, updated]);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!resetToken) {
-      setNotice("Your password reset session is missing. Request a new code.");
+      toast.error(
+        "Your password reset session is missing. Request a new code.",
+      );
       return;
     }
     const formData = new FormData(event.currentTarget);
@@ -45,22 +69,21 @@ export function UpdatePasswordScreen() {
     const confirmPassword = String(formData.get("confirmPassword") ?? "");
 
     if (password !== confirmPassword) {
-      setNotice(updatePassword.passwordMismatchMessage);
+      toast.error(updatePassword.passwordMismatchMessage);
       return;
     }
 
     setSubmitting(true);
-    setNotice("");
     try {
       await submitPasswordReset(resetToken, password);
       clearPasswordResetToken();
       setUpdated(true);
-      setNotice("Your password has been updated. You can now sign in.");
+      toast.afterRedirect("Password updated. You can sign in now.");
     } catch (error) {
       if (error instanceof AdminApiError && error.status === 401) {
         clearPasswordResetToken();
       }
-      setNotice(
+      toast.error(
         error instanceof Error
           ? error.message
           : "Could not update your password. Request a new reset code.",
@@ -72,6 +95,10 @@ export function UpdatePasswordScreen() {
 
   return (
     <AuthScreenLayout>
+      <AuthRedirectOverlay
+        open={submitting || updated}
+        message={updated ? "Redirecting to sign in…" : "Updating password…"}
+      />
       <div className="mb-5 text-center">
         <h1 className="font-[family-name:var(--font-plus-jakarta)] text-[30px] leading-[1.15] font-bold tracking-[-0.04em] text-primary sm:text-[36px]">
           {updatePassword.title}
@@ -150,15 +177,6 @@ export function UpdatePasswordScreen() {
             )}
           </button>
         </div>
-
-        {notice ? (
-          <p
-            role={updated ? "status" : "alert"}
-            className="font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground"
-          >
-            {notice}
-          </p>
-        ) : null}
 
         <button
           type="submit"

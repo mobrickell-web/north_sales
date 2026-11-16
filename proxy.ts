@@ -3,6 +3,8 @@ import type { NextRequest } from "next/server";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
+// Auth/marketing entry only. Private website pages and client assessment are
+// never listed here — clients use /dashboard/assessment instead.
 const PUBLIC_PATHS = [
   "/",
   "/login",
@@ -10,17 +12,28 @@ const PUBLIC_PATHS = [
   "/forgot-password",
   "/verification-code",
   "/update-password",
-];
+] as const;
 
 const REPRESENTATIVE_PATHS = [
   "/blogs",
   "/careers",
   "/privacy-policy",
   "/terms-of-use",
+  // Confirmed private: reps + Super Admin only (not PUBLIC_PATHS).
   "/sales-alignment-assessment",
+  "/on-behalf",
   // The leads page itself only admits Account Executives.
   "/leads",
-];
+] as const;
+
+if (
+  (PUBLIC_PATHS as readonly string[]).includes("/sales-alignment-assessment") ||
+  (PUBLIC_PATHS as readonly string[]).includes("/dashboard")
+) {
+  throw new Error(
+    "Chunk 11 guard: private assessment/dashboard routes must not be public.",
+  );
+}
 
 const CLIENT_PATHS = ["/dashboard", "/sales-alignment-assessment"];
 
@@ -29,14 +42,14 @@ const RESULTS_PATH = /^\/dashboard\/results\/[^/]+$/;
 
 type Account = { role: string; position: string | null };
 
-function matches(pathname: string, prefixes: string[]) {
+function matches(pathname: string, prefixes: readonly string[]) {
   return prefixes.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   );
 }
 
 function isPublic(pathname: string) {
-  if (PUBLIC_PATHS.includes(pathname)) return true;
+  if ((PUBLIC_PATHS as readonly string[]).includes(pathname)) return true;
   // Email links for people with no account; guarded by an unguessable token.
   return /^\/appointments\/(cancel|reschedule)\/[^/]+$/.test(pathname);
 }
@@ -51,6 +64,8 @@ async function getAccount(req: NextRequest): Promise<Account | null> {
   });
 
   if (response.status === 401 || response.status === 403) return null;
+  // Rate-limit / transient API failures should not crash every page navigation.
+  if (response.status === 429) return null;
   if (!response.ok) {
     throw new Error(
       `Could not verify the current account (HTTP ${response.status}).`,
@@ -79,7 +94,15 @@ async function getAccount(req: NextRequest): Promise<Account | null> {
 }
 
 function toLogin(req: NextRequest) {
-  return NextResponse.redirect(new URL("/login", req.url));
+  const login = new URL("/login", req.url);
+  // Preserve Zoom on-behalf deep links after sign-in.
+  if (req.nextUrl.pathname.startsWith("/on-behalf/")) {
+    login.searchParams.set(
+      "next",
+      `${req.nextUrl.pathname}${req.nextUrl.search}`,
+    );
+  }
+  return NextResponse.redirect(login);
 }
 
 export async function proxy(req: NextRequest) {

@@ -4,8 +4,10 @@ import { redirect } from "next/navigation";
 import { ResultsDashboard } from "@/components/client/results-dashboard";
 import {
   type AssessmentResultDetail,
+  clientSafeResultToSalesAlignmentPayload,
   parseSalesAlignmentResult,
 } from "@/lib/assessment-results-api";
+import type { ClientAssessmentPayload } from "@/lib/client-assessment-api";
 import {
   ServerApiError,
   getAccountHomePath,
@@ -19,16 +21,99 @@ export const metadata: Metadata = {
 };
 
 type LoadedResult =
-  | { status: "ok"; result: AssessmentResultDetail }
+  | {
+      status: "ok";
+      record: {
+        id: string;
+        firstName: string;
+        email: string;
+        overallScore: number;
+        maxScore: number;
+        createdAt: string;
+      };
+      payload: NonNullable<ReturnType<typeof parseSalesAlignmentResult>>;
+    }
   | { status: "not-found" }
   | { status: "error"; message: string };
 
-async function loadResult(id: string): Promise<LoadedResult> {
+function firstNameOf(name: string) {
+  return name.trim().split(/\s+/)[0] || name;
+}
+
+async function loadLegacyResult(id: string): Promise<LoadedResult> {
   try {
     const result = await serverApiFetch<AssessmentResultDetail>(
       `/api/v1/assessment-results/${encodeURIComponent(id)}`,
     );
-    return { status: "ok", result };
+    const payload = parseSalesAlignmentResult(result.result);
+    if (!payload) {
+      return {
+        status: "error",
+        message: "These results were saved in a format we can't display.",
+      };
+    }
+    return {
+      status: "ok",
+      record: {
+        id: result.id,
+        firstName: result.firstName,
+        email: result.email,
+        overallScore: result.overallScore,
+        maxScore: result.maxScore,
+        createdAt: result.createdAt,
+      },
+      payload,
+    };
+  } catch (cause) {
+    if (cause instanceof ServerApiError) {
+      if (cause.status === 401) redirect("/login");
+      if (
+        cause.status === 404 ||
+        cause.status === 403 ||
+        cause.status === 400
+      ) {
+        return { status: "not-found" };
+      }
+    }
+    return {
+      status: "error",
+      message: "We could not load these results. Please refresh the page.",
+    };
+  }
+}
+
+async function loadClientInstanceResult(
+  id: string,
+  account: { name: string; email: string },
+): Promise<LoadedResult> {
+  try {
+    const payload = await serverApiFetch<ClientAssessmentPayload>(
+      `/api/v1/client/assessment/instances/${encodeURIComponent(id)}`,
+    );
+
+    if (
+      payload.instance?.status !== "COMPLETED" ||
+      !payload.result ||
+      !payload.instance
+    ) {
+      return { status: "not-found" };
+    }
+
+    return {
+      status: "ok",
+      record: {
+        id: payload.instance.id,
+        firstName: firstNameOf(account.name),
+        email: account.email,
+        overallScore: payload.result.overallScore,
+        maxScore: 100,
+        createdAt: payload.instance.submittedAt ?? new Date().toISOString(),
+      },
+      payload: clientSafeResultToSalesAlignmentPayload(
+        payload.assessment.title,
+        payload.result,
+      ),
+    };
   } catch (cause) {
     if (cause instanceof ServerApiError) {
       if (cause.status === 401) redirect("/login");
@@ -54,7 +139,17 @@ export default async function AssessmentResultPage({
 }) {
   const account = await requireAccount();
   const { id } = await params;
-  const loaded = await loadResult(id);
+
+  const loaded =
+    account.role === "USER"
+      ? await loadClientInstanceResult(id, account)
+      : await loadLegacyResult(id);
+
+  // Clients may still open legacy AssessmentResult IDs from older flows.
+  const resolved =
+    account.role === "USER" && loaded.status === "not-found"
+      ? await loadLegacyResult(id)
+      : loaded;
 
   const viewer = {
     name: account.name,
@@ -63,43 +158,27 @@ export default async function AssessmentResultPage({
     homePath: getAccountHomePath(account),
   };
 
-  if (loaded.status !== "ok") {
+  if (resolved.status !== "ok") {
     return (
       <ResultsDashboard
         viewer={viewer}
         state={
-          loaded.status === "not-found"
+          resolved.status === "not-found"
             ? { kind: "not-found" }
-            : { kind: "error", message: loaded.message }
+            : { kind: "error", message: resolved.message }
         }
       />
     );
   }
 
-  const payload = parseSalesAlignmentResult(loaded.result.result);
-
   return (
     <ResultsDashboard
       viewer={viewer}
-      state={
-        payload
-          ? {
-              kind: "ok",
-              record: {
-                id: loaded.result.id,
-                firstName: loaded.result.firstName,
-                email: loaded.result.email,
-                overallScore: loaded.result.overallScore,
-                maxScore: loaded.result.maxScore,
-                createdAt: loaded.result.createdAt,
-              },
-              payload,
-            }
-          : {
-              kind: "error",
-              message: "These results were saved in a format we can't display.",
-            }
-      }
+      state={{
+        kind: "ok",
+        record: resolved.record,
+        payload: resolved.payload,
+      }}
     />
   );
 }

@@ -1,4 +1,5 @@
-import { Arimo, Geist, Geist_Mono, Inter, Lora } from "next/font/google";
+import { Arimo, Geist, Geist_Mono, Inter } from "next/font/google";
+import localFont from "next/font/local";
 
 export const fontSans = Geist({
   variable: "--font-geist-sans",
@@ -16,10 +17,22 @@ export const fontSecondary = Arimo({
   weight: ["400", "700"],
 });
 
-export const fontHeading = Lora({
+// Self-hosted so Next.js does not need to reach fonts.googleapis.com at build/dev.
+export const fontHeading = localFont({
+  src: [
+    {
+      path: "../fonts/lora/lora-latin-400-normal.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/lora/lora-latin-700-normal.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-lora",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const fontBody = Inter({

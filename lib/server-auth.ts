@@ -19,49 +19,51 @@ export async function getServerAccount(): Promise<ServerAccount | null> {
   const cookie = (await headers()).get("cookie");
   if (!cookie) return null;
 
-  const response = await fetch(`${API_URL}/api/v1/auth/me`, {
-    headers: { cookie },
-    cache: "no-store",
-  });
+  try {
+    const response = await fetch(`${API_URL}/api/v1/auth/me`, {
+      headers: { cookie },
+      cache: "no-store",
+    });
 
-  if (response.status === 401 || response.status === 403) return null;
-  if (!response.ok) {
-    throw new Error(
-      `Could not verify the current account (HTTP ${response.status}).`,
-    );
+    if (response.status === 401 || response.status === 403) return null;
+    // Avoid turning temporary API issues into a 500 on every page.
+    if (response.status === 429 || !response.ok) return null;
+
+    const body: unknown = await response.json();
+    const result =
+      typeof body === "object" && body !== null && "data" in body
+        ? body.data
+        : body;
+
+    if (
+      typeof result !== "object" ||
+      result === null ||
+      !("id" in result) ||
+      !("name" in result) ||
+      !("email" in result) ||
+      !("role" in result) ||
+      typeof result.id !== "string" ||
+      typeof result.name !== "string" ||
+      typeof result.email !== "string" ||
+      typeof result.role !== "string"
+    ) {
+      return null;
+    }
+
+    return {
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      role: result.role,
+      position:
+        "position" in result && typeof result.position === "string"
+          ? result.position
+          : null,
+    };
+  } catch {
+    // Backend down / network blip — treat as logged out instead of crashing SSR.
+    return null;
   }
-
-  const body: unknown = await response.json();
-  const result =
-    typeof body === "object" && body !== null && "data" in body
-      ? body.data
-      : body;
-
-  if (
-    typeof result !== "object" ||
-    result === null ||
-    !("id" in result) ||
-    !("name" in result) ||
-    !("email" in result) ||
-    !("role" in result) ||
-    typeof result.id !== "string" ||
-    typeof result.name !== "string" ||
-    typeof result.email !== "string" ||
-    typeof result.role !== "string"
-  ) {
-    throw new Error("The authentication service returned an invalid profile.");
-  }
-
-  return {
-    id: result.id,
-    name: result.name,
-    email: result.email,
-    role: result.role,
-    position:
-      "position" in result && typeof result.position === "string"
-        ? result.position
-        : null,
-  };
 }
 
 export function isAccountExecutive(

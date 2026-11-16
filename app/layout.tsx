@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { siteConfig } from "@/config/site";
 import { SessionRevocationMonitor } from "@/components/auth/session-revocation-monitor";
+import { AppToaster } from "@/components/shared/app-toast";
 import {
   fontBody,
   fontHeading,
@@ -40,6 +41,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <SessionRevocationMonitor />
+        <AppToaster />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-100 focus:bg-secondary focus:px-3 focus:py-2 focus:text-secondary-foreground"

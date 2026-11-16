@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -21,15 +21,18 @@ import { AdminSidebar } from "@/components/shared/admin-sidebar";
 import { AdminTopbar } from "@/components/shared/admin-topbar";
 import { AdminAssessmentPreviewSheet } from "@/components/admin/admin-assessment-preview-sheet";
 import type { AdminAssessmentSectionDraft } from "@/components/admin/admin-assessment-preview-sheet";
+import type { AdminAssessmentStatus } from "@/config/admin-assessments";
 import {
   type AdminAssessmentDocument,
   type AdminAssessmentQuestion,
   type AdminAssessmentSection,
+  ADMIN_ASSESSMENT_SAVE_DELAY_MS,
   deleteAdminAssessment,
-  getAdminAssessmentDocument,
-  saveAdminAssessmentDocument,
+  getAdminAssessment,
+  saveAdminAssessment,
+  setAdminAssessmentClientPrimary,
   setAdminAssessmentStatus,
-} from "@/lib/admin-assessment-store";
+} from "@/lib/admin-assessments";
 import {
   type AdminProfile,
   adminLogout,
@@ -37,6 +40,7 @@ import {
   clearSession,
   hasSession,
   isSuperAdmin,
+  isUnauthorized,
 } from "@/lib/auth-api";
 import { cn } from "@/lib/utils";
 
@@ -65,6 +69,19 @@ function statusClass(status: AdminAssessmentDocument["status"]) {
     return "bg-admin-status-draft-bg text-admin-status-draft";
   }
   return "bg-admin-status-archived-bg text-admin-status-archived";
+}
+
+function contentSignature(document: AdminAssessmentDocument) {
+  return JSON.stringify({
+    title: document.title,
+    resultText: document.resultText,
+    settings: document.settings,
+    sections: document.sections,
+  });
+}
+
+function errorMessage(cause: unknown, fallback: string) {
+  return cause instanceof Error && cause.message ? cause.message : fallback;
 }
 
 export function AdminAssessmentEditor({
@@ -104,31 +121,69 @@ export function AdminAssessmentEditor({
   const [draggingQuestionId, setDraggingQuestionId] = useState<string | null>(
     null,
   );
+  const [loadError, setLoadError] = useState("");
+  const [reloadKey, setReloadKey] = useState(0);
+  const [hydrated, setHydrated] = useState(false);
+  const [saveState, setSaveState] = useState<
+    "idle" | "saving" | "saved" | "error"
+  >("idle");
+  const [saveError, setSaveError] = useState("");
+  const [actionError, setActionError] = useState("");
+  const [statusPending, setStatusPending] = useState(false);
+  const pendingRef = useRef<AdminAssessmentDocument | null>(null);
+  const savedSignatureRef = useRef<string | null>(null);
+  const saveChainRef = useRef<Promise<void>>(Promise.resolve());
+  const deletedRef = useRef(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     if (!hasSession()) {
       router.replace(LOGIN_PATH);
       return;
     }
 
-    adminProfile()
-      .then((profile) => {
+    (async () => {
+      try {
+        const profile = await adminProfile();
+        if (cancelled) return;
+
         if (!isSuperAdmin(profile)) {
           clearSession();
           router.replace(LOGIN_PATH);
           return;
         }
         setAdmin(profile);
-        const assessment = getAdminAssessmentDocument(assessmentId);
-        setDocument(assessment);
-        setSelectedSectionId(assessment?.sections[0]?.id ?? null);
-      })
-      .catch(() => {
-        clearSession();
-        router.replace(LOGIN_PATH);
-      })
-      .finally(() => setChecking(false));
-  }, [assessmentId, router]);
+
+        const loaded = await getAdminAssessment(assessmentId);
+        if (cancelled) return;
+
+        if (loaded) {
+          savedSignatureRef.current = contentSignature(loaded);
+          setDocument(loaded);
+          setSelectedSectionId(loaded.sections[0]?.id ?? null);
+        }
+      } catch (cause) {
+        if (cancelled) return;
+
+        if (isUnauthorized(cause)) {
+          clearSession();
+          router.replace(LOGIN_PATH);
+          return;
+        }
+        setLoadError(errorMessage(cause, "Could not load this assessment."));
+      } finally {
+        if (!cancelled) {
+          setHydrated(true);
+          setChecking(false);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [assessmentId, reloadKey, router]);
 
   const selectedSection = useMemo(
     () =>
@@ -143,9 +198,74 @@ export function AdminAssessmentEditor({
       0,
     ) ?? 0;
 
+  const runSave = useCallback(async (snapshot: AdminAssessmentDocument) => {
+    if (deletedRef.current) return true;
+
+    setSaveState("saving");
+    try {
+      await saveAdminAssessment(snapshot);
+      if (deletedRef.current) return true;
+
+      savedSignatureRef.current = contentSignature(snapshot);
+      setSaveError("");
+      setSaveState("saved");
+      return true;
+    } catch (cause) {
+      if (!deletedRef.current) {
+        // Keep the newest unsaved snapshot so "Retry" can resend it.
+        pendingRef.current = pendingRef.current ?? snapshot;
+        setSaveState("error");
+        setSaveError(errorMessage(cause, "Could not save changes."));
+      }
+      return false;
+    }
+  }, []);
+
+  const enqueueSave = useCallback(
+    (snapshot: AdminAssessmentDocument) => {
+      if (pendingRef.current === snapshot) pendingRef.current = null;
+
+      // Serialize writes so an older payload can never land after a newer one.
+      const next = saveChainRef.current.then(() => runSave(snapshot));
+      saveChainRef.current = next.then(() => undefined);
+      return next;
+    },
+    [runSave],
+  );
+
+  useEffect(() => {
+    if (!hydrated || !document) return;
+
+    const signature = contentSignature(document);
+    if (signature === savedSignatureRef.current) return;
+    // Never persist a blank name; blur normalizes it back to "Untitled assessment".
+    if (!document.title.trim()) return;
+
+    pendingRef.current = document;
+    const timer = window.setTimeout(() => {
+      // A publish/archive flush may have already sent this snapshot.
+      if (pendingRef.current === document) void enqueueSave(document);
+    }, ADMIN_ASSESSMENT_SAVE_DELAY_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [document, enqueueSave, hydrated]);
+
+  const flushSave = useCallback(async () => {
+    const pending = pendingRef.current;
+    if (pending) return enqueueSave(pending);
+
+    await saveChainRef.current;
+    return true;
+  }, [enqueueSave]);
+
   const updateDocument = (next: AdminAssessmentDocument) => {
-    saveAdminAssessmentDocument(next);
     setDocument(next);
+  };
+
+  const normalizeTitle = () => {
+    if (!document) return;
+    const title = document.title.trim() || "Untitled assessment";
+    if (title !== document.title) updateDocument({ ...document, title });
   };
 
   const handleLogout = async () => {
@@ -282,12 +402,102 @@ export function AdminAssessmentEditor({
     });
   };
 
-  const changeStatus = (status: AdminAssessmentDocument["status"]) => {
-    if (!document) return;
-    const next = { ...document, status };
-    setAdminAssessmentStatus(document.id, status);
-    setDocument(next);
+  const changeStatus = async (status: AdminAssessmentStatus) => {
+    if (!document || statusPending) return;
+
     setActionsOpen(false);
+    setStatusPending(true);
+    setActionError("");
+    try {
+      // Publish/archive must not race an unsaved edit.
+      const saved = await flushSave();
+      if (!saved) return;
+
+      const applied = await setAdminAssessmentStatus(document.id, status);
+      setDocument((current) =>
+        current
+          ? {
+              ...current,
+              status: applied.status,
+              isClientPrimary: applied.isClientPrimary,
+            }
+          : current,
+      );
+    } catch (cause) {
+      setActionError(errorMessage(cause, "Could not update the status."));
+    } finally {
+      setStatusPending(false);
+    }
+  };
+
+  const setAsClientAssessment = async (enabled: boolean) => {
+    if (!document || statusPending) return;
+    if (document.status !== "Published") {
+      setActionError("Publish this assessment before toggling client-facing.");
+      return;
+    }
+
+    setActionsOpen(false);
+    setStatusPending(true);
+    setActionError("");
+    try {
+      const applied = await setAdminAssessmentClientPrimary(
+        document.id,
+        enabled,
+      );
+      setDocument((current) =>
+        current
+          ? {
+              ...current,
+              status: applied.status,
+              isClientPrimary: applied.isClientPrimary,
+            }
+          : current,
+      );
+    } catch (cause) {
+      setActionError(
+        errorMessage(
+          cause,
+          enabled
+            ? "Could not turn on the client-facing assessment."
+            : "Could not turn off the client-facing assessment.",
+        ),
+      );
+    } finally {
+      setStatusPending(false);
+    }
+  };
+
+  const publish = () => {
+    if (!document) return;
+    // The API rejects publishing an already-published row; just save instead.
+    if (document.status === "Published") {
+      void flushSave();
+      return;
+    }
+    void changeStatus("Published");
+  };
+
+  const removeAssessment = async () => {
+    if (!document || statusPending) return;
+
+    setActionsOpen(false);
+    setStatusPending(true);
+    setActionError("");
+    try {
+      deletedRef.current = true;
+      await deleteAdminAssessment(document.id);
+      router.push("/assessments");
+    } catch (cause) {
+      deletedRef.current = false;
+      setActionError(errorMessage(cause, "Could not delete this assessment."));
+      setStatusPending(false);
+    }
+  };
+
+  const retrySave = () => {
+    const snapshot = pendingRef.current ?? document;
+    if (snapshot) void enqueueSave(snapshot);
   };
 
   if (checking) {
@@ -303,20 +513,35 @@ export function AdminAssessmentEditor({
 
   if (!document) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-admin-canvas text-admin-text">
-        <p>This assessment could not be found.</p>
-        <Link
-          href="/assessments"
-          className="text-[13px] font-medium text-admin-info hover:underline"
-        >
-          Return to assessments
-        </Link>
+      <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-admin-canvas px-4 text-center text-admin-text">
+        <p>{loadError ? loadError : "This assessment could not be found."}</p>
+        <div className="flex items-center gap-4">
+          {loadError ? (
+            <button
+              type="button"
+              onClick={() => {
+                setLoadError("");
+                setChecking(true);
+                setReloadKey((key) => key + 1);
+              }}
+              className="cursor-pointer text-[13px] font-semibold text-admin-info hover:underline"
+            >
+              Try again
+            </button>
+          ) : null}
+          <Link
+            href="/assessments"
+            className="text-[13px] font-medium text-admin-info hover:underline"
+          >
+            Return to assessments
+          </Link>
+        </div>
       </main>
     );
   }
 
   return (
-    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-1 overflow-x-clip bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
+    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-1 bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
       <AdminSidebar
         onLogout={handleLogout}
         signingOut={signingOut}
@@ -344,10 +569,22 @@ export function AdminAssessmentEditor({
           </div>
 
           <section className="flex flex-col justify-between gap-4 py-5 sm:py-7 lg:flex-row lg:items-center">
-            <div className="min-w-0">
-              <h1 className="break-words font-sans text-[25px] leading-tight font-bold tracking-[-0.035em] text-admin-navy sm:text-[30px]">
-                {document.title}
-              </h1>
+            <div className="min-w-0 lg:flex-1">
+              <input
+                aria-label="Assessment name"
+                value={document.title}
+                onChange={(event) =>
+                  updateDocument({ ...document, title: event.target.value })
+                }
+                onBlur={normalizeTitle}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") event.currentTarget.blur();
+                }}
+                maxLength={200}
+                placeholder="Untitled assessment"
+                title="Click to rename this assessment"
+                className="-mx-2 w-[calc(100%+1rem)] min-w-0 cursor-text rounded-lg border border-transparent bg-transparent px-2 font-sans text-[25px] leading-tight font-bold tracking-[-0.035em] text-admin-navy outline-none transition-colors placeholder:text-admin-navy/40 hover:border-admin-border-strong focus:border-admin-info focus:ring-2 focus:ring-admin-info/15 sm:text-[30px]"
+              />
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 <span
                   className={cn(
@@ -357,6 +594,45 @@ export function AdminAssessmentEditor({
                 >
                   {document.status}
                 </span>
+                {document.status === "Published" ? (
+                  <div className="inline-flex shrink-0 items-center gap-2">
+                    <span className="text-[10px] font-semibold tracking-[0.04em] text-admin-muted uppercase">
+                      Client
+                    </span>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={document.isClientPrimary}
+                      aria-label="Client facing assessment"
+                      title={
+                        document.isClientPrimary
+                          ? "Turn off to hide from client dashboard (none will be client-facing)"
+                          : "Turn on to show this assessment on the client dashboard (only one at a time)"
+                      }
+                      disabled={statusPending}
+                      onClick={() =>
+                        void setAsClientAssessment(!document.isClientPrimary)
+                      }
+                      className={cn(
+                        "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full p-0.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-info disabled:cursor-not-allowed",
+                        document.isClientPrimary
+                          ? "bg-admin-navy"
+                          : "bg-[#D7DCE3] hover:bg-[#C8CED6]",
+                        statusPending && "opacity-60",
+                      )}
+                    >
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "pointer-events-none block size-4 rounded-full bg-white shadow-sm transition-transform duration-200",
+                          document.isClientPrimary
+                            ? "translate-x-4"
+                            : "translate-x-0",
+                        )}
+                      />
+                    </button>
+                  </div>
+                ) : null}
                 <span className="text-[12px] text-admin-muted">
                   {questionCount} questions · {document.sections.length}{" "}
                   sections
@@ -371,33 +647,34 @@ export function AdminAssessmentEditor({
                   aria-label="Assessment actions"
                   aria-expanded={actionsOpen}
                   onClick={() => setActionsOpen((open) => !open)}
-                  className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-admin-border-strong bg-admin-surface text-admin-text-strong hover:bg-admin-soft sm:size-[52px] sm:rounded-xl"
+                  disabled={statusPending}
+                  className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-admin-border-strong bg-admin-surface text-admin-text-strong hover:bg-admin-soft disabled:cursor-not-allowed disabled:opacity-60 sm:size-[52px] sm:rounded-xl"
                 >
                   <Ellipsis className="size-3.5 sm:size-4" />
                 </button>
                 {actionsOpen ? (
-                  <div className="absolute top-[calc(100%+8px)] right-0 z-30 min-w-[168px] rounded-xl border border-admin-border-strong bg-admin-surface p-1.5 shadow-lg">
+                  <div className="absolute top-[calc(100%+8px)] right-0 z-30 min-w-[220px] rounded-xl border border-admin-border-strong bg-admin-surface p-1.5 shadow-lg">
                     <button
                       type="button"
-                      onClick={() => changeStatus("Archived")}
-                      className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-text transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none"
+                      onClick={() => void changeStatus("Archived")}
+                      disabled={statusPending}
+                      className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-text transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       Archive
                     </button>
                     <button
                       type="button"
-                      onClick={() => changeStatus("Draft")}
-                      className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-text transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none"
+                      onClick={() => void changeStatus("Draft")}
+                      disabled={statusPending}
+                      className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-text transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       Draft
                     </button>
                     <button
                       type="button"
-                      onClick={() => {
-                        deleteAdminAssessment(document.id);
-                        router.push("/assessments");
-                      }}
-                      className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-logout transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none"
+                      onClick={() => void removeAssessment()}
+                      disabled={statusPending}
+                      className="block w-full rounded-md px-3 py-2.5 text-left text-[14px] text-admin-logout transition-colors hover:bg-admin-sidebar hover:text-admin-sidebar-text focus-visible:bg-admin-sidebar focus-visible:text-admin-sidebar-text focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       Delete
                     </button>
@@ -413,15 +690,55 @@ export function AdminAssessmentEditor({
               </button>
               <button
                 type="button"
-                onClick={() => changeStatus("Published")}
-                className="inline-flex h-9 w-auto shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-3 text-[11px] font-semibold whitespace-nowrap text-admin-surface hover:bg-admin-assessment-gold-hover sm:h-[52px] sm:rounded-xl sm:px-7 sm:text-[14px]"
+                onClick={publish}
+                disabled={statusPending}
+                className="inline-flex h-9 w-auto shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-3 text-[11px] font-semibold whitespace-nowrap text-admin-surface hover:bg-admin-assessment-gold-hover disabled:cursor-not-allowed disabled:opacity-60 sm:h-[52px] sm:rounded-xl sm:px-7 sm:text-[14px]"
               >
-                {document.status === "Published"
-                  ? "Publish changes"
-                  : "Publish"}
+                {statusPending
+                  ? "Publishing…"
+                  : document.status === "Published"
+                    ? "Publish changes"
+                    : "Publish"}
               </button>
             </div>
           </section>
+
+          {actionError ? (
+            <p
+              role="alert"
+              className="mb-3 rounded-lg border border-admin-logout/30 bg-admin-surface px-3 py-2 text-[12px] text-admin-logout"
+            >
+              {actionError}
+            </p>
+          ) : null}
+
+          <div
+            aria-live="polite"
+            className="mb-3 flex min-h-5 items-center gap-2 text-[12px] text-admin-muted"
+          >
+            {saveState === "saving" ? (
+              <>
+                <Loader2 className="size-3.5 animate-spin" />
+                Saving…
+              </>
+            ) : saveState === "saved" ? (
+              "All changes saved"
+            ) : null}
+            {saveState === "error" ? (
+              <>
+                <span role="alert" className="text-admin-logout">
+                  {saveError || "Could not save changes."}
+                </span>
+                <button
+                  type="button"
+                  onClick={retrySave}
+                  className="cursor-pointer font-semibold text-admin-info hover:underline"
+                >
+                  Retry
+                </button>
+              </>
+            ) : null}
+          </div>
 
           <div className="grid grid-cols-4 border-b border-admin-border sm:flex sm:gap-5">
             {tabs.map((tab) => (
@@ -805,6 +1122,8 @@ export function AdminAssessmentEditor({
                 Assessment name
                 <input
                   value={document.title}
+                  maxLength={200}
+                  onBlur={normalizeTitle}
                   onChange={(event) =>
                     updateDocument({ ...document, title: event.target.value })
                   }

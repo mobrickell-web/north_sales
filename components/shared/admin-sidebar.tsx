@@ -42,6 +42,8 @@ export function AdminSidebar({
   const isAssessmentList = pathname.startsWith("/assessments");
   const isAppointments = pathname.startsWith("/appointments");
   const isAccessManagement = pathname.startsWith("/access");
+  const isEngagement = pathname.startsWith("/engagement");
+  const isAssessmentResults = pathname.startsWith("/assessment-results");
   const sidebar = (
     <aside className="flex min-h-[1024px] w-[280px] shrink-0 flex-col rounded-2xl bg-admin-sidebar px-4 pt-6 pb-6 font-sans text-admin-sidebar-text">
       <div className="mb-6 flex items-start justify-between">
@@ -127,6 +129,34 @@ export function AdminSidebar({
           <Users className="size-[14px]" />
           <span>Access Management</span>
         </Link>
+        <Link
+          href="/engagement"
+          onClick={onClose}
+          aria-current={isEngagement ? "page" : undefined}
+          className={cn(
+            "flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[14px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold",
+            isEngagement
+              ? "bg-gradient-to-r from-admin-gold to-admin-gold-deep text-admin-sidebar shadow-sm"
+              : "text-admin-sidebar-text hover:bg-admin-sidebar-hover",
+          )}
+        >
+          <FileText className="size-[14px]" />
+          <span>Client Engagement</span>
+        </Link>
+        <Link
+          href="/assessment-results"
+          onClick={onClose}
+          aria-current={isAssessmentResults ? "page" : undefined}
+          className={cn(
+            "flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[14px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold",
+            isAssessmentResults
+              ? "bg-gradient-to-r from-admin-gold to-admin-gold-deep text-admin-sidebar shadow-sm"
+              : "text-admin-sidebar-text hover:bg-admin-sidebar-hover",
+          )}
+        >
+          <BarChart3 className="size-[14px]" />
+          <span>Assessment Results</span>
+        </Link>
       </nav>
 
       <div className="mt-4 mb-2 px-1 text-[12px] font-medium text-slate-400">
@@ -184,7 +214,7 @@ export function AdminSidebar({
 
   return (
     <>
-      <div className="hidden shrink-0 pl-[6px] pt-[11px] pb-[11px] lg:block">
+      <div className="sticky top-[11px] hidden shrink-0 self-start pl-[6px] pt-[11px] pb-[11px] lg:block">
         {sidebar}
       </div>
       {mobileOpen ? (

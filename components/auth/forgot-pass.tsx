@@ -4,14 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
+import { AuthRedirectOverlay } from "@/components/shared/app-toast";
 import { AuthScreenLayout } from "@/components/shared/auth-screen-layout";
 import { authConfig } from "@/config/auth";
 import { requestPasswordReset } from "@/lib/auth-api";
+import { toast } from "@/lib/toast";
 
 export function ForgotPasswordScreen() {
   const router = useRouter();
   const { forgotPassword } = authConfig;
-  const [notice, setNotice] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -19,25 +20,25 @@ export function ForgotPasswordScreen() {
     const formData = new FormData(event.currentTarget);
     const email = String(formData.get("email") ?? "").trim();
     setSubmitting(true);
-    setNotice("");
     try {
       await requestPasswordReset(email);
+      toast.afterRedirect("Reset code sent. Check your email.");
       router.push(
         `${forgotPassword.verificationHref}?purpose=PASSWORD_RESET&email=${encodeURIComponent(email)}`,
       );
     } catch (error) {
-      setNotice(
+      toast.error(
         error instanceof Error
           ? error.message
           : "Could not request a password reset code.",
       );
-    } finally {
       setSubmitting(false);
     }
   };
 
   return (
     <AuthScreenLayout>
+      <AuthRedirectOverlay open={submitting} message="Sending code…" />
       <div className="mb-8 text-center">
         <h1 className="font-[family-name:var(--font-plus-jakarta)] text-[30px] leading-[1.15] font-bold tracking-[-0.04em] text-primary sm:text-[36px]">
           {forgotPassword.title}
@@ -58,14 +59,9 @@ export function ForgotPasswordScreen() {
           autoComplete="email"
           placeholder={forgotPassword.email.placeholder}
           required
-          className="h-12 w-full rounded-xl border border-input px-3 font-[family-name:var(--font-plus-jakarta)] text-[13px] text-foreground placeholder:text-muted-foreground focus:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze/15"
+          disabled={submitting}
+          className="h-12 w-full rounded-xl border border-input px-3 font-[family-name:var(--font-plus-jakarta)] text-[13px] text-foreground placeholder:text-muted-foreground focus:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze/15 disabled:opacity-60"
         />
-
-        {notice ? (
-          <p role="alert" className="text-[12px] text-destructive">
-            {notice}
-          </p>
-        ) : null}
 
         <button
           type="submit"

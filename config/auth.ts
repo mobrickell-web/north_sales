@@ -3,6 +3,36 @@ export const authConfig = {
     backgroundImage: "/images/auth/signup.svg",
     logo: "/logo/Group%20151.svg",
   },
+  //auth-signup
+  signup: {
+    title: "Request Client Access",
+    description:
+      "Create a client account request. Website access requires Super Admin approval.",
+    googleButtonLabel: "Request access with Google",
+    accountUnavailableMessage: "Account creation is not connected yet.",
+    fields: {
+      name: {
+        label: "Name",
+        placeholder: "Name",
+      },
+      email: {
+        label: "Email",
+        placeholder: "Email",
+      },
+      password: {
+        label: "Password",
+        placeholder: "Password",
+      },
+    },
+    passwordVisibility: {
+      show: "Show password",
+      hide: "Hide password",
+    },
+    continueButtonLabel: "Submit access request",
+    loginPrompt: "I have an account?",
+    loginLinkLabel: "Log in",
+    loginHref: "/login",
+  },
   //auth-login
   login: {
     title: "Authorized Access",
@@ -11,6 +41,7 @@ export const authConfig = {
     categoryLabel: "Access Type",
     categories: [
       { value: "CLIENT", label: "Client" },
+      { value: "SALES_REPRESENTATIVE", label: "Sales Representatives" },
       { value: "ACCOUNT_EXECUTIVE", label: "Account Executive" },
       {
         value: "IMPLEMENTATION_SPECIALIST",
@@ -27,6 +58,9 @@ export const authConfig = {
     googleButtonLabel: "Continue with Google",
     forgotPasswordLabel: "Forgot password?",
     forgotPasswordHref: "/forgot-password",
+    signupPrompt: "Need client access?",
+    signupLinkLabel: "Request access",
+    signupHref: "/signup",
     email: {
       label: "Email",
       placeholder: "Email",
@@ -44,7 +78,7 @@ export const authConfig = {
   forgotPassword: {
     title: "Forgot Password",
     description:
-      "Enter your email and we’ll send you a verification code to reset your password.",
+      "Enter your email and we'll send you a verification code to reset your password.",
     email: {
       label: "Email",
       placeholder: "Email",
@@ -63,7 +97,7 @@ export const authConfig = {
       "We sent a verification code to your email address. Please enter the code below.",
     codeLabel: "Verification code digit",
     verifyButtonLabel: "Verify",
-    resendPrompt: "Didn’t receive code?",
+    resendPrompt: "Didn't receive code?",
     resendButtonLabel: "Resend Code",
     resendUnavailableMessage: "Code resend is not connected yet.",
     unavailableMessage: "Code verification is not connected yet.",

@@ -1,18 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Loader2, Plus, Search } from "lucide-react";
 
 import { AdminSidebar } from "@/components/shared/admin-sidebar";
 import { AdminTopbar } from "@/components/shared/admin-topbar";
-import { adminAssessmentsConfig } from "@/config/admin-assessments";
+import {
+  type AdminAssessment,
+  adminAssessmentsConfig,
+} from "@/config/admin-assessments";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import {
   createAdminAssessment,
-  getAdminAssessments,
-} from "@/lib/admin-assessment-store";
+  listAdminAssessments,
+  setAdminAssessmentClientPrimary,
+} from "@/lib/admin-assessments";
 import {
   type AdminProfile,
   adminLogout,
@@ -24,6 +28,10 @@ import {
 import { cn } from "@/lib/utils";
 
 const LOGIN_PATH = "/login";
+
+function errorMessage(cause: unknown, fallback: string) {
+  return cause instanceof Error && cause.message ? cause.message : fallback;
+}
 
 function statusStyle(status: string) {
   switch (status) {
@@ -45,11 +53,24 @@ export function AdminAssessmentsScreen() {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebouncedValue(search);
   const [activeFilter, setActiveFilter] = useState<string>("All");
-  const [assessments] = useState([
-    ...(typeof window === "undefined"
-      ? adminAssessmentsConfig.initialAssessments
-      : getAdminAssessments()),
-  ]);
+  const [assessments, setAssessments] = useState<AdminAssessment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+  const [creating, setCreating] = useState(false);
+  const [primaryPendingId, setPrimaryPendingId] = useState<string | null>(null);
+  const [actionError, setActionError] = useState("");
+
+  const loadAssessments = useCallback(async () => {
+    setLoading(true);
+    setLoadError("");
+    try {
+      setAssessments(await listAdminAssessments());
+    } catch (cause) {
+      setLoadError(errorMessage(cause, "Could not load assessments."));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (!hasSession()) {
@@ -65,13 +86,14 @@ export function AdminAssessmentsScreen() {
           return;
         }
         setAdmin(profile);
+        return loadAssessments();
       })
       .catch(() => {
         clearSession();
         router.replace(LOGIN_PATH);
       })
       .finally(() => setChecking(false));
-  }, [router]);
+  }, [loadAssessments, router]);
 
   const filteredAssessments = useMemo(() => {
     const normalizedSearch = debouncedSearch.trim().toLowerCase();
@@ -96,9 +118,51 @@ export function AdminAssessmentsScreen() {
     router.replace(LOGIN_PATH);
   };
 
-  const createAssessment = () => {
-    const id = createAdminAssessment();
-    router.push(`/assessments/${id}`);
+  const createAssessment = async () => {
+    setCreating(true);
+    setActionError("");
+    try {
+      const created = await createAdminAssessment();
+      router.push(`/assessments/${created.id}`);
+    } catch (cause) {
+      setActionError(errorMessage(cause, "Could not create an assessment."));
+      setCreating(false);
+    }
+  };
+
+  const setClientFacing = async (
+    assessment: AdminAssessment,
+    enabled: boolean,
+  ) => {
+    if (assessment.status !== "Published") return;
+    setPrimaryPendingId(assessment.id);
+    setActionError("");
+    try {
+      await setAdminAssessmentClientPrimary(assessment.id, enabled);
+      setAssessments((rows) =>
+        rows.map((row) => ({
+          ...row,
+          isClientPrimary: enabled ? row.id === assessment.id : false,
+        })),
+      );
+    } catch (cause) {
+      setActionError(
+        errorMessage(
+          cause,
+          enabled
+            ? "Could not turn on the client-facing assessment."
+            : "Could not turn off the client-facing assessment.",
+        ),
+      );
+    } finally {
+      setPrimaryPendingId(null);
+    }
+  };
+
+  const handleClientFacingToggle = (assessment: AdminAssessment) => {
+    if (assessment.status !== "Published") return;
+    // OFF allowed (none shown). ON is exclusive — max one primary.
+    void setClientFacing(assessment, !assessment.isClientPrimary);
   };
 
   if (checking) {
@@ -120,7 +184,7 @@ export function AdminAssessmentsScreen() {
   };
 
   return (
-    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)] overflow-x-clip bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
+    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)] bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
       <AdminSidebar
         onLogout={handleLogout}
         signingOut={signingOut}
@@ -149,12 +213,28 @@ export function AdminAssessmentsScreen() {
             <button
               type="button"
               onClick={createAssessment}
-              className="inline-flex h-10 w-fit cursor-pointer items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-4 text-[12px] font-semibold text-admin-surface transition-colors hover:bg-admin-assessment-gold-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold"
+              disabled={creating}
+              className="inline-flex h-10 w-fit cursor-pointer items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-4 text-[12px] font-semibold text-admin-surface transition-colors hover:bg-admin-assessment-gold-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <Plus className="size-4" />
-              {adminAssessmentsConfig.newAssessmentLabel}
+              {creating ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Plus className="size-4" />
+              )}
+              {creating
+                ? "Creating…"
+                : adminAssessmentsConfig.newAssessmentLabel}
             </button>
           </section>
+
+          {actionError ? (
+            <p
+              role="alert"
+              className="mb-3 rounded-lg border border-admin-logout/30 bg-admin-surface px-3 py-2 text-[12px] text-admin-logout"
+            >
+              {actionError}
+            </p>
+          ) : null}
 
           <section aria-label="Assessments" className="w-full min-w-0">
             <div className="mb-3 flex flex-col gap-3 lg:flex-row lg:items-center">
@@ -208,7 +288,7 @@ export function AdminAssessmentsScreen() {
                 tabIndex={0}
                 className="admin-table-scroll-region w-full max-w-full min-w-0 overflow-x-auto overflow-y-hidden overscroll-x-contain [-webkit-overflow-scrolling:touch]"
               >
-                <table className="w-max min-w-[820px] table-fixed border-collapse text-left">
+                <table className="w-max min-w-[920px] table-fixed border-collapse text-left">
                   <thead className="bg-admin-surface text-[11px] font-medium text-admin-muted">
                     <tr>
                       {adminAssessmentsConfig.columns.map((column) => (
@@ -217,7 +297,7 @@ export function AdminAssessmentsScreen() {
                           className={cn(
                             "border-b border-admin-border-subtle px-2 py-3 font-medium sm:px-4",
                             column === "Assessment" && "w-[220px]",
-                            column === "Status" && "w-[120px]",
+                            column === "Status" && "w-[160px]",
                             column === "Content" && "w-[190px]",
                             column === "Responses" && "w-[110px]",
                             column === "Last edited" && "w-[140px]",
@@ -226,13 +306,41 @@ export function AdminAssessmentsScreen() {
                           {column}
                         </th>
                       ))}
-                      <th className="w-[76px] border-b border-admin-border-subtle px-4 py-3">
+                      <th className="w-[180px] border-b border-admin-border-subtle px-4 py-3">
                         <span className="sr-only">Actions</span>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-admin-border-subtle">
-                    {filteredAssessments.length ? (
+                    {loading ? (
+                      <tr>
+                        <td
+                          colSpan={adminAssessmentsConfig.columns.length + 1}
+                          className="px-4 py-12 text-center text-[13px] text-admin-muted"
+                        >
+                          <span className="inline-flex items-center gap-2">
+                            <Loader2 className="size-4 animate-spin" />
+                            Loading assessments…
+                          </span>
+                        </td>
+                      </tr>
+                    ) : loadError ? (
+                      <tr>
+                        <td
+                          colSpan={adminAssessmentsConfig.columns.length + 1}
+                          className="px-4 py-12 text-center text-[13px] text-admin-muted"
+                        >
+                          <p role="alert">{loadError}</p>
+                          <button
+                            type="button"
+                            onClick={() => void loadAssessments()}
+                            className="mt-3 inline-flex h-9 cursor-pointer items-center rounded-lg border border-admin-border-strong px-3 text-[12px] font-semibold text-admin-info hover:bg-admin-soft"
+                          >
+                            Try again
+                          </button>
+                        </td>
+                      </tr>
+                    ) : filteredAssessments.length ? (
                       filteredAssessments.map((assessment) => (
                         <tr
                           key={assessment.id}
@@ -261,18 +369,66 @@ export function AdminAssessmentsScreen() {
                             {assessment.sections} sections
                           </td>
                           <td className="px-4 py-3.5 whitespace-nowrap text-admin-muted">
-                            {assessment.responses}
+                            {assessment.responses ?? "—"}
                           </td>
                           <td className="px-4 py-3.5 whitespace-nowrap text-admin-muted">
                             {assessment.lastEdited}
                           </td>
-                          <td className="w-[64px] px-2 py-3.5 text-right sm:w-[76px] sm:px-4">
-                            <Link
-                              href={`/assessments/${assessment.id}`}
-                              className="inline-flex h-9 items-center rounded-lg border border-admin-border-strong bg-admin-surface px-3 text-[11px] font-medium text-admin-assessment-text hover:bg-admin-soft"
-                            >
-                              {adminAssessmentsConfig.editLabel}
-                            </Link>
+                          <td className="px-2 py-3.5 text-right sm:px-4">
+                            <div className="inline-flex flex-nowrap items-center justify-end gap-4">
+                              {assessment.status === "Published" ? (
+                                <div className="inline-flex shrink-0 items-center gap-2">
+                                  <span className="text-[10px] font-semibold tracking-[0.04em] text-admin-muted uppercase">
+                                    Client
+                                  </span>
+                                  <button
+                                    type="button"
+                                    role="switch"
+                                    aria-checked={assessment.isClientPrimary}
+                                    aria-label={`Client facing: ${assessment.title}`}
+                                    title={
+                                      assessment.isClientPrimary
+                                        ? "Turn off to hide from client dashboard (none will be client-facing)"
+                                        : "Turn on to show this assessment on the client dashboard (only one at a time)"
+                                    }
+                                    disabled={
+                                      primaryPendingId === assessment.id
+                                    }
+                                    onClick={() =>
+                                      handleClientFacingToggle(assessment)
+                                    }
+                                    className={cn(
+                                      "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full p-0.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-info disabled:cursor-not-allowed",
+                                      assessment.isClientPrimary
+                                        ? "bg-admin-navy"
+                                        : "bg-[#D7DCE3] hover:bg-[#C8CED6]",
+                                      primaryPendingId === assessment.id &&
+                                        "opacity-60",
+                                    )}
+                                  >
+                                    {primaryPendingId === assessment.id ? (
+                                      <Loader2 className="mx-auto size-3 animate-spin text-admin-surface" />
+                                    ) : (
+                                      <span
+                                        aria-hidden
+                                        className={cn(
+                                          "pointer-events-none block size-4 rounded-full bg-white shadow-sm transition-transform duration-200",
+                                          assessment.isClientPrimary
+                                            ? "translate-x-4"
+                                            : "translate-x-0",
+                                        )}
+                                      />
+                                    )}
+                                  </button>
+                                </div>
+                              ) : null}
+                              <Link
+                                href={`/assessments/${assessment.id}`}
+                                className="inline-flex h-9 shrink-0 items-center rounded-lg border border-admin-border-strong bg-admin-surface px-3 text-[11px] font-medium text-admin-assessment-text hover:bg-admin-soft"
+                              >
+                                {adminAssessmentsConfig.editLabel}
+                              </Link>
+                            </div>
                           </td>
                         </tr>
                       ))

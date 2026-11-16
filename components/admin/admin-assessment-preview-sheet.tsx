@@ -8,7 +8,7 @@ import { AdminAssessmentSideSheet } from "@/components/shared/admin-assessment-s
 import type {
   AdminAssessmentDocument,
   AdminAssessmentQuestion,
-} from "@/lib/admin-assessment-store";
+} from "@/lib/admin-assessments";
 
 export type AdminAssessmentSectionDraft = {
   title: string;

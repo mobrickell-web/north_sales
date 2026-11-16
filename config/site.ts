@@ -1212,8 +1212,8 @@ export function getPillarThemeKpisOpeningLine(themeLabel: string): string {
   const measure =
     themeLabel in pillarThemeKpiMeasurePhrases
       ? pillarThemeKpiMeasurePhrases[
-      themeLabel as keyof typeof pillarThemeKpiMeasurePhrases
-      ]
+          themeLabel as keyof typeof pillarThemeKpiMeasurePhrases
+        ]
       : themeLabel.toLowerCase();
   return `Below are examples of KPIs we may use to measure ${measure}.`;
 }

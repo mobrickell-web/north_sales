@@ -29,7 +29,15 @@ import type {
 } from "@/lib/assessment-results-api";
 import { cn } from "@/lib/utils";
 
-const ASSESSMENT_PATH = "/sales-alignment-assessment";
+function assessmentPathFor(
+  viewer: DashboardViewer,
+  options: { retake?: boolean } = {},
+) {
+  if (viewer.role !== "USER") return "/sales-alignment-assessment";
+  return options.retake
+    ? "/dashboard/assessment?retake=1"
+    : "/dashboard/assessment";
+}
 
 export type ResultRecord = {
   id: string;
@@ -107,7 +115,7 @@ function ResultsUnavailable({
         <Link href={viewer.homePath} className={secondaryLinkClass}>
           {viewer.role === "USER" ? "Back to dashboard" : "Back"}
         </Link>
-        <Link href={ASSESSMENT_PATH} className={primaryLinkClass}>
+        <Link href={assessmentPathFor(viewer)} className={primaryLinkClass}>
           Take the assessment
         </Link>
       </div>
@@ -162,7 +170,7 @@ function ResultsContent({
           </p>
         </div>
         <Link
-          href={ASSESSMENT_PATH}
+          href={assessmentPathFor(viewer, { retake: true })}
           className={cn(secondaryLinkClass, "w-fit")}
         >
           <RotateCcw className="size-3.5" />

@@ -11,6 +11,7 @@ import {
   GoogleSignInScript,
   useGoogleSignIn,
 } from "@/components/auth/google-sign-in";
+import { AuthRedirectOverlay } from "@/components/shared/app-toast";
 import { AuthScreenLayout } from "@/components/shared/auth-screen-layout";
 import { authConfig } from "@/config/auth";
 import type { LoginCategory } from "@/lib/auth-api";
@@ -99,6 +100,7 @@ export function LoginScreen({
         onReady={google.initialize}
         onError={google.handleScriptError}
       />
+      <AuthRedirectOverlay open={google.isSubmitting || google.isRedirecting} />
       <div className="mb-5 text-center">
         <h1 className="font-[family-name:var(--font-plus-jakarta)] text-[30px] leading-[1.15] font-bold tracking-[-0.04em] text-primary sm:text-[36px]">
           {login.title}
@@ -171,9 +173,9 @@ export function LoginScreen({
       <button
         type="button"
         onClick={google.handleClick}
-        disabled={google.isSubmitting}
-        aria-busy={google.isSubmitting}
-        className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-input px-4 font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
+        disabled={google.isSubmitting || google.isRedirecting}
+        aria-busy={google.isSubmitting || google.isRedirecting}
+        className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-input px-4 font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Image
           src="/images/auth/google-icon.svg"
@@ -184,13 +186,12 @@ export function LoginScreen({
           unoptimized
           className="size-4"
         />
-        {login.googleButtonLabel}
+        {google.isRedirecting
+          ? "Redirecting…"
+          : google.isSubmitting
+            ? "Signing in…"
+            : login.googleButtonLabel}
       </button>
-      {google.error ? (
-        <p role="alert" className="mt-2 text-center text-sm text-destructive">
-          {google.error}
-        </p>
-      ) : null}
 
       <div className="my-4 border-t border-border" aria-hidden="true" />
 
@@ -207,6 +208,16 @@ export function LoginScreen({
           </div>
         }
       />
+
+      <p className="mt-6 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground">
+        {login.signupPrompt}{" "}
+        <Link
+          href={login.signupHref}
+          className="cursor-pointer font-semibold text-bronze underline underline-offset-2 hover:brightness-90"
+        >
+          {login.signupLinkLabel}
+        </Link>
+      </p>
     </AuthScreenLayout>
   );
 }

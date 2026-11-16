@@ -10,6 +10,7 @@ import {
   type FormEvent,
 } from "react";
 
+import { AuthRedirectOverlay } from "@/components/shared/app-toast";
 import { AuthScreenLayout } from "@/components/shared/auth-screen-layout";
 import { authConfig } from "@/config/auth";
 import {
@@ -18,8 +19,11 @@ import {
   verifyAuthCode,
   type VerificationPurpose,
 } from "@/lib/auth-api";
+import { toast } from "@/lib/toast";
 
 const CODE_LENGTH = 6;
+const RESEND_COOLDOWN_SECONDS = 60;
+const CODE_EXPIRES_IN_SECONDS = 5 * 60;
 
 export function VerificationCodeScreen() {
   const router = useRouter();
@@ -29,11 +33,10 @@ export function VerificationCodeScreen() {
     searchParams.get("purpose") === "SIGNUP" ? "SIGNUP" : "PASSWORD_RESET";
   const { verificationCode } = authConfig;
   const [digits, setDigits] = useState<string[]>(Array(CODE_LENGTH).fill(""));
-  const [notice, setNotice] = useState("");
-  const [noticeIsError, setNoticeIsError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [resending, setResending] = useState(false);
-  const [resendCooldown, setResendCooldown] = useState(0);
+  const [resendCooldown, setResendCooldown] = useState(RESEND_COOLDOWN_SECONDS);
+  const [codeExpiresIn, setCodeExpiresIn] = useState(CODE_EXPIRES_IN_SECONDS);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   useEffect(() => {
@@ -44,6 +47,28 @@ export function VerificationCodeScreen() {
     );
     return () => window.clearTimeout(timer);
   }, [resendCooldown]);
+
+  useEffect(() => {
+    if (codeExpiresIn <= 0) return;
+    const timer = window.setTimeout(
+      () => setCodeExpiresIn((remaining) => Math.max(remaining - 1, 0)),
+      1000,
+    );
+    return () => window.clearTimeout(timer);
+  }, [codeExpiresIn]);
+
+  const formatCountdown = (totalSeconds: number) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const startFreshCodeTimers = (
+    retryAfterSeconds = RESEND_COOLDOWN_SECONDS,
+  ) => {
+    setResendCooldown(retryAfterSeconds);
+    setCodeExpiresIn(CODE_EXPIRES_IN_SECONDS);
+  };
 
   const updateDigits = (startIndex: number, value: string) => {
     const numbers = value.replace(/\D/g, "").slice(0, CODE_LENGTH - startIndex);
@@ -69,29 +94,25 @@ export function VerificationCodeScreen() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!email) {
-      setNotice(
+      toast.error(
         purpose === "SIGNUP"
           ? "Email address is missing. Return to sign up and try again."
           : "Email address is missing. Request a new password reset code.",
       );
-      setNoticeIsError(true);
       return;
     }
     if (digits.some((digit) => !digit)) {
       const firstEmptyIndex = digits.findIndex((digit) => !digit);
       inputRefs.current[firstEmptyIndex]?.focus();
-      setNotice("Enter all six digits to continue.");
-      setNoticeIsError(true);
+      toast.error("Enter all six digits to continue.");
       return;
     }
 
     setSubmitting(true);
-    setNotice("");
-    setNoticeIsError(false);
     try {
       const result = await verifyAuthCode(email, digits.join(""), purpose);
       if (purpose === "SIGNUP") {
-        setNoticeIsError(false);
+        toast.afterRedirect("Email verified. You can sign in now.");
         router.replace(verificationCode.loginHref);
         return;
       }
@@ -102,14 +123,13 @@ export function VerificationCodeScreen() {
         );
       }
       storePasswordResetToken(result.resetToken);
+      toast.afterRedirect("Code verified. Set your new password.");
       const query = `?email=${encodeURIComponent(email)}`;
       router.push(`${verificationCode.updatePasswordHref}${query}`);
     } catch (error) {
-      setNotice(
+      toast.error(
         error instanceof Error ? error.message : "Code verification failed.",
       );
-      setNoticeIsError(true);
-    } finally {
       setSubmitting(false);
     }
   };
@@ -117,31 +137,28 @@ export function VerificationCodeScreen() {
   const handleResend = async () => {
     if (resending || resendCooldown > 0) return;
     if (!email) {
-      setNotice(
+      toast.error(
         purpose === "SIGNUP"
           ? "Email address is missing. Return to sign up and try again."
           : "Email address is missing. Request a new password reset code.",
       );
-      setNoticeIsError(true);
       return;
     }
     setResending(true);
     try {
       const result = await resendAuthCode(email, purpose);
-      setNotice(result.message);
-      setNoticeIsError(false);
-      if (typeof result.retryAfterSeconds === "number") {
-        setResendCooldown(result.retryAfterSeconds);
-        setDigits(Array(CODE_LENGTH).fill(""));
-        inputRefs.current[0]?.focus();
-      } else {
-        setResendCooldown(0);
-      }
+      toast.success("A new verification code has been sent.");
+      startFreshCodeTimers(
+        typeof result.retryAfterSeconds === "number"
+          ? result.retryAfterSeconds
+          : RESEND_COOLDOWN_SECONDS,
+      );
+      setDigits(Array(CODE_LENGTH).fill(""));
+      inputRefs.current[0]?.focus();
     } catch (error) {
-      setNotice(
+      toast.error(
         error instanceof Error ? error.message : "Could not resend the code.",
       );
-      setNoticeIsError(true);
       if (error instanceof Error) {
         const cooldown = error.message.match(/wait (\d+) seconds/i);
         if (cooldown) setResendCooldown(Number(cooldown[1]));
@@ -153,6 +170,16 @@ export function VerificationCodeScreen() {
 
   return (
     <AuthScreenLayout>
+      <AuthRedirectOverlay
+        open={submitting || resending}
+        message={
+          resending
+            ? "Sending new code…"
+            : purpose === "SIGNUP"
+              ? "Verifying email…"
+              : "Verifying code…"
+        }
+      />
       <div className="mb-8 text-center">
         <h1 className="font-[family-name:var(--font-plus-jakarta)] text-[30px] leading-[1.15] font-bold tracking-[-0.04em] text-primary sm:text-[36px]">
           {verificationCode.title}
@@ -204,38 +231,40 @@ export function VerificationCodeScreen() {
           ))}
         </div>
 
-        {notice ? (
-          <p
-            role={noticeIsError ? "alert" : "status"}
-            className="mt-3 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground"
-          >
-            {notice}
-          </p>
-        ) : null}
-
         <button
           type="submit"
-          disabled={submitting || resending}
+          disabled={submitting || resending || codeExpiresIn <= 0}
           className="mt-5 flex h-12 w-full cursor-pointer items-center justify-center rounded-xl bg-bronze font-[family-name:var(--font-plus-jakarta)] text-[13px] font-semibold text-white transition-colors hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? "Verifying…" : verificationCode.verifyButtonLabel}
         </button>
       </form>
 
-      <p className="mt-3 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground">
-        {verificationCode.resendPrompt}{" "}
-        <button
-          type="button"
-          onClick={() => void handleResend()}
-          disabled={resending || submitting || resendCooldown > 0}
-          className="cursor-pointer font-semibold text-bronze underline underline-offset-2 hover:brightness-90 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {resending
-            ? "Sending…"
-            : resendCooldown > 0
-              ? `Resend in ${resendCooldown}s`
-              : verificationCode.resendButtonLabel}
-        </button>
+      <p
+        role="status"
+        className="mt-3 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground"
+      >
+        {codeExpiresIn > 0
+          ? `Code expires in ${formatCountdown(codeExpiresIn)}`
+          : "Code expired. Resend a new code to continue."}
+      </p>
+
+      <p className="mt-2 text-center font-[family-name:var(--font-plus-jakarta)] text-[12px] text-muted-foreground">
+        {resendCooldown > 0 ? (
+          <>Resend code will be available in {resendCooldown}s</>
+        ) : (
+          <>
+            {verificationCode.resendPrompt}{" "}
+            <button
+              type="button"
+              onClick={() => void handleResend()}
+              disabled={resending || submitting}
+              className="cursor-pointer font-semibold text-bronze underline underline-offset-2 hover:brightness-90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {resending ? "Sending…" : verificationCode.resendButtonLabel}
+            </button>
+          </>
+        )}
       </p>
 
       <p className="mt-6 text-center">

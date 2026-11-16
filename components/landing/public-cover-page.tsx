@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { ContactDialog } from "@/components/layout/contact-dialog";
 import {
   ScheduleAppointmentProvider,
   useScheduleAppointment,
@@ -13,6 +15,7 @@ import { siteConfig } from "@/config/site";
 function PublicCoverContent() {
   const { openSchedule } = useScheduleAppointment();
   const { publicCover } = siteConfig;
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col bg-[#020B1E] text-white">
@@ -74,15 +77,19 @@ function PublicCoverContent() {
               >
                 {publicCover.phone.label}
               </a>
-              <a
-                href={publicCover.email.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-bronze underline decoration-bronze/40 underline-offset-4 transition-colors hover:text-primary"
+              <button
+                type="button"
+                onClick={() => setIsContactOpen(true)}
+                className="cursor-pointer text-bronze underline decoration-bronze/40 underline-offset-4 transition-colors hover:text-primary"
               >
                 {publicCover.email.label}
-              </a>
+              </button>
             </div>
+
+            <ContactDialog
+              open={isContactOpen}
+              onOpenChange={setIsContactOpen}
+            />
 
             <div className="mt-9 flex w-full max-w-xl flex-col justify-center gap-3 sm:flex-row">
               <Link

@@ -6,6 +6,8 @@ import { Loader2 } from "lucide-react";
 
 import { AdminAppointmentsPanel } from "@/components/admin/admin-appointments";
 import { AdminAccessManagement } from "@/components/admin/admin-access-management";
+import { AdminAssessmentResults } from "@/components/admin/admin-assessment-results";
+import { AdminClientEngagement } from "@/components/admin/admin-client-engagement";
 import { AdminOverviewContent } from "@/components/admin/admin-overview";
 import { AdminSidebar } from "@/components/shared/admin-sidebar";
 import { AdminTopbar } from "@/components/shared/admin-topbar";
@@ -23,7 +25,12 @@ const LOGIN_PATH = "/login";
 export function AdminDashboardShell({
   page = "overview",
 }: {
-  page?: "overview" | "appointments" | "access";
+  page?:
+    | "overview"
+    | "appointments"
+    | "access"
+    | "engagement"
+    | "assessment-results";
 }) {
   const router = useRouter();
 
@@ -78,7 +85,7 @@ export function AdminDashboardShell({
   }
 
   return (
-    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)] overflow-x-clip bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
+    <div className="grid min-h-screen w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)] bg-admin-canvas lg:grid-cols-[286px_minmax(0,1fr)]">
       <AdminSidebar
         onLogout={handleSignOut}
         signingOut={signingOut}
@@ -93,6 +100,24 @@ export function AdminDashboardShell({
             onMenuClick={() => setMobileSidebarOpen(true)}
           />
           <AdminAccessManagement />
+        </main>
+      ) : page === "engagement" ? (
+        <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
+          <AdminTopbar
+            adminName={admin?.name}
+            title="Client Engagement"
+            onMenuClick={() => setMobileSidebarOpen(true)}
+          />
+          <AdminClientEngagement />
+        </main>
+      ) : page === "assessment-results" ? (
+        <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
+          <AdminTopbar
+            adminName={admin?.name}
+            title="Assessment Results"
+            onMenuClick={() => setMobileSidebarOpen(true)}
+          />
+          <AdminAssessmentResults />
         </main>
       ) : page === "appointments" ? (
         <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">

@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -14,9 +14,11 @@ import type { MouseEvent } from "react";
 import {
   googleLogin,
   getRoleHomePath,
+  getSafeNextPath,
   storeSession,
   type LoginCategory,
 } from "@/lib/auth-api";
+import { toast, toastAuthFailure } from "@/lib/toast";
 
 type GoogleCredentialResponse = {
   credential?: string;
@@ -73,13 +75,14 @@ export function GoogleSignInScript({
 
 export function useGoogleSignIn(category: LoginCategory = "CLIENT") {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const initialized = useRef(false);
   const submitting = useRef(false);
   // Google keeps the callback registered at initialize time, so the selected
   // category has to be read through a ref instead of a captured value.
   const categoryRef = useRef(category);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useLayoutEffect(() => {
     categoryRef.current = category;
@@ -91,27 +94,31 @@ export function useGoogleSignIn(category: LoginCategory = "CLIENT") {
 
       submitting.current = true;
       setIsSubmitting(true);
-      setError("");
       try {
         const session = await googleLogin(
           response.credential,
           categoryRef.current,
         );
         storeSession(session);
+        setIsRedirecting(true);
+        toast.afterRedirect("Signed in successfully.");
+        const nextPath = getSafeNextPath(searchParams.get("next"));
         router.replace(
-          getRoleHomePath(session.admin.role, session.admin.position),
+          nextPath ??
+            getRoleHomePath(session.admin.role, session.admin.position),
         );
       } catch (cause) {
-        setError(
+        toastAuthFailure(
           cause instanceof Error
-            ? cause.message
-            : "Google sign-in failed. Please try again.",
+            ? cause
+            : new Error("Google sign-in failed. Please try again."),
         );
         submitting.current = false;
         setIsSubmitting(false);
+        setIsRedirecting(false);
       }
     },
-    [router],
+    [router, searchParams],
   );
 
   const initialize = useCallback(() => {
@@ -126,7 +133,7 @@ export function useGoogleSignIn(category: LoginCategory = "CLIENT") {
   }, [handleCredential]);
 
   const handleScriptError = useCallback(() => {
-    setError("Google sign-in could not load. Please try again.");
+    toast.error("Google sign-in could not load. Please try again.");
   }, []);
 
   useEffect(() => {
@@ -141,36 +148,31 @@ export function useGoogleSignIn(category: LoginCategory = "CLIENT") {
         return;
       }
       if (!GOOGLE_CLIENT_ID) {
-        setError("Google sign-in is not configured.");
+        toast.error("Google sign-in is not configured.");
         return;
       }
       if (!initialized.current || !window.google) {
-        setError("Google sign-in is still loading. Please try again.");
+        toast.error("Google sign-in is still loading. Please try again.");
         return;
       }
       if (submitting.current) return;
 
       event.preventDefault();
-      setError("");
       window.google.accounts.id.prompt((moment) => {
         if (moment.isNotDisplayed()) {
-          setError(
+          toast.error(
             moment.getNotDisplayedReason() === "browser_not_supported"
               ? "Google sign-in is not supported in this browser."
               : "Google sign-in could not open. Check your browser's popup or privacy settings and try again.",
           );
         } else if (moment.isSkippedMoment()) {
-          setError(
-            moment.getSkippedReason() === "user_cancel"
-              ? "Google sign-in was cancelled."
-              : "Google sign-in was skipped. Please try again.",
-          );
-        } else if (moment.isDismissedMoment()) {
-          setError(
-            moment.getDismissedReason() === "credential_returned"
-              ? ""
-              : "Google sign-in was dismissed.",
-          );
+          if (moment.getSkippedReason() === "user_cancel") return;
+          toast.error("Google sign-in was skipped. Please try again.");
+        } else if (
+          moment.isDismissedMoment() &&
+          moment.getDismissedReason() !== "credential_returned"
+        ) {
+          toast.error("Google sign-in was dismissed.");
         }
       });
     },
@@ -181,7 +183,7 @@ export function useGoogleSignIn(category: LoginCategory = "CLIENT") {
     handleClick,
     initialize,
     handleScriptError,
-    error,
     isSubmitting,
+    isRedirecting,
   };
 }

@@ -33,7 +33,8 @@ export const STAFF_POSITION_LABELS: Record<StaffPosition, string> = {
   REGIONAL_SALES_MANAGER: "Regional Sales Manager",
 };
 
-export type LoginCategory = "CLIENT" | StaffPosition | "MASTER_ADMIN" | "OTHER";
+export type LoginCategory =
+  "CLIENT" | "SALES_REPRESENTATIVE" | StaffPosition | "MASTER_ADMIN" | "OTHER";
 export type VerificationPurpose = "SIGNUP" | "PASSWORD_RESET";
 
 export type AdminProfile = {
@@ -98,6 +99,14 @@ export function getRoleHomePath(role: string, position?: StaffPosition | null) {
   return "/";
 }
 
+/** Only allow same-origin relative redirects (e.g. Zoom on-behalf links). */
+export function getSafeNextPath(candidate: string | null | undefined) {
+  if (!candidate) return null;
+  if (!candidate.startsWith("/") || candidate.startsWith("//")) return null;
+  if (candidate.startsWith("/on-behalf/")) return candidate;
+  return null;
+}
+
 export class AdminApiError extends Error {
   readonly status: number;
 
@@ -114,6 +123,28 @@ export function isRateLimited(error: unknown) {
 
 export function isUnauthorized(error: unknown) {
   return error instanceof AdminApiError && error.status === 401;
+}
+
+export function isForbidden(error: unknown) {
+  return error instanceof AdminApiError && error.status === 403;
+}
+
+export function isAccessPending(error: unknown) {
+  if (!(error instanceof Error)) return false;
+  return /pending Super Admin approval|waiting for Super Admin/i.test(
+    error.message,
+  );
+}
+
+function remapCredentialError(error: unknown): never {
+  if (
+    isUnauthorized(error) &&
+    error instanceof Error &&
+    !/inactive|configured|token|verified email/i.test(error.message)
+  ) {
+    throw new AdminApiError(401, "Incorrect email or password.");
+  }
+  throw error;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -165,17 +196,29 @@ export async function adminLogin(
       body: JSON.stringify({ email: email.trim(), password, category }),
     });
   } catch (error) {
-    if (isUnauthorized(error)) {
-      throw new AdminApiError(401, "Incorrect email or password.");
-    }
-    throw error;
+    remapCredentialError(error);
   }
 }
 
-export function googleLogin(idToken: string, category: LoginCategory) {
-  return request<AdminSession>("/api/v1/auth/google", {
+export async function googleLogin(idToken: string, category: LoginCategory) {
+  try {
+    return await request<AdminSession>("/api/v1/auth/google", {
+      method: "POST",
+      body: JSON.stringify({ idToken, category }),
+    });
+  } catch (error) {
+    remapCredentialError(error);
+  }
+}
+
+export function requestClientSignup(input: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  return request<{ message: string }>("/api/v1/auth/signup", {
     method: "POST",
-    body: JSON.stringify({ idToken, category }),
+    body: JSON.stringify(input),
   });
 }
 
@@ -379,7 +422,7 @@ export function clearSession() {
 
 let refreshInFlight: Promise<AdminSession | null> | null = null;
 
-async function refreshSession(): Promise<AdminSession | null> {
+export async function refreshSession(): Promise<AdminSession | null> {
   refreshInFlight ??= adminRefresh()
     .then((session) => {
       storeSession(session);

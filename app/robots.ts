@@ -7,7 +7,12 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: protectedRoutes,
+      disallow: [
+        ...protectedRoutes,
+        "/appointments/cancel",
+        "/appointments/reschedule",
+        "/api/",
+      ],
     },
   };
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ClipboardList } from "lucide-react";
 
@@ -10,31 +11,447 @@ import {
   LocalDate,
   ScoreBar,
 } from "@/components/client/dashboard-ui";
-import type { AssessmentResultSummary } from "@/lib/assessment-results-api";
+import type {
+  ClientBaseline,
+  ClientDashboardAssessment,
+  ClientDashboardAssessmentHistoryItem,
+  ClientDashboardData,
+  ClientImprovement,
+  ClientKpi,
+  ClientMilestone,
+  ClientReport,
+} from "@/lib/client-dashboard";
+import { downloadClientReport } from "@/lib/client-report-api";
 
-const ASSESSMENT_PATH = "/sales-alignment-assessment";
+const ASSESSMENT_PATH = "/dashboard/assessment";
+const SCORE_MAX = 100;
 
-const assessmentNames: Record<string, string> = {
-  "sales-alignment": "Sales Alignment Assessment",
-};
+function assessmentHref(
+  slug?: string | null,
+  options: { retake?: boolean } = {},
+) {
+  const params = new URLSearchParams();
+  if (slug) params.set("slug", slug);
+  if (options.retake) params.set("retake", "1");
+  const qs = params.toString();
+  return qs ? `${ASSESSMENT_PATH}?${qs}` : ASSESSMENT_PATH;
+}
 
-function assessmentName(slug: string) {
-  return assessmentNames[slug] ?? "Assessment";
+function resultsHref(instanceId: string) {
+  return `/dashboard/results/${encodeURIComponent(instanceId)}`;
+}
+
+function formatDate(value: string | null | undefined): string {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "—";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+
+function formatNumber(value: number, unit?: string | null): string {
+  const formatted = new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 2,
+  }).format(value);
+  return unit ? `${formatted} ${unit}` : formatted;
+}
+
+function statusLabel(status: string): string {
+  return status
+    .toLowerCase()
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function EmptyState({ message }: { message: string }) {
+  return (
+    <p className="rounded-lg border border-dashed border-admin-border bg-admin-soft/40 px-4 py-6 text-center text-[14px] text-admin-muted">
+      {message}
+    </p>
+  );
+}
+
+function isCompleted(
+  item: Pick<ClientDashboardAssessmentHistoryItem, "status" | "overallScore">,
+) {
+  return item.status === "COMPLETED" && item.overallScore != null;
+}
+
+function groupLatestKpis(rows: ClientKpi[]) {
+  const byKey = new Map<string, ClientKpi[]>();
+  for (const row of rows) {
+    const list = byKey.get(row.metricKey) ?? [];
+    list.push(row);
+    byKey.set(row.metricKey, list);
+  }
+
+  return [...byKey.entries()].map(([metricKey, list]) => {
+    const sorted = [...list].sort(
+      (a, b) =>
+        new Date(b.measuredAt).getTime() - new Date(a.measuredAt).getTime(),
+    );
+    const latest = sorted[0];
+    const previous = sorted[1];
+    const delta = previous && latest ? latest.value - previous.value : null;
+    return { metricKey, latest, previous, delta };
+  });
+}
+
+function BaselinesTable({ rows }: { rows: ClientBaseline[] }) {
+  if (rows.length === 0) {
+    return (
+      <EmptyState message="No baseline measurements have been published for your account yet." />
+    );
+  }
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-left text-[13px]">
+        <thead className="text-[11px] font-semibold tracking-[0.08em] text-admin-muted uppercase">
+          <tr className="border-b border-admin-border-subtle">
+            <th className="px-1 py-2 font-semibold">Metric</th>
+            <th className="px-1 py-2 font-semibold">Value</th>
+            <th className="px-1 py-2 font-semibold">Measured</th>
+            <th className="px-1 py-2 font-semibold">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr
+              key={row.id}
+              className="border-b border-admin-border-subtle text-admin-assessment-text last:border-0"
+            >
+              <td className="px-1 py-3">{row.label}</td>
+              <td className="px-1 py-3">{formatNumber(row.value, row.unit)}</td>
+              <td className="px-1 py-3">{formatDate(row.measuredAt)}</td>
+              <td className="px-1 py-3 text-admin-muted">
+                {row.source ?? "—"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ImprovementsList({ rows }: { rows: ClientImprovement[] }) {
+  if (rows.length === 0) {
+    return (
+      <EmptyState message="No agreed improvements have been published for your account yet." />
+    );
+  }
+
+  return (
+    <ul className="flex flex-col divide-y divide-admin-border-subtle">
+      {rows.map((row) => (
+        <li
+          key={row.id}
+          className="flex flex-col gap-2 py-3.5 sm:flex-row sm:items-start sm:justify-between"
+        >
+          <div className="min-w-0">
+            <p className="text-[14px] font-semibold text-admin-assessment-text">
+              {row.title}
+            </p>
+            {row.description ? (
+              <p className="mt-1 text-[13px] leading-relaxed text-admin-muted">
+                {row.description}
+              </p>
+            ) : null}
+            <p className="mt-2 text-[12px] text-admin-muted">
+              Owner:{" "}
+              {[row.ownerName, row.ownerSide].filter(Boolean).join(" · ") ||
+                "—"}
+              {row.targetDate ? ` · Target ${formatDate(row.targetDate)}` : ""}
+            </p>
+          </div>
+          <span className="shrink-0 text-[11px] font-semibold tracking-[0.08em] text-admin-gold-deep uppercase">
+            {statusLabel(row.status)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function KpiPanel({ rows }: { rows: ClientKpi[] }) {
+  if (rows.length === 0) {
+    return (
+      <EmptyState message="No KPI measurements have been published for your account yet." />
+    );
+  }
+
+  const groups = groupLatestKpis(rows);
+
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      {groups.map(({ metricKey, latest, previous, delta }) => (
+        <article
+          key={metricKey}
+          className="rounded-xl border border-admin-border bg-admin-soft/30 px-4 py-4"
+        >
+          <p className="text-[11px] font-semibold tracking-[0.1em] text-admin-muted uppercase">
+            {metricKey.replace(/_/g, " ")}
+          </p>
+          <p className="mt-3 text-[28px] leading-none font-bold text-admin-navy">
+            {formatNumber(latest.value)}
+          </p>
+          <p className="mt-2 text-[12px] text-admin-muted">
+            Measured {formatDate(latest.measuredAt)}
+            {latest.target !== null
+              ? ` · Target ${formatNumber(latest.target)}`
+              : ""}
+          </p>
+          {delta !== null ? (
+            <p
+              className={`mt-3 text-[13px] font-medium ${
+                delta >= 0 ? "text-emerald-700" : "text-red-600"
+              }`}
+            >
+              {delta >= 0 ? "+" : ""}
+              {formatNumber(delta)} vs prior ({formatDate(previous?.measuredAt)}
+              )
+            </p>
+          ) : (
+            <p className="mt-3 text-[13px] text-admin-muted">
+              First recorded measurement
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function MilestonesTable({ rows }: { rows: ClientMilestone[] }) {
+  if (rows.length === 0) {
+    return (
+      <EmptyState message="No implementation schedule items have been published yet." />
+    );
+  }
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-left text-[13px]">
+        <thead className="text-[11px] font-semibold tracking-[0.08em] text-admin-muted uppercase">
+          <tr className="border-b border-admin-border-subtle">
+            <th className="px-1 py-2 font-semibold">Milestone</th>
+            <th className="px-1 py-2 font-semibold">Start</th>
+            <th className="px-1 py-2 font-semibold">Due</th>
+            <th className="px-1 py-2 font-semibold">Owner</th>
+            <th className="px-1 py-2 font-semibold">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr
+              key={row.id}
+              className="border-b border-admin-border-subtle text-admin-assessment-text last:border-0"
+            >
+              <td className="px-1 py-3">{row.title}</td>
+              <td className="px-1 py-3">{formatDate(row.startDate)}</td>
+              <td className="px-1 py-3">{formatDate(row.dueDate)}</td>
+              <td className="px-1 py-3 text-admin-muted">
+                {[row.ownerName, row.ownerSide].filter(Boolean).join(" · ") ||
+                  "—"}
+              </td>
+              <td className="px-1 py-3 font-medium text-admin-gold-deep">
+                {statusLabel(row.status)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ReportsList({ rows }: { rows: ClientReport[] }) {
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
+  const [downloadError, setDownloadError] = useState("");
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  if (rows.length === 0) {
+    return (
+      <EmptyState message="No engagement reports have been published for your account yet." />
+    );
+  }
+
+  const handleDownload = async (reportId: string) => {
+    setDownloadError("");
+    setDownloadingId(reportId);
+    try {
+      await downloadClientReport(reportId);
+    } catch (cause) {
+      setDownloadError(
+        cause instanceof Error
+          ? cause.message
+          : "Could not download this report.",
+      );
+    } finally {
+      setDownloadingId(null);
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      {downloadError ? (
+        <p role="alert" className="text-[13px] text-red-600">
+          {downloadError}
+        </p>
+      ) : null}
+      <ul className="flex flex-col divide-y divide-admin-border-subtle">
+        {rows.map((row) => {
+          const expanded = expandedId === row.id;
+          return (
+            <li
+              key={row.id}
+              className="flex flex-col gap-3 py-3.5 sm:flex-row sm:items-start sm:justify-between"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="text-[14px] font-semibold text-admin-assessment-text">
+                  {row.title}
+                </p>
+                <p className="mt-1 text-[12px] text-admin-muted">
+                  {statusLabel(row.type)} · {row.period}
+                  {row.publishedAt
+                    ? ` · Published ${formatDate(row.publishedAt)}`
+                    : ""}
+                </p>
+                {row.originalFileName ? (
+                  <p className="mt-1 text-[12px] text-admin-muted">
+                    File: {row.originalFileName}
+                  </p>
+                ) : null}
+                {row.summary ? (
+                  <p
+                    className={`mt-2 text-[13px] leading-relaxed text-admin-muted ${
+                      expanded ? "" : "line-clamp-2"
+                    }`}
+                  >
+                    {row.summary}
+                  </p>
+                ) : null}
+              </div>
+              <div className="flex shrink-0 flex-wrap gap-2">
+                {row.summary ? (
+                  <button
+                    type="button"
+                    onClick={() => setExpandedId(expanded ? null : row.id)}
+                    className="inline-flex h-9 items-center justify-center rounded-lg border border-admin-border-strong bg-admin-surface px-3 text-[12px] font-semibold text-admin-assessment-text hover:bg-admin-soft"
+                  >
+                    {expanded ? "Hide summary" : "View"}
+                  </button>
+                ) : null}
+                {row.canDownload ? (
+                  <button
+                    type="button"
+                    onClick={() => void handleDownload(row.id)}
+                    disabled={downloadingId === row.id}
+                    className="inline-flex h-9 items-center justify-center rounded-lg bg-admin-assessment-gold px-3 text-[12px] font-semibold text-admin-surface hover:bg-admin-assessment-gold-hover disabled:opacity-60"
+                  >
+                    {downloadingId === row.id ? "Downloading…" : "Download"}
+                  </button>
+                ) : null}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function AssessmentCtaLabel({
+  assessment,
+}: {
+  assessment: ClientDashboardAssessment | null;
+}) {
+  // Label follows the current client-facing primary only — prior completed
+  // assessments in history must not flip a newly assigned primary to Retake.
+  if (
+    assessment?.status === "IN_PROGRESS" ||
+    assessment?.status === "PENDING"
+  ) {
+    return (
+      <>
+        Continue assessment
+        <ArrowUpRight className="size-3.5" />
+      </>
+    );
+  }
+  if (assessment?.status === "COMPLETED" && assessment.instanceId) {
+    return (
+      <>
+        Retake assessment
+        <ArrowUpRight className="size-3.5" />
+      </>
+    );
+  }
+  return (
+    <>
+      Start assessment
+      <ArrowUpRight className="size-3.5" />
+    </>
+  );
 }
 
 export function ClientDashboard({
   name,
   email,
-  results,
-  loadError,
+  data,
+  errorMessage,
 }: {
   name: string;
   email: string;
-  results: AssessmentResultSummary[];
-  loadError: string | null;
+  data: ClientDashboardData | null;
+  errorMessage?: string;
 }) {
-  const latest = results[0] ?? null;
   const firstName = name.trim().split(/\s+/)[0] || name;
+  const loadError =
+    errorMessage ?? (!data ? "Unexpected error loading your dashboard." : null);
+
+  const completed = (data?.assessments ?? [])
+    .filter(isCompleted)
+    .sort((a, b) => {
+      const aTime = a.submittedAt ? new Date(a.submittedAt).getTime() : 0;
+      const bTime = b.submittedAt ? new Date(b.submittedAt).getTime() : 0;
+      return bTime - aTime;
+    });
+
+  const primary = data?.assessment ?? null;
+  const primaryCompleted =
+    primary?.status === "COMPLETED" && primary.result && primary.instanceId
+      ? {
+          instanceId: primary.instanceId,
+          assessmentId: primary.assessmentId,
+          assessmentTitle: primary.assessmentTitle,
+          assessmentSlug: primary.assessmentSlug,
+          status: primary.status,
+          submittedAt: primary.submittedAt,
+          overallScore: primary.result.overallScore,
+        }
+      : null;
+
+  const latest = primaryCompleted ?? completed[0] ?? null;
+  const previous = completed.find(
+    (item) => item.instanceId !== latest?.instanceId,
+  );
+  const scoreDelta =
+    latest?.overallScore != null && previous?.overallScore != null
+      ? latest.overallScore - previous.overallScore
+      : null;
+
+  const ctaHref = assessmentHref(
+    primary?.assessmentSlug ?? latest?.assessmentSlug,
+    {
+      retake: primary?.status === "COMPLETED" && Boolean(primary.instanceId),
+    },
+  );
 
   return (
     <DashboardShell
@@ -67,26 +484,30 @@ export function ClientDashboard({
             <p className="text-[11px] font-semibold tracking-[0.14em] text-admin-gold uppercase">
               Latest Sales Alignment Score
             </p>
-            {latest ? (
+            {latest?.overallScore != null ? (
               <>
                 <p className="mt-5 font-heading leading-none">
                   <span className="text-[56px] font-bold text-admin-gold">
                     {latest.overallScore}
                   </span>
                   <span className="text-[24px] text-admin-sidebar-text/80">
-                    /{latest.maxScore}
+                    /{SCORE_MAX}
                   </span>
                 </p>
-                <p className="mt-4 text-[12px] text-slate-400">
-                  Taken <LocalDate value={latest.createdAt} />
-                </p>
-                <Link
-                  href={`/dashboard/results/${encodeURIComponent(latest.id)}`}
-                  className="mt-4 inline-flex w-fit items-center gap-1.5 text-[12px] font-semibold text-admin-gold hover:underline"
-                >
-                  View full results
-                  <ArrowRight className="size-3.5" />
-                </Link>
+                {latest.submittedAt ? (
+                  <p className="mt-4 text-[12px] text-slate-400">
+                    Taken <LocalDate value={latest.submittedAt} />
+                  </p>
+                ) : null}
+                {latest.instanceId ? (
+                  <Link
+                    href={resultsHref(latest.instanceId)}
+                    className="mt-4 inline-flex w-fit items-center gap-1.5 text-[12px] font-semibold text-admin-gold hover:underline"
+                  >
+                    View full results
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                ) : null}
               </>
             ) : (
               <p className="mt-5 text-[14px] leading-relaxed text-slate-300">
@@ -100,11 +521,11 @@ export function ClientDashboard({
               Assessments taken
             </p>
             <p className="mt-5 text-[48px] leading-none font-bold text-admin-navy">
-              {results.length}
+              {completed.length}
             </p>
             <p className="mt-auto pt-4 text-[12px] text-admin-muted">
-              {results.length > 1 && latest
-                ? `Your latest score is ${latest.overallScore - results[1].overallScore >= 0 ? "+" : ""}${latest.overallScore - results[1].overallScore} versus your previous result.`
+              {scoreDelta != null
+                ? `Your latest score is ${scoreDelta >= 0 ? "+" : ""}${scoreDelta} versus your previous result.`
                 : "Retake the assessment later to compare your progress."}
             </p>
           </section>
@@ -114,18 +535,21 @@ export function ClientDashboard({
               <ClipboardList className="size-5" />
             </span>
             <h2 className="mt-4 text-[16px] font-bold text-admin-navy">
-              Take the Sales Alignment Assessment
+              {primary?.assessmentTitle ?? "Sales Alignment Assessment"}
             </h2>
             <p className="mt-1 text-[13px] leading-relaxed text-admin-muted">
-              Rate 10 statements about sales performance, systems, and
-              leadership. It takes 2–3 minutes.
+              {primary?.status === "IN_PROGRESS" ||
+              primary?.status === "PENDING"
+                ? "Continue your assessment when you are ready. Answers are scored securely after you submit."
+                : primary?.status === "NOT_STARTED" || !primary?.instanceId
+                  ? "A new assessment has been assigned to your account. Start it from this private client portal."
+                  : "Complete your assigned assessment from this private client portal."}
             </p>
             <Link
-              href={ASSESSMENT_PATH}
+              href={ctaHref}
               className="mt-auto inline-flex h-10 w-fit items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-4 text-[12px] font-semibold text-admin-surface transition-colors hover:bg-admin-assessment-gold-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold"
             >
-              {latest ? "Retake assessment" : "Start assessment"}
-              <ArrowUpRight className="size-3.5" />
+              <AssessmentCtaLabel assessment={primary} />
             </Link>
           </section>
         </div>
@@ -133,9 +557,9 @@ export function ClientDashboard({
         <div id="my-results" className="mt-6 scroll-mt-6">
           <DashboardCard
             title="My results"
-            description="Every Sales Alignment Assessment linked to your account, latest first."
+            description="Every completed assessment linked to your account, latest first."
           >
-            {results.length === 0 ? (
+            {completed.length === 0 ? (
               <div className="py-8 text-center">
                 <p className="text-[14px] text-admin-muted">
                   {loadError
@@ -143,7 +567,7 @@ export function ClientDashboard({
                     : "You haven't completed an assessment yet."}
                 </p>
                 <Link
-                  href={ASSESSMENT_PATH}
+                  href={ctaHref}
                   className="mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-admin-border-strong bg-admin-surface px-4 text-[12px] font-semibold text-admin-assessment-text hover:bg-admin-soft"
                 >
                   Take the assessment
@@ -151,32 +575,36 @@ export function ClientDashboard({
               </div>
             ) : (
               <ul className="flex flex-col divide-y divide-admin-border-subtle">
-                {results.map((result) => (
-                  <li key={result.id}>
+                {completed.map((result) => (
+                  <li key={result.instanceId}>
                     <Link
-                      href={`/dashboard/results/${encodeURIComponent(result.id)}`}
+                      href={resultsHref(result.instanceId)}
                       className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 rounded-lg py-3.5 transition-colors hover:bg-admin-soft sm:grid-cols-[minmax(0,1fr)_180px_72px_24px] sm:px-2"
                     >
                       <div className="min-w-0">
                         <p className="truncate text-[14px] font-semibold text-admin-assessment-text">
-                          {assessmentName(result.assessment)}
+                          {result.assessmentTitle}
                         </p>
                         <p className="mt-0.5 truncate text-[12px] text-admin-muted">
-                          <LocalDate value={result.createdAt} /> ·{" "}
-                          {result.firstName} · {result.email}
+                          {result.submittedAt ? (
+                            <LocalDate value={result.submittedAt} />
+                          ) : (
+                            "Completed"
+                          )}{" "}
+                          · {statusLabel(result.status)}
                         </p>
                       </div>
                       <div className="col-span-2 row-start-2 sm:col-span-1 sm:row-start-auto">
                         <ScoreBar
-                          score={result.overallScore}
-                          max={result.maxScore}
+                          score={result.overallScore ?? 0}
+                          max={SCORE_MAX}
                           label="Overall score"
                         />
                       </div>
                       <p className="row-start-1 text-right text-[15px] font-bold text-admin-navy sm:row-start-auto">
                         {result.overallScore}
                         <span className="text-[12px] font-semibold text-admin-muted">
-                          /{result.maxScore}
+                          /{SCORE_MAX}
                         </span>
                       </p>
                       <ArrowRight
@@ -190,6 +618,45 @@ export function ClientDashboard({
             )}
           </DashboardCard>
         </div>
+
+        {data ? (
+          <div className="mt-6 space-y-6">
+            <DashboardCard
+              title="Performance baselines"
+              description="The starting measurements for your engagement."
+            >
+              <BaselinesTable rows={data.baselines} />
+            </DashboardCard>
+
+            <DashboardCard
+              title="Agreed improvements"
+              description="Improvements currently being implemented with NPSG."
+            >
+              <ImprovementsList rows={data.improvements} />
+            </DashboardCard>
+
+            <DashboardCard
+              title="KPI progress"
+              description="Current performance measurements against prior readings."
+            >
+              <KpiPanel rows={data.kpis} />
+            </DashboardCard>
+
+            <DashboardCard
+              title="Implementation schedule"
+              description="Milestones and responsibilities for the engagement plan."
+            >
+              <MilestonesTable rows={data.milestones} />
+            </DashboardCard>
+
+            <DashboardCard
+              title="Engagement reports"
+              description="Published client-edition reports and recommendations."
+            >
+              <ReportsList rows={data.reports} />
+            </DashboardCard>
+          </div>
+        ) : null}
       </div>
     </DashboardShell>
   );

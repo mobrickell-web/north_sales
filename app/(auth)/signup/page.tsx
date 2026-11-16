@@ -1,7 +1,18 @@
-import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import { Suspense } from "react";
 
-// Self sign-up is disabled: the Master Admin creates client accounts and
-// shares their login credentials.
+import { SignupScreen } from "@/components/auth/signup";
+
+export const metadata: Metadata = {
+  title: "Create Your Account",
+  description: "Create your NORTH POINT SALES GROUP account.",
+};
+
+// Self sign-up remains available for client access requests.
 export default function SignupPage() {
-  redirect("/login");
+  return (
+    <Suspense fallback={null}>
+      <SignupScreen />
+    </Suspense>
+  );
 }
