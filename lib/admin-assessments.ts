@@ -288,9 +288,7 @@ export async function setAdminAssessmentStatus(
       body: JSON.stringify({ status: STATUS_TO_WIRE[status] }),
     },
   );
-  if (row?.slug) {
-    void revalidateAssessment(row.slug);
-  }
+  await revalidateAssessment(row?.slug);
   return {
     status: toUiStatus(row.status),
     isClientPrimary: Boolean(row.isClientPrimary),
@@ -312,11 +310,9 @@ export async function setAdminAssessmentClientPrimary(
       body: JSON.stringify({ enabled }),
     },
   );
-  if (row?.slug) {
-    void revalidateAssessment(row.slug);
-  } else {
-    void revalidateAssessment();
-  }
+  // Always await so Primary OFF / switch is reflected on the public page
+  // before the admin UI continues.
+  await revalidateAssessment(row?.slug);
   return {
     status: toUiStatus(row.status),
     isClientPrimary: Boolean(row.isClientPrimary),
@@ -324,10 +320,14 @@ export async function setAdminAssessmentClientPrimary(
 }
 
 export async function deleteAdminAssessment(id: string): Promise<void> {
-  await adminFetch<{ deleted: boolean; id: string }>(
-    `${BASE_PATH}/${encodeURIComponent(id)}`,
-    { method: "DELETE" },
-  );
+  const result = await adminFetch<{
+    deleted: boolean;
+    id: string;
+    slug?: string;
+  }>(`${BASE_PATH}/${encodeURIComponent(id)}`, { method: "DELETE" });
+  // Bust the public /sales-alignment-assessment cache so a deleted or
+  // former-primary assessment cannot keep rendering.
+  await revalidateAssessment(result.slug);
 }
 
 export const ADMIN_ASSESSMENT_SAVE_DELAY_MS = SAVE_DELAY_MS;

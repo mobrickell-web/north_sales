@@ -21,20 +21,42 @@ export const STAFF_ROLE = "SALES_REPRESENTATIVE";
 
 // Staff accounts share role SALES_REPRESENTATIVE and are told apart by position.
 export type StaffPosition =
-  | "ACCOUNT_EXECUTIVE"
+  | "EXECUTIVE_ACCOUNT_DEVELOPMENT_SPECIALIST"
   | "IMPLEMENTATION_SPECIALIST"
   | "FRACTIONAL_VP"
-  | "REGIONAL_SALES_MANAGER";
+  | "REGIONAL_SALES_MANAGER"
+  | "OFFICE_MANAGER";
+
+/** EADS — CRM /leads specialist position (A7). */
+export const EADS_POSITION =
+  "EXECUTIVE_ACCOUNT_DEVELOPMENT_SPECIALIST" as const satisfies StaffPosition;
 
 export const STAFF_POSITION_LABELS: Record<StaffPosition, string> = {
-  ACCOUNT_EXECUTIVE: "Account Executive",
-  IMPLEMENTATION_SPECIALIST: "Implementation Specialist",
-  FRACTIONAL_VP: "Fractional VP",
+  EXECUTIVE_ACCOUNT_DEVELOPMENT_SPECIALIST:
+    "Executive Account Development Specialist",
+  IMPLEMENTATION_SPECIALIST: "Sales Performance Implementation Specialist",
+  FRACTIONAL_VP: "Fractional VP of Sales",
   REGIONAL_SALES_MANAGER: "Regional Sales Manager",
+  OFFICE_MANAGER: "Office Manager",
 };
 
-export type LoginCategory =
-  "CLIENT" | "SALES_REPRESENTATIVE" | StaffPosition | "MASTER_ADMIN" | "OTHER";
+/** Blocked when Master Admin creates client / staff accounts. */
+export const BLOCKED_ACCOUNT_EMAILS = new Set(["gotohell@gmail.com"]);
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function validateAccountEmail(email: string): string | null {
+  const normalized = email.trim().toLowerCase();
+  if (!normalized || !EMAIL_PATTERN.test(normalized)) {
+    return "Enter a valid email address.";
+  }
+  if (BLOCKED_ACCOUNT_EMAILS.has(normalized)) {
+    return "This email address is not allowed for account creation.";
+  }
+  return null;
+}
+
+export type LoginCategory = "CLIENT" | StaffPosition | "MASTER_ADMIN" | "OTHER";
 export type VerificationPurpose = "SIGNUP" | "PASSWORD_RESET";
 
 export type AdminProfile = {
@@ -63,6 +85,10 @@ export type ClientAccessRequest = {
     emailVerifiedAt: string | null;
     isActive: boolean;
     createdAt: string;
+    /** Admin-set password for credential handoff (Master Admin list only). */
+    adminSetPassword?: string | null;
+    accessPauseReason?: string | null;
+    accessPausedAt?: string | null;
   };
 };
 
@@ -74,6 +100,9 @@ export type SalesRepresentative = {
   createdAt: string;
   lastLoginAt?: string | null;
   position: StaffPosition | null;
+  adminSetPassword?: string | null;
+  accessPauseReason?: string | null;
+  accessPausedAt?: string | null;
 };
 
 export type CreatedClientAccount = {
@@ -82,20 +111,24 @@ export type CreatedClientAccount = {
   email: string;
   isActive: boolean;
   createdAt: string;
+  adminSetPassword?: string | null;
 };
 
 export function isSuperAdmin(admin: AdminProfile | null) {
   return admin?.role === ADMIN_ROLE;
 }
 
-export function isAccountExecutive(admin: AdminProfile | null) {
-  return admin?.role === STAFF_ROLE && admin.position === "ACCOUNT_EXECUTIVE";
+export function isEads(admin: AdminProfile | null) {
+  return admin?.role === STAFF_ROLE && admin.position === EADS_POSITION;
 }
+
+/** @deprecated Use isEads — kept as alias during A7 rename. */
+export const isAccountExecutive = isEads;
 
 export function getRoleHomePath(role: string, position?: StaffPosition | null) {
   if (role === ADMIN_ROLE) return "/dashboard";
   if (role === "USER") return "/dashboard";
-  if (role === STAFF_ROLE && position === "ACCOUNT_EXECUTIVE") return "/leads";
+  if (role === STAFF_ROLE && position === EADS_POSITION) return "/leads";
   return "/";
 }
 
@@ -109,11 +142,19 @@ export function getSafeNextPath(candidate: string | null | undefined) {
 
 export class AdminApiError extends Error {
   readonly status: number;
+  readonly code?: string;
+  readonly duplicates?: unknown;
 
-  constructor(status: number, message: string) {
+  constructor(
+    status: number,
+    message: string,
+    extras?: { code?: string; duplicates?: unknown },
+  ) {
     super(message);
     this.name = "AdminApiError";
     this.status = status;
+    this.code = extras?.code;
+    this.duplicates = extras?.duplicates;
   }
 }
 
@@ -161,12 +202,16 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     status?: boolean;
     data?: T;
     message?: string | string[];
+    code?: string;
+    duplicates?: unknown;
   } | null;
 
   if (!response.ok) {
     const responseMessage = Array.isArray(body?.message)
       ? body.message.join(", ")
-      : body?.message;
+      : typeof body?.message === "string"
+        ? body.message
+        : undefined;
 
     if (response.status === 429) {
       throw new AdminApiError(
@@ -179,6 +224,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     throw new AdminApiError(
       response.status,
       responseMessage || "Something went wrong. Please try again.",
+      { code: body?.code, duplicates: body?.duplicates },
     );
   }
 
@@ -316,10 +362,13 @@ export function decideClientAccessRequest(
   );
 }
 
-export function deactivateClientAccess(id: string) {
+export function deactivateClientAccess(id: string, reason: string) {
   return adminFetch<{ isActive: false }>(
     `/api/v1/auth/admin/clients/${encodeURIComponent(id)}/access`,
-    { method: "DELETE" },
+    {
+      method: "DELETE",
+      body: JSON.stringify({ reason }),
+    },
   );
 }
 
@@ -359,10 +408,13 @@ export function createClientAccount(input: {
   });
 }
 
-export function deactivateSalesRepresentative(id: string) {
+export function deactivateSalesRepresentative(id: string, reason: string) {
   return adminFetch<{ deleted: true }>(
     `/api/v1/auth/admin/representatives/${encodeURIComponent(id)}`,
-    { method: "DELETE" },
+    {
+      method: "DELETE",
+      body: JSON.stringify({ reason }),
+    },
   );
 }
 
@@ -451,5 +503,52 @@ export async function adminFetch<T>(
     const session = await refreshSession();
     if (!session) throw error;
     return request<T>(path, init);
+  }
+}
+
+/** Binary/file download with the same cookie auth + 401 refresh as adminFetch. */
+export async function adminDownload(
+  path: string,
+  init?: RequestInit,
+): Promise<{ blob: Blob; filename: string | null }> {
+  const run = async () => {
+    const response = await fetch(`${API_URL}${path}`, {
+      ...init,
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const body = (await response.json().catch(() => null)) as {
+        message?: string | string[];
+        code?: string;
+        duplicates?: unknown;
+      } | null;
+      const responseMessage = Array.isArray(body?.message)
+        ? body.message.join(", ")
+        : typeof body?.message === "string"
+          ? body.message
+          : undefined;
+      throw new AdminApiError(
+        response.status,
+        responseMessage || "Download failed. Please try again.",
+        { code: body?.code, duplicates: body?.duplicates },
+      );
+    }
+
+    const disposition = response.headers.get("Content-Disposition");
+    const match = disposition?.match(/filename="?([^";]+)"?/i);
+    return {
+      blob: await response.blob(),
+      filename: match?.[1] ? decodeURIComponent(match[1]) : null,
+    };
+  };
+
+  try {
+    return await run();
+  } catch (error) {
+    if (!isUnauthorized(error)) throw error;
+    const session = await refreshSession();
+    if (!session) throw error;
+    return run();
   }
 }

@@ -1,6 +1,11 @@
 import { adminFetch } from "@/lib/auth-api";
 
-export const ADMIN_TABS = ["upcoming", "completed", "cancelled"] as const;
+export const ADMIN_TABS = [
+  "pending",
+  "upcoming",
+  "completed",
+  "cancelled",
+] as const;
 export type AdminTab = (typeof ADMIN_TABS)[number];
 
 /** The latest provider-reported outcome for one outbound email on an appointment. */
@@ -110,6 +115,26 @@ export function updateAdminAppointmentStatus(
   );
 }
 
+/** A6 — accept a pending website booking. */
+export function acceptAdminAppointment(id: string) {
+  return adminFetch<AdminAppointment>(
+    `/api/v1/admin/appointments/${encodeURIComponent(id)}/accept`,
+    { method: "POST" },
+  );
+}
+
+/** A6 — reject a pending website booking. */
+export function rejectAdminAppointment(id: string, reason?: string) {
+  const trimmed = reason?.trim();
+  return adminFetch<AdminAppointment>(
+    `/api/v1/admin/appointments/${encodeURIComponent(id)}/reject`,
+    {
+      method: "POST",
+      body: JSON.stringify(trimmed ? { reason: trimmed } : {}),
+    },
+  );
+}
+
 function addUtcDays(date: string, days: number) {
   const parsed = new Date(`${date}T00:00:00.000Z`);
   parsed.setUTCDate(parsed.getUTCDate() + days);
@@ -175,6 +200,7 @@ export function humanizeEnum(value: string) {
 }
 
 export const STATUS_TONE: Record<string, string> = {
+  PENDING: "border-[#f0d7a8] bg-[#fff8eb] text-[#8a5a10]",
   CONFIRMED: "border-[#bfe3c4] bg-[#f1faf3] text-[#1f6b33]",
   RESCHEDULED: "border-[#c9dcf5] bg-[#f2f7fd] text-[#1c4e80]",
   COMPLETED: "border-[#d8d3c4] bg-[#f6f4ee] text-[#5c5f66]",
@@ -191,6 +217,8 @@ export const ACTION_TONE: Record<string, string> = {
   RESCHEDULED_BY_ADMIN: "border-[#c9dcf5] bg-[#f2f7fd] text-[#1c4e80]",
   CANCELLED_BY_PROSPECT: "border-[#f3c9c9] bg-[#fdf3f3] text-[#8f2d2d]",
   CANCELLED_BY_ADMIN: "border-[#f3c9c9] bg-[#fdf3f3] text-[#8f2d2d]",
+  ACCEPTED_BY_ADMIN: "border-[#bfe3c4] bg-[#f1faf3] text-[#1f6b33]",
+  REJECTED_BY_ADMIN: "border-[#f3c9c9] bg-[#fdf3f3] text-[#8f2d2d]",
   MARKED_COMPLETED_BY_ADMIN: "border-[#bfe3c4] bg-[#f1faf3] text-[#1f6b33]",
   EMAIL_RESENT_BY_ADMIN: "border-[#d8d3c4] bg-[#f6f4ee] text-[#5c5f66]",
 };
@@ -204,6 +232,8 @@ export const ACTION_LABELS: Record<string, string> = {
   RESCHEDULED_BY_ADMIN: "Rescheduled by admin",
   CANCELLED_BY_PROSPECT: "Cancelled by prospect",
   CANCELLED_BY_ADMIN: "Cancelled by admin",
+  ACCEPTED_BY_ADMIN: "Accepted by admin",
+  REJECTED_BY_ADMIN: "Rejected by admin",
   MARKED_COMPLETED_BY_ADMIN: "Marked completed by admin",
   EMAIL_RESENT_BY_ADMIN: "Email resent by admin",
 };

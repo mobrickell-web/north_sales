@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { AdminDashboardShell } from "@/components/admin/admin-dashboard";
 import { ClientDashboard } from "@/components/client/client-dashboard";
 import { getClientDashboard } from "@/lib/client-dashboard";
-import { getServerAccount, isAccountExecutive } from "@/lib/server-auth";
+import { getServerAccount, isEads } from "@/lib/server-auth";
 
 export const metadata: Metadata = {
   title: "Dashboard · North Point Sales Group",
@@ -31,7 +31,7 @@ export default async function DashboardPage() {
 
   if (account.role === "SUPER_ADMIN") return <AdminDashboardShell />;
 
-  if (isAccountExecutive(account)) redirect("/leads");
+  if (isEads(account)) redirect("/leads");
   if (account.role === "SALES_REPRESENTATIVE") redirect("/");
   redirect("/login");
 }

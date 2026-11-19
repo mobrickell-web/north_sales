@@ -18,10 +18,12 @@ import {
   type AdminEmailDeliverySummary,
   type AdminTab,
   STATUS_TONE,
+  acceptAdminAppointment,
   buildAppointmentQuery,
   formatInTimezone,
   humanizeEnum,
   listAdminAppointments,
+  rejectAdminAppointment,
 } from "@/lib/admin-appointments";
 import { hasSession } from "@/lib/auth-api";
 import { cn } from "@/lib/utils";
@@ -90,6 +92,7 @@ function renderEmailDeliveryBadge(delivery: AdminEmailDeliverySummary | null) {
 }
 
 const TAB_LABELS: Record<AdminTab, string> = {
+  pending: "Pending",
   upcoming: "Upcoming",
   completed: "Completed",
   cancelled: "Cancelled",
@@ -103,7 +106,7 @@ type Failure = { key: string; message: string };
 export function AdminAppointmentsPanel() {
   const router = useRouter();
 
-  const [tab, setTab] = useState<AdminTab>("upcoming");
+  const [tab, setTab] = useState<AdminTab>("pending");
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [from, setFrom] = useState("");
@@ -113,6 +116,9 @@ export function AdminAppointmentsPanel() {
 
   const [result, setResult] = useState<Result | null>(null);
   const [failure, setFailure] = useState<Failure | null>(null);
+  const [actionId, setActionId] = useState<string | null>(null);
+  const [actionNotice, setActionNotice] = useState("");
+  const [actionError, setActionError] = useState("");
 
   const requestId = useRef(0);
 
@@ -173,15 +179,69 @@ export function AdminAppointmentsPanel() {
   const pages = Math.max(1, Math.ceil(total / take));
   const hasFilters = Boolean(searchInput || from || to);
 
+  const reload = () => {
+    const current = ++requestId.current;
+    listAdminAppointments(query)
+      .then((data) => {
+        if (current !== requestId.current) return;
+        setResult({ key: queryKey, items: data.items, total: data.total });
+        setFailure(null);
+      })
+      .catch((err: Error) => {
+        if (current !== requestId.current) return;
+        setFailure({ key: queryKey, message: err.message });
+      });
+  };
+
+  const handleAccept = async (id: string) => {
+    setActionId(id);
+    setActionError("");
+    setActionNotice("");
+    try {
+      await acceptAdminAppointment(id);
+      setActionNotice("Booking accepted. Confirmation email will be sent.");
+      reload();
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Could not accept booking.",
+      );
+    } finally {
+      setActionId(null);
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    const reason = window.prompt("Reject reason (optional):", "") ?? undefined;
+    setActionId(id);
+    setActionError("");
+    setActionNotice("");
+    try {
+      await rejectAdminAppointment(id, reason || undefined);
+      setActionNotice("Booking rejected.");
+      reload();
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Could not reject booking.",
+      );
+    } finally {
+      setActionId(null);
+    }
+  };
+
   return (
     <section className="overflow-hidden rounded-2xl border border-[#E8E4DC] bg-white shadow-[0_8px_28px_rgba(0,21,40,0.08)]">
       <div className="h-1 w-full bg-gradient-to-r from-[#b17411] via-[#C99B31] to-[#b17411]" />
 
       <div className="border-b border-[#EFEBE3] px-5 py-4 sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="font-body text-[18px] font-extrabold tracking-[0.03em] text-[#001528] uppercase">
-            Appointments
-          </h2>
+          <div>
+            <h2 className="font-body text-[18px] font-extrabold tracking-[0.03em] text-[#001528] uppercase">
+              Appointments
+            </h2>
+            <p className="mt-1 font-body text-[12px] text-[#8A8F98]">
+              Pending = website booking form submissions awaiting accept/reject.
+            </p>
+          </div>
           <p className="flex items-center gap-2 font-body text-[13px] text-[#8A8F98]">
             {loading ? <Loader2 className="size-3.5 animate-spin" /> : null}
             {loading ? "Loading…" : `${total} result${total === 1 ? "" : "s"}`}
@@ -285,6 +345,16 @@ export function AdminAppointmentsPanel() {
           loading && items.length > 0 && "opacity-60",
         )}
       >
+        {actionNotice ? (
+          <div className="mb-4">
+            <AdminAlert tone="info">{actionNotice}</AdminAlert>
+          </div>
+        ) : null}
+        {actionError ? (
+          <div className="mb-4">
+            <AdminAlert>{actionError}</AdminAlert>
+          </div>
+        ) : null}
         {error ? (
           <AdminAlert>{error}</AdminAlert>
         ) : items.length === 0 ? (
@@ -310,12 +380,12 @@ export function AdminAppointmentsPanel() {
         ) : (
           <ul className="divide-y divide-[#EFEBE3]">
             {items.map((appointment) => (
-              <li key={appointment.id}>
-                <Link
-                  href={`/appointments/${appointment.id}`}
-                  className="flex flex-col gap-3 py-4 transition-opacity hover:opacity-80 lg:flex-row lg:items-start lg:justify-between"
-                >
-                  <div className="min-w-0">
+              <li key={appointment.id} className="py-4">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                  <Link
+                    href={`/appointments/${appointment.id}`}
+                    className="min-w-0 transition-opacity hover:opacity-80"
+                  >
                     <p className="font-body text-[15px] font-bold text-[#001528]">
                       {appointment.contactName}
                     </p>
@@ -326,7 +396,7 @@ export function AdminAppointmentsPanel() {
                       {appointment.email}
                       {appointment.phone ? ` · ${appointment.phone}` : ""}
                     </p>
-                  </div>
+                  </Link>
 
                   <div className="flex shrink-0 flex-col items-start gap-2 lg:items-end">
                     <p className="font-body text-[13px] font-semibold text-[#001528]">
@@ -363,13 +433,44 @@ export function AdminAppointmentsPanel() {
                       {renderEmailDeliveryBadge(appointment.emailDelivery)}
                     </div>
 
+                    {appointment.status === "PENDING" ? (
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        <button
+                          type="button"
+                          disabled={actionId === appointment.id}
+                          onClick={() => void handleAccept(appointment.id)}
+                          className="inline-flex h-8 items-center rounded-lg bg-[#b17411] px-3 text-[11px] font-semibold text-white hover:bg-[#8f5d0e] disabled:opacity-60"
+                        >
+                          {actionId === appointment.id ? (
+                            <Loader2 className="size-3.5 animate-spin" />
+                          ) : (
+                            "Accept"
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={actionId === appointment.id}
+                          onClick={() => void handleReject(appointment.id)}
+                          className="inline-flex h-8 items-center rounded-lg border border-[#f3c9c9] bg-white px-3 text-[11px] font-semibold text-[#8f2d2d] hover:bg-[#fdf3f3] disabled:opacity-60"
+                        >
+                          Reject
+                        </button>
+                        <Link
+                          href={`/appointments/${appointment.id}`}
+                          className="inline-flex h-8 items-center rounded-lg border border-[#E8E4DC] px-3 text-[11px] font-semibold text-[#001528] hover:border-[#b17411]"
+                        >
+                          Details
+                        </Link>
+                      </div>
+                    ) : null}
+
                     {appointment.cancellationReason ? (
                       <p className="max-w-[42ch] text-right font-body text-[12px] text-[#8f2d2d]">
                         {appointment.cancellationReason}
                       </p>
                     ) : null}
                   </div>
-                </Link>
+                </div>
               </li>
             ))}
           </ul>

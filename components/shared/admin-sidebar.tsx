@@ -42,6 +42,7 @@ export function AdminSidebar({
   const isAssessmentList = pathname.startsWith("/assessments");
   const isAppointments = pathname.startsWith("/appointments");
   const isAccessManagement = pathname.startsWith("/access");
+  const isCrm = pathname.startsWith("/crm");
   const isEngagement = pathname.startsWith("/engagement");
   const isAssessmentResults = pathname.startsWith("/assessment-results");
   const sidebar = (
@@ -128,6 +129,20 @@ export function AdminSidebar({
         >
           <Users className="size-[14px]" />
           <span>Access Management</span>
+        </Link>
+        <Link
+          href="/crm"
+          onClick={onClose}
+          aria-current={isCrm ? "page" : undefined}
+          className={cn(
+            "flex h-10 w-full items-center gap-3 rounded-lg px-3 text-[14px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold",
+            isCrm
+              ? "bg-gradient-to-r from-admin-gold to-admin-gold-deep text-admin-sidebar shadow-sm"
+              : "text-admin-sidebar-text hover:bg-admin-sidebar-hover",
+          )}
+        >
+          <UsersRound className="size-[14px]" />
+          <span>CRM</span>
         </Link>
         <Link
           href="/engagement"

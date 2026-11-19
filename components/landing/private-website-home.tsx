@@ -17,7 +17,7 @@ export function PrivateWebsiteHome() {
     <ScheduleAppointmentProvider>
       <SiteHeader />
       <main id="main" className="relative z-0 flex-1">
-        <HeroSection />
+        <HeroSection hidePrimaryCta hideSecondaryCta />
         <AboutUsSection />
         <WhyPartnerSection />
         <ProvenResultsSection />

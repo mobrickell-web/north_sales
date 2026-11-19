@@ -11,7 +11,11 @@ export type ServerAccount = {
   position: string | null;
 };
 
-export const ACCOUNT_EXECUTIVE = "ACCOUNT_EXECUTIVE";
+/** EADS — CRM /leads specialist position (A7). */
+export const EADS_POSITION = "EXECUTIVE_ACCOUNT_DEVELOPMENT_SPECIALIST";
+
+/** @deprecated Use EADS_POSITION. */
+export const ACCOUNT_EXECUTIVE = EADS_POSITION;
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
@@ -66,14 +70,15 @@ export async function getServerAccount(): Promise<ServerAccount | null> {
   }
 }
 
-export function isAccountExecutive(
-  account: Pick<ServerAccount, "role" | "position">,
-) {
+export function isEads(account: Pick<ServerAccount, "role" | "position">) {
   return (
     account.role === "SALES_REPRESENTATIVE" &&
-    account.position === ACCOUNT_EXECUTIVE
+    account.position === EADS_POSITION
   );
 }
+
+/** @deprecated Use isEads — kept as alias during A7 rename. */
+export const isAccountExecutive = isEads;
 
 // Where an account lands when it opens a page it may not use.
 export function getAccountHomePath(
@@ -82,7 +87,7 @@ export function getAccountHomePath(
   if (account.role === "SUPER_ADMIN" || account.role === "USER") {
     return "/dashboard";
   }
-  if (isAccountExecutive(account)) return "/leads";
+  if (isEads(account)) return "/leads";
   if (account.role === "SALES_REPRESENTATIVE") return "/";
   return "/login";
 }

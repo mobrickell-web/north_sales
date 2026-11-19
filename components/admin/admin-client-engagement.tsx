@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
+import { useSearchParams } from "next/navigation";
 import { ChevronDown, Filter, Loader2 } from "lucide-react";
 
 import {
@@ -243,8 +244,11 @@ function ClientFilterDropdown({
 }
 
 export function AdminClientEngagement() {
+  const searchParams = useSearchParams();
+  const queryClientId = searchParams.get("clientId")?.trim() || "";
+
   const [clients, setClients] = useState<ApprovedClient[]>([]);
-  const [clientId, setClientId] = useState("");
+  const [clientId, setClientId] = useState(queryClientId);
   const [tab, setTab] = useState<TabKey>("baselines");
   const [loadingClients, setLoadingClients] = useState(true);
   const [loadingData, setLoadingData] = useState(false);
@@ -279,7 +283,13 @@ export function AdminClientEngagement() {
         }))
         .sort((a, b) => a.name.localeCompare(b.name));
       setClients(approved);
-      setClientId((current) => current || approved[0]?.id || "");
+      setClientId((current) => {
+        if (queryClientId && approved.some((c) => c.id === queryClientId)) {
+          return queryClientId;
+        }
+        if (current && approved.some((c) => c.id === current)) return current;
+        return approved[0]?.id || "";
+      });
       setError("");
     } catch (cause) {
       setError(
@@ -290,7 +300,7 @@ export function AdminClientEngagement() {
     } finally {
       setLoadingClients(false);
     }
-  }, []);
+  }, [queryClientId]);
 
   const loadEngagement = useCallback(async (id: string) => {
     if (!id) return;

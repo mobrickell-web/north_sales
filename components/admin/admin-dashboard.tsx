@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
@@ -8,6 +8,7 @@ import { AdminAppointmentsPanel } from "@/components/admin/admin-appointments";
 import { AdminAccessManagement } from "@/components/admin/admin-access-management";
 import { AdminAssessmentResults } from "@/components/admin/admin-assessment-results";
 import { AdminClientEngagement } from "@/components/admin/admin-client-engagement";
+import { AdminCrmPanel } from "@/components/admin/admin-crm";
 import { AdminOverviewContent } from "@/components/admin/admin-overview";
 import { AdminSidebar } from "@/components/shared/admin-sidebar";
 import { AdminTopbar } from "@/components/shared/admin-topbar";
@@ -29,6 +30,7 @@ export function AdminDashboardShell({
     | "overview"
     | "appointments"
     | "access"
+    | "crm"
     | "engagement"
     | "assessment-results";
 }) {
@@ -101,6 +103,15 @@ export function AdminDashboardShell({
           />
           <AdminAccessManagement />
         </main>
+      ) : page === "crm" ? (
+        <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
+          <AdminTopbar
+            adminName={admin?.name}
+            title="CRM"
+            onMenuClick={() => setMobileSidebarOpen(true)}
+          />
+          <AdminCrmPanel />
+        </main>
       ) : page === "engagement" ? (
         <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">
           <AdminTopbar
@@ -108,7 +119,16 @@ export function AdminDashboardShell({
             title="Client Engagement"
             onMenuClick={() => setMobileSidebarOpen(true)}
           />
-          <AdminClientEngagement />
+          <Suspense
+            fallback={
+              <p className="mt-6 flex items-center gap-2 text-[14px] text-admin-muted">
+                <Loader2 className="size-4 animate-spin" />
+                Loading engagement…
+              </p>
+            }
+          >
+            <AdminClientEngagement />
+          </Suspense>
         </main>
       ) : page === "assessment-results" ? (
         <main className="w-full min-w-0 max-w-full overflow-x-hidden bg-admin-canvas px-4 pb-8 text-admin-text sm:px-6 lg:px-8">

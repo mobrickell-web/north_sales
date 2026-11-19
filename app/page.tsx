@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: siteConfig.name,
     description:
-      "Learn how prospective clients can review the NORTH POINT SALES GROUP website during a private Zoom presentation.",
+      "Learn how prospective clients can review the NORTH POINT SALES GROUP website during a private Google Meet presentation.",
     // This URL serves the private website to signed-in accounts, so only the
     // public cover render may be indexed or crawled.
     robots: account

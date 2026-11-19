@@ -8,8 +8,11 @@ import { siteConfig } from "@/config/site";
 import { useScheduleAppointment } from "@/components/schedule/schedule-provider";
 
 export function HeroSection({
+  hidePrimaryCta = false,
   hideSecondaryCta = false,
 }: {
+  /** Hide Schedule a Consultation (e.g. signed-in private site). */
+  hidePrimaryCta?: boolean;
   hideSecondaryCta?: boolean;
 }) {
   const { hero } = siteConfig;
@@ -40,24 +43,28 @@ export function HeroSection({
             {hero.body}
           </p>
 
-          <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-2.5">
-            <button
-              type="button"
-              onClick={openSchedule}
-              className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center bg-bronze px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-white uppercase sm:w-auto sm:whitespace-nowrap"
-            >
-              {hero.primaryCta.label}
-            </button>
-            {!hideSecondaryCta && (
-              <button
-                type="button"
-                onClick={() => setIsVideoDialogOpen(true)}
-                className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center border border-gold px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-gold uppercase transition-colors hover:bg-gold hover:text-[#001528] sm:w-auto sm:whitespace-nowrap"
-              >
-                {hero.secondaryCta.label}
-              </button>
-            )}
-          </div>
+          {!hidePrimaryCta || !hideSecondaryCta ? (
+            <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-2.5">
+              {!hidePrimaryCta ? (
+                <button
+                  type="button"
+                  onClick={openSchedule}
+                  className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center bg-bronze px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-white uppercase sm:w-auto sm:whitespace-nowrap"
+                >
+                  {hero.primaryCta.label}
+                </button>
+              ) : null}
+              {!hideSecondaryCta ? (
+                <button
+                  type="button"
+                  onClick={() => setIsVideoDialogOpen(true)}
+                  className="inline-flex min-h-[43px] w-full cursor-pointer items-center justify-center border border-gold px-5 text-center font-secondary text-[12px] font-bold tracking-[0.06em] whitespace-normal text-gold uppercase transition-colors hover:bg-gold hover:text-[#001528] sm:w-auto sm:whitespace-nowrap"
+                >
+                  {hero.secondaryCta.label}
+                </button>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         {/* Right image — in normal flow on mobile; absolute on lg so it can't spill into the footer */}

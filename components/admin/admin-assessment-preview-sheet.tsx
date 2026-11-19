@@ -23,7 +23,7 @@ type NewQuestionType = Extract<
   "five-point-scale" | "yes-no" | "multiple-choice"
 >;
 const newQuestionTypes: { value: NewQuestionType; label: string }[] = [
-  { value: "five-point-scale", label: "5-point scale" },
+  { value: "five-point-scale", label: "10-point scale" },
   { value: "yes-no", label: "Yes / No" },
   { value: "multiple-choice", label: "Multiple choice" },
 ];
@@ -337,24 +337,22 @@ export function AdminAssessmentPreviewSheet({
               <p className="mt-2.5 text-[10px] font-medium tracking-wide text-admin-muted uppercase">
                 Respondent sees
               </p>
-              <div className="mt-2 grid grid-cols-5 gap-1.5">
+              <div className="mt-2 grid grid-cols-10 gap-0.5">
                 {Array.from({ length: 10 }, (_, index) => {
                   const value = index + 1;
                   return (
                     <div
                       key={value}
-                      className="flex min-h-10 flex-col items-center justify-center rounded-md border border-admin-border-strong text-[12px] font-semibold text-admin-text-strong"
+                      className="flex min-h-10 items-center justify-center rounded-md border border-admin-border-strong text-[11px] font-semibold text-admin-text-strong"
                     >
                       {value}
-                      <span className="text-[10px] font-normal text-admin-muted">
-                        {((value - 1) % 5) + 1} pt
-                      </span>
                     </div>
                   );
                 })}
               </div>
-              <div className="mt-1 flex justify-end text-[10px] text-green-600">
-                {highLabel || "Strongly agree"}
+              <div className="mt-1 flex justify-between text-[10px] text-admin-muted">
+                <span>{lowLabel || "Strongly disagree"}</span>
+                <span>{highLabel || "Strongly agree"}</span>
               </div>
             </div>
           ) : null}
@@ -539,11 +537,23 @@ export function AdminAssessmentPreviewSheet({
                   {assessmentCopy.form.title}
                 </h3>
                 <p className="mt-1 text-[10px] text-admin-muted">
-                  {assessmentCopy.form.scaleLow} ={" "}
-                  {assessmentCopy.form.scaleLowLabel}
-                  <span className="mx-1.5 text-admin-assessment-gold">·</span>
-                  {assessmentCopy.form.scaleHigh} ={" "}
-                  {assessmentCopy.form.scaleHighLabel}
+                  {questions.some(
+                    (question) =>
+                      question.type === "scale" ||
+                      question.type === "five-point-scale",
+                  ) ? (
+                    <>
+                      {assessmentCopy.form.scaleLow} ={" "}
+                      {assessmentCopy.form.scaleLowLabel}
+                      <span className="mx-1.5 text-admin-assessment-gold">
+                        ·
+                      </span>
+                      {assessmentCopy.form.scaleHigh} ={" "}
+                      {assessmentCopy.form.scaleHighLabel}
+                    </>
+                  ) : (
+                    <>Respondents answer each question once.</>
+                  )}
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-admin-border px-2 py-1 text-[9px] text-admin-muted">
@@ -608,9 +618,13 @@ export function AdminAssessmentPreviewSheet({
                           </h4>
                           <p className="mt-1 text-[10px] leading-relaxed text-admin-muted">
                             {question.required ? "Required" : "Optional"}
-                            {question.type !== "scale"
-                              ? ` · ${question.type === "five-point-scale" ? "5-point scale" : question.type === "yes-no" ? "Yes / No" : question.type === "short-answer" ? "Short answer" : "Multiple choice"}`
-                              : ""}
+                            {question.type !== "scale" &&
+                            question.type !== "five-point-scale"
+                              ? ` · ${question.type === "yes-no" ? "Yes / No" : question.type === "short-answer" ? "Short answer" : "Multiple choice"}`
+                              : question.type === "scale" ||
+                                  question.type === "five-point-scale"
+                                ? " · 1–10 scale"
+                                : ""}
                           </p>
                           {question.helperText ? (
                             <p className="mt-1 text-[9px] text-admin-muted">
@@ -626,10 +640,7 @@ export function AdminAssessmentPreviewSheet({
                               {question.prompt}
                             </legend>
                             <div className="grid grid-cols-10 gap-0.5">
-                              {(question.type === "scale"
-                                ? assessmentCopy.scale
-                                : Array.from({ length: 10 }, (_, i) => i + 1)
-                              ).map((value) => (
+                              {assessmentCopy.scale.map((value) => (
                                 <label
                                   key={value}
                                   className={`flex h-7 min-w-0 cursor-pointer items-center justify-center rounded-[3px] border text-[9px] transition-colors ${
@@ -652,11 +663,6 @@ export function AdminAssessmentPreviewSheet({
                                     className="sr-only"
                                   />
                                   {value}
-                                  {question.type === "five-point-scale" ? (
-                                    <span className="text-[7px] text-admin-muted">
-                                      {((value - 1) % 5) + 1} pt
-                                    </span>
-                                  ) : null}
                                 </label>
                               ))}
                             </div>

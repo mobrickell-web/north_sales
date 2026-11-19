@@ -64,7 +64,7 @@ function LeadsSidebar({
       </div>
 
       <nav
-        aria-label="Account Executive navigation"
+        aria-label="Executive Account Development Specialist navigation"
         className="flex flex-col gap-2"
       >
         <Link
@@ -93,7 +93,7 @@ function LeadsSidebar({
           </p>
           <p className="truncate text-[12px] text-slate-400">{email}</p>
           <p className="mt-1 text-[11px] font-medium text-admin-gold">
-            Account Executive
+            Executive Account Development Specialist
           </p>
         </div>
         <button

@@ -6,6 +6,7 @@ export const protectedRoutes = [
   "/dashboard",
   "/leads",
   "/access",
+  "/crm",
   "/admin",
   "/assessments",
   "/assessment-results",
@@ -16,7 +17,7 @@ export const protectedRoutes = [
   "/careers",
   "/privacy-policy",
   "/terms-of-use",
-  // Private website assessment (reps + Super Admin only) — never public.
+  // Public free assessment (noindex); completion creates client access.
   "/sales-alignment-assessment",
   "/login",
   "/signup",

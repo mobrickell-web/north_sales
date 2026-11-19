@@ -379,17 +379,17 @@ export function AdminAssessmentsScreen() {
                               {assessment.status === "Published" ? (
                                 <div className="inline-flex shrink-0 items-center gap-2">
                                   <span className="text-[10px] font-semibold tracking-[0.04em] text-admin-muted uppercase">
-                                    Client
+                                    Primary
                                   </span>
                                   <button
                                     type="button"
                                     role="switch"
                                     aria-checked={assessment.isClientPrimary}
-                                    aria-label={`Client facing: ${assessment.title}`}
+                                    aria-label={`Primary assessment: ${assessment.title}`}
                                     title={
                                       assessment.isClientPrimary
-                                        ? "Turn off to hide from client dashboard (none will be client-facing)"
-                                        : "Turn on to show this assessment on the client dashboard (only one at a time)"
+                                        ? "This is the default Primary assessment shown on client dashboards"
+                                        : "Set as Primary — the default assessment shown on client dashboards (only one at a time)"
                                     }
                                     disabled={
                                       primaryPendingId === assessment.id

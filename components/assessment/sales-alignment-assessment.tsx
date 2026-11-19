@@ -2,9 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowUpRight, Loader2 } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
+import {
+  SALES_ALIGNMENT_ASSESSMENT,
+  claimAssessmentResult,
+  type SalesAlignmentResultPayload,
+} from "@/lib/assessment-results-api";
 import type {
   PublishedAssessment,
   PublishedQuestion,
@@ -111,12 +117,15 @@ function DataDrivenAssessmentView({
     });
   }, [sections]);
 
+  const router = useRouter();
   const [scores, setScores] = useState<Record<string, number>>({});
   const [textAnswers, setTextAnswers] = useState<Record<string, string>>({});
   const [showResults, setShowResults] = useState(false);
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [detailsError, setDetailsError] = useState<string | null>(null);
 
   // Check required completion
@@ -217,8 +226,72 @@ function DataDrivenAssessmentView({
     }
   };
 
-  const viewResults = () => {
-    if (isPreview) return;
+  const buildResultPayload = (): SalesAlignmentResultPayload | null => {
+    if (!results) return null;
+    const copy = staticAssessmentConfig.results;
+    const pillars = results.sectionBreakdowns
+      .filter((section) => section.hasScores)
+      .map((section) => ({
+        number: section.number,
+        title: section.title,
+        description: section.description ?? "",
+        score: Number(section.score.toFixed(1)),
+        maxScore: 10,
+        statementIds: results.scoredQuestions
+          .filter((question) => question.section.id === section.id)
+          .map((question) => question.id),
+      }));
+
+    const statements = results.scoredQuestions.map((question) => ({
+      id: question.id,
+      number: question.number,
+      title: question.prompt.slice(0, 72),
+      prompt: question.prompt,
+      pillarNumber: String(question.sectionNumber).padStart(2, "0"),
+      pillarTitle: question.section.title,
+      score: question.score,
+      maxScore: 10,
+    }));
+
+    const closerStatements = results.review.map((question) => ({
+      id: question.id,
+      number: question.number,
+      title: question.prompt.slice(0, 72),
+      prompt: question.prompt,
+      pillarNumber: String(question.sectionNumber).padStart(2, "0"),
+      pillarTitle: question.section.title,
+      score: question.score,
+      maxScore: 10,
+    }));
+
+    return {
+      version: 1,
+      title: assessment.title,
+      overall: { score: results.overallScore, maxScore: 100 },
+      pillars,
+      statements,
+      closerReview: {
+        allSame: results.allSame,
+        showRelativeNote: !results.allSame && closerStatements.length > 0,
+        statements: closerStatements,
+      },
+      copy: {
+        eyebrow: copy.eyebrow,
+        overallScoreLabel: copy.overallScoreLabel,
+        overallScoreSuffix: copy.overallScoreSuffix,
+        pillarScoreSuffix: copy.pillarScoreSuffix,
+        statementScoresTitle: copy.statementScoresTitle,
+        areasTitle: copy.areasTitle,
+        areasSameRating: copy.areasSameRating,
+        relativeReviewNote: copy.relativeReviewNote,
+        disclaimer: copy.disclaimer,
+        scheduleLabel: copy.scheduleLabel,
+      },
+    };
+  };
+
+  const viewResults = async () => {
+    if (isPreview || submitting) return;
 
     if (!isComplete) {
       const firstMissing = requiredQuestions.find((q) => {
@@ -234,7 +307,7 @@ function DataDrivenAssessmentView({
       return;
     }
 
-    if (!firstName.trim() || !email.trim()) {
+    if (!firstName.trim() || !email.trim() || password.trim().length < 8) {
       setDetailsError(staticAssessmentConfig.nextStep.missingDetails);
       document
         .getElementById("assessment-lead-capture")
@@ -242,15 +315,39 @@ function DataDrivenAssessmentView({
       return;
     }
 
+    const payload = buildResultPayload();
+    if (!payload || !results) {
+      setDetailsError("Could not score your assessment. Please try again.");
+      return;
+    }
+
     setDetailsError(null);
     setHighlightedId(null);
-    setShowResults(true);
-
-    requestAnimationFrame(() => {
-      document
-        .getElementById("assessment-results")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    setSubmitting(true);
+    try {
+      const answers: Record<string, number> = {};
+      for (const [questionId, score] of Object.entries(scores)) {
+        answers[questionId] = score;
+      }
+      const claimed = await claimAssessmentResult({
+        assessment: SALES_ALIGNMENT_ASSESSMENT,
+        firstName: firstName.trim(),
+        email: email.trim(),
+        password: password.trim(),
+        overallScore: results.overallScore,
+        maxScore: 100,
+        answers,
+        result: payload,
+      });
+      router.replace(`/dashboard/results/${encodeURIComponent(claimed.id)}`);
+    } catch (cause) {
+      setDetailsError(
+        cause instanceof Error && cause.message
+          ? cause.message
+          : "Could not open your results. Please try again.",
+      );
+      setSubmitting(false);
+    }
   };
 
   const resetAssessment = () => {
@@ -260,6 +357,8 @@ function DataDrivenAssessmentView({
     setHighlightedId(null);
     setFirstName("");
     setEmail("");
+    setPassword("");
+    setSubmitting(false);
     setDetailsError(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -312,11 +411,21 @@ function DataDrivenAssessmentView({
                 {staticAssessmentConfig.form.title}
               </h2>
               <p className="mt-1 font-body text-[13px] text-[#5C5F66]">
-                <span className="font-semibold text-[#001528]">1</span> =
-                Strongly disagree
-                <span className="mx-2 text-[#b17411]">·</span>
-                <span className="font-semibold text-[#001528]">10</span> =
-                Strongly agree
+                {questions.some(
+                  (question) =>
+                    question.type === "scale" ||
+                    question.type === "five-point-scale",
+                ) ? (
+                  <>
+                    <span className="font-semibold text-[#001528]">1</span> =
+                    Strongly disagree
+                    <span className="mx-2 text-[#b17411]">·</span>
+                    <span className="font-semibold text-[#001528]">10</span> =
+                    Strongly agree
+                  </>
+                ) : (
+                  <>Answer each question to continue.</>
+                )}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -391,16 +500,9 @@ function DataDrivenAssessmentView({
                             isPreview ? "pointer-events-none opacity-60" : ""
                           }`}
                         >
-                          {question.type === "scale" ? (
+                          {question.type === "scale" ||
+                          question.type === "five-point-scale" ? (
                             <ScaleQuestionInput
-                              question={question}
-                              currentValue={scores[question.id]}
-                              onChange={(value) =>
-                                handleScoreChange(question.id, value)
-                              }
-                            />
-                          ) : question.type === "five-point-scale" ? (
-                            <FivePointScaleInput
                               question={question}
                               currentValue={scores[question.id]}
                               onChange={(value) =>
@@ -464,7 +566,7 @@ function DataDrivenAssessmentView({
                 </p>
               ) : null}
 
-              <div className="mt-5 grid max-w-[720px] grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="mt-5 grid max-w-[960px] grid-cols-1 gap-3 sm:grid-cols-3">
                 <div>
                   <label
                     htmlFor="assessment-first-name"
@@ -477,11 +579,12 @@ function DataDrivenAssessmentView({
                     type="text"
                     autoComplete="given-name"
                     value={firstName}
+                    disabled={submitting}
                     onChange={(e) => {
                       setFirstName(e.target.value);
                       setDetailsError(null);
                     }}
-                    className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20"
+                    className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20 disabled:opacity-60"
                   />
                 </div>
                 <div>
@@ -496,11 +599,33 @@ function DataDrivenAssessmentView({
                     type="email"
                     autoComplete="email"
                     value={email}
+                    disabled={submitting}
                     onChange={(e) => {
                       setEmail(e.target.value);
                       setDetailsError(null);
                     }}
-                    className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20"
+                    className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20 disabled:opacity-60"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="assessment-temp-password"
+                    className="mb-1 block font-body text-[12px] font-bold tracking-[0.04em] text-[#001528] uppercase"
+                  >
+                    {staticAssessmentConfig.nextStep.passwordLabel}
+                  </label>
+                  <input
+                    id="assessment-temp-password"
+                    type="text"
+                    autoComplete="new-password"
+                    spellCheck={false}
+                    value={password}
+                    disabled={submitting}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setDetailsError(null);
+                    }}
+                    className="w-full rounded-lg border border-[#E8E4DC] bg-white px-3 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20 disabled:opacity-60"
                   />
                 </div>
               </div>
@@ -514,11 +639,21 @@ function DataDrivenAssessmentView({
               <div className="mt-5">
                 <button
                   type="button"
-                  onClick={viewResults}
-                  className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center gap-2 bg-[#001528] px-6 font-body text-[13px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#020B1E] sm:w-auto"
+                  onClick={() => void viewResults()}
+                  disabled={submitting}
+                  className="inline-flex h-[48px] w-full cursor-pointer items-center justify-center gap-2 bg-[#001528] px-6 font-body text-[13px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#020B1E] disabled:cursor-wait disabled:opacity-70 sm:w-auto"
                 >
-                  {staticAssessmentConfig.nextStep.button}
-                  <ArrowUpRight className="size-4" aria-hidden />
+                  {submitting ? (
+                    <>
+                      <Loader2 className="size-4 animate-spin" aria-hidden />
+                      {staticAssessmentConfig.nextStep.submittingLabel}
+                    </>
+                  ) : (
+                    <>
+                      {staticAssessmentConfig.nextStep.button}
+                      <ArrowUpRight className="size-4" aria-hidden />
+                    </>
+                  )}
                 </button>
                 <p className="mt-2 font-body text-[12px] text-[#8A8F98]">
                   {staticAssessmentConfig.nextStep.note}
@@ -527,7 +662,7 @@ function DataDrivenAssessmentView({
             </div>
           ) : null}
 
-          {/* Results Display */}
+          {/* Inline results kept for local preview fallback only */}
           {showResults && results ? (
             <div
               id="assessment-results"
@@ -745,57 +880,6 @@ function ScaleQuestionInput({
                 value={value}
                 checked={isSelected}
                 onChange={() => onChange(value)}
-                className="sr-only"
-              />
-              {value}
-            </label>
-          );
-        })}
-      </div>
-      <div className="mt-1.5 flex justify-between font-body text-[11px] text-[#8A8F98]">
-        <span>{lowLabel}</span>
-        <span>{highLabel}</span>
-      </div>
-    </fieldset>
-  );
-}
-
-function FivePointScaleInput({
-  question,
-  currentValue,
-  onChange,
-}: {
-  question: PublishedQuestion;
-  currentValue?: number;
-  onChange: (value: number) => void;
-}) {
-  const scale = [1, 2, 3, 4, 5];
-  const lowLabel = question.lowLabel || "Strongly disagree";
-  const highLabel = question.highLabel || "Strongly agree";
-
-  return (
-    <fieldset className="w-full">
-      <legend className="sr-only">{question.prompt}</legend>
-      <div className="grid grid-cols-5 gap-1.5">
-        {scale.map((value) => {
-          // Normalized to 1-10 for unified scoring (value * 2)
-          const normalized = value * 2;
-          const isSelected = currentValue === normalized;
-          return (
-            <label
-              key={value}
-              className={`flex h-9 cursor-pointer items-center justify-center rounded-[4px] border font-body text-[13px] transition-colors ${
-                isSelected
-                  ? "border-[#001528] bg-[#001528] text-white"
-                  : "border-[#E8E4DC] bg-white text-[#001528] hover:border-[#b17411]"
-              }`}
-            >
-              <input
-                type="radio"
-                name={question.id}
-                value={value}
-                checked={isSelected}
-                onChange={() => onChange(normalized)}
                 className="sr-only"
               />
               {value}

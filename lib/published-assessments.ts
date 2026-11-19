@@ -109,16 +109,16 @@ export async function fetchPublishedAssessment(
 
 /**
  * Same published assessment clients see (isClientPrimary).
- * Used by the private Super Admin / Representative web page.
+ * No long-lived cache: Primary toggle OFF / delete must hide immediately.
  */
 export async function fetchClientFacingAssessment(): Promise<PublishedAssessment | null> {
   try {
     const response = await fetch(
       `${API_URL}/api/v1/assessments/client-primary`,
       {
+        cache: "no-store",
         next: {
           tags: [CLIENT_FACING_ASSESSMENT_TAG],
-          revalidate: 3600,
         },
       },
     );

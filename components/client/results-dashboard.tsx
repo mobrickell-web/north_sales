@@ -115,9 +115,11 @@ function ResultsUnavailable({
         <Link href={viewer.homePath} className={secondaryLinkClass}>
           {viewer.role === "USER" ? "Back to dashboard" : "Back"}
         </Link>
-        <Link href={assessmentPathFor(viewer)} className={primaryLinkClass}>
-          Take the assessment
-        </Link>
+        {viewer.role !== "USER" ? (
+          <Link href={assessmentPathFor(viewer)} className={primaryLinkClass}>
+            Take the assessment
+          </Link>
+        ) : null}
       </div>
     </section>
   );
@@ -169,13 +171,15 @@ function ResultsContent({
             <span className="break-all">{record.email}</span>
           </p>
         </div>
-        <Link
-          href={assessmentPathFor(viewer, { retake: true })}
-          className={cn(secondaryLinkClass, "w-fit")}
-        >
-          <RotateCcw className="size-3.5" />
-          Retake assessment
-        </Link>
+        {viewer.role !== "USER" ? (
+          <Link
+            href={assessmentPathFor(viewer, { retake: true })}
+            className={cn(secondaryLinkClass, "w-fit")}
+          >
+            <RotateCcw className="size-3.5" />
+            Retake assessment
+          </Link>
+        ) : null}
       </section>
 
       <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">

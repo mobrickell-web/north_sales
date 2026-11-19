@@ -386,20 +386,22 @@ function QuestionField({
 
         {question.type === "five-point-scale" ? (
           <div className="flex flex-wrap gap-2">
-            {Array.from({ length: 5 }, (_, index) => index + 1).map((score) => (
-              <button
-                key={score}
-                type="button"
-                onClick={() => onChange(score)}
-                className={`min-h-10 min-w-10 border px-2 text-sm ${
-                  value === score
-                    ? "border-gold bg-gold text-[#001528]"
-                    : "border-white/20 text-white/80"
-                }`}
-              >
-                {score}
-              </button>
-            ))}
+            {Array.from({ length: 10 }, (_, index) => index + 1).map(
+              (score) => (
+                <button
+                  key={score}
+                  type="button"
+                  onClick={() => onChange(score)}
+                  className={`min-h-10 min-w-10 border px-2 text-sm ${
+                    value === score
+                      ? "border-gold bg-gold text-[#001528]"
+                      : "border-white/20 text-white/80"
+                  }`}
+                >
+                  {score}
+                </button>
+              ),
+            )}
           </div>
         ) : null}
 

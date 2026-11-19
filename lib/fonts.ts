@@ -35,8 +35,9 @@ export const fontHeading = localFont({
   display: "swap",
 });
 
+// Inter is a variable Google font — do not pass a weight array (Turbopack
+// fails with "next/font/google queries have exactly one entry").
 export const fontBody = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
 });

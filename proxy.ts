@@ -3,8 +3,8 @@ import type { NextRequest } from "next/server";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
-// Auth/marketing entry only. Private website pages and client assessment are
-// never listed here — clients use /dashboard/assessment instead.
+// Auth/marketing entry + public free Sales Alignment Assessment lead magnet.
+// Paying-client CRM assessments stay on /dashboard (results only for USER).
 const PUBLIC_PATHS = [
   "/",
   "/login",
@@ -12,6 +12,7 @@ const PUBLIC_PATHS = [
   "/forgot-password",
   "/verification-code",
   "/update-password",
+  "/sales-alignment-assessment",
 ] as const;
 
 const REPRESENTATIVE_PATHS = [
@@ -19,23 +20,19 @@ const REPRESENTATIVE_PATHS = [
   "/careers",
   "/privacy-policy",
   "/terms-of-use",
-  // Confirmed private: reps + Super Admin only (not PUBLIC_PATHS).
   "/sales-alignment-assessment",
   "/on-behalf",
-  // The leads page itself only admits Account Executives.
+  // The leads page itself only admits EADS specialists.
   "/leads",
 ] as const;
 
-if (
-  (PUBLIC_PATHS as readonly string[]).includes("/sales-alignment-assessment") ||
-  (PUBLIC_PATHS as readonly string[]).includes("/dashboard")
-) {
+if ((PUBLIC_PATHS as readonly string[]).includes("/dashboard")) {
   throw new Error(
-    "Chunk 11 guard: private assessment/dashboard routes must not be public.",
+    "Chunk 11 guard: client dashboard routes must not be public.",
   );
 }
 
-const CLIENT_PATHS = ["/dashboard", "/sales-alignment-assessment"];
+const CLIENT_PATHS = ["/dashboard"];
 
 // Anyone who submits the assessment is sent to its results dashboard.
 const RESULTS_PATH = /^\/dashboard\/results\/[^/]+$/;
@@ -128,7 +125,8 @@ export async function proxy(req: NextRequest) {
       return NextResponse.next();
     }
     const home =
-      pathname === "/dashboard" && account.position === "ACCOUNT_EXECUTIVE"
+      pathname === "/dashboard" &&
+      account.position === "EXECUTIVE_ACCOUNT_DEVELOPMENT_SPECIALIST"
         ? "/leads"
         : "/";
     return NextResponse.redirect(new URL(home, req.url));

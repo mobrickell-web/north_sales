@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import { SalesAlignmentAssessment } from "@/components/assessment/sales-alignment-assessment";
 import { siteConfig } from "@/config/site";
 import { fetchClientFacingAssessment } from "@/lib/published-assessments";
-import { requireRepresentative } from "@/lib/server-auth";
+import { getServerAccount } from "@/lib/server-auth";
+
+/** Always hit the API — Primary OFF / delete must hide immediately. */
+export const dynamic = "force-dynamic";
 
 const pageConfig = siteConfig.salesAlignmentAssessment;
 
@@ -27,14 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function SalesAlignmentAssessmentRoute() {
-  // Super Admin + Sales Representatives only
-  const account = await requireRepresentative();
-
+  const account = await getServerAccount();
   const publishedAssessment = await fetchClientFacingAssessment();
-  // Reps may preview the client-facing assessment, but must use an
-  // admin-issued Zoom on-behalf link to complete it for a client.
+
+  // Public visitors + Super Admin can complete the free assessment.
+  // Sales reps preview only — client completion uses Zoom on-behalf links.
   const mode =
-    account.role === "SALES_REPRESENTATIVE" ? "preview" : "interactive";
+    account?.role === "SALES_REPRESENTATIVE" ? "preview" : "interactive";
 
   return (
     <SalesAlignmentAssessment

@@ -41,19 +41,24 @@ export const authConfig = {
     categoryLabel: "Access Type",
     categories: [
       { value: "CLIENT", label: "Client" },
-      { value: "SALES_REPRESENTATIVE", label: "Sales Representatives" },
-      { value: "ACCOUNT_EXECUTIVE", label: "Account Executive" },
+      {
+        value: "EXECUTIVE_ACCOUNT_DEVELOPMENT_SPECIALIST",
+        label: "Executive Account Development Specialist",
+      },
       {
         value: "IMPLEMENTATION_SPECIALIST",
-        label: "Implementation Specialist",
+        label: "Sales Performance Implementation Specialist",
       },
-      { value: "FRACTIONAL_VP", label: "Fractional VP" },
+      { value: "FRACTIONAL_VP", label: "Fractional VP of Sales" },
       {
         value: "REGIONAL_SALES_MANAGER",
-        label: "Regional Services Manager",
+        label: "Regional Sales Manager",
+      },
+      {
+        value: "OFFICE_MANAGER",
+        label: "Office Manager",
       },
       { value: "MASTER_ADMIN", label: "Master Admin" },
-      { value: "OTHER", label: "Office Admin" },
     ],
     googleButtonLabel: "Continue with Google",
     forgotPasswordLabel: "Forgot password?",

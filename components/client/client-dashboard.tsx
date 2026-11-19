@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ClipboardList } from "lucide-react";
+import { ArrowRight, ClipboardList } from "lucide-react";
 
 import { AdminAlert } from "@/components/admin/admin-ui";
 import { DashboardShell } from "@/components/client/dashboard-shell";
@@ -13,7 +13,6 @@ import {
 } from "@/components/client/dashboard-ui";
 import type {
   ClientBaseline,
-  ClientDashboardAssessment,
   ClientDashboardAssessmentHistoryItem,
   ClientDashboardData,
   ClientImprovement,
@@ -23,19 +22,7 @@ import type {
 } from "@/lib/client-dashboard";
 import { downloadClientReport } from "@/lib/client-report-api";
 
-const ASSESSMENT_PATH = "/dashboard/assessment";
 const SCORE_MAX = 100;
-
-function assessmentHref(
-  slug?: string | null,
-  options: { retake?: boolean } = {},
-) {
-  const params = new URLSearchParams();
-  if (slug) params.set("slug", slug);
-  if (options.retake) params.set("retake", "1");
-  const qs = params.toString();
-  return qs ? `${ASSESSMENT_PATH}?${qs}` : ASSESSMENT_PATH;
-}
 
 function resultsHref(instanceId: string) {
   return `/dashboard/results/${encodeURIComponent(instanceId)}`;
@@ -366,40 +353,6 @@ function ReportsList({ rows }: { rows: ClientReport[] }) {
   );
 }
 
-function AssessmentCtaLabel({
-  assessment,
-}: {
-  assessment: ClientDashboardAssessment | null;
-}) {
-  // Label follows the current client-facing primary only — prior completed
-  // assessments in history must not flip a newly assigned primary to Retake.
-  if (
-    assessment?.status === "IN_PROGRESS" ||
-    assessment?.status === "PENDING"
-  ) {
-    return (
-      <>
-        Continue assessment
-        <ArrowUpRight className="size-3.5" />
-      </>
-    );
-  }
-  if (assessment?.status === "COMPLETED" && assessment.instanceId) {
-    return (
-      <>
-        Retake assessment
-        <ArrowUpRight className="size-3.5" />
-      </>
-    );
-  }
-  return (
-    <>
-      Start assessment
-      <ArrowUpRight className="size-3.5" />
-    </>
-  );
-}
-
 export function ClientDashboard({
   name,
   email,
@@ -445,13 +398,6 @@ export function ClientDashboard({
     latest?.overallScore != null && previous?.overallScore != null
       ? latest.overallScore - previous.overallScore
       : null;
-
-  const ctaHref = assessmentHref(
-    primary?.assessmentSlug ?? latest?.assessmentSlug,
-    {
-      retake: primary?.status === "COMPLETED" && Boolean(primary.instanceId),
-    },
-  );
 
   return (
     <DashboardShell
@@ -511,14 +457,15 @@ export function ClientDashboard({
               </>
             ) : (
               <p className="mt-5 text-[14px] leading-relaxed text-slate-300">
-                No results yet. Take the assessment to see your score here.
+                No results yet. When your North Point representative completes
+                an assessment for you, your score will appear here.
               </p>
             )}
           </section>
 
           <section className="flex flex-col rounded-2xl border border-admin-border bg-admin-surface p-6 shadow-admin-card">
             <p className="text-[11px] font-semibold tracking-[0.14em] text-admin-muted uppercase">
-              Assessments taken
+              Assessments completed
             </p>
             <p className="mt-5 text-[48px] leading-none font-bold text-admin-navy">
               {completed.length}
@@ -526,7 +473,7 @@ export function ClientDashboard({
             <p className="mt-auto pt-4 text-[12px] text-admin-muted">
               {scoreDelta != null
                 ? `Your latest score is ${scoreDelta >= 0 ? "+" : ""}${scoreDelta} versus your previous result.`
-                : "Retake the assessment later to compare your progress."}
+                : "Additional assessments completed by your representative will appear here for comparison."}
             </p>
           </section>
 
@@ -538,19 +485,23 @@ export function ClientDashboard({
               {primary?.assessmentTitle ?? "Sales Alignment Assessment"}
             </h2>
             <p className="mt-1 text-[13px] leading-relaxed text-admin-muted">
-              {primary?.status === "IN_PROGRESS" ||
-              primary?.status === "PENDING"
-                ? "Continue your assessment when you are ready. Answers are scored securely after you submit."
-                : primary?.status === "NOT_STARTED" || !primary?.instanceId
-                  ? "A new assessment has been assigned to your account. Start it from this private client portal."
-                  : "Complete your assigned assessment from this private client portal."}
+              This is your primary assessment. Results are prepared by your
+              North Point Admin or sales representative — you can review them
+              here once they are complete.
             </p>
-            <Link
-              href={ctaHref}
-              className="mt-auto inline-flex h-10 w-fit items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-4 text-[12px] font-semibold text-admin-surface transition-colors hover:bg-admin-assessment-gold-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold"
-            >
-              <AssessmentCtaLabel assessment={primary} />
-            </Link>
+            {latest?.instanceId ? (
+              <Link
+                href={resultsHref(latest.instanceId)}
+                className="mt-auto inline-flex h-10 w-fit items-center justify-center gap-2 rounded-lg bg-admin-assessment-gold px-4 text-[12px] font-semibold text-admin-surface transition-colors hover:bg-admin-assessment-gold-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-gold"
+              >
+                View latest results
+                <ArrowRight className="size-3.5" />
+              </Link>
+            ) : (
+              <p className="mt-auto pt-4 text-[12px] text-admin-muted">
+                No completed results yet.
+              </p>
+            )}
           </section>
         </div>
 
@@ -564,14 +515,8 @@ export function ClientDashboard({
                 <p className="text-[14px] text-admin-muted">
                   {loadError
                     ? "Your results could not be loaded."
-                    : "You haven't completed an assessment yet."}
+                    : "No assessment results yet. Your representative will complete assessments on your behalf."}
                 </p>
-                <Link
-                  href={ctaHref}
-                  className="mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-admin-border-strong bg-admin-surface px-4 text-[12px] font-semibold text-admin-assessment-text hover:bg-admin-soft"
-                >
-                  Take the assessment
-                </Link>
               </div>
             ) : (
               <ul className="flex flex-col divide-y divide-admin-border-subtle">

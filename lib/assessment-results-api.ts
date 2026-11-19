@@ -1,4 +1,4 @@
-import { adminFetch } from "@/lib/auth-api";
+import { adminFetch, storeSession, type AdminSession } from "@/lib/auth-api";
 import type { ClientSafeAssessmentResult } from "@/lib/client-assessment-api";
 
 export const SALES_ALIGNMENT_ASSESSMENT = "sales-alignment";
@@ -75,11 +75,39 @@ export type SubmitAssessmentResultInput = {
   result: SalesAlignmentResultPayload;
 };
 
+export type ClaimAssessmentResultInput = SubmitAssessmentResultInput & {
+  password: string;
+};
+
+export type ClaimAssessmentResultResponse = AdminSession & {
+  id: string;
+};
+
 export function submitAssessmentResult(input: SubmitAssessmentResultInput) {
   return adminFetch<{ id: string }>("/api/v1/assessment-results", {
     method: "POST",
     body: JSON.stringify(input),
   });
+}
+
+/** Public free assessment: create client + store results + sign in. */
+export async function claimAssessmentResult(
+  input: ClaimAssessmentResultInput,
+): Promise<ClaimAssessmentResultResponse> {
+  const claimed = await adminFetch<ClaimAssessmentResultResponse>(
+    "/api/v1/assessment-results/claim",
+    {
+      method: "POST",
+      body: JSON.stringify(input),
+    },
+  );
+  storeSession({
+    tokenType: claimed.tokenType,
+    expiresIn: claimed.expiresIn,
+    refreshExpiresIn: claimed.refreshExpiresIn,
+    admin: claimed.admin,
+  });
+  return claimed;
 }
 
 export function listMyAssessmentResults() {

@@ -20,9 +20,11 @@ import {
   type AdminEmailDeliverySummary,
   type AdminStatusAction,
   STATUS_TONE,
+  acceptAdminAppointment,
   formatInTimezone,
   getAdminAppointment,
   humanizeEnum,
+  rejectAdminAppointment,
   updateAdminAppointmentStatus,
 } from "@/lib/admin-appointments";
 import { AdminApiError, hasSession } from "@/lib/auth-api";
@@ -306,6 +308,43 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
     }
   };
 
+  const applyAccept = async () => {
+    setSaving(true);
+    setActionError(null);
+    try {
+      await acceptAdminAppointment(id);
+      setPending(null);
+      load();
+    } catch (err) {
+      const apiError = err as AdminApiError;
+      setActionError({
+        tone: apiError.status === 400 ? "info" : "error",
+        message: apiError.message,
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const applyReject = async () => {
+    setSaving(true);
+    setActionError(null);
+    try {
+      await rejectAdminAppointment(id, reason);
+      setPending(null);
+      setReason("");
+      load();
+    } catch (err) {
+      const apiError = err as AdminApiError;
+      setActionError({
+        tone: apiError.status === 400 ? "info" : "error",
+        message: apiError.message,
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
   if (error) {
     return (
       <main className="mx-auto max-w-[900px] px-4 py-10 sm:px-6">
@@ -453,6 +492,90 @@ export function AdminAppointmentDetailView({ id }: { id: string }) {
               <p className="mt-3 font-body text-[14px] text-[#8f2d2d]">
                 This appointment is cancelled and can no longer be changed.
               </p>
+            ) : detail.status === "PENDING" ? (
+              <>
+                <p className="mt-1 font-body text-[13px] text-[#8A8F98]">
+                  Website booking awaiting approval. Accept to confirm and send
+                  emails, or reject to free the slot.
+                </p>
+
+                {actionError ? (
+                  <div className="mt-4">
+                    <AdminAlert tone={actionError.tone}>
+                      {actionError.message}
+                    </AdminAlert>
+                  </div>
+                ) : null}
+
+                {pending === null ? (
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button
+                      type="button"
+                      onClick={() => void applyAccept()}
+                      disabled={saving}
+                      className="inline-flex h-[42px] items-center justify-center rounded-full bg-[#b17411] px-5 font-secondary text-[12px] font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#8f5d0e] disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {saving ? "Saving…" : "Accept booking"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPending("CANCELLED");
+                        setActionError(null);
+                      }}
+                      disabled={saving}
+                      className="inline-flex h-[42px] items-center justify-center rounded-full border border-[#f3c9c9] bg-white px-5 font-secondary text-[12px] font-bold tracking-[0.08em] text-[#8f2d2d] uppercase transition-colors hover:border-[#8f2d2d] disabled:opacity-50"
+                    >
+                      Reject booking
+                    </button>
+                  </div>
+                ) : (
+                  <div className="mt-4 rounded-xl border border-[#E8E4DC] bg-[#FAF9F5] p-4">
+                    <p className="font-body text-[13px] font-semibold text-[#001528]">
+                      Reject this website booking?
+                    </p>
+                    <div className="mt-3">
+                      <label
+                        htmlFor="reject-reason"
+                        className="mb-1.5 block font-body text-[12px] font-bold tracking-[0.04em] text-[#001528] uppercase"
+                      >
+                        Reason (optional)
+                      </label>
+                      <textarea
+                        id="reject-reason"
+                        rows={3}
+                        maxLength={500}
+                        value={reason}
+                        onChange={(event) => setReason(event.target.value)}
+                        placeholder="e.g. Requested time no longer available"
+                        className="w-full resize-y rounded-lg border border-[#E8E4DC] bg-white px-3.5 py-2.5 font-body text-[14px] text-[#001528] outline-none transition-colors placeholder:text-[#8A8F98] focus:border-[#b17411] focus:ring-2 focus:ring-[#b17411]/20"
+                      />
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      <button
+                        type="button"
+                        onClick={() => void applyReject()}
+                        disabled={saving}
+                        className="inline-flex h-[42px] items-center justify-center rounded-full bg-[#001528] px-5 font-secondary text-[12px] font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#0b2540] disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {saving ? "Saving…" : "Confirm reject"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setPending(null);
+                          setReason("");
+                          setActionError(null);
+                        }}
+                        disabled={saving}
+                        className="inline-flex h-[42px] items-center justify-center rounded-full border border-[#E8E4DC] bg-white px-5 font-secondary text-[12px] font-bold tracking-[0.08em] text-[#001528] uppercase transition-colors hover:border-[#b17411] hover:text-[#b17411] disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        Back
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
               <>
                 <p className="mt-1 font-body text-[13px] text-[#8A8F98]">

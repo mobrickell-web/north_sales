@@ -1,4 +1,4 @@
-/** Static content: investment tier pop-outs, component KPIs, pillar theme KPIs (Section 4 & 7). */
+﻿/** Static content: investment tier pop-outs, component KPIs, pillar theme KPIs (Section 4 & 7). */
 
 /** Section 7 — investment tier pop-out content (replaces prior copy). */
 
@@ -35,7 +35,7 @@ const salesTeamPerformancePopout = {
     {
       title: "3. Individual Sales Performance Coaching",
       intro:
-        "We conduct structured group coaching sessions over Zoom and provide targeted individual coaching as needed. We help ensure that representatives understand the value of the products or services they sell and can explain how those offerings address what matters to each customer.",
+        "We conduct structured group coaching sessions over Google Meet and provide targeted individual coaching as needed. We help ensure that representatives understand the value of the products or services they sell and can explain how those offerings address what matters to each customer.",
     },
     {
       title: "4. Sales Leadership Sessions",
@@ -97,7 +97,7 @@ const focusedSalesPerformancePopout = {
       numbered: true,
       items: [
         "Executive discovery to identify organizational priorities and agree on the areas to review and improve.",
-        "Individual performance assessments for up to five selected sales or account representatives, structured group coaching over Zoom, and targeted individual coaching as needed.",
+        "Individual performance assessments for up to five selected sales or account representatives, structured group coaching over Google Meet, and targeted individual coaching as needed.",
         "Evaluation and coaching on sales presentations, objection handling, follow-up, and closing. We help ensure representatives understand the value of what they sell and can explain how it addresses what matters to each customer.",
         "Sales manager participation in coaching, implementation, and reinforcement of agreed improvements.",
         "A broader review of sales processes, CRM utilization, and pipeline management.",
@@ -1284,7 +1284,7 @@ export const siteConfig = {
     privacyTitle: "Why Our Website Access Is Private",
     privacyParagraphs: [
       "Our complete website contains extensive proprietary information about our sales performance methods, processes, implementation approach, and services developed through years of experience.",
-      "To protect this information, we provide access through private Zoom presentations with authorized NORTH POINT SALES GROUP representatives.",
+      "To protect this information, we provide access through private Google Meet presentations with authorized NORTH POINT SALES GROUP representatives.",
       "Prospective clients can review our complete website, ask questions, and understand our services and investment options before making any financial commitment.",
       "We believe in complete transparency with prospective clients while protecting our proprietary business information.",
     ],
@@ -1322,6 +1322,10 @@ export const siteConfig = {
     links: [
       { label: "Careers", href: "/careers" },
       { label: "EXECUTIVE INSIGHTS", href: "/blogs" },
+      {
+        label: "Sales Alignment Assessment",
+        href: "/sales-alignment-assessment",
+      },
     ],
   },
   hero: {
@@ -1533,7 +1537,7 @@ export const siteConfig = {
                   "OPTION 1 — Sales Team Performance Engagement | $15,000 | 30 Days",
                 href: "#investment-option-1",
                 description:
-                  "Direct work with up to five selected sales or account representatives on your existing sales team. Includes individual assessments, structured group Zoom coaching, targeted individual coaching as needed, sales process improvements, baseline KPIs, weekly updates, and a final executive summary. Companies with larger teams can start with selected representatives and agree on the scope and price of any additional work in advance.",
+                  "Direct work with up to five selected sales or account representatives on your existing sales team. Includes individual assessments, structured group Google Meet coaching, targeted individual coaching as needed, sales process improvements, baseline KPIs, weekly updates, and a final executive summary. Companies with larger teams can start with selected representatives and agree on the scope and price of any additional work in advance.",
               },
               {
                 title:
@@ -1987,7 +1991,7 @@ export const siteConfig = {
                   "Review sales conversations, presentations, and follow-up practices.",
                   "Identify opportunities to improve prospecting, qualification, objection handling, and closing.",
                   "Help representatives understand the value of the products or services they sell and explain how those offerings address what matters to each customer.",
-                  "Use recorded conversations, role-playing, structured group Zoom coaching, and targeted individual coaching as appropriate.",
+                  "Use recorded conversations, role-playing, structured group Google Meet coaching, and targeted individual coaching as appropriate.",
                   "Review individual progress against agreed performance baselines where measurable.",
                   "Help sales managers reinforce effective practices and share them with other representatives where appropriate.",
                 ],
@@ -2057,7 +2061,7 @@ export const siteConfig = {
                   "We deliver our engagements remotely and coordinate assessments, coaching, and implementation with your team’s sales responsibilities and operating priorities.",
                 ],
                 bullets: [
-                  "Use Zoom sessions, recorded sales conversations, and CRM reviews as appropriate.",
+                  "Use Google Meet sessions, recorded sales conversations, and CRM reviews as appropriate.",
                   "Schedule coaching and working sessions around key sales activities.",
                   "Introduce agreed changes in a sequence your team can put into practice.",
                   "Hand off ongoing responsibilities to the people who will manage the work internally.",
@@ -3989,7 +3993,7 @@ export const siteConfig = {
                   "Provide access to appropriate sales leadership and selected sales or account representatives.",
                   "Provide available sales performance information, reports, metrics, and relevant sales materials.",
                   "Explain current sales processes, expectations, management practices, and areas of concern.",
-                  "Make selected representatives available for scheduled individual assessments, group Zoom coaching, and targeted individual coaching as needed.",
+                  "Make selected representatives available for scheduled individual assessments, group Google Meet coaching, and targeted individual coaching as needed.",
                   "Participate in discussions about findings, coaching priorities, and progress.",
                   "Provide appropriate access to systems or information needed to evaluate sales performance.",
                   "Review and support agreed changes that fall within the company's responsibility.",
@@ -4032,7 +4036,7 @@ export const siteConfig = {
                 intro:
                   "The focus shifts to coaching the selected representatives and implementing agreed improvements.\nWork may include:",
                 items: [
-                  "Conducting structured group coaching sessions over Zoom and providing targeted individual coaching as needed.",
+                  "Conducting structured group coaching sessions over Google Meet and providing targeted individual coaching as needed.",
                   "Helping ensure representatives understand the value of the products or services they sell and can explain how those offerings address what matters to each customer.",
                   "Improving prospecting, qualification, presentations, objection handling, closing, or follow-up where needed.",
                   "Implementing agreed sales process improvements.",
@@ -4131,7 +4135,7 @@ export const siteConfig = {
                 items: [
                   "Review how leads are generated, handled, qualified, and advanced through the pipeline.",
                   "Examine sales conversations, presentations, objection handling, follow-up, and closing.",
-                  "Conduct structured group coaching over Zoom and provide targeted individual coaching as needed.",
+                  "Conduct structured group coaching over Google Meet and provide targeted individual coaching as needed.",
                   "Help representatives understand the value of the products or services they sell and explain how those offerings address what matters to each customer.",
                   "Agree with sales leadership on which priority improvements to implement during the engagement.",
                 ],
@@ -4484,7 +4488,7 @@ export const siteConfig = {
           "Can NORTH POINT SALES GROUP work with just a few of our Sales or Account Representatives?",
         answer: [
           "Yes. You can select up to five sales or account representatives from your existing sales team for direct assessment and coaching. This works for smaller teams as well as larger teams that want to start with a few people.",
-          "Option 1 — Sales Team Performance Engagement | $15,000 | 30 Days. We assess the selected representatives individually, provide structured group coaching over Zoom and targeted individual coaching as needed, and work with your sales manager to reinforce improvements.",
+          "Option 1 — Sales Team Performance Engagement | $15,000 | 30 Days. We assess the selected representatives individually, provide structured group coaching over Google Meet and targeted individual coaching as needed, and work with your sales manager to reinforce improvements.",
           "Option 2 — Focused Sales Performance Engagement | $25,000 | 45 Days. We provide the same direct assessment and coaching for up to five selected representatives, review the broader sales leadership, systems, and processes, and implement agreed priority improvements.",
           "If you’d like us to work with more than five representatives, including new hires, we’ll confirm the scope and price with you before any additional work begins.",
           {
@@ -6741,16 +6745,19 @@ NORTH POINT SALES GROUP may help improve sales productivity by:
       eyebrow: "Your next step",
       title: "View Your FREE Sales Alignment Results",
       subtitle:
-        "Enter your first name and email to view your personalized Sales Alignment Assessment results and identify areas where your sales organization may benefit from improvement.",
+        "Enter your first name, email, and a temporary password to open your client dashboard with personalized Sales Alignment results. You can change your password later from forgot password on the login page.",
       incomplete: "Please rate all 10 statements before submitting.",
       firstNameLabel: "First name",
       emailLabel: "Email",
+      passwordLabel: "Set temporary password",
       privacy: "We respect your privacy. No spam, ever.",
       privacyLinkLabel: "View our privacy policy.",
       privacyHref: "/privacy-policy",
       button: "View My Results",
-      note: "Free. Immediate. No account required.",
-      missingDetails: "Please enter your first name and email to continue.",
+      note: "Creates your client access and opens your dashboard results.",
+      missingDetails:
+        "Please enter your first name, email, and a temporary password to continue.",
+      submittingLabel: "Opening your results…",
     },
     results: {
       eyebrow: "Your results",

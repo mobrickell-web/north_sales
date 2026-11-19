@@ -112,9 +112,7 @@ export function VerificationCodeScreen() {
     try {
       const result = await verifyAuthCode(email, digits.join(""), purpose);
       if (purpose === "SIGNUP") {
-        toast.afterRedirect(
-          "Email verified. Your access request is waiting for Master Admin approval.",
-        );
+        toast.afterRedirect("Email verified. You can sign in now.");
         router.replace(verificationCode.loginHref);
         return;
       }

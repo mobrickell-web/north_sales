@@ -15,7 +15,7 @@ import {
   adminProfile,
   clearSession,
   getStoredAdmin,
-  isAccountExecutive,
+  isEads,
   type AdminProfile,
 } from "@/lib/auth-api";
 
@@ -77,7 +77,7 @@ export function SiteHeader() {
   };
   const [account, setAccount] = useState<AdminProfile | null>(null);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const showLeadsDashboard = isAccountExecutive(account);
+  const showLeadsDashboard = isEads(account);
 
   useEffect(() => {
     let cancelled = false;
@@ -282,7 +282,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-50 w-full bg-primary shadow-md">
         <div
           data-site-header-bar
-          className="mx-auto flex min-h-[80px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8 xl:h-[110px] xl:min-h-0 xl:grid xl:grid-cols-[270px_minmax(0,1fr)_auto] xl:gap-x-0 xl:px-[24px]"
+          className="mx-auto flex min-h-[80px] w-full max-w-[1600px] items-center justify-between px-5 sm:px-8 xl:h-[110px] xl:min-h-0 xl:grid xl:grid-cols-[270px_minmax(0,1fr)_auto] xl:gap-x-4 xl:px-[24px]"
         >
           <Link
             href="/"
@@ -302,7 +302,7 @@ export function SiteHeader() {
           <nav
             ref={desktopNavRef}
             aria-label="Primary"
-            className="relative hidden h-[89px] items-center justify-center gap-[10px] xl:flex 2xl:gap-[18px]"
+            className="relative hidden h-[89px] items-center justify-center gap-[14px] xl:flex 2xl:gap-[22px]"
           >
             {siteConfig.nav.map((item) => {
               const itemHash = toHash(item.href);
@@ -428,21 +428,23 @@ export function SiteHeader() {
             </div>
           </nav>
 
-          <button
-            type="button"
-            onClick={() => {
-              setIsMenuOpen(false);
-              openSchedule();
-            }}
-            className="relative z-10 hidden h-[58px] w-[225px] shrink-0 flex-col items-center justify-center gap-[2px] bg-gold p-[10px_24px] text-center font-secondary text-[16px] font-bold uppercase leading-[1.2] tracking-[0.011em] text-[#001528] transition-all hover:bg-gold/90 hover:shadow-lg xl:flex"
-          >
-            <span className="w-full text-center leading-none">
-              {siteConfig.cta.labelLines[0]}
-            </span>
-            <span className="w-full text-center leading-none">
-              {siteConfig.cta.labelLines[1]}
-            </span>
-          </button>
+          {!account ? (
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(false);
+                openSchedule();
+              }}
+              className="relative z-10 hidden h-[58px] w-[225px] shrink-0 flex-col items-center justify-center gap-[2px] bg-gold p-[10px_24px] text-center font-secondary text-[16px] font-bold uppercase leading-[1.2] tracking-[0.011em] text-[#001528] transition-all hover:bg-gold/90 hover:shadow-lg xl:flex"
+            >
+              <span className="w-full text-center leading-none">
+                {siteConfig.cta.labelLines[0]}
+              </span>
+              <span className="w-full text-center leading-none">
+                {siteConfig.cta.labelLines[1]}
+              </span>
+            </button>
+          ) : null}
 
           <button
             type="button"
@@ -528,16 +530,18 @@ export function SiteHeader() {
                   {isSigningOut ? "Logging out…" : "Log out"}
                 </button>
               ) : null}
-              <button
-                type="button"
-                className="mt-5 flex min-h-[52px] w-full items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  openSchedule();
-                }}
-              >
-                Schedule a Consultation
-              </button>
+              {!account ? (
+                <button
+                  type="button"
+                  className="mt-5 flex min-h-[52px] w-full items-center justify-center bg-gold px-5 text-center font-secondary text-sm font-bold uppercase tracking-[0.08em] text-primary transition-colors hover:bg-gold/90"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    openSchedule();
+                  }}
+                >
+                  Schedule a Consultation
+                </button>
+              ) : null}
             </nav>
           </div>
         )}

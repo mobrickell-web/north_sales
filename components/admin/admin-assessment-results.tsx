@@ -14,6 +14,7 @@ import { ChevronDown, Filter, Loader2 } from "lucide-react";
 import {
   AdminAlert,
   AdminCard,
+  adminInputClass,
   adminLabelClass,
   adminPrimaryButtonClass,
 } from "@/components/admin/admin-ui";
@@ -225,6 +226,7 @@ function ResultsFilterDropdown({
 export function AdminAssessmentResults() {
   const [clients, setClients] = useState<ApprovedClient[]>([]);
   const [clientId, setClientId] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
   const [publishedAssessments, setPublishedAssessments] = useState<
     AdminAssessment[]
   >([]);
@@ -250,6 +252,18 @@ export function AdminAssessmentResults() {
     [clients, clientId],
   );
 
+  const resolveClientByEmail = useCallback(
+    (rawEmail: string) => {
+      const normalized = rawEmail.trim().toLowerCase();
+      if (!normalized) return null;
+      return (
+        clients.find((client) => client.email.toLowerCase() === normalized) ??
+        null
+      );
+    },
+    [clients],
+  );
+
   const selectedAssessment = useMemo(
     () => publishedAssessments.find((row) => row.id === assessmentId) ?? null,
     [assessmentId, publishedAssessments],
@@ -270,7 +284,16 @@ export function AdminAssessmentResults() {
           email: request.account.email,
         }));
       setClients(approved);
-      setClientId((current) => current || approved[0]?.id || "");
+      setClientId((current) => {
+        if (current && approved.some((row) => row.id === current)) {
+          return current;
+        }
+        return approved[0]?.id || "";
+      });
+      setClientEmail((current) => {
+        if (current.trim()) return current;
+        return approved[0]?.email ?? "";
+      });
     } catch (cause) {
       setError(
         cause instanceof Error
@@ -370,27 +393,52 @@ export function AdminAssessmentResults() {
     }
   };
 
+  const applyClientEmail = (rawEmail: string) => {
+    const match = resolveClientByEmail(rawEmail);
+    setClientEmail(rawEmail);
+    if (match) {
+      setClientId(match.id);
+      setIssuedLink("");
+      setError("");
+      return match;
+    }
+    return null;
+  };
+
   const handleCreate = async () => {
-    if (!clientId || !assessmentId) return;
+    if (!assessmentId) return;
+    const match =
+      resolveClientByEmail(clientEmail) ??
+      (clientId
+        ? (clients.find((client) => client.id === clientId) ?? null)
+        : null);
+    if (!match) {
+      setError(
+        "Enter an approved client email to send this assessment. Approve the client in Access Management first if needed.",
+      );
+      return;
+    }
+    setClientId(match.id);
+    setClientEmail(match.email);
     setCreating(true);
     setError("");
     setNotice("");
     try {
-      const created = await createClientAssessmentInstance(clientId, {
+      const created = await createClientAssessmentInstance(match.id, {
         assessmentId,
       });
       setNotice(
         selectedAssessment
-          ? `Instance created for “${selectedAssessment.title}”.`
-          : "Assessment instance created for this client.",
+          ? `“${selectedAssessment.title}” sent to ${match.email}. Complete it via the Zoom on-behalf link — results will appear on the client dashboard.`
+          : `Assessment sent to ${match.email}.`,
       );
-      await loadInstances(clientId);
+      await loadInstances(match.id);
       await openInstance(created.id);
     } catch (cause) {
       setError(
         cause instanceof Error
           ? cause.message
-          : "Could not create assessment instance.",
+          : "Could not send assessment to this client.",
       );
     } finally {
       setCreating(false);
@@ -451,41 +499,81 @@ export function AdminAssessmentResults() {
 
       <AdminCard
         title="Client assessment results"
-        description="Review completed scores for an approved client, create a Zoom meeting instance, and issue a one-time on-behalf completion link for a representative."
+        description="Send a published assessment to any approved client by email, complete it on their behalf during a Zoom meeting, and review the results that appear on their dashboard."
       >
-        <ResultsFilterDropdown
-          id="results-client"
-          label="Approved client"
-          value={clientId}
-          emptyLabel="No approved clients yet"
-          options={clients.map((client) => ({
-            value: client.id,
-            label: `${client.name} · ${client.email}`,
-          }))}
-          onChange={(next) => {
-            setClientId(next);
-            setIssuedLink("");
-            setNotice("");
-          }}
-        />
+        <label className="block">
+          <span className={adminLabelClass}>Client email</span>
+          <input
+            type="email"
+            autoComplete="off"
+            spellCheck={false}
+            placeholder="client@company.com"
+            value={clientEmail}
+            onChange={(event) => {
+              setClientEmail(event.target.value);
+              setError("");
+            }}
+            onBlur={() => {
+              const match = applyClientEmail(clientEmail);
+              if (clientEmail.trim() && !match) {
+                setError(
+                  "No approved client found for that email. Check Access Management.",
+                );
+              }
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                const match = applyClientEmail(clientEmail);
+                if (clientEmail.trim() && !match) {
+                  setError(
+                    "No approved client found for that email. Check Access Management.",
+                  );
+                }
+              }
+            }}
+            className={adminInputClass}
+          />
+        </label>
+        <div className="mt-4">
+          <ResultsFilterDropdown
+            id="results-client"
+            label="Or pick an approved client"
+            value={clientId}
+            emptyLabel="No approved clients yet"
+            options={clients.map((client) => ({
+              value: client.id,
+              label: `${client.name} · ${client.email}`,
+            }))}
+            onChange={(next) => {
+              setClientId(next);
+              const match = clients.find((client) => client.id === next);
+              if (match) setClientEmail(match.email);
+              setIssuedLink("");
+              setNotice("");
+              setError("");
+            }}
+          />
+        </div>
         {selectedClient ? (
           <p className="mt-3 text-sm text-admin-muted">
             Viewing assessments for{" "}
             <span className="font-semibold text-admin-text">
               {selectedClient.name}
-            </span>
-            .
+            </span>{" "}
+            ({selectedClient.email}).
           </p>
         ) : null}
       </AdminCard>
 
       {!clientId ? (
         <AdminAlert tone="info">
-          Approve a client in Access Management first, then return here.
+          Enter an approved client email above, or approve a client in Access
+          Management first.
         </AdminAlert>
       ) : (
         <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
-          <AdminCard title="Instances">
+          <AdminCard title="Send assessment">
             <ResultsFilterDropdown
               id="results-assessment"
               label="Assessment"
@@ -495,11 +583,15 @@ export function AdminAssessmentResults() {
               options={publishedAssessments.map((assessment) => ({
                 value: assessment.id,
                 label: assessment.isClientPrimary
-                  ? `${assessment.title} · Client facing`
+                  ? `${assessment.title} · Primary`
                   : assessment.title,
               }))}
               onChange={setAssessmentId}
             />
+            <p className="mt-3 text-[12px] leading-relaxed text-admin-muted">
+              Primary is the default assessment shown on the client dashboard.
+              Choose another published assessment when sending a follow-up.
+            </p>
             <div className="mt-4 mb-4 flex flex-wrap gap-2">
               <button
                 type="button"
@@ -509,7 +601,7 @@ export function AdminAssessmentResults() {
                 }
                 className={adminPrimaryButtonClass}
               >
-                {creating ? "Creating…" : "Create instance"}
+                {creating ? "Sending…" : "Send assessment to client"}
               </button>
             </div>
 
@@ -520,9 +612,9 @@ export function AdminAssessmentResults() {
               </p>
             ) : instances.length === 0 ? (
               <p className="text-sm text-admin-muted">
-                No assessment instances yet. Choose an assessment above, create
-                one for a Zoom meeting, or wait for the client to start from
-                their dashboard.
+                No assessment instances yet. Choose an assessment and send it to
+                this client, then issue a Zoom on-behalf link for the
+                representative to complete it.
               </p>
             ) : (
               <ul className="space-y-2">

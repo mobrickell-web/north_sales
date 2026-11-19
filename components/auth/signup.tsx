@@ -55,7 +55,7 @@ export function SignupScreen() {
       />
       <AuthRedirectOverlay
         open={submitting || google.isSubmitting || google.isRedirecting}
-        message={submitting ? "Creating account…" : "Signing you in…"}
+        message={submitting ? "Requesting access…" : "Signing you in…"}
       />
       <div className="mb-8 text-center">
         <h1 className="font-[family-name:var(--font-plus-jakarta)] text-[30px] leading-[1.15] font-bold tracking-[-0.04em] text-primary sm:text-[36px]">
